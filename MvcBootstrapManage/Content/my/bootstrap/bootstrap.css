@@ -4968,7 +4968,7 @@ input[type="submit"].btn.btn-mini {
   color: #ccc;
 }
 
-.breadcrumb > .active {
+.breadcrumb .active {
   color: #999999;
 }
 

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DBEntity">
+  <EntityContainerMapping StorageEntityContainer="MvcBootstrapModelStoreContainer" CdmEntityContainer="DBEntity">
     <EntitySetMapping Name="Log">
-      <EntityTypeMapping TypeName="Model.Log">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.Log">
         <MappingFragment StoreEntitySet="Log">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -15,7 +15,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Module">
-      <EntityTypeMapping TypeName="Model.Module">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.Module">
         <MappingFragment StoreEntitySet="Module">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -29,7 +29,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Operation">
-      <EntityTypeMapping TypeName="Model.Operation">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.Operation">
         <MappingFragment StoreEntitySet="Operation">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -41,7 +41,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Permission">
-      <EntityTypeMapping TypeName="Model.Permission">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.Permission">
         <MappingFragment StoreEntitySet="Permission">
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -50,7 +50,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Role">
-      <EntityTypeMapping TypeName="Model.Role">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.Role">
         <MappingFragment StoreEntitySet="Role">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -63,7 +63,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="User">
-      <EntityTypeMapping TypeName="Model.User">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.User">
         <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -80,5 +80,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrapModel.Store.GetModuleTree" />
   </EntityContainerMapping>
 </Mapping>

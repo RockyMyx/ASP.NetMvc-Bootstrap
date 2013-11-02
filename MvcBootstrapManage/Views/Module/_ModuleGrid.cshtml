@@ -1,11 +1,11 @@
 ﻿@model List<MvcBootstrapManage.Models.Module>
-
 <thead>
 	<tr>
+        <th><input id="js-check-all" type="checkbox" style="margin:-3px 5px 0 0;" />选择</th>
 		<th class="sort-alpha">Name</th>
 		<th class="sort-alpha">Code</th>
-		<th class="sort-alpha">Url</th>
-		<th class="sort-alpha">IsVisible</th>
+		<th>Url</th>
+		<th>IsVisible</th>
 		<th class="sort-data">CreateDate</th>
 		<th>操作</th>
 	</tr>
@@ -14,11 +14,31 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Name</td>
-		    <td>@item.Code</td>
-		    <td>@item.Url</td>
-		    <td>@item.IsVisible</td>
-		    <td>@item.CreateDate</td>
+            <td class="hide">@item.ID</td>
+            <td class="js-check"><input class="js-check-cell" type="checkbox" /></td>
+		    <td class="js-readonly" key="Name" content="@item.Name">
+            @if (item.ParentId == item.ID)
+            {
+                <img src="../../Images/folder.png" style="padding-right:10px;" />
+            }
+            else
+            {
+                <img src="../../Images/child.png" style="padding-right:10px;" />
+            }
+            @item.Name</td>
+		    <td class="js-readonly" key="Code" content="@item.Code">@item.Code</td>
+		    <td key="Url" content="@item.Url" type="notEmpty">@item.Url</td>
+            <td class="js-bool" key="IsVisible" content="@((bool)item.IsVisible ? "1" : "0")">
+            @if ((bool)item.IsVisible)
+            {
+                <img src="../../Images/enable.png" />
+            }
+            else
+            {
+                <img src="../../Images/disable.png" />
+            }
+            </td>
+		    <td class="js-readonly" key="CreateDate" content="@item.CreateDate">@item.CreateDate</td>
             <td><a href="#"><i class="icon-pencil"></i></a>
                 <a href="#ModalDel" role="button" data-toggle="modal"><i class="icon-remove"></i></a></td>
         </tr>

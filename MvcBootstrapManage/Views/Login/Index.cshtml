@@ -5,7 +5,7 @@
 @*两种方式皆可*@
 @section style{
     @*<link href="@Url.Content("~/Content/my/login.css")" rel="stylesheet" type="text/css" />*@
-    @Styles.Render("~/Content/login")
+    @Styles.Render("~/Content/css-login")
 }
 <div class="navbar">
     <div class="navbar-inner">
@@ -37,6 +37,4 @@
         </div>
     </div>
 </div>
-@section script{
-    <script type="text/javascript" src="@Url.Content("~/Scripts/my/login.js")"></script>
-}
+@Scripts.Render("~/Content/js-login")

@@ -98,6 +98,7 @@ hr {
   position: relative;
   background: #fff;
   border-left: 1px solid #cccccc;
+  height: auto;
 }
 .header {
   background: #ffffff;
@@ -748,16 +749,109 @@ table.table.list tr:first-child td {
   }
 }
 
-/**********************************************************/
+/***********************自定义样式***********************************/
 
 .error-text
 {
     padding-left:40px;
 }
-
 .btn-primary
 {
     margin-right:5px;
+}
+.even
+{
+    background-color:#F9F9F9;
+}
+.odd
+{
+    background-color:#EFEFEF;
+}
+.w97
+{
+    width:97%;
+    margin:0 auto;
+    margin-bottom:20px;
+}
+.pl10
+{
+    margin-left:10px;
+}
+.pl30
+{
+    padding-left:30px;
+}
+.ml20
+{
+    margin-left:20%;
+}
+.inline-right
+{
+    display: inline-block;
+    float: right;
+}
+.my-select
+{
+    width: 195px;
+}
+.form-tip
+{
+    padding-left:17px;
+    display:inline-block;
+}
+.form-input
+{
+    border: 1px solid #A7A6AA;
+    height: 18px;
+    padding: 2px 0 2px 5px;
+    background: url(/Images/input.png) repeat-x;
+    border-radius:3px;
+    width:180px;
+}
+.form-input-readonly
+{
+    width:180px;
+}
+.form-init
+{
+    background: url(/Images/pwd_sprite.png) 0 -215px no-repeat;
+}
+.form-focus
+{
+    background: url(/Images/focus.png) left center no-repeat;
+}
+.form-warn
+{
+    background: url(/Images/warning.png) left center no-repeat;
+}
+.form-error
+{
+    background: url(/Images/pwd_sprite.png) 0 -283px no-repeat;
+}
+.form-success
+{
+    background: url(/Images/pwd_sprite.png) 0 -247px no-repeat;
+}
+.form-pwd-weak
+{
+    background: url(/Images/pwd_sprite.png) 0 -100px no-repeat;
+    color: #ff9c3a;
+    width:64px;
+    height:10px;
+}
+.form-pwd-mid
+{
+    background: url(/Images/pwd_sprite.png) 0 -142px no-repeat;
+    color: #61d01c;
+    width:64px;
+    height:10px;
+}
+.form-pwd-strong
+{
+    background: url(/Images/pwd_sprite.png) 0 -190px no-repeat;
+    color: #61d01c;
+    width:64px;
+    height:10px;
 }
 
 /***********************************************************/

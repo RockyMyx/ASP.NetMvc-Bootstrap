@@ -7,7 +7,7 @@ using MvcBootstrapManage.Models;
 
 namespace MvcBootstrapManage.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         public ActionResult Index()
         {

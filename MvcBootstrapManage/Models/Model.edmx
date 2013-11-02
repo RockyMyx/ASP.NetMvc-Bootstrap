@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="Log" EntityType="Model.Store.Log" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Module" EntityType="Model.Store.Module" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Operation" EntityType="Model.Store.Operation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Permission" EntityType="Model.Store.Permission" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Role" EntityType="Model.Store.Role" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="Model.Store.User" store:Type="Tables" Schema="dbo" />
+      <Schema Namespace="MvcBootstrapModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MvcBootstrapModelStoreContainer">
+          <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="Log">
           <Key>
@@ -87,18 +87,20 @@
           <Property Name="Creator" Type="varchar" MaxLength="20" />
           <Property Name="Remark" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="MvcBootstrapModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DBEntity" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Log" EntityType="Model.Log" />
-          <EntitySet Name="Module" EntityType="Model.Module" />
-          <EntitySet Name="Operation" EntityType="Model.Operation" />
-          <EntitySet Name="Permission" EntityType="Model.Permission" />
-          <EntitySet Name="Role" EntityType="Model.Role" />
-          <EntitySet Name="User" EntityType="Model.User" />
+          <EntitySet Name="Log" EntityType="MvcBootstrapModel.Log" />
+          <EntitySet Name="Module" EntityType="MvcBootstrapModel.Module" />
+          <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Operation" />
+          <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Permission" />
+          <EntitySet Name="Role" EntityType="MvcBootstrapModel.Role" />
+          <EntitySet Name="User" EntityType="MvcBootstrapModel.User" />
+          <FunctionImport Name="GetModuleTree" EntitySet="Module" ReturnType="Collection(MvcBootstrapModel.Module)" />
         </EntityContainer>
         <EntityType Name="Log">
           <Key>
@@ -179,8 +181,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DBEntity">
-          <EntitySetMapping Name="Log"><EntityTypeMapping TypeName="Model.Log"><MappingFragment StoreEntitySet="Log">
+        <EntityContainerMapping StorageEntityContainer="MvcBootstrapModelStoreContainer" CdmEntityContainer="DBEntity">
+          <EntitySetMapping Name="Log"><EntityTypeMapping TypeName="MvcBootstrapModel.Log"><MappingFragment StoreEntitySet="Log">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="UserName" ColumnName="UserName" />
             <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
@@ -189,7 +191,7 @@
             <ScalarProperty Name="Detail" ColumnName="Detail" />
             <ScalarProperty Name="DateTime" ColumnName="DateTime" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Module"><EntityTypeMapping TypeName="Model.Module"><MappingFragment StoreEntitySet="Module">
+          <EntitySetMapping Name="Module"><EntityTypeMapping TypeName="MvcBootstrapModel.Module"><MappingFragment StoreEntitySet="Module">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Code" ColumnName="Code" />
@@ -199,7 +201,7 @@
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="Creator" ColumnName="Creator" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Operation"><EntityTypeMapping TypeName="Model.Operation"><MappingFragment StoreEntitySet="Operation">
+          <EntitySetMapping Name="Operation"><EntityTypeMapping TypeName="MvcBootstrapModel.Operation"><MappingFragment StoreEntitySet="Operation">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Code" ColumnName="Code" />
@@ -207,12 +209,12 @@
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="Creator" ColumnName="Creator" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Permission"><EntityTypeMapping TypeName="Model.Permission"><MappingFragment StoreEntitySet="Permission">
+          <EntitySetMapping Name="Permission"><EntityTypeMapping TypeName="MvcBootstrapModel.Permission"><MappingFragment StoreEntitySet="Permission">
             <ScalarProperty Name="UserID" ColumnName="UserID" />
             <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             <ScalarProperty Name="Authority" ColumnName="Authority" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Role"><EntityTypeMapping TypeName="Model.Role"><MappingFragment StoreEntitySet="Role">
+          <EntitySetMapping Name="Role"><EntityTypeMapping TypeName="MvcBootstrapModel.Role"><MappingFragment StoreEntitySet="Role">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Remark" ColumnName="Remark" />
@@ -221,7 +223,7 @@
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="Creators" ColumnName="Creators" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="User"><EntityTypeMapping TypeName="Model.User"><MappingFragment StoreEntitySet="User">
+          <EntitySetMapping Name="User"><EntityTypeMapping TypeName="MvcBootstrapModel.User"><MappingFragment StoreEntitySet="User">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Password" ColumnName="Password" />
@@ -235,6 +237,7 @@
             <ScalarProperty Name="Creator" ColumnName="Creator" />
             <ScalarProperty Name="Remark" ColumnName="Remark" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrapModel.Store.GetModuleTree" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -256,12 +259,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="Model.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.5430916341145826" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="2.1610522460937496" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.5879931640624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.3520719401041656" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="4.75" PointY="3.75" Height="3.3071704101562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.5430916341145826" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.3520719401041656" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.User" Width="1.5" PointX="4.75" PointY="3.75" Height="3.3071704101562496" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>

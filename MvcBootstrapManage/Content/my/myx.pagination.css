@@ -1,0 +1,70 @@
+/*Modified By RockyMyx
+1、调整字体
+2、增加CSS3圆角边框样式
+3、修复浏览器兼容问题
+*/
+
+.pagination
+{
+    font-size: 100%;
+}
+
+.pagination a
+{
+    text-decoration: none;
+    border: solid 1px #AAE;
+    color: #15B;
+}
+
+.pagination a, .pagination span
+{
+    display: block;
+    float: left;
+    padding: 0.3em 0.5em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.pagination .current
+{
+    background: #26B;
+    color: #fff;
+    border: solid 1px #AAE;
+}
+
+.pagination .current.prev, .pagination .current.next
+{
+    color: #999;
+    border-color: #999;
+    background: #fff;
+}
+
+.bor
+{
+    -moz-border-radius: 3px;     /* Firefox 2-3.6 */
+    -webkit-border-radius: 3px;  /* Chrome 4      */
+    border-radius: 3px;
+}
+
+/**修复浏览器兼容问题**/
+#go-span
+{
+    margin-top: -10px;
+    _margin-top: -5px;
+}
+
+#go-page
+{
+    width: 20px;
+    height: 15px;
+    margin-top: 9px;
+    _margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 7px;
+}
+
+#btn-go-page
+{
+    _width: 20px;
+    _padding: 0 5px;
+}

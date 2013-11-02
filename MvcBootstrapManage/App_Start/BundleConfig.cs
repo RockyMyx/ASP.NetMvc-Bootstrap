@@ -32,8 +32,11 @@ namespace MvcBootstrapManage
                                  "~/Content/my/theme.css",
                                  "~/Content/my/font-awesome/css/font-awesome.css"));
 
-            bundles.Add(new StyleBundle("~/Content/login")
+            bundles.Add(new StyleBundle("~/Content/css-login")
                         .Include("~/Content/my/login.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css-paging")
+                        .Include("~/Content/my/myx.pagination.css"));
 
             #endregion
 
@@ -42,6 +45,17 @@ namespace MvcBootstrapManage
             bundles.Add(new ScriptBundle("~/Content/js")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
                                  "~/Scripts/my/bootstrap.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/js-login")
+                        .Include("~/Scripts/my/login.js"));
+
+            bundles.Add(new ScriptBundle("~/Content/js-manage")
+                        .Include("~/Scripts/jquery-1.8.3.min.js",
+                                 "~/Scripts/my/myx.validate.js",
+                                 //"~/Scripts/my/My97DatePicker/WdatePicker.js",
+                                 "~/Scripts/my/bootstrap-modal.js",
+                                 "~/Scripts/my/myx.table.js",
+                                 "~/Scripts/my/myx.pagination.js"));
 
             #endregion
 

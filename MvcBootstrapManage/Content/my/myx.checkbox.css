@@ -1,0 +1,33 @@
+﻿.check
+{
+    margin: 0 5px;
+    float:left;
+    font: 14px/1.5 tahoma, arial, 宋体, sans-serif;
+}
+.check-icon
+{
+    width: 16px;
+    height: 16px;
+    background: url(/Images/checkbox.png) no-repeat;
+    float: left;
+    cursor: pointer;
+    overflow: hidden; /* IE6 */
+}
+.check-text
+{
+    padding-left: 3px;
+    margin-top: -2px;
+    display: inline-block;
+}
+.check-normal
+{
+    background-position: left 0;
+}
+.check-hover
+{
+    background-position: left -16px;
+}
+.check-checked
+{
+    background-position: left -32px;
+}

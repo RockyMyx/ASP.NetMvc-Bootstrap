@@ -140,6 +140,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\CheckLoginAttribute.cs" />
     <Compile Include="Filters\ErrorCatcherAttribute.cs" />
@@ -153,11 +154,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\MyViewModel.cs" />
-    <Compile Include="Models\PagingHelper.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ModuleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\my\bootstrap\bootstrap-responsive.css" />
@@ -167,9 +166,38 @@
     <Content Include="Content\my\img\glyphicons-halflings-white.png" />
     <Content Include="Content\my\img\glyphicons-halflings.png" />
     <Content Include="Content\my\index.css" />
-    <Content Include="Content\my\manage.css" />
+    <Content Include="Content\my\myx.checkbox.css" />
+    <Content Include="Content\my\myx.combox.css" />
+    <Content Include="Images\accept.png" />
+    <Content Include="Images\checkbox.png" />
+    <Content Include="Images\child.png" />
+    <Content Include="Images\combo_arrow.png" />
+    <Content Include="Images\enable.png" />
+    <Content Include="Images\disable.png" />
+    <Content Include="Images\focus.png" />
+    <Content Include="Images\folder.png" />
+    <Content Include="Images\input.png" />
+    <Content Include="Images\pwd_sprite.png" />
+    <Content Include="Images\ui-bg-click.png" />
+    <Content Include="Images\ui-bg-hover.png" />
+    <Content Include="Images\warning.png" />
+    <Content Include="Scripts\my\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\my\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\my\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\my\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\my\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\my\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\my\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\my\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\my\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\my\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\my\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\my\My97DatePicker\WdatePicker.js" />
     <Content Include="Content\my\myx.lib.css" />
-    <Content Include="Content\my\pagination.css" />
+    <Content Include="Content\my\myx.pagination.css" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\modify.png" />
     <Content Include="Scripts\my\bootstrap-affix.js" />
     <Content Include="Scripts\my\bootstrap-alert.js" />
     <Content Include="Scripts\my\bootstrap-button.js" />
@@ -291,8 +319,14 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\my\jquery.pagination.js" />
+    <Content Include="Scripts\my\json2.js" />
+    <Content Include="Scripts\my\myx.combox.js" />
+    <Content Include="Scripts\my\myx.formValidate.js" />
+    <Content Include="Scripts\my\myx.pagination.js" />
     <Content Include="Scripts\my\login.js" />
+    <Content Include="Scripts\my\myx.table.js" />
+    <Content Include="Scripts\my\myx.validate.js" />
+    <Content Include="Scripts\my\pinyin.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\table.png" />
     <Content Include="Web.config" />
@@ -384,16 +418,12 @@
     <None Include="Content\my\font-awesome\sass\font-awesome.scss" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Welcome.cshtml" />
+    <Content Include="Views\Module\Index.cshtml" />
+    <Content Include="Views\Module\_ModuleGrid.cshtml" />
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Views\Home\Manage.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-    <Content Include="Views\Home\ManageLazy.cshtml" />
-    <Content Include="Views\Home\TestLazy.cshtml" />
-    <Content Include="Views\Home\_data.cshtml" />
-    <Content Include="Views\Home\_lazy.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -411,7 +441,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>8176</DevelopmentServerPort>
+          <DevelopmentServerPort>15678</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

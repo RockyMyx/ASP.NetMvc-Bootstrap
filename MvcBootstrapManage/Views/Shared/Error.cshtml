@@ -3,11 +3,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-------正式环境下注释------------>
+
 <h2>
     Sorry, an error occurred while processing your request.
 </h2>
 
 错误原因：@(((Exception)ViewData["Ex"]).ToString())
+
+<!------------------------------->
 
 <div class="row-fluid errorDiv">
     <div class="http-error">

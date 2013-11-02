@@ -7,20 +7,38 @@
 * @param {Object} opts Several options (see README for documentation)
 * @return {Object} jQuery Object
 */
+
+/* Modified by RockyMyx
+1、增加显示“首页”和“尾页”
+2、增加显示“跳转到__页”
+3、Ajax无刷新请求数据，增加参数table_to控制数据返回时刷新的表格
+4、增加函数参数，根据需要对分页按键各部分进行控制
+5、修改默认请求连接为当前页面url，即location.href
+6、按钮使用css3圆角美化
+7、修复浏览器兼容性问题
+*/
 jQuery.fn.pagination = function (maxentries, opts) {
     opts = jQuery.extend({
         items_per_page: 3,
         num_display_entries: 9,
         current_page: 0,
         num_edge_entries: 1,
+        //请求当前页面
         link_to: location.href,
-        first_text: "First",
-        prev_text: "Prev",
-        next_text: "Next",
-        last_text: "Last",
+        table_to: '.table',
+        //增加分页控件信息，修改分页显示文字
+        first_text: "首页",
+        prev_text: "上一页",
+        next_text: "下一页",
+        last_text: "末页",
         ellipse_text: "...",
+        //自定义显示分页控件各部分
+        first_show_always: true,
         prev_show_always: true,
         next_show_always: true,
+        last_show_always: true,
+        goto_show_always: true,
+        data_info__show_always: true,
         callback: function () { return false; }
     }, opts || {});
 
@@ -53,6 +71,7 @@ jQuery.fn.pagination = function (maxentries, opts) {
         function pageSelected(page_id, evt) {
             current_page = page_id;
             drawLinks();
+            //AJAX请求数据
             $('.current-page').html('当前第' + (++page_id) + '页');
             var params = '{pageIndex : ' + page_id + '}';
             $.ajax({
@@ -62,7 +81,9 @@ jQuery.fn.pagination = function (maxentries, opts) {
                 dataType: 'html',
                 data: params,
                 success: function (result) {
-                    $('.table').html(result);
+                    $(opts.table_to).html(result);
+                    //绑定表格的编辑和删除点击事件等，依赖于myx.table.js
+                    bindTable();
                 }
             });
             var continuePropagation = opts.callback(page_id, panel);
@@ -93,23 +114,24 @@ jQuery.fn.pagination = function (maxentries, opts) {
                 page_id = page_id < 0 ? 0 : (page_id < np ? page_id : np - 1); // Normalize page id to sane value
                 appendopts = jQuery.extend({ text: page_id + 1, classes: "" }, appendopts || {});
                 if (page_id == current_page) {
-                    var lnk = jQuery("<span class='current'>" + (appendopts.text) + "</span>");
+                    var lnk = jQuery("<span class='current br'>" + (appendopts.text) + "</span>");
                 }
                 else {
-                    var lnk = jQuery("<a>" + (appendopts.text) + "</a>")
+                    var lnk = jQuery('<a class="bor">' + (appendopts.text) + '</a>')
 						.bind("click", getClickHandler(page_id))
 						.attr('href', '');
+                    //去除默认链接
                 }
                 if (appendopts.classes) { lnk.addClass(appendopts.classes); }
                 panel.append(lnk);
             }
-            // Generate "First"-Link
-            if (opts.first_text) {
-                appendItem(0, { text: opts.first_text, classes: "prev" });
+            // 生成首页按钮
+            if (opts.first_text && opts.first_show_always) {
+                appendItem(0, { text: opts.first_text, classes: "prev bor" });
             }
             // Generate "Previous"-Link
             if (opts.prev_text && (current_page > 0 || opts.prev_show_always)) {
-                appendItem(current_page - 1, { text: opts.prev_text, classes: "prev" });
+                appendItem(current_page - 1, { text: opts.prev_text, classes: "prev bor" });
             }
             // Generate starting points
             if (interval[0] > 0 && opts.num_edge_entries > 0) {
@@ -138,37 +160,44 @@ jQuery.fn.pagination = function (maxentries, opts) {
             }
             // Generate "Next"-Link
             if (opts.next_text && (current_page < np - 1 || opts.next_show_always)) {
-                appendItem(current_page + 1, { text: opts.next_text, classes: "next" });
+                appendItem(current_page + 1, { text: opts.next_text, classes: "next bor" });
             }
-            // Generate "Next"-Link
-            if (opts.next_text) {
-                appendItem(np, { text: opts.last_text, classes: "next" });
+            // 生成末页按钮
+            if (opts.next_text && opts.last_show_always) {
+                appendItem(np, { text: opts.last_text, classes: "next br" });
             }
-            panel.append('<span style="margin-top:-10px;" id="go-span">跳转到<input type="text" class="go-page" style="width:20px;height:15px;margin-top:9px;margin-left:5px;margin-right:7px;" /></span>');
-            $('<input type="button" id="btn-go-page" class="btn btn-small btn-primary" value="GO" />').on('click', function () {
-                var goPage = $('.go-page').val();
-                if (goPage == '') {
-                    alert("请输入");
-                    return;
-                }
-                else if (isNaN(goPage) || !/^\d+$/.test(goPage)) {
-                    alert("输入不符合规范");
-                    return;
-                }
-                else if (goPage < 1) {
-                    alert("不得小于1");
-                }
-                else if (parseInt(goPage) <= parseInt(np)) {
-                    pageSelected(goPage - 1);
-                }
-                else {
-                    alert("超出最大页数");
-                }
-            }).appendTo($('#go-span'));
-            panel.append('<span style="float:right">共' + maxentries + '条数据</span>');
-            panel.append('<span style="float:right">每页' + opts.items_per_page + '条数据</span>');
-            panel.append('<span style="float:right">共' + np + '页</span>');
-            panel.append('<span class="current-page" style="float:right">当前第1页</span>');
+            // 生成跳转页面按钮
+            if (opts.goto_show_always) {
+                panel.append('<span style="margin-top:-10px;_margin-top:-5px;" id="go-span">跳转到<input type="text" id="go-page" style="width:20px;height:15px;margin-top:9px;_margin-top:1px;margin-left:5px;margin-right:7px;" /></span>');
+                // 绑定跳转事件
+                $('<input type="button" id="btn-go-page" class="btn btn-small btn-primary"  style="_width:20px;_padding:0 5px;" value="GO" />').on('click', function () {
+                    var goPage = $('#go-page').val();
+                    if (goPage == '') {
+                        alert("请输入需要跳转的页数！");
+                        return;
+                    }
+                    else if (isNaN(goPage) || !/^\d+$/.test(goPage)) {
+                        alert("输入不符合要求！请输入正整数");
+                        return;
+                    }
+                    else if (goPage < 1) {
+                        alert("输入页码不得小于1，请重新输入！");
+                    }
+                    else if (parseInt(goPage) <= parseInt(np)) {
+                        pageSelected(goPage - 1);
+                    }
+                    else {
+                        alert("输入页码超出最大页数，请重新输入");
+                    }
+                }).appendTo($('#go-span'));
+            }
+            //生成分页数据信息
+            if (opts.data_info__show_always) {
+                panel.append('<span style="float:right">共' + maxentries + '条数据</span>');
+                panel.append('<span style="float:right">每页' + opts.items_per_page + '条数据</span>');
+                panel.append('<span style="float:right">共' + np + '页</span>');
+                panel.append('<span class="current-page" style="float:right">当前第1页</span>');
+            }
         }
 
         // Extract current_page from options

@@ -1,0 +1,48 @@
+﻿select
+{
+    /*修改select的width、height和display会影响到combo-input*/
+    /*修改select的height属性要调整combo-input的height和line-height属性*/
+    width:100px;
+}
+input.combo-input
+{
+    border: 1px solid #D0D0D0;
+    height: 23px;
+    *line-height: 20px;
+    padding-left: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    background-image: url(/Images/combo_arrow.png);
+    background-position: right 8px;
+    background-repeat: no-repeat;
+}
+/**/
+#combo-data
+{
+    border: 1px solid #A7A6AA;
+    background-color: #FFF;
+    overflow: auto;
+}
+#combo-data a
+{
+    display: block;
+    line-height: 25px;
+    padding: 3px 10px;
+    text-decoration: none;
+    color: #000;
+    /*多余文字用省略号显示，也可以通过设置combo-data的width属性调整下拉框的宽度*/
+    text-overflow: ellipsis;
+    white-space:nowrap; 
+    overflow:hidden;
+}
+#combo-data a:hover
+{
+    color: #198cef;
+    text-decoration: none;
+    background: url(/Images/ui-bg-hover.png) repeat-x 50% 50%;
+}
+#combo-data a.selected
+{
+    color: #FFF;
+    background: url(/Images/ui-bg-click.png) repeat-x 50% 50%;
+}

@@ -213,6 +213,25 @@ namespace MvcBootstrapManage.Models
         }
 
         #endregion
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<Module> GetModuleTree()
+        {
+            return base.ExecuteFunction<Module>("GetModuleTree");
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="mergeOption"></param>
+        public ObjectResult<Module> GetModuleTree(MergeOption mergeOption)
+        {
+            return base.ExecuteFunction<Module>("GetModuleTree", mergeOption);
+        }
+
+        #endregion
     }
     
 
@@ -223,7 +242,7 @@ namespace MvcBootstrapManage.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Log")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="Log")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Log : EntityObject
@@ -422,7 +441,7 @@ namespace MvcBootstrapManage.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Module")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="Module")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Module : EntityObject
@@ -645,7 +664,7 @@ namespace MvcBootstrapManage.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Operation")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="Operation")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Operation : EntityObject
@@ -820,7 +839,7 @@ namespace MvcBootstrapManage.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Permission")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="Permission")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Permission : EntityObject
@@ -928,7 +947,7 @@ namespace MvcBootstrapManage.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Role")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="Role")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Role : EntityObject
@@ -1127,7 +1146,7 @@ namespace MvcBootstrapManage.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="User")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class User : EntityObject
