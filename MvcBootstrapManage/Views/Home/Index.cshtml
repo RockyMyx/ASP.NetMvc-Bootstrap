@@ -63,19 +63,19 @@
             <ul id="dashboard-menu" class="nav nav-list collapse in">
             @{if (ViewData["browse-yhgl"] != null)
               {
-                <li><a href="javascript:;"><i class="icon-user"></i>用户管理</a></li>
+                <li><a href="javascript:;"><i class="icon-user"></i>@ViewData["browse-yhgl"]</a></li>
               }}
             @{if (ViewData["browse-jsgl"] != null)
               {
-                <li><a target="content" href="/Role/Index"><i class="icon-star"></i>角色管理</a></li>
+                <li><a target="content" href="/Role/Index"><i class="icon-star"></i>@ViewData["browse-jsgl"]</a></li>
               }}
             @{if (ViewData["browse-mkgl"] != null)
               {
-                <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>模块管理</a></li>
+                <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>@ViewData["browse-mkgl"]</a></li>
               }}
             @{if (ViewData["browse-qxgl"] != null)
               {
-                <li><a target="content" href="javascript:;"><i class="icon-lock"></i>权限管理</a></li>
+                <li><a target="content" href="javascript:;"><i class="icon-lock"></i>@ViewData["browse-qxgl"]</a></li>
               }}
             </ul>
             

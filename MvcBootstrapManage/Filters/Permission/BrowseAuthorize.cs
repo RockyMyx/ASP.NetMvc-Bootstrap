@@ -13,7 +13,7 @@ public class BrowseAuthorize : AuthorizeAttribute
         int controllID = 0;
         //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
         int roleID = 1;
-        List<string> modules = null;
+        Dictionary<string, string> modules = null;
         using (DBEntity db = new DBEntity())
         {
             controllID = db.Module.Where(m => m.Controller == controller).Select(m => m.ID).FirstOrDefault();
@@ -21,11 +21,13 @@ public class BrowseAuthorize : AuthorizeAttribute
                        join p in db.Permission
                        on m.ID equals p.ControllerID
                        where p.RoleID == roleID && p.ActionID == 1
-                       select m.Code).ToList();
+                       select new { m.Code, m.Name })
+                       .AsEnumerable()
+                       .ToDictionary(m => m.Code, m => m.Name);
         }
-        foreach (string module in modules)
+        foreach (KeyValuePair<string,string> module in modules)
         {
-            filterContext.Controller.ViewData["browse-" + module] = module;
+            filterContext.Controller.ViewData["browse-" + module.Key] = module.Value;
         }
     }
 }
