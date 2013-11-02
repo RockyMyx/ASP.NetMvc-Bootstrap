@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "系统错误";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Sorry, an error occurred while processing your request.
+</h2>
+
+错误原因：@(((Exception)ViewData["Ex"]).ToString())
+
+<div class="row-fluid errorDiv">
+    <div class="http-error">
+        <h1>Oops!</h1>
+        <p class="info">系统出错，请及时联系管理员!</p>
+        <p>
+           <button class="btn btn-large btn-info" type="button" onclick="history.back();">返回上一页</button>
+           <button class="btn btn-large btn-info" type="button" onclick="location.href='/'">返回首页</button>
+        </p>
+    </div>
+</div>

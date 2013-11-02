@@ -1,0 +1,236 @@
+﻿/* display */
+.di{display:inline;}
+.db{display:block;}
+.dib{display:inline-block;}
+/* width */
+.w20{width:20px;}
+.w50{width:50px;}
+.w70{width:70px;}
+.w100{width:100px;}
+.w120{width:120px;}
+.w140{width:140px;}
+.w160{width:160px;}
+.w180{width:180px;}
+.w200{width:200px;}
+.w220{width:220px;}
+.w250{width:250px;}
+.w280{width:280px;}
+.w300{width:280px;}
+.w320{width:320px;}
+.w360{width:360px;}
+.w400{width:400px;}
+.w460{width:460px;}
+.w500{width:500px;}
+.w600{width:600px;}
+.w640{width:640px;}
+.w700{width:700px;}
+/* height */
+.h20{height:20px;}
+.h50{height:50px;}
+.h70{height:70px;}
+.h100{height:100px;}
+.h120{height:120px;}
+.h140{height:140px;}
+.h160{height:160px;}
+.h180{height:180px;}
+.h200{height:200px;}
+.h220{height:220px;}
+.h250{height:250px;}
+.h280{height:280px;}
+.h300{height:280px;}
+.h320{height:320px;}
+.h360{height:360px;}
+.h400{height:400px;}
+.h460{height:460px;}
+.h500{height:500px;}
+.h600{height:600px;}
+.h640{height:640px;}
+.h700{height:700px;}
+/* percent width value */
+.wp10{width:10%;}
+.wp15{width:15%;}
+.wp20{width:20%;}
+.wp25{width:25%;}
+.wp30{width:30%;}
+.wp33{width:33.3%;}
+.wp40{width:40%;}
+.wp50{width:50%;}
+.wp60{width:60%;}
+.wp66{width:66.6%;}
+.wp70{width:70%;}
+.wp75{width:75%;}
+.wp80{width:80%;}
+.wp90{width:90%;}
+.wp100{width:100%;}
+/* line-height */
+.lh14{line-height:1.4;}
+.lh16{line-height:1.6;}
+.lh18{line-height:1.8;}
+.lh20{line-height:2.0;}
+.lh22{line-height:2.2;}
+.lh24{line-height:2.4;}
+/* margin */
+.m0{margin:0;}
+.m1{margin:1px;}
+.ml1{margin-left:1px;}
+.mr1{margin-right:1px;}
+.mt1{margin-top:1px;}
+.mb1{margin-bottom:1px;}
+.m2{margin:2px;}
+.ml2{margin-left:2px;}
+.mr2{margin-right:2px;}
+.mt2{margin-top:2px;}
+.mb2{margin-bottom:2px;}
+.m5{margin:5px;}
+.ml5{margin-left:5px;}
+.mr5{margin-right:5px;}
+.mt5{margin-top:5px;}
+.mb5{margin-bottom:5px;}
+.m10{margin:10px;}
+.ml10{margin-left:10px;}
+.mr10{margin-right:10px;}
+.mt10{margin-top:10px;}
+.mb10{margin-bottom:10px;}
+.m15{margin:15px;}
+.ml15{margin-left:15px;}
+.mr15{margin-right:15px;}
+.mt15{margin-top:15px;}
+.mb15{margin-bottom:15px;}
+.m20{margin:20px;}
+.ml20{margin-left:20px;}
+.mr20{margin-right:20px;}
+.mt20{margin-top:20px;}
+.mb20{margin-bottom:20px;}
+/* margin negative */
+.m-1{margin:-1px;}
+.ml-1{margin-left:-1px;}
+.mr-1{margin-right:-1px;}
+.mt-1{margin-top:-1px;}
+.mb-1{margin-bottom:-1px;}
+.m-3{margin:-3px;}
+.ml-3{margin-left:-3px;}
+.mr-3{margin-right:-3px;}
+.mt-3{margin-top:-3px;}
+.mb-3{margin-bottom:-3px;}
+.m-5{margin:-5px;}
+.ml-5{margin-left:-5px;}
+.mr-5{margin-right:-5px;}
+.mt-5{margin-top:-5px;}
+.mb-5{margin-bottom:-5px;}
+.m-10{margin:-10px;}
+.ml-10{margin-left:-10px;}
+.mr-10{margin-right:-10px;}
+.mt-10{margin-top:-10px;}
+.mb-10{margin-bottom:-10px;}
+.m-20{margin:-20px;}
+.ml-20{margin-left:-20px;}
+.mr-20{margin-right:-20px;}
+.mt-20{margin-top:-20px;}
+.mb-20{margin-bottom:-20px;}
+/* padding */
+.p0{padding:0;}
+.p1{padding:1px;}
+.pl1{padding-left:1px;}
+.pt1{padding-top:1px;}
+.pr1{padding-right:1px;}
+.pb1{padding-bottom:1px;}
+.p2{padding:2px;}
+.pl2{padding-left:2px;}
+.pt2{padding-top:2px;}
+.pr2{padding-right:2px;}
+.pb2{padding-bottom:2px;}
+.pl5{padding-left:5px;}
+.p5{padding:5px;}
+.pt5{padding-top:5px;}
+.pr5{padding-right:5px;}
+.pb5{padding-bottom:5px;}
+.p10{padding:10px;}
+.pl10{padding-left:10px;}
+.pt10{padding-top:10px;}
+.pr10{padding-right:10px;}
+.pb10{padding-bottom:10px;}
+.p15{padding:15px;}
+.pl15{padding-left:15px;}
+.pt15{padding-top:15px;}
+.pr15{padding-right:15px;}
+.pb15{padding-bottom:15px;}
+.p20{padding:20px;}
+.pl20{padding-left:20px;}
+.pt20{padding-top:20px;}
+.pr20{padding-right:20px;}
+.pb20{padding-bottom:20px;}
+/* 块状元素水平居中 */
+.auto{margin-left:auto; margin-right:auto;}
+/* border */
+.bd0{border:0; outline:0;}
+.bd-red{border: 1px solid Red;}
+.bd-yel{border: 1px solid Yellow;}
+.bd-blue{border: 1px solid Blue;}
+.bd-green{border: 1px solid Green;}
+.bd-gray{border: 1px solid Gray;}
+/* background-color */
+.bg-red{background-color:Red;}
+.bg-yel{background-color:Yellow;}
+.bg-blue{background-color:Blue;}
+.bg-green{background-color:Green;}
+.bg-gray{background-color: Gray;}
+/* div test*/
+.div-test { width:100px; height:100px; border:1px solid red; }
+/* safe color */
+.c0{color:#000;}
+.c3{color:#333;}
+.c6{color:#666;}
+.c9{color:#999;}
+.cc{color:#ccc;}
+.cw{color:white;}
+/* font-size */
+.f0{font-size:0;}
+.f10{font-size:10px;}
+.f12{font-size:12px;}
+.f13{font-size:13px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.f20{font-size:20px;}
+.f24{font-size:24px;}
+/* font-family */
+.fa{font-family:Arial;}
+.ft{font-family:Tahoma;}
+.fv{font-family:Verdana;}
+.fs{font-family:'simsun';}
+.fm{font-family:'microsoft yahei';}
+/* font-style */
+.n{font-weight:normal; font-style:normal;}
+.b{font-weight:bold;}
+.i{font-style:italic;}
+/* text-align */
+.tc{text-align:center;}
+.tr{text-align:right;}
+.tl{text-align:left;}
+.tj{text-align:justify;}
+/* letter-spacing */
+.ls-1{letter-spacing:-1px;}
+.ls0{letter-spacing:0;}
+.ls1{letter-spacing:1px;}
+.ls2{letter-spacing:2px;}
+/* white-space */
+.nowrap{white-space:nowrap;}
+/* word-wrap */
+.bk{word-wrap:break-word;}
+/* vertical-align */
+.vm{vertical-align:middle;}
+.vtb{vertical-align:text-bottom;}
+.vb{vertical-align:bottom;}
+.vt{vertical-align:top;}
+/* float */
+.l{float:left;}
+.r{float:right;}
+/* overflow */
+.ovh{overflow:hidden;}
+/* visibility */
+.vh{visibility:hidden;}
+.vv{visibility:visible;}
+/* zoom */
+.z{*zoom:1;}
+/* 解决IE6下的双外边距bug。块状元素在浮动时有相同方向的margin值时出现 */
+.fli{float: left; *display: inline;}
+.fri{float: right; *display: inline;}

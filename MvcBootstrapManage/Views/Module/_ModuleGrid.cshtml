@@ -1,0 +1,26 @@
+﻿@model List<MvcBootstrapManage.Models.Module>
+
+<thead>
+	<tr>
+		<th class="sort-alpha">Name</th>
+		<th class="sort-alpha">Code</th>
+		<th class="sort-alpha">Url</th>
+		<th class="sort-alpha">IsVisible</th>
+		<th class="sort-data">CreateDate</th>
+		<th>操作</th>
+	</tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+		    <td>@item.Code</td>
+		    <td>@item.Url</td>
+		    <td>@item.IsVisible</td>
+		    <td>@item.CreateDate</td>
+            <td><a href="#"><i class="icon-pencil"></i></a>
+                <a href="#ModalDel" role="button" data-toggle="modal"><i class="icon-remove"></i></a></td>
+        </tr>
+    }
+</tbody>

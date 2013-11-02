@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+@using MvcBootstrapManage.Models
+@model PagingHelper<Student>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+@foreach (var Data in Model.GetPagingData())
+{
+    <p>ID:@Data.Id Name:@Data.Name</p>
+}
+<p>
+@if (Model.HasPrev)
+{
+    <a href="@Url.Action("Test", "Home", new { id = Model.PageIndex - 1 })">上一页</a>
+}
+else
+{
+    <em style="color:Gray">上一页</em>
+}
+@if (Model.HasNext)
+{
+    <a href="@Url.Action("Test", "Home", new { id = Model.PageIndex + 1 })">下一页</a>
+}
+else
+{
+      <em style="color:Gray">下一页</em>
+}
+</p>

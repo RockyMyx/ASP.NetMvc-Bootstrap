@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "系统登录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*两种方式皆可*@
+@section style{
+    @*<link href="@Url.Content("~/Content/my/login.css")" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/Content/login")
+}
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav pull-right"></ul>
+        <span class="brand">LOGO</span>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="dialog">
+        <div class="block">
+            <p class="block-heading">欢迎使用本系统</p>
+            <div class="block-body">
+                <form action="/Login/Index" method="post">
+                    <label>用户名：</label>
+                    <input type="text" class="span12" id="userName" name="userName" placeholder="UserName" autofocus required>
+                    <label>密码：</label>
+                    <input type="password" class="span12" id="userPwd" name="userPwd" placeholder="Password" required>
+                    @if (ViewBag.info != null)
+                    {
+                        <p id="info">@ViewBag.info</p>
+                    }
+                    @*<div class="row">
+                      <div class="offset4"><input type="submit" class="btn btn-primary span6" value="登陆" /></div>
+                    </div>*@
+                    <input type="submit" class="btn btn-primary pull-right span5" value="登陆" onclick="location.href='/Home/Index'" />
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/my/login.js")"></script>
+}
