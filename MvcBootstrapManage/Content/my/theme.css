@@ -749,8 +749,7 @@ table.table.list tr:first-child td {
   }
 }
 
-/***********************自定义样式***********************************/
-
+/***********************通用样式***********************************/
 .error-text
 {
     padding-left:40px;
@@ -758,14 +757,6 @@ table.table.list tr:first-child td {
 .btn-primary
 {
     margin-right:5px;
-}
-.even
-{
-    background-color:#F9F9F9;
-}
-.odd
-{
-    background-color:#EFEFEF;
 }
 .w97
 {
@@ -785,6 +776,11 @@ table.table.list tr:first-child td {
 {
     margin-left:20%;
 }
+.italic
+{
+    font-style: italic;
+    color: #ccc;
+}
 .inline-right
 {
     display: inline-block;
@@ -794,6 +790,41 @@ table.table.list tr:first-child td {
 {
     width: 195px;
 }
+#ModalEdit 
+{
+    width: 600px;
+}
+
+/********************表单斑马行样式***********************/
+.even
+{
+    background-color:#F9F9F9;
+}
+.odd
+{
+    background-color:#EFEFEF;
+}
+
+/********************表格头排序样式***********************/
+#js-table th
+{
+    cursor: pointer;
+}
+.th-sort
+{
+    background-repeat:no-repeat;
+    background-position:10px center;
+}
+.sort-down
+{
+    background-image:url('/Images/sort-down.png');
+}
+.sort-up
+{
+    background-image:url('/Images/sort-up.png');
+}
+
+/********************表单验证样式***********************/
 .form-tip
 {
     padding-left:17px;
@@ -854,4 +885,4 @@ table.table.list tr:first-child td {
     height:10px;
 }
 
-/***********************************************************/
+/*****************************************************/

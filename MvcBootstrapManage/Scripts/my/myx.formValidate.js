@@ -17,6 +17,8 @@ validationConfig：包含表单的class，提示div的class以及各种提示信
 tipSweep:         true表示在表单blur时即触发表单验证，反之false
 showAllError:     true表示在点击提交按钮时显示所有未通过验证的表单提示信息，反之在检测到第一个错误时即停止检测
 tipStyle:         提示文字显示方式：text表示显示文本，title表示显示在标签的title属性中
+isInline:         是否内联显示
+isHideInit:       是否隐藏表单验证初始样式
 tipClass:         提示文字样式
 infoClass:        表单提示图标样式
 focusClass:       点击表单图标样式
@@ -309,8 +311,10 @@ strongClass:      密码强度强图标样式
             config: validationConfig,
             tipSweep: true,
             showAllError: true,
+            isInline: false,
+            isHideInit: false,
             tipStyle: 'text',
-            tipClass: 'form-tip',
+            tipClass: '.form-tip',
             initClass: 'form-init',
             focusClass: 'form-focus',
             warnClass: 'form-warn',
@@ -333,6 +337,15 @@ strongClass:      密码强度强图标样式
             return this.replace(/^\w/, function (s) {
                 return s.toUpperCase();
             });
+        };
+
+        Array.prototype.contains = function () {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] == arguments[0]) {
+                    return true;
+                }
+            }
+            return false;
         };
 
         function checkDate(year, month, day) {
@@ -408,45 +421,60 @@ strongClass:      密码强度强图标样式
             this.removeClass(settings.initClass)
                 .removeClass(hideClass)
                 .addClass(showClass)
-                .html(info);
+                .showTip(info);
         };
 
-        $.fn.showOnly = function (info, showClass, hideClass) {
+        $.fn.showOnly = function (info, showClass) {
             this.addClass(showClass)
-                .html(info);
+                .showTip(info);
+        };
+
+        $.fn.hideOnly = function (info, hideClas) {
+            this.removeClass(hideClas)
+                .showTip(info);
         };
 
         /***************************************************************/
 
-        var obj = settings.scope ? $(settings.scope) : $(document);
-
         if (settings.tipStyle == 'title') {
-            $('.' + settings.tipClass).css({ 'height': '20px', 'vertical-align': 'middle' });
+            $(settings.tipClass).css({ 'height': '20px', 'vertical-align': 'middle' });
         }
 
-        var controls = obj.find('select, input:text');
+        if (settings.isInline) {
+            $(settings.tipClass).css({ 'display': 'inline', 'padding-top': '4px' });
+        }
+
+        var controls = $(this).find('select, input:text');
         var control;
         for (var i = 0; i < controls.length; i++) {
             control = controls.eq(i);
-
-            //TODO valType == 'noCheck' || 
             if (control.is('select')) {
-                control.parent().find('.' + settings.tipClass).showOnly('请选择', settings.initClass);
+                if (!control.hasClass('noCheck')) {
+                    control.parent().find(settings.tipClass).showOnly('请选择', settings.initClass);
+                }
+                else {
+                    control.parent().find(settings.tipClass).addClass(settings.successClass);
+                }
             }
             else {
-                if (control.attr('class') != undefined) {
-                    valType = control.attr('class').split(' ')[0];
-                    if (settings.config[valType] != undefined) {
-                        control.next().showOnly(settings.config[valType]['init'], settings.initClass);
+                if (!settings.isHideInit) {
+                    if (control.attr('class') != undefined) {
+                        valType = control.attr('class').split(' ');
+                        if (!valType.contains('hide') && settings.config[valType[0]] != undefined) {
+                            control.next().showOnly(settings.config[valType[0]]['init'], settings.initClass);
+                        }
                     }
+                }
+                else {
+                        control.next().showOnly('', settings.successClass);
                 }
             }
         }
 
-        var selects = obj.find('select');
+        var selects = $(this).find('select');
 
         selects.on('change', function () {
-            var tipSelect = $(this).parent().find('.' + settings.tipClass);
+            var tipSelect = $(this).parent().find(settings.tipClass);
             if (!$(this).hasClass('noCheck')) {
                 if (this.selectedIndex == 0) {
                     tipSelect.showHide('请选择内容', settings.errorClass, settings.successClass);
@@ -457,7 +485,7 @@ strongClass:      密码强度强图标样式
             }
         });
 
-        var inputs = obj.find('input');
+        var inputs = $(this).find('input');
         var valType;
 
         inputs.on('focus', function () {
@@ -545,15 +573,21 @@ strongClass:      密码强度强图标样式
             });
         }
 
-        obj.find('input[type=submit]').on('click', function (e) {
+        $(this).find('input[type=submit]').on('click', function (e) {
             for (var i = 0; i < controls.length; i++) {
                 control = controls.eq(i);
                 if (control.is('select')) {
-                    var tipSelect = control.parent().find('.' + settings.tipClass);
-                    if (tipSelect.hasClass(settings.initClass)) {
-                        tipSelect.showHide('请选择', settings.errorClass, settings.successClass);
-                        if (!settings.showAllError) {
-                            return false;
+                    if (control.hasClass('noCheck')) {
+                        alert(1);
+                        control.hideOnly('', settings.initClass);
+                    }
+                    else {
+                        var tipSelect = control.parent().find(settings.tipClass);
+                        if (tipSelect.hasClass(settings.initClass)) {
+                            tipSelect.showHide('请选择', settings.errorClass, settings.successClass);
+                            if (!settings.showAllError) {
+                                return false;
+                            }
                         }
                     }
                 }

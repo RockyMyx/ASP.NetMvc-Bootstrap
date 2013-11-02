@@ -30,13 +30,13 @@ namespace MvcBootstrapManage.Controllers
 
                 //DB操作方法三：使用LINQ
                 var user = (from u in db.User
-                            join p in db.Permission
-                            on u.ID equals p.UserID
+                            join r in db.UserRole
+                            on u.ID equals r.UserID
                             where (u.Name == userName && u.Password == userPwd)
                             select new 
                             {
                                 UserID = u.ID,
-                                RoleID = p.RoleID,
+                                RoleID = r.RoleID,
                                 RealName = u.RealName,
                                 UserName = u.Name
                             }).FirstOrDefault();

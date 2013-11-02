@@ -70,6 +70,7 @@ jQuery.fn.pagination = function (maxentries, opts) {
         */
         function pageSelected(page_id, evt) {
             current_page = page_id;
+            setPageIndex(current_page);
             drawLinks();
             //AJAX请求数据
             $('.current-page').html('当前第' + (++page_id) + '页');
@@ -117,7 +118,7 @@ jQuery.fn.pagination = function (maxentries, opts) {
                     var lnk = jQuery("<span class='current br'>" + (appendopts.text) + "</span>");
                 }
                 else {
-                    var lnk = jQuery('<a class="bor">' + (appendopts.text) + '</a>')
+                    var lnk = jQuery('<a class="bor" id="page' + page_id + '">' + (appendopts.text) + '</a>')
 						.bind("click", getClickHandler(page_id))
 						.attr('href', '');
                     //去除默认链接

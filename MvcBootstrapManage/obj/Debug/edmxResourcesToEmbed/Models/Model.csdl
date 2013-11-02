@@ -7,6 +7,8 @@
     <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Permission" />
     <EntitySet Name="Role" EntityType="MvcBootstrapModel.Role" />
     <EntitySet Name="User" EntityType="MvcBootstrapModel.User" />
+    <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.UserRole" />
+    <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.UserPermission" />
     <FunctionImport Name="GetModuleTree" EntitySet="Module" ReturnType="Collection(MvcBootstrapModel.Module)" />
   </EntityContainer>
   <EntityType Name="Log">
@@ -28,11 +30,12 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="Url" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="ParentId" Type="Int32" />
     <Property Name="IsVisible" Type="Boolean" />
     <Property Name="CreateDate" Type="DateTime" />
     <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Type="String" Name="Operations" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Operation">
     <Key>
@@ -40,19 +43,17 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="Order" Type="Int32" />
+    <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="CreateDate" Type="DateTime" />
     <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
   </EntityType>
   <EntityType Name="Permission">
     <Key>
-      <PropertyRef Name="UserID" />
       <PropertyRef Name="RoleID" />
     </Key>
-    <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="RoleID" Type="Int32" Nullable="false" />
-    <Property Name="Authority" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <Property Name="ControllerID" Type="Int32" />
+    <Property Name="ActionID" Type="Int32" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -82,5 +83,23 @@
     <Property Name="CreateDate" Type="DateTime" />
     <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserPermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="RealName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
   </EntityType>
 </Schema>

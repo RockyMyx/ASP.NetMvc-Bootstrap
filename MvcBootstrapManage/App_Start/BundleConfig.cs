@@ -52,10 +52,10 @@ namespace MvcBootstrapManage
             bundles.Add(new ScriptBundle("~/Content/js-manage")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
                                  "~/Scripts/my/myx.validate.js",
-                                 //"~/Scripts/my/My97DatePicker/WdatePicker.js",
+                                 "~/Scripts/my/myx.formValidate.js",
                                  "~/Scripts/my/bootstrap-modal.js",
-                                 "~/Scripts/my/myx.table.js",
-                                 "~/Scripts/my/myx.pagination.js"));
+                                 "~/Scripts/my/myx.pagination.js",
+                                 "~/Scripts/my/myx.page.js"));
 
             #endregion
 

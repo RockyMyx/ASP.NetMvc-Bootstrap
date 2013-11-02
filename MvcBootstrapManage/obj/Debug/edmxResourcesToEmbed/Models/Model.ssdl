@@ -4,9 +4,25 @@
     <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" store:Schema="dbo" store:Name="Permission">
+      <DefiningQuery>SELECT 
+      [Permission].[RoleID] AS [RoleID], 
+      [Permission].[ControllerID] AS [ControllerID], 
+      [Permission].[ActionID] AS [ActionID]
+      FROM [dbo].[Permission] AS [Permission]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.Store.UserPermission" store:Type="Views" store:Schema="dbo" store:Name="UserPermission">
+      <DefiningQuery>SELECT 
+      [UserPermission].[ID] AS [ID], 
+      [UserPermission].[Name] AS [Name], 
+      [UserPermission].[RealName] AS [RealName], 
+      [UserPermission].[Controller] AS [Controller], 
+      [UserPermission].[Action] AS [Action]
+      FROM [dbo].[UserPermission] AS [UserPermission]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
   <EntityType Name="Log">
     <Key>
@@ -27,11 +43,12 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Code" Type="varchar" MaxLength="20" />
-    <Property Name="Url" Type="varchar" MaxLength="50" />
+    <Property Name="Controller" Type="varchar" MaxLength="50" />
     <Property Name="ParentId" Type="int" />
     <Property Name="IsVisible" Type="bit" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Creator" Type="varchar" MaxLength="20" />
+    <Property Name="Operations" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Operation">
     <Key>
@@ -39,19 +56,20 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" MaxLength="20" />
-    <Property Name="Code" Type="varchar" MaxLength="20" />
-    <Property Name="Order" Type="int" />
+    <Property Name="Action" Type="varchar" MaxLength="20" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Creator" Type="varchar" MaxLength="20" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'MvcBootstrap.dbo.Permission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
   <EntityType Name="Permission">
     <Key>
-      <PropertyRef Name="UserID" />
       <PropertyRef Name="RoleID" />
     </Key>
-    <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="RoleID" Type="int" Nullable="false" />
-    <Property Name="Authority" Type="varchar" MaxLength="1000" />
+    <Property Name="ControllerID" Type="int" />
+    <Property Name="ActionID" Type="int" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -81,6 +99,27 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Creator" Type="varchar" MaxLength="20" />
     <Property Name="Remark" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'MvcBootstrap.dbo.UserPermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="UserPermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="RealName" Type="varchar" MaxLength="20" />
+    <Property Name="Controller" Type="varchar" MaxLength="50" />
+    <Property Name="Action" Type="varchar" MaxLength="20" />
   </EntityType>
   <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
 </Schema>

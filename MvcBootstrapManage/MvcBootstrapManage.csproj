@@ -140,25 +140,30 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Filters\CheckLoginAttribute.cs" />
-    <Compile Include="Filters\ErrorCatcherAttribute.cs" />
-    <Compile Include="Filters\LogAttribute.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SystemAPIController.cs" />
+    <Compile Include="Filters\Permission\BrowseAuthorize.cs" />
+    <Compile Include="Filters\Permission\CheckLoginAttribute.cs" />
+    <Compile Include="Filters\Error\ErrorCatcherAttribute.cs" />
+    <Compile Include="Filters\Log\LogAttribute.cs" />
+    <Compile Include="Filters\Permission\OperationAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Models\Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\ModuleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\my\animate.min.css" />
     <Content Include="Content\my\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\my\bootstrap\bootstrap-responsive.min.css" />
     <Content Include="Content\my\bootstrap\bootstrap.css" />
@@ -168,6 +173,8 @@
     <Content Include="Content\my\index.css" />
     <Content Include="Content\my\myx.checkbox.css" />
     <Content Include="Content\my\myx.combox.css" />
+    <Content Include="Images\sort-up.png" />
+    <Content Include="Images\sort-down.png" />
     <Content Include="Images\accept.png" />
     <Content Include="Images\checkbox.png" />
     <Content Include="Images\child.png" />
@@ -177,6 +184,7 @@
     <Content Include="Images\focus.png" />
     <Content Include="Images\folder.png" />
     <Content Include="Images\input.png" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Images\pwd_sprite.png" />
     <Content Include="Images\ui-bg-click.png" />
     <Content Include="Images\ui-bg-hover.png" />
@@ -324,7 +332,7 @@
     <Content Include="Scripts\my\myx.formValidate.js" />
     <Content Include="Scripts\my\myx.pagination.js" />
     <Content Include="Scripts\my\login.js" />
-    <Content Include="Scripts\my\myx.table.js" />
+    <Content Include="Scripts\my\myx.page.js" />
     <Content Include="Scripts\my\myx.validate.js" />
     <Content Include="Scripts\my\pinyin.js" />
     <Content Include="Scripts\_references.js" />
@@ -420,11 +428,15 @@
     <Content Include="Views\Home\Welcome.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\_ModuleGrid.cshtml" />
+    <Content Include="Views\Shared\_ModalDel.cshtml" />
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\_RoleGrid.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

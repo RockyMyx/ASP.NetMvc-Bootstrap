@@ -18,6 +18,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css-paging")
     @RenderSection("style", required: false)
 </head>
 <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
@@ -27,8 +28,86 @@
 <!--[if (gt IE 9)|!(IE)]><!--> 
 <body class=""> 
 <!--<![endif]-->
+    <div class="content">
+        <div id="js-grid">
+            <div class="header">
+                <h1>@ViewBag.Title</h1>
+            </div>
+            <ul class="breadcrumb">
+                <li class="active"><span>@ViewBag.ParentEnName</span><span class="divider">/</span></li>
+                <li>@ViewBag.CurrentEnName</li>
+            </ul>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="btn-toolbar">
+                        @{if (Convert.ToBoolean(ViewData["Create"]))
+                          {
+                            <button class="btn btn-primary" id="js-btn-toolbar-add">
+                            <i class="icon-plus"></i>新增</button>
+                          }}
+                        @{if (Convert.ToBoolean(ViewData["Delete"]))
+                          {
+                            <button class="btn" id="js-btn-toolbar-delete" onclick="confirm('您确定要删除吗？删除后不可恢复！')">删除</button>
+                          }}
+                        @{if (Convert.ToBoolean(ViewData["Search"]))
+                          {
+                        <button class="btn" id="js-btn-toolbar-refresh">刷新</button>
+                        <form class="form-search inline-right">
+                            <input type="text" placeholder="@ViewBag.SearchName" class="input-place italic" id="js-input-search">
+                            <button type="button" class="btn btn-primary pl10" id="js-btn-search">搜索</button>
+                        </form>
+                          }}
+                    </div>
+                    <div class="well">
+                        <table class="table table-striped table-bordered table-hover" id="js-table">
+                            @RenderSection("datagrid", required: false)
+                        </table>
+                        <div class="pagination"></div>
+                    </div>
+                    @Html.Partial("_ModalDel")
+                </div>
+                <div id="ModalEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <span class="label label-warning">修改信息</span>
+                        <img src="@Url.Content("~/Images/loading.gif")" id="js-loading" class="hide" alt="loading" />
+                    </div>
+                    <div class="modal-body">
+                        <form id="js-edit-form">
+                            @RenderSection("editform", required: false)
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-primary" id="js-btn-modal-edit" data-dismiss="modal">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="js-add-div" class="hide">
+            <div class="navbar w97">
+                <div class="navbar-inner">
+                    <a class="brand" href="#">@ViewBag.AddTitle</a>
+                </div>
+            </div>
+            <form class="form-horizontal ml20" id="js-add-form">
+                @RenderSection("addform", required: false)
+                <div class="control-group">
+                    <div class="controls ml20">
+                        <input class="btn btn-primary" type="submit" id="js-btn-form-add" value="确定" />
+                        <input class="btn btn-primary" type="button" id="js-btn-form-cancel" value="取消" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var dataCount = '@ViewBag.TotalCount';
+        var pageSize = '@ViewBag.PageSize';
+        var hideSearch = '@ViewBag.HideSearch';
+    </script>
+    @Scripts.Render("~/Content/js-manage")
     @RenderBody()
     @RenderSection("script", required: false)
-    @*@Styles.Render("base-js")*@
 </body>
 </html>

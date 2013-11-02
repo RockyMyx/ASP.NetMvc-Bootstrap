@@ -4,14 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MvcBootstrapModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="MvcBootstrapModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="MvcBootstrapModelStoreContainer">
           <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" store:Schema="dbo" store:Name="Permission">
+            <DefiningQuery>SELECT 
+      [Permission].[RoleID] AS [RoleID], 
+      [Permission].[ControllerID] AS [ControllerID], 
+      [Permission].[ActionID] AS [ActionID]
+      FROM [dbo].[Permission] AS [Permission]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.Store.UserPermission" store:Type="Views" store:Schema="dbo" store:Name="UserPermission">
+            <DefiningQuery>SELECT 
+      [UserPermission].[ID] AS [ID], 
+      [UserPermission].[Name] AS [Name], 
+      [UserPermission].[RealName] AS [RealName], 
+      [UserPermission].[Controller] AS [Controller], 
+      [UserPermission].[Action] AS [Action]
+      FROM [dbo].[UserPermission] AS [UserPermission]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
         <EntityType Name="Log">
           <Key>
@@ -32,11 +48,12 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="20" />
-          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="Controller" Type="varchar" MaxLength="50" />
           <Property Name="ParentId" Type="int" />
           <Property Name="IsVisible" Type="bit" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Creator" Type="varchar" MaxLength="20" />
+          <Property Name="Operations" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Operation">
           <Key>
@@ -44,19 +61,20 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
-          <Property Name="Code" Type="varchar" MaxLength="20" />
-          <Property Name="Order" Type="int" />
+          <Property Name="Action" Type="varchar" MaxLength="20" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Creator" Type="varchar" MaxLength="20" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'MvcBootstrap.dbo.Permission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
         <EntityType Name="Permission">
           <Key>
-            <PropertyRef Name="UserID" />
             <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
-          <Property Name="Authority" Type="varchar" MaxLength="1000" />
+          <Property Name="ControllerID" Type="int" />
+          <Property Name="ActionID" Type="int" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -87,9 +105,29 @@
           <Property Name="Creator" Type="varchar" MaxLength="20" />
           <Property Name="Remark" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'MvcBootstrap.dbo.UserPermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="UserPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="RealName" Type="varchar" MaxLength="20" />
+          <Property Name="Controller" Type="varchar" MaxLength="50" />
+          <Property Name="Action" Type="varchar" MaxLength="20" />
+        </EntityType>
         <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MvcBootstrapModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -100,6 +138,8 @@
           <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Permission" />
           <EntitySet Name="Role" EntityType="MvcBootstrapModel.Role" />
           <EntitySet Name="User" EntityType="MvcBootstrapModel.User" />
+          <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.UserRole" />
+          <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.UserPermission" />
           <FunctionImport Name="GetModuleTree" EntitySet="Module" ReturnType="Collection(MvcBootstrapModel.Module)" />
         </EntityContainer>
         <EntityType Name="Log">
@@ -121,11 +161,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Url" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ParentId" Type="Int32" />
           <Property Name="IsVisible" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" />
           <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Type="String" Name="Operations" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Operation">
           <Key>
@@ -133,19 +174,17 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Order" Type="Int32" />
+          <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" />
           <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
-            <PropertyRef Name="UserID" />
             <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="Authority" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="ControllerID" Type="Int32" />
+          <Property Name="ActionID" Type="Int32" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -176,6 +215,24 @@
           <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="RealName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -192,10 +249,11 @@
             <ScalarProperty Name="DateTime" ColumnName="DateTime" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Module"><EntityTypeMapping TypeName="MvcBootstrapModel.Module"><MappingFragment StoreEntitySet="Module">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Operations" ColumnName="Operations" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Code" ColumnName="Code" />
-            <ScalarProperty Name="Url" ColumnName="Url" />
+            <ScalarProperty Name="Controller" ColumnName="Controller" />
             <ScalarProperty Name="ParentId" ColumnName="ParentId" />
             <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -204,15 +262,14 @@
           <EntitySetMapping Name="Operation"><EntityTypeMapping TypeName="MvcBootstrapModel.Operation"><MappingFragment StoreEntitySet="Operation">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Code" ColumnName="Code" />
-            <ScalarProperty Name="Order" ColumnName="Order" />
+            <ScalarProperty Name="Action" ColumnName="Action" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="Creator" ColumnName="Creator" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Permission"><EntityTypeMapping TypeName="MvcBootstrapModel.Permission"><MappingFragment StoreEntitySet="Permission">
-            <ScalarProperty Name="UserID" ColumnName="UserID" />
             <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-            <ScalarProperty Name="Authority" ColumnName="Authority" />
+            <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
+            <ScalarProperty Name="ActionID" ColumnName="ActionID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Role"><EntityTypeMapping TypeName="MvcBootstrapModel.Role"><MappingFragment StoreEntitySet="Role">
             <ScalarProperty Name="ID" ColumnName="ID" />
@@ -237,6 +294,17 @@
             <ScalarProperty Name="Creator" ColumnName="Creator" />
             <ScalarProperty Name="Remark" ColumnName="Remark" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserRole"><EntityTypeMapping TypeName="MvcBootstrapModel.UserRole"><MappingFragment StoreEntitySet="UserRole">
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+            <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserPermission"><EntityTypeMapping TypeName="MvcBootstrapModel.UserPermission"><MappingFragment StoreEntitySet="UserPermission">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="RealName" ColumnName="RealName" />
+            <ScalarProperty Name="Controller" ColumnName="Controller" />
+            <ScalarProperty Name="Action" ColumnName="Action" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrapModel.Store.GetModuleTree" />
         </EntityContainerMapping>
       </Mapping>
@@ -260,11 +328,13 @@
     <Diagrams>
       <Diagram Name="Model">
         <EntityTypeShape EntityType="MvcBootstrapModel.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.5430916341145826" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.734111328125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9700325520833326" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.5879931640624996" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.3520719401041656" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.User" Width="1.5" PointX="4.75" PointY="3.75" Height="3.3071704101562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.UserRole" Width="1.5" PointX="6.75" PointY="0.75" Height="1.3969734700520817" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.UserPermission" Width="1.5" PointX="6.75" PointY="3.75" Height="1.9700325520833317" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -4,82 +4,122 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcBootstrapManage.Models;
-using MvcBootstrapManage.ViewModel;
+using System.Text;
+using System.Web.Script.Serialization;
+using System.Data;
 
 namespace MvcBootstrapManage.Controllers
 {
-    public class ModuleController : BaseController
+    public class ModuleController : ManageController
     {
-        public ModuleController()
+        protected override int TotalCount
         {
-            base.RecordCount = db.Module.Count();
+            get { return db.Module.Count(); }
         }
 
-        public ActionResult Index()
+        public override ActionResult Index()
         {
-            using (DBEntity db = new DBEntity())
+            List<Module> modules = db.Module.ToList();
+            List<SelectListItem> moduleList = new List<SelectListItem>();
+            int isParent;
+            moduleList.Add(new SelectListItem { Text = "请选择", Value = "0" });
+            for (int i = 0; i < modules.Count; i++)
             {
-                ViewBag.TotalCount = base.RecordCount;
-                var result = db.GetModuleTree().Take(base.DataPerPage).ToList();
-                return View(result);
+                if (!int.TryParse(modules[i].ParentId.ToString(), out isParent))
+                {
+                    moduleList.Add(new SelectListItem { Text = modules[i].Name, Value = modules[i].ID.ToString() });
+                }
             }
+            ViewData["ParentId"] = moduleList;
+            var result = db.GetModuleTree().Take(base.PageSize).ToList();
+            return View(result);
         }
 
         [HttpPost]
-        public ActionResult Index(int? pageIndex)
+        public override ActionResult Index(int? pageIndex)
         {
-            using (DBEntity db = new DBEntity())
-            {
-                int index = pageIndex ?? 1;
-                IList<Module> result = db.GetModuleTree().Skip((index - 1) * 3).Take(base.DataPerPage).ToList();
-                return PartialView("_ModuleGrid", result);
-            }
+            int index = pageIndex ?? 1;
+            IList<Module> result = db.GetModuleTree().Skip((index - 1) * 3).Take(base.PageSize).ToList();
+            return PartialView("_ModuleGrid", result);
         }
 
         [HttpPost]
-        public ActionResult Update(ModuleEditViewModel viewModel)
+        public override ActionResult Update(FormCollection formInfo)
         {
-            Module module = db.Module.Where(m => m.ID == viewModel.ID).Single();
-            module.Url = viewModel.Url;
-            module.IsVisible = int.Parse(viewModel.IsVisible) == 1 ? true : false;
-            db.SaveChanges();
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult Delete(List<int> ids)
-        {
-            foreach (int id in ids)
-            {
-                Module module = db.Module.Where(m => m.ID == id).Single();
-                db.DeleteObject(module);
-            }
+            int id = Convert.ToInt32(formInfo["ID"]);
+            Module module = GetModuleFromForm(formInfo);
+            Module oldModule = db.Module.Where(m => m.ID == id).Single();
+            oldModule.ID = id;
+            oldModule.Name = module.Name;
+            oldModule.Controller = module.Controller;
+            oldModule.IsVisible = module.IsVisible;
+            oldModule.Operations = module.Operations;
             db.SaveChanges();
             return new EmptyResult();
         }
 
         [HttpPost]
-        public ActionResult Add(FormCollection formInfo)
+        public override ActionResult Delete(List<int> ids)
         {
-            Module module = new Module();
-            module.Name = formInfo["Name"].ToString();
-            module.Code = formInfo["Code"].ToString();
-            module.ParentId = Convert.ToInt32(formInfo["ParentId"]);
-            module.IsVisible = string.Compare(formInfo["IsVisible"], "1") == 0;
+            try
+            {
+                foreach (int id in ids)
+                {
+                    Module module = db.Module.Where(m => m.ID == id).Single();
+                    db.DeleteObject(module);
+                    db.SaveChanges();
+                }
+            }
+            catch (OptimisticConcurrencyException)
+            {
+                db.AcceptAllChanges();
+            }
+
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public override ActionResult Create(FormCollection formInfo)
+        {
+            Module module = GetModuleFromForm(formInfo);
+            module.CreateDate = DateTime.Now;
+            //module.Creator = Session["RealName"].ToString();
             db.Module.AddObject(module);
             db.SaveChanges();
             return new EmptyResult();
         }
 
-        [HttpPost]
-        public ActionResult Search(string name)
+        public override ActionResult Search(string name)
         {
-            using (DBEntity db = new DBEntity())
+            IList<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name)).ToList();
+            return PartialView("_ModuleGrid", result);
+        }
+
+        private Module GetModuleFromForm(FormCollection formInfo)
+        {
+            Module module = new Module();
+            module.Name = formInfo["Name"].ToString();
+            module.Code = formInfo["Code"].ToString();
+            module.Controller = formInfo["Controller"].ToString();
+            module.IsVisible = string.Compare(formInfo["IsVisible"], "1") == 0;
+            int parentId = Convert.ToInt32(formInfo["ParentId"]);
+            if (parentId != 0)
             {
-                IList<Module> result = db.Module.Where(m => m.Name.Contains(name)).OrderBy(m => m.ID).ToList();
-                ViewBag.SearchCount = result.Count;
-                return PartialView("_ModuleGrid", result);
+                module.ParentId = parentId;
             }
+
+            List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
+            if (operations.Count > 0)
+            {
+                StringBuilder strOperation = new StringBuilder();
+                foreach (string operation in operations)
+                {
+                    strOperation.Append(operation.Replace("op", "") + ",");
+                }
+                module.Operations = strOperation.Remove(strOperation.Length - 1, 1).ToString();
+            }
+
+            return module;
         }
     }
 }

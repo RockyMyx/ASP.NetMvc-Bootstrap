@@ -10,10 +10,9 @@ namespace MvcBootstrapManage.Controllers
     //[Log]
     //[CheckLogin]
     [ErrorCatcher]
+    [OperationAuthorize]
+    [BrowseAuthorize]
     public class BaseController : Controller
     {
-        protected DBEntity db = new DBEntity();
-        protected int DataPerPage = 3;
-        protected int RecordCount { get; set; }
     }
 }

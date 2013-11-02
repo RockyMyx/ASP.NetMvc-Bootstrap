@@ -160,6 +160,38 @@ namespace MvcBootstrapManage.Models
             }
         }
         private ObjectSet<User> _User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserRole> UserRole
+        {
+            get
+            {
+                if ((_UserRole == null))
+                {
+                    _UserRole = base.CreateObjectSet<UserRole>("UserRole");
+                }
+                return _UserRole;
+            }
+        }
+        private ObjectSet<UserRole> _UserRole;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserPermission> UserPermission
+        {
+            get
+            {
+                if ((_UserPermission == null))
+                {
+                    _UserPermission = base.CreateObjectSet<UserPermission>("UserPermission");
+                }
+                return _UserPermission;
+            }
+        }
+        private ObjectSet<UserPermission> _UserPermission;
 
         #endregion
         #region AddTo Methods
@@ -210,6 +242,22 @@ namespace MvcBootstrapManage.Models
         public void AddToUser(User user)
         {
             base.AddObject("User", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserRole EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserRole(UserRole userRole)
+        {
+            base.AddObject("UserRole", userRole);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserPermission EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserPermission(UserPermission userPermission)
+        {
+            base.AddObject("UserPermission", userPermission);
         }
 
         #endregion
@@ -542,24 +590,24 @@ namespace MvcBootstrapManage.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Url
+        public global::System.String Controller
         {
             get
             {
-                return _Url;
+                return _Controller;
             }
             set
             {
-                OnUrlChanging(value);
-                ReportPropertyChanging("Url");
-                _Url = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Url");
-                OnUrlChanged();
+                OnControllerChanging(value);
+                ReportPropertyChanging("Controller");
+                _Controller = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Controller");
+                OnControllerChanged();
             }
         }
-        private global::System.String _Url;
-        partial void OnUrlChanging(global::System.String value);
-        partial void OnUrlChanged();
+        private global::System.String _Controller;
+        partial void OnControllerChanging(global::System.String value);
+        partial void OnControllerChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -656,6 +704,30 @@ namespace MvcBootstrapManage.Models
         private global::System.String _Creator;
         partial void OnCreatorChanging(global::System.String value);
         partial void OnCreatorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Operations
+        {
+            get
+            {
+                return _Operations;
+            }
+            set
+            {
+                OnOperationsChanging(value);
+                ReportPropertyChanging("Operations");
+                _Operations = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Operations");
+                OnOperationsChanged();
+            }
+        }
+        private global::System.String _Operations;
+        partial void OnOperationsChanging(global::System.String value);
+        partial void OnOperationsChanged();
 
         #endregion
     
@@ -741,48 +813,24 @@ namespace MvcBootstrapManage.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Code
+        public global::System.String Action
         {
             get
             {
-                return _Code;
+                return _Action;
             }
             set
             {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
+                OnActionChanging(value);
+                ReportPropertyChanging("Action");
+                _Action = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Action");
+                OnActionChanged();
             }
         }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Order
-        {
-            get
-            {
-                return _Order;
-            }
-            set
-            {
-                OnOrderChanging(value);
-                ReportPropertyChanging("Order");
-                _Order = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Order");
-                OnOrderChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Order;
-        partial void OnOrderChanging(Nullable<global::System.Int32> value);
-        partial void OnOrderChanged();
+        private global::System.String _Action;
+        partial void OnActionChanging(global::System.String value);
+        partial void OnActionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -849,45 +897,16 @@ namespace MvcBootstrapManage.Models
         /// <summary>
         /// Create a new Permission object.
         /// </summary>
-        /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="roleID">Initial value of the RoleID property.</param>
-        public static Permission CreatePermission(global::System.Int32 userID, global::System.Int32 roleID)
+        public static Permission CreatePermission(global::System.Int32 roleID)
         {
             Permission permission = new Permission();
-            permission.UserID = userID;
             permission.RoleID = roleID;
             return permission;
         }
 
         #endregion
         #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserID
-        {
-            get
-            {
-                return _UserID;
-            }
-            set
-            {
-                if (_UserID != value)
-                {
-                    OnUserIDChanging(value);
-                    ReportPropertyChanging("UserID");
-                    _UserID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("UserID");
-                    OnUserIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _UserID;
-        partial void OnUserIDChanging(global::System.Int32 value);
-        partial void OnUserIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -921,24 +940,48 @@ namespace MvcBootstrapManage.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Authority
+        public Nullable<global::System.Int32> ControllerID
         {
             get
             {
-                return _Authority;
+                return _ControllerID;
             }
             set
             {
-                OnAuthorityChanging(value);
-                ReportPropertyChanging("Authority");
-                _Authority = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Authority");
-                OnAuthorityChanged();
+                OnControllerIDChanging(value);
+                ReportPropertyChanging("ControllerID");
+                _ControllerID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ControllerID");
+                OnControllerIDChanged();
             }
         }
-        private global::System.String _Authority;
-        partial void OnAuthorityChanging(global::System.String value);
-        partial void OnAuthorityChanged();
+        private Nullable<global::System.Int32> _ControllerID;
+        partial void OnControllerIDChanging(Nullable<global::System.Int32> value);
+        partial void OnControllerIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ActionID
+        {
+            get
+            {
+                return _ActionID;
+            }
+            set
+            {
+                OnActionIDChanging(value);
+                ReportPropertyChanging("ActionID");
+                _ActionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ActionID");
+                OnActionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ActionID;
+        partial void OnActionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnActionIDChanged();
 
         #endregion
     
@@ -1457,6 +1500,241 @@ namespace MvcBootstrapManage.Models
         private global::System.String _Remark;
         partial void OnRemarkChanging(global::System.String value);
         partial void OnRemarkChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="UserPermission")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserPermission : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserPermission object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static UserPermission CreateUserPermission(global::System.Int32 id)
+        {
+            UserPermission userPermission = new UserPermission();
+            userPermission.ID = id;
+            return userPermission;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RealName
+        {
+            get
+            {
+                return _RealName;
+            }
+            set
+            {
+                OnRealNameChanging(value);
+                ReportPropertyChanging("RealName");
+                _RealName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RealName");
+                OnRealNameChanged();
+            }
+        }
+        private global::System.String _RealName;
+        partial void OnRealNameChanging(global::System.String value);
+        partial void OnRealNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Controller
+        {
+            get
+            {
+                return _Controller;
+            }
+            set
+            {
+                OnControllerChanging(value);
+                ReportPropertyChanging("Controller");
+                _Controller = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Controller");
+                OnControllerChanged();
+            }
+        }
+        private global::System.String _Controller;
+        partial void OnControllerChanging(global::System.String value);
+        partial void OnControllerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Action
+        {
+            get
+            {
+                return _Action;
+            }
+            set
+            {
+                OnActionChanging(value);
+                ReportPropertyChanging("Action");
+                _Action = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Action");
+                OnActionChanged();
+            }
+        }
+        private global::System.String _Action;
+        partial void OnActionChanging(global::System.String value);
+        partial void OnActionChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrapModel", Name="UserRole")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserRole : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserRole object.
+        /// </summary>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        /// <param name="roleID">Initial value of the RoleID property.</param>
+        public static UserRole CreateUserRole(global::System.Int32 userID, global::System.Int32 roleID)
+        {
+            UserRole userRole = new UserRole();
+            userRole.UserID = userID;
+            userRole.RoleID = roleID;
+            return userRole;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                if (_UserID != value)
+                {
+                    OnUserIDChanging(value);
+                    ReportPropertyChanging("UserID");
+                    _UserID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserID");
+                    OnUserIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleID
+        {
+            get
+            {
+                return _RoleID;
+            }
+            set
+            {
+                if (_RoleID != value)
+                {
+                    OnRoleIDChanging(value);
+                    ReportPropertyChanging("RoleID");
+                    _RoleID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("RoleID");
+                    OnRoleIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _RoleID;
+        partial void OnRoleIDChanging(global::System.Int32 value);
+        partial void OnRoleIDChanged();
 
         #endregion
     

@@ -1,14 +1,39 @@
 ﻿@{
-    ViewBag.Title = "欢迎使用XXXX管理系统";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "资产管理系统首页";
+    Layout = null;
 }
 
-@section style{
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- fav and touch icons -->
+    <link rel="shortcut icon" href="../../Images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../Images/apple-touch-icon-144-precompos.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../Images/apple-touch-icon-114-precompos.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../Images/apple-touch-icon-72-precompose.png">
+    <link rel="apple-touch-icon-precomposed" href="../../Images/apple-touch-icon-57-precompose.png">
+    <!-- For IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    @Styles.Render("~/Content/css")
     <link href="@Url.Content("~/Content/my/index.css")" rel="stylesheet" type="text/css" />
-}
-
+</head>
+<!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+<!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+<!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> 
+<body class=""> 
+<!--<![endif]-->
 <div id="container">
-    <div class="navbar">
+    <div class="navbar" id="header">
         <div class="navbar-inner">
             <a class="brand" href="#">LOGO</a>
             <ul class="nav pull-right">
@@ -31,35 +56,53 @@
     </div>
     <div id="page">
         <div id="left" class="sidebar-nav">
-            <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>系统管理</a>
+            @{if (ViewData["browse-xtgl"] != null)
+              {
+                <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>系统管理</a>
+              }}
             <ul id="dashboard-menu" class="nav nav-list collapse in">
+            @{if (ViewData["browse-yhgl"] != null)
+              {
                 <li><a href="javascript:;"><i class="icon-user"></i>用户管理</a></li>
-                <li ><a href="#"><i class="icon-star"></i>角色管理</a></li>
-                <li ><a target="content" href="/Module/Index"><i class="icon-th-large"></i>模块管理</a></li>
-                <li ><a href="#"><i class="icon-lock"></i>权限管理</a></li>
+              }}
+            @{if (ViewData["browse-jsgl"] != null)
+              {
+                <li><a target="content" href="/Role/Index"><i class="icon-star"></i>角色管理</a></li>
+              }}
+            @{if (ViewData["browse-mkgl"] != null)
+              {
+                <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>模块管理</a></li>
+              }}
+            @{if (ViewData["browse-qxgl"] != null)
+              {
+                <li><a target="content" href="javascript:;"><i class="icon-lock"></i>权限管理</a></li>
+              }}
             </ul>
+            
+            
+            <!--同上操作-->
             <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>基本数据管理</a>
             <ul id="accounts-menu" class="nav nav-list collapse">
-                <li ><a href="#">资产分类设置</a></li>
-                <li ><a href="#">资产单位设置</a></li>
-                <li ><a href="#">部门信息设置</a></li>
+                <li><a href="#">资产分类设置</a></li>
+                <li><a href="#">资产单位设置</a></li>
+                <li><a href="#">部门信息设置</a></li>
             </ul>
             <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-exclamation-sign"></i>固定资产管理</a>
             <ul id="error-menu" class="nav nav-list collapse">
-                <li ><a href="#">资产入库</a></li>
-                <li ><a href="#">资产修改、删除</a></li>
-                <li ><a href="#">资产调拨</a></li>
-                <li ><a href="#">资产借出</a></li>
-                <li ><a href="#">资产送修</a></li>
-                <li ><a href="#">资产归还</a></li>
-                <li ><a href="#">资产折旧</a></li>
-                <li ><a href="#">资产注销</a></li>
+                <li><a href="#">资产入库</a></li>
+                <li><a href="#">资产修改、删除</a></li>
+                <li><a href="#">资产调拨</a></li>
+                <li><a href="#">资产借出</a></li>
+                <li><a href="#">资产送修</a></li>
+                <li><a href="#">资产归还</a></li>
+                <li><a href="#">资产折旧</a></li>
+                <li><a href="#">资产注销</a></li>
             </ul>
             <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>统计查询</a>
             <ul id="legal-menu" class="nav nav-list collapse">
-                <li ><a href="#">资产查询</a></li>
-                <li ><a href="#">资产转移记录</a></li>
-                <li ><a href="#">报表打印</a></li>
+                <li><a href="#">资产查询</a></li>
+                <li><a href="#">资产转移记录</a></li>
+                <li><a href="#">报表打印</a></li>
             </ul>
             <a href="#" class="nav-header" data-toggle="collapse"><i class="icon-question-sign"></i>系统帮助</a>
         </div>
@@ -74,12 +117,10 @@
         </div>
     </div>
 </div>
-@section script{
-    @Scripts.Render("~/Content/js")
-    <script type="text/javascript">
-        var visibleHeight = document.body.clientHeight;
-        var left = document.getElementById('left');
-        var frame = document.getElementById('frame');
-        left.style.height = frame.style.height = visibleHeight + "px";
-    </script> 
-}
+@Scripts.Render("~/Content/js")
+<script type="text/javascript">
+    var visibleHeight = document.body.clientHeight;
+    var left = document.getElementById('left');
+    var frame = document.getElementById('frame');
+    left.style.height = frame.style.height = visibleHeight+ "px";
+</script>

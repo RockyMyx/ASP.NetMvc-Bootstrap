@@ -1,0 +1,24 @@
+﻿@model List<MvcBootstrapManage.Models.Role>
+<thead>
+	<tr>
+        <th><input id="js-check-all" type="checkbox" style="margin:-2px 5px 0 0;" />选择</th>
+		<th class="sort-alpha">角色名称</th>
+		<th class="sort-alpha">角色说明</th>
+		<th class="sort-date">创建日期</th>
+		<th>操作</th>
+	</tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="hide">@item.ID</td>
+            <td class="js-check"><input class="js-check-cell" type="checkbox" /></td>
+		    <td key="Name" content="@item.Name" type="notEmpty">@item.Name</td>
+		    <td key="Remark" content="@item.Remark" type="notEmpty">@item.Remark</td>
+		    <td class="js-readonly" key="CreateDate" content="@item.CreateDate">@item.CreateDate</td>
+            <td><a href="javascript:;"><i class="icon-pencil" type="table"></i></a>
+                <a href="#ModalDel" role="button" data-toggle="modal"><i class="icon-remove"></i></a></td>
+        </tr>
+    }
+</tbody>

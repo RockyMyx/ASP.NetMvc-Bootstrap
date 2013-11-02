@@ -17,10 +17,11 @@
     <EntitySetMapping Name="Module">
       <EntityTypeMapping TypeName="MvcBootstrapModel.Module">
         <MappingFragment StoreEntitySet="Module">
+          <ScalarProperty Name="Operations" ColumnName="Operations" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -33,8 +34,7 @@
         <MappingFragment StoreEntitySet="Operation">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Creator" ColumnName="Creator" />
         </MappingFragment>
@@ -43,9 +43,9 @@
     <EntitySetMapping Name="Permission">
       <EntityTypeMapping TypeName="MvcBootstrapModel.Permission">
         <MappingFragment StoreEntitySet="Permission">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-          <ScalarProperty Name="Authority" ColumnName="Authority" />
+          <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
+          <ScalarProperty Name="ActionID" ColumnName="ActionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -77,6 +77,25 @@
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Creator" ColumnName="Creator" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRole">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPermission">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.UserPermission">
+        <MappingFragment StoreEntitySet="UserPermission">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RealName" ColumnName="RealName" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

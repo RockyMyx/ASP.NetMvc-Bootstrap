@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "角色管理";
+    ViewBag.ParentEnName = "System";
+    ViewBag.CurrentEnName = "RoleManage";
+    ViewBag.SearchName = "角色名称";
+    ViewBag.AddTitle = "新增角色信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section datagrid{
+    @Html.Partial("_RoleGrid")
+}
+
+@section addform{
+    <div class="control-group">
+        <label class="control-label">
+            角色名称</label>
+        <div class="controls">
+            <input type="text" name="Name" class="empty form-input">
+            <div class="form-tip"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            角色说明</label>
+        <div class="controls">
+            <input type="text" name="Remark" class="form-input" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            是否启用</label>
+        <div class="controls">
+            <label class="radio inline">
+                <input type="radio" name="IsVisible" value="1" checked>是
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="IsVisible" value="0">否
+            </label>
+        </div>
+    </div>
+}
