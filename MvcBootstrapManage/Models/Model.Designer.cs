@@ -897,11 +897,11 @@ namespace MvcBootstrapManage.Models
         /// <summary>
         /// Create a new Permission object.
         /// </summary>
-        /// <param name="roleID">Initial value of the RoleID property.</param>
-        public static Permission CreatePermission(global::System.Int32 roleID)
+        /// <param name="id">Initial value of the ID property.</param>
+        public static Permission CreatePermission(global::System.Int32 id)
         {
             Permission permission = new Permission();
-            permission.RoleID = roleID;
+            permission.ID = id;
             return permission;
         }
 
@@ -911,9 +911,9 @@ namespace MvcBootstrapManage.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 RoleID
+        public Nullable<global::System.Int32> RoleID
         {
             get
             {
@@ -921,18 +921,15 @@ namespace MvcBootstrapManage.Models
             }
             set
             {
-                if (_RoleID != value)
-                {
-                    OnRoleIDChanging(value);
-                    ReportPropertyChanging("RoleID");
-                    _RoleID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("RoleID");
-                    OnRoleIDChanged();
-                }
+                OnRoleIDChanging(value);
+                ReportPropertyChanging("RoleID");
+                _RoleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RoleID");
+                OnRoleIDChanged();
             }
         }
-        private global::System.Int32 _RoleID;
-        partial void OnRoleIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _RoleID;
+        partial void OnRoleIDChanging(Nullable<global::System.Int32> value);
         partial void OnRoleIDChanged();
     
         /// <summary>
@@ -982,6 +979,33 @@ namespace MvcBootstrapManage.Models
         private Nullable<global::System.Int32> _ActionID;
         partial void OnActionIDChanging(Nullable<global::System.Int32> value);
         partial void OnActionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
 
         #endregion
     

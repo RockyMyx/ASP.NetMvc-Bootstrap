@@ -4,13 +4,7 @@
     <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" store:Schema="dbo" store:Name="Permission">
-      <DefiningQuery>SELECT 
-      [Permission].[RoleID] AS [RoleID], 
-      [Permission].[ControllerID] AS [ControllerID], 
-      [Permission].[ActionID] AS [ActionID]
-      FROM [dbo].[Permission] AS [Permission]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -60,14 +54,12 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Creator" Type="varchar" MaxLength="20" />
   </EntityType>
-  <!--Errors Found During Generation:
-      warning 6002: The table/view 'MvcBootstrap.dbo.Permission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
   <EntityType Name="Permission">
     <Key>
-      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="int" />
     <Property Name="ControllerID" Type="int" />
     <Property Name="ActionID" Type="int" />
   </EntityType>

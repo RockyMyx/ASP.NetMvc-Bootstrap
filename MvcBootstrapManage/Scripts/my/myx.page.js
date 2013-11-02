@@ -24,6 +24,14 @@ function isValidForm(form) {
     return true;
 }
 
+//模态窗口展现事件
+$('.modal').on('shown', function (e) {
+    var modal = $(this);
+    modal.css('margin-top', (modal.outerHeight() / 2) * -1.3)
+         .css('margin-left', (modal.outerWidth() / 2) * -1);
+    return this;
+});
+
 function resize() {
     $('.content').css('height', $(window).height() + $(window).scrollTop());
 }
@@ -251,7 +259,7 @@ function bindTable() {
                     if (isCommit) {
                         $.ajax({
                             type: 'POST',
-                            url: '/' + thisModel + '/Update',
+                            url: '/' + thisModel + '/Modify',
                             contentType: 'application/json',
                             dataType: 'html',
                             //IE6、IE7默认不支持JSON.stringify，可以引入Scripts/my/json2.js解决此问题
@@ -333,14 +341,6 @@ function bindTable() {
         }
     });
 
-    //编辑窗口展现事件
-    $('#ModalEdit').on('shown', function (e) {
-        var modal = $(this);
-        modal.css('margin-top', (modal.outerHeight() / 2) * -1.3)
-             .css('margin-left', (modal.outerWidth() / 2) * -1);
-        return this;
-    });
-
     /****************************工具栏按钮*****************************/
 
     var isSelectAll = false;
@@ -352,7 +352,8 @@ function bindTable() {
     });
 
     //工具栏删除按钮点击事件
-    $('#js-btn-toolbar-delete').on('click', function (e) {
+    //unbind为了解决弹出多次confirm的问题
+    $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
         var trs = $('.table tbody').find('tr');
         var deletetd, ids = [];
         for (var i = 0; i < trs.length; i++) {
@@ -362,16 +363,18 @@ function bindTable() {
             }
         }
         if (ids.length != 0) {
-            $.ajax({
-                type: 'POST',
-                url: '/' + thisModel + '/Delete',
-                contentType: 'application/json',
-                dataType: 'html',
-                data: JSON.stringify(ids),
-                success: function () {
-                    resetPagination(-ids.length);
-                }
-            });
+            if (confirm('您确定要删除吗？删除后不可恢复！')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/' + thisModel + '/Delete',
+                    contentType: 'application/json',
+                    dataType: 'html',
+                    data: JSON.stringify(ids),
+                    success: function () {
+                        resetPagination(-ids.length);
+                    }
+                });
+            }
         }
         else {
             alert('请选中需要删除的行');
@@ -386,13 +389,19 @@ $('#js-btn-toolbar-refresh').on('click', function () {
 
 //工具栏添加按钮点击事件
 $('#js-btn-toolbar-add').on('click', function () {
+    //重置隐藏控件
+    var hideElments = $('#js-add-form').find('.hide');
+    for (var i = 0; i < hideElments.length; i++) {
+        hideElments[i].style.display = 'none';
+    }
+
     $('#js-add-form').mValidate();
     var scrollHeight = ~ ~$('#js-grid').height() + 'px';
-    $('body').css('height', ~ ~$(document).height() + ~ ~$('#js-add-div').height() + 'px');
+    $('body').css('height', ~ ~$(document).height() + ~ ~$('#js-div-add').height() + 'px');
     $('body').animate({ scrollTop: scrollHeight }, 'fast', function () {
         resize();
     });
-    $('#js-add-div').show();
+    $('#js-div-add').show();
 });
 
 //工具栏搜索按钮点击事件
@@ -409,21 +418,6 @@ $('#js-btn-search').on('click', function () {
     }
 });
 
-//工具栏权限分配按钮点击事件
-$('#js-btn-toolbar-permission').on('click', function () {
-    var roleCheck = $('#js-table').find('input:checked');
-    if ($('#js-table').find('.js-check-all').prop('checked') != undefined ||
-        roleCheck.length == 0) {
-        alert('请选中需要分配权限的角色！');
-    }
-    else if (roleCheck.length > 1) {
-        alert('每次只能为一个角色分配权限！');
-    }
-    else {
-        alert(checkId);
-    }
-});
-
 /****************************添加表单*****************************/
 
 //确定按钮点击事件
@@ -433,16 +427,16 @@ $('#js-btn-form-add').on('click', function () {
         $.post('/' + thisModel + '/Create', form.serialize())
          .done(function () {
              resetPagination(1);
-             $('body').animate({ scrollTop: -$('#js-add-div').height() }, 'fast');
+             $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast');
          });
     }
 });
 
 //取消按钮点击事件
 $('#js-btn-form-cancel').on('click', function () {
-    $('#js-add-div').hide();
+    $('#js-div-add').hide();
     $('body').css('height', $(window).height());
-    $('body').animate({ scrollTop: -$('#js-add-div').height() }, 'fast', function () {
+    $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast', function () {
         resize();
     });
 });
@@ -454,7 +448,6 @@ var pageIndex;
 function setPageIndex(index) {
     pageIndex = index;
 }
-
 
 function initPagination(totalCount) {
     $(".pagination").pagination(totalCount);

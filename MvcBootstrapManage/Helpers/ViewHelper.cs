@@ -30,4 +30,38 @@ public static class ViewHelper
             return MvcHtmlString.Create(strBuilder.ToString());
         }
     }
+
+    /// <summary>
+    /// 权限分配时，生成每个资源对应的权限
+    /// </summary>
+    public static MvcHtmlString DistributeOptions(this HtmlHelper helper, int moduleId)
+    {
+        StringBuilder strBuilder = new StringBuilder();
+        string label = "<form class=\"js-form-permission\" name=\"setPermission\"><label class=\"inline\">{0}</label>";
+        string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" action=\"{0}\" style=\"margin:-2px 8px 0 8px\" />{2}";
+        using (DBEntity db = new DBEntity())
+        {
+            List<Module> modules = db.Module.Where(m => m.ParentId == moduleId).ToList();
+            string[] operations = null;
+            int actionId = 0;
+            Operation operation = null;
+            foreach (Module module in modules)
+            {
+                if (!string.IsNullOrWhiteSpace(module.Operations))
+                {
+                    strBuilder.AppendFormat(label, module.Name);
+                    operations = module.Operations.Split(',');
+                    foreach (string op in operations)
+                    {
+                        actionId = Convert.ToInt32(op);
+                        operation = db.Operation.Where(o => o.ID == actionId).Single();
+                        strBuilder.AppendFormat(checkbox, module.ID, operation.ID, operation.Name);
+                    }
+                    strBuilder.Append("</form><p></p>");
+                }
+            }
+        }
+
+        return MvcHtmlString.Create(strBuilder.ToString());
+    }
 }

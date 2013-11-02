@@ -9,13 +9,7 @@
           <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" store:Schema="dbo" store:Name="Permission">
-            <DefiningQuery>SELECT 
-      [Permission].[RoleID] AS [RoleID], 
-      [Permission].[ControllerID] AS [ControllerID], 
-      [Permission].[ActionID] AS [ActionID]
-      FROM [dbo].[Permission] AS [Permission]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Permission" EntityType="MvcBootstrapModel.Store.Permission" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -65,14 +59,12 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Creator" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'MvcBootstrap.dbo.Permission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="Permission">
           <Key>
-            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="int" />
           <Property Name="ControllerID" Type="int" />
           <Property Name="ActionID" Type="int" />
         </EntityType>
@@ -166,7 +158,7 @@
           <Property Name="IsVisible" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" />
           <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Type="String" Name="Operations" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Operation">
           <Key>
@@ -180,11 +172,12 @@
         </EntityType>
         <EntityType Name="Permission">
           <Key>
-            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
           <Property Name="ControllerID" Type="Int32" />
           <Property Name="ActionID" Type="Int32" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -249,8 +242,7 @@
             <ScalarProperty Name="DateTime" ColumnName="DateTime" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Module"><EntityTypeMapping TypeName="MvcBootstrapModel.Module"><MappingFragment StoreEntitySet="Module">
-            <ScalarProperty Name="Operations" ColumnName="Operations" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Code" ColumnName="Code" />
             <ScalarProperty Name="Controller" ColumnName="Controller" />
@@ -258,6 +250,7 @@
             <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="Creator" ColumnName="Creator" />
+            <ScalarProperty Name="Operations" ColumnName="Operations" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Operation"><EntityTypeMapping TypeName="MvcBootstrapModel.Operation"><MappingFragment StoreEntitySet="Operation">
             <ScalarProperty Name="ID" ColumnName="ID" />
@@ -267,7 +260,8 @@
             <ScalarProperty Name="Creator" ColumnName="Creator" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Permission"><EntityTypeMapping TypeName="MvcBootstrapModel.Permission"><MappingFragment StoreEntitySet="Permission">
-            <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
             <ScalarProperty Name="ActionID" ColumnName="ActionID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -328,9 +322,9 @@
     <Diagrams>
       <Diagram Name="Model">
         <EntityTypeShape EntityType="MvcBootstrapModel.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.734111328125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.7341113281249996" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9700325520833326" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.7790128580729165" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.3520719401041656" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.User" Width="1.5" PointX="4.75" PointY="3.75" Height="3.3071704101562496" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.UserRole" Width="1.5" PointX="6.75" PointY="0.75" Height="1.3969734700520817" IsExpanded="true" />

@@ -5,10 +5,11 @@ using System.Web;
 
 namespace MvcBootstrapManage.ViewModel
 {
-    public class ModuleEditViewModel
+    public class RoleEditViewModel
     {
         public int ID { get; set; }
-        public string Url { get; set; }
-        public string IsVisible { get; set; }
+        public string Name { get; set; }
+        public string Remark { get; set; }
+        public string IsEnable { get; set; }
     }
 }

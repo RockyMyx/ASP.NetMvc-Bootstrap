@@ -388,6 +388,8 @@ strongClass:      密码强度强图标样式
 
         $.fn.showInit = function (info) {
             this.next()
+                .removeClass(settings.successClass)
+                .removeClass(settings.errorClass)
                 .addClass(settings.initClass)
                 .showTip(info);
         }
@@ -425,7 +427,10 @@ strongClass:      密码强度强图标样式
         };
 
         $.fn.showOnly = function (info, showClass) {
-            this.addClass(showClass)
+            this.removeClass(settings.successClass)
+                .removeClass(settings.focusClass)
+                .removeClass(settings.errorClass)
+                .addClass(showClass)
                 .showTip(info);
         };
 
@@ -460,13 +465,13 @@ strongClass:      密码强度强图标样式
                 if (!settings.isHideInit) {
                     if (control.attr('class') != undefined) {
                         valType = control.attr('class').split(' ');
-                        if (!valType.contains('hide') && settings.config[valType[0]] != undefined) {
+                        if (settings.config[valType[0]] != undefined) {
                             control.next().showOnly(settings.config[valType[0]]['init'], settings.initClass);
                         }
                     }
                 }
                 else {
-                        control.next().showOnly('', settings.successClass);
+                    control.next().showOnly('', settings.successClass);
                 }
             }
         }
@@ -578,7 +583,6 @@ strongClass:      密码强度强图标样式
                 control = controls.eq(i);
                 if (control.is('select')) {
                     if (control.hasClass('noCheck')) {
-                        alert(1);
                         control.hideOnly('', settings.initClass);
                     }
                     else {

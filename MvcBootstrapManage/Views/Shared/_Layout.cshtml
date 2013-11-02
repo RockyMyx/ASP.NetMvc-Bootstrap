@@ -47,9 +47,9 @@
                           }}
                         @{if (ViewData["Delete"] != null)
                           {
-                            <button class="btn" id="js-btn-toolbar-delete" onclick="confirm('您确定要删除吗？删除后不可恢复！')">删除</button>
+                            <button class="btn" id="js-btn-toolbar-delete">删除</button>
                           }}
-                        @{if (ViewData["Delete"] != null)
+                        @{if (ViewData["SetPermission"] != null)
                           {
                             <button class="btn" id="js-btn-toolbar-permission">权限分配</button>
                           }}
@@ -86,9 +86,10 @@
                         <button class="btn btn-primary" id="js-btn-modal-edit" data-dismiss="modal">提交</button>
                     </div>
                 </div>
+                @RenderSection("permission", required: false)
             </div>
         </div>
-        <div id="js-add-div" class="hide">
+        <div id="js-div-add" class="hide">
             <div class="navbar w97">
                 <div class="navbar-inner">
                     <a class="brand" href="#">@ViewBag.AddTitle</a>

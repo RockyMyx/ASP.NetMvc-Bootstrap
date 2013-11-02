@@ -1,4 +1,5 @@
 ﻿@model List<MvcBootstrapManage.Models.Module>
+
 <thead>
 	<tr>
         <th><input id="js-check-all" type="checkbox" style="margin:-2px 5px 0 0;" />选择</th>
@@ -56,7 +57,7 @@
                     <a href="javascript:;"><i class="icon-pencil" type="window"></i></a>
                   }
                 }
-                @{if (Convert.ToBoolean(ViewData["Update"]))
+                @{if (Convert.ToBoolean(ViewData["Delete"]))
                   {
                     <a href="#ModalDel" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
                   }

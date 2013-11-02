@@ -35,7 +35,7 @@
     <Property Name="IsVisible" Type="Boolean" />
     <Property Name="CreateDate" Type="DateTime" />
     <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Type="String" Name="Operations" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
   </EntityType>
   <EntityType Name="Operation">
     <Key>
@@ -49,11 +49,12 @@
   </EntityType>
   <EntityType Name="Permission">
     <Key>
-      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" />
     <Property Name="ControllerID" Type="Int32" />
     <Property Name="ActionID" Type="Int32" />
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Role">
     <Key>

@@ -17,7 +17,6 @@
     <EntitySetMapping Name="Module">
       <EntityTypeMapping TypeName="MvcBootstrapModel.Module">
         <MappingFragment StoreEntitySet="Module">
-          <ScalarProperty Name="Operations" ColumnName="Operations" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -26,6 +25,7 @@
           <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="Operations" ColumnName="Operations" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -43,6 +43,7 @@
     <EntitySetMapping Name="Permission">
       <EntityTypeMapping TypeName="MvcBootstrapModel.Permission">
         <MappingFragment StoreEntitySet="Permission">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
           <ScalarProperty Name="ActionID" ColumnName="ActionID" />

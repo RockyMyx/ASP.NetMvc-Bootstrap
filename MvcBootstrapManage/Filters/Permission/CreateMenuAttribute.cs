@@ -5,18 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using MvcBootstrapManage.Models;
 
-public class BrowseAuthorize : AuthorizeAttribute
+public class CreateMenuAttribute : FilterAttribute, IActionFilter
 {
-    public override void OnAuthorization(AuthorizationContext filterContext)
+    #region IActionFilter Members
+
+    public void OnActionExecuted(ActionExecutedContext filterContext)
     {
-        string controller = (string)filterContext.RouteData.Values["Controller"];
-        int controllID = 0;
+        throw new NotImplementedException();
+    }
+
+    public void OnActionExecuting(ActionExecutingContext filterContext)
+    {
         //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
         int roleID = 1;
         Dictionary<string, string> modules = null;
         using (DBEntity db = new DBEntity())
         {
-            controllID = db.Module.Where(m => m.Controller == controller).Select(m => m.ID).FirstOrDefault();
             modules = (from m in db.Module
                        join p in db.Permission
                        on m.ID equals p.ControllerID
@@ -25,9 +29,11 @@ public class BrowseAuthorize : AuthorizeAttribute
                        .AsEnumerable()
                        .ToDictionary(m => m.Code, m => m.Name);
         }
-        foreach (KeyValuePair<string,string> module in modules)
+        foreach (KeyValuePair<string, string> module in modules)
         {
-            filterContext.Controller.ViewData["browse-" + module.Key] = module.Value;
+            filterContext.Controller.ViewData[module.Key] = module.Value;
         }
     }
+
+    #endregion
 }

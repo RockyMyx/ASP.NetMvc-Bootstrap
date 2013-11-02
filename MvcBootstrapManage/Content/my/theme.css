@@ -764,6 +764,10 @@ table.table.list tr:first-child td {
     margin:0 auto;
     margin-bottom:20px;
 }
+.w90
+{
+    width:90%;
+}
 .pl10
 {
     margin-left:10px;
@@ -781,21 +785,31 @@ table.table.list tr:first-child td {
     font-style: italic;
     color: #ccc;
 }
+.inline
+{
+    display: inline;
+    margin-left: 20px;
+    margin-right: 50px;
+}
 .inline-right
 {
     display: inline-block;
     float: right;
 }
+
+/********************下拉框样式****************************/
 .my-select
 {
     width: 195px;
 }
+
+/********************编辑模态窗口宽度**********************/
 #ModalEdit 
 {
     width: 600px;
 }
 
-/********************表单斑马行样式***********************/
+/********************表单斑马行样式************************/
 .even
 {
     background-color:#F9F9F9;
@@ -885,4 +899,24 @@ table.table.list tr:first-child td {
     height:10px;
 }
 
-/*****************************************************/
+/**************************TAB样式*********************/
+/*.tab-content {
+    border: 1px solid #bbb;
+    padding: 10px;
+}
+
+.nav-tabs 
+{
+    border:none;
+    margin-bottom: 0;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus 
+{
+    border:1px solid #aaa;
+    color: #555555;
+    cursor: default;
+    background-color: #ffffff;
+} */

@@ -10,7 +10,6 @@ namespace MvcBootstrapManage.Controllers
     //[Log]
     //[CheckLogin]
     [ErrorCatcher]
-    [OperationAuthorize]
     [BrowseAuthorize]
     public class BaseController : Controller
     {
