@@ -40,16 +40,20 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="btn-toolbar">
-                        @{if (Convert.ToBoolean(ViewData["Create"]))
+                        @{if (ViewData["Create"] != null)
                           {
                             <button class="btn btn-primary" id="js-btn-toolbar-add">
                             <i class="icon-plus"></i>新增</button>
                           }}
-                        @{if (Convert.ToBoolean(ViewData["Delete"]))
+                        @{if (ViewData["Delete"] != null)
                           {
                             <button class="btn" id="js-btn-toolbar-delete" onclick="confirm('您确定要删除吗？删除后不可恢复！')">删除</button>
                           }}
-                        @{if (Convert.ToBoolean(ViewData["Search"]))
+                        @{if (ViewData["Delete"] != null)
+                          {
+                            <button class="btn" id="js-btn-toolbar-permission">权限分配</button>
+                          }}
+                        @{if (ViewData["Search"] != null)
                           {
                         <button class="btn" id="js-btn-toolbar-refresh">刷新</button>
                         <form class="form-search inline-right">

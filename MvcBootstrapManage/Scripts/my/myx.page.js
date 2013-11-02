@@ -128,7 +128,7 @@ $(document).ready(function () {
 //获得当前的Controller名，如/Module/Index，则thisModel为Module
 var removeController = location.href.substring(0, location.href.lastIndexOf('/'));
 var thisModel = removeController.substring(removeController.lastIndexOf('/') + 1).capitalize();
-var deleteId = [];
+var checkId, deleteId = [];
 
 function bindTable() {
     var currentTd, input;
@@ -150,6 +150,10 @@ function bindTable() {
     });
 
     $('#js-table').find('tr').click(function (e) {
+        //点击选择框
+        if (e.target.type == 'checkbox' && e.target.checked) {
+            checkId = $(this).find('td').eq(0).html();
+        }
         //点击编辑图标
         if (e.target.className == 'icon-pencil') {
             if ($('.icon-pencil').attr('type') == 'table') {
@@ -333,7 +337,7 @@ function bindTable() {
     $('#ModalEdit').on('shown', function (e) {
         var modal = $(this);
         modal.css('margin-top', (modal.outerHeight() / 2) * -1.3)
-    .css('margin-left', (modal.outerWidth() / 2) * -1);
+             .css('margin-left', (modal.outerWidth() / 2) * -1);
         return this;
     });
 
@@ -350,11 +354,11 @@ function bindTable() {
     //工具栏删除按钮点击事件
     $('#js-btn-toolbar-delete').on('click', function (e) {
         var trs = $('.table tbody').find('tr');
-        var deltd, ids = [];
+        var deletetd, ids = [];
         for (var i = 0; i < trs.length; i++) {
-            deltd = trs.eq(i);
-            if (deltd.find('.js-check-cell').is(':checked')) {
-                ids.push(deltd.find('td').eq(0).html());
+            deletetd = trs.eq(i);
+            if (deletetd.find('.js-check-cell').is(':checked')) {
+                ids.push(deletetd.find('td').eq(0).html());
             }
         }
         if (ids.length != 0) {
@@ -402,6 +406,21 @@ $('#js-btn-search').on('click', function () {
             $(".pagination").pagination($('#js-table tbody').find('tr').length);
             $("#js-table tbody tr:gt(" + hideSearch + ")").hide().end();
         });
+    }
+});
+
+//工具栏权限分配按钮点击事件
+$('#js-btn-toolbar-permission').on('click', function () {
+    var roleCheck = $('#js-table').find('input:checked');
+    if ($('#js-table').find('.js-check-all').prop('checked') != undefined ||
+        roleCheck.length == 0) {
+        alert('请选中需要分配权限的角色！');
+    }
+    else if (roleCheck.length > 1) {
+        alert('每次只能为一个角色分配权限！');
+    }
+    else {
+        alert(checkId);
     }
 });
 
