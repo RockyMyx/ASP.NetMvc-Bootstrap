@@ -67,11 +67,26 @@ namespace MvcBootstrapManage.Controllers
 
             int controllerId;
             int actionId;
+            List<int> parentIds = new List<int>();
             foreach (string item in formInfo.AllKeys)
             {
                 controllerId = Convert.ToInt32(item.Split('-')[0]);
                 actionId = Convert.ToInt32(item.Split('-')[1]);
                 db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = controllerId, ActionID = actionId });
+
+                //添加父节点
+                int parentId = Convert.ToInt32(db.Module.Where(m => m.ID == controllerId)
+                                                        .Select(m => m.ParentId)
+                                                        .Single());
+                if (!parentIds.Contains(parentId))
+                {
+                    parentIds.Add(parentId);
+                }
+            }
+
+            foreach (int parentId in parentIds)
+            {
+                db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = parentId, ActionID = 1 });
             }
 
             db.SaveChanges();
