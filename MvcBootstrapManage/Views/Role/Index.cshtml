@@ -41,13 +41,15 @@
     </div>
 }
 @section permission{
-    <div id="ModalPermission" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="ModalPermission" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
             <span class="label label-warning">分配权限</span>
             <img src="@Url.Content("~/Images/loading.gif")" id="js-loading" class="hide" alt="loading" />
         </div>
-        <div class="modal-body">
+        <div class="modal-body my-modal h300">
             <ul id="myTab" class="nav nav-tabs">
                 @foreach (Module module in ViewData["ParentModule"] as IEnumerable<Module>)
                 {
@@ -64,14 +66,18 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-            <button class="btn btn-primary" id="js-btn-modal-permission" data-dismiss="modal">提交</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                取消</button>
+            <button class="btn btn-primary" id="js-btn-modal-permission" data-dismiss="modal">
+                提交</button>
         </div>
     </div>
 }
 @section script{
+    <script src="@Url.Content("~/Scripts/my/bootstrap-tooltip.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/my/bootstrap-tab.js")" type="text/javascript"></script>
     <script type="text/javascript">
+        $('.js-checkall-permission').tooltip();
         $('#myTab a:first').tab('show');
         $('#js-btn-toolbar-permission').on('click', function () {
             var roleCheck = $('#js-table').find('input:checked');
@@ -83,15 +89,37 @@
                 alert('每次只能为一个角色分配权限！');
             }
             else {
+                //Reset
+                var checkboxes = $('.js-form-permission').find('input[type=checkbox]');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes.eq(i).prop('checked', '');
+                }
+                $('#myTab a:first').tab('show');
+
                 $('#ModalPermission').modal('show');
             }
-         });
-         $('#js-btn-modal-permission').on('click', function () {
-             $.post('/' + thisModel + '/SetPermission/' + checkId, $('.js-form-permission').serialize() + '2-3=off')
+        });
+        $('#js-btn-modal-permission').on('click', function () {
+            $.post('/' + thisModel + '/SetPermission/' + checkId,
+                    $('.js-form-permission').serialize())
               .done(function () {
                   alert("权限分配成功！");
-                  //$('body').animate({ scrollTop: -$('#js-div-permission').height() }, 'fast');
               });
-         });
+        });
+        $('.js-checkall-permission').on('click', function () {
+            var sibCheckboxes = $(this).closest('form').find('input[type=checkbox]');
+            if (!$(this).prop('checked')) {
+                $(this).attr('data-original-title', '全选');
+                for (var i = 0; i < sibCheckboxes.length; i++) {
+                    sibCheckboxes.eq(i).prop('checked', '');
+                }
+            }
+            else {
+                $(this).attr('data-original-title', '反选');
+                for (var i = 0; i < sibCheckboxes.length; i++) {
+                    sibCheckboxes.eq(i).prop('checked', 'true');
+                }
+            }
+        });
     </script>
 }

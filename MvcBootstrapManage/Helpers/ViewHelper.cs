@@ -20,7 +20,7 @@ public static class ViewHelper
                                                     .Select(s => new { s.ID, s.Name })
                                                     .AsEnumerable()
                                                     .ToDictionary(k => k.ID, k => k.Name);
-            string label = "<label class=\"checkbox inline\"><input type=\"checkbox\" id=\"op{0}\" name=\"op{0}\" />{1}</label>";
+            string label = "<label class=\"checkbox inline ml10\"><input type=\"checkbox\" id=\"op{0}\" name=\"op{0}\" />{1}</label>";
             StringBuilder strBuilder = new StringBuilder();
             foreach (KeyValuePair<int, string> item in operations)
             {
@@ -37,7 +37,7 @@ public static class ViewHelper
     public static MvcHtmlString DistributeOptions(this HtmlHelper helper, int moduleId)
     {
         StringBuilder strBuilder = new StringBuilder();
-        string label = "<form class=\"js-form-permission\" name=\"setPermission\"><label class=\"inline\">{0}</label>";
+        string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" data-toggle=\"tooltip\" data-placement=\"top\" data-original-title=\"全选\" /><label class=\"inline mr40 ml20\">{0}</label>";
         string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" action=\"{0}\" style=\"margin:-2px 8px 0 8px\" />{2}";
         using (DBEntity db = new DBEntity())
         {

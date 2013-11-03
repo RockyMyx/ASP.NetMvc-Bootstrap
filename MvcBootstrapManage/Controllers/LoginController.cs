@@ -22,6 +22,7 @@ namespace MvcBootstrapManage.Controllers
                 //DB操作方法一：使用原生SQL
                 //string sql = "select count(*) from User where Name='admin' and Password='admin'";
                 //db.ExecuteStoreQuery<int>(sql).FirstOrDefault();
+                //db.ExecuteStoreCommand(sql);
 
                 //DB操作方法二：使用参数化SQL
                 //string sql = "select count(*) from User where Name=@Name and Password=@Password";

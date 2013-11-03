@@ -422,7 +422,7 @@ $('#js-btn-search').on('click', function () {
 
 //确定按钮点击事件
 $('#js-btn-form-add').on('click', function () {
-    var form = $(this).closest("form");
+    var form = $(this).closest('form');
     if (isValidForm(form)) {
         $.post('/' + thisModel + '/Create', form.serialize())
          .done(function () {

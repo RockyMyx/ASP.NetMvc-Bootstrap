@@ -61,6 +61,10 @@ namespace MvcBootstrapManage.Controllers
         [HttpPost]
         public ActionResult SetPermission(int id, FormCollection formInfo)
         {
+            //Reset
+            string sql = "DELETE FROM permission WHERE roleID = " + id;
+            db.ExecuteStoreCommand(sql);
+
             int controllerId;
             int actionId;
             foreach (string item in formInfo.AllKeys)
@@ -69,6 +73,7 @@ namespace MvcBootstrapManage.Controllers
                 actionId = Convert.ToInt32(item.Split('-')[1]);
                 db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = controllerId, ActionID = actionId });
             }
+
             db.SaveChanges();
             return new EmptyResult();
         }
