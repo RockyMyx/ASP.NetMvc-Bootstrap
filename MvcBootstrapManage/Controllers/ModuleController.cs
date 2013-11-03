@@ -52,7 +52,7 @@ namespace MvcBootstrapManage.Controllers
             oldModule.ID = id;
             oldModule.Name = module.Name;
             oldModule.Controller = module.Controller;
-            oldModule.IsVisible = module.IsVisible;
+            oldModule.IsEnable = module.IsEnable;
             oldModule.Operations = module.Operations;
             db.SaveChanges();
             return new EmptyResult();
@@ -101,7 +101,7 @@ namespace MvcBootstrapManage.Controllers
             module.Name = formInfo["Name"].ToString();
             module.Code = formInfo["Code"].ToString();
             module.Controller = formInfo["Controller"].ToString();
-            module.IsVisible = string.Compare(formInfo["IsVisible"], "1") == 0;
+            module.IsEnable = string.Compare(formInfo["IsEnable"], "1") == 0;
             int parentId = Convert.ToInt32(formInfo["ParentId"]);
             if (parentId != 0)
             {

@@ -38,8 +38,8 @@
             @item.Name</td>
 		    <td class="js-readonly" key="Code" content="@item.Code">@item.Code</td>
 		    <td key="Controller" content="@item.Controller" type="notEmpty">@item.Controller</td>
-            <td class="js-bool" key="IsVisible" content="@((bool)item.IsVisible ? "1" : "0")">
-            @if ((bool)item.IsVisible)
+            <td class="js-bool" key="IsEnable" content="@((bool)item.IsEnable ? "1" : "0")">
+            @if ((bool)item.IsEnable)
             {
                 <img src="../../Images/enable.png" alt="可用" title="可用" />
             }

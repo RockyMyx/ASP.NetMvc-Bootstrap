@@ -22,7 +22,7 @@
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Controller" ColumnName="Controller" />
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-          <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+          <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Creator" ColumnName="Creator" />
           <ScalarProperty Name="Operations" ColumnName="Operations" />
@@ -89,17 +89,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserPermission">
-      <EntityTypeMapping TypeName="MvcBootstrapModel.UserPermission">
-        <MappingFragment StoreEntitySet="UserPermission">
-          <ScalarProperty Name="ID" ColumnName="ID" />
+    <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrapModel.Store.GetModuleTree" />
+    <EntitySetMapping Name="v_UserAllPermission">
+      <EntityTypeMapping TypeName="MvcBootstrapModel.v_UserAllPermission">
+        <MappingFragment StoreEntitySet="v_UserAllPermission">
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+          <ScalarProperty Name="ModuleEnable" ColumnName="ModuleEnable" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="RealName" ColumnName="RealName" />
-          <ScalarProperty Name="Controller" ColumnName="Controller" />
-          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
+          <ScalarProperty Name="RoleEnable" ColumnName="RoleEnable" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrapModel.Store.GetModuleTree" />
+    <FunctionImportMapping FunctionImportName="GetUserBrowse" FunctionName="MvcBootstrapModel.Store.GetUserBrowse">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MvcBootstrapModel.UserBrowseViewModel">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserOperation" FunctionName="MvcBootstrapModel.Store.GetUserOperation" />
   </EntityContainerMapping>
 </Mapping>

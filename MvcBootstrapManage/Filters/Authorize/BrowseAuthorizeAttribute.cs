@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcBootstrapManage.Models;
+using System.Data.Objects;
 
 public class BrowseAuthorizeAttribute : AuthorizeAttribute
 {
@@ -11,20 +12,13 @@ public class BrowseAuthorizeAttribute : AuthorizeAttribute
     {
         //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
         int roleID = 1;
-        Dictionary<string, string> modules = null;
         using (DBEntity db = new DBEntity())
         {
-            modules = (from m in db.Module
-                       join p in db.Permission
-                       on m.ID equals p.ControllerID
-                       where p.RoleID == roleID && p.ActionID == 1
-                       select new { m.Code, m.Name })
-                       .AsEnumerable()
-                       .ToDictionary(m => m.Code, m => m.Name);
-        }
-        foreach (KeyValuePair<string, string> module in modules)
-        {
-            filterContext.Controller.ViewData[module.Key] = module.Value;
+            IEnumerable<UserBrowseViewModel> modules = db.GetUserBrowse(roleID).AsEnumerable();
+            foreach (UserBrowseViewModel module in modules)
+            {
+                filterContext.Controller.ViewData[module.Code] = module.Name;
+            }
         }
     }
 }

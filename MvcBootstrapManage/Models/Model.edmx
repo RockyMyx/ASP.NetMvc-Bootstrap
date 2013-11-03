@@ -13,14 +13,19 @@
           <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.Store.UserPermission" store:Type="Views" store:Schema="dbo" store:Name="UserPermission">
+          <EntitySet Name="v_UserAllPermission" EntityType="MvcBootstrapModel.Store.v_UserAllPermission" store:Type="Views" store:Schema="dbo" store:Name="v_UserAllPermission">
             <DefiningQuery>SELECT 
-      [UserPermission].[ID] AS [ID], 
-      [UserPermission].[Name] AS [Name], 
-      [UserPermission].[RealName] AS [RealName], 
-      [UserPermission].[Controller] AS [Controller], 
-      [UserPermission].[Action] AS [Action]
-      FROM [dbo].[UserPermission] AS [UserPermission]</DefiningQuery>
+      [v_UserAllPermission].[UserID] AS [UserID], 
+      [v_UserAllPermission].[RoleID] AS [RoleID], 
+      [v_UserAllPermission].[RoleEnable] AS [RoleEnable], 
+      [v_UserAllPermission].[ControllerID] AS [ControllerID], 
+      [v_UserAllPermission].[Code] AS [Code], 
+      [v_UserAllPermission].[Name] AS [Name], 
+      [v_UserAllPermission].[ParentId] AS [ParentId], 
+      [v_UserAllPermission].[ModuleEnable] AS [ModuleEnable], 
+      [v_UserAllPermission].[ActionID] AS [ActionID], 
+      [v_UserAllPermission].[ActionName] AS [ActionName]
+      FROM [dbo].[v_UserAllPermission] AS [v_UserAllPermission]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
         <EntityType Name="Log">
@@ -44,7 +49,7 @@
           <Property Name="Code" Type="varchar" MaxLength="20" />
           <Property Name="Controller" Type="varchar" MaxLength="50" />
           <Property Name="ParentId" Type="int" />
-          <Property Name="IsVisible" Type="bit" />
+          <Property Name="IsEnable" Type="bit" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Creator" Type="varchar" MaxLength="20" />
           <Property Name="Operations" Type="varchar" MaxLength="100" />
@@ -106,19 +111,31 @@
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'MvcBootstrap.dbo.UserPermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'MvcBootstrap.dbo.v_UserAllPermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
-        <EntityType Name="UserPermission">
+        <EntityType Name="v_UserAllPermission">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="20" />
-          <Property Name="RealName" Type="varchar" MaxLength="20" />
-          <Property Name="Controller" Type="varchar" MaxLength="50" />
-          <Property Name="Action" Type="varchar" MaxLength="20" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="RoleEnable" Type="bit" />
+          <Property Name="ControllerID" Type="int" />
+          <Property Name="Code" Type="varchar" MaxLength="20" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="ModuleEnable" Type="bit" />
+          <Property Name="ActionID" Type="int" />
+          <Property Name="ActionName" Type="varchar" MaxLength="20" />
         </EntityType>
         <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserOperation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+          <Parameter Name="ControllerID" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -131,8 +148,15 @@
           <EntitySet Name="Role" EntityType="MvcBootstrapModel.Role" />
           <EntitySet Name="User" EntityType="MvcBootstrapModel.User" />
           <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.UserRole" />
-          <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.UserPermission" />
           <FunctionImport Name="GetModuleTree" EntitySet="Module" ReturnType="Collection(MvcBootstrapModel.Module)" />
+          <EntitySet Name="v_UserAllPermission" EntityType="MvcBootstrapModel.v_UserAllPermission" />
+          <FunctionImport Name="GetUserBrowse" ReturnType="Collection(MvcBootstrapModel.UserBrowseViewModel)">
+          <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserOperation" ReturnType="Collection(String)">
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+            <Parameter Name="ControllerID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Log">
           <Key>
@@ -155,7 +179,7 @@
           <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ParentId" Type="Int32" />
-          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="IsEnable" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" />
           <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
@@ -174,10 +198,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleID" Type="Int32" />
           <Property Name="ControllerID" Type="Int32" />
           <Property Name="ActionID" Type="Int32" />
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -216,16 +240,25 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="UserPermission">
+        <EntityType Name="v_UserAllPermission">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="RealName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="RoleID" />
+          <Property Type="Boolean" Name="RoleEnable" />
+          <Property Type="Int32" Name="ControllerID" />
+          <Property Type="String" Name="Code" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ParentId" />
+          <Property Type="Boolean" Name="ModuleEnable" />
+          <Property Type="Int32" Name="ActionID" />
+          <Property Type="String" Name="ActionName" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="UserBrowseViewModel">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -247,7 +280,7 @@
             <ScalarProperty Name="Code" ColumnName="Code" />
             <ScalarProperty Name="Controller" ColumnName="Controller" />
             <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-            <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+            <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="Creator" ColumnName="Creator" />
             <ScalarProperty Name="Operations" ColumnName="Operations" />
@@ -261,7 +294,7 @@
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Permission"><EntityTypeMapping TypeName="MvcBootstrapModel.Permission"><MappingFragment StoreEntitySet="Permission">
             <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
             <ScalarProperty Name="ActionID" ColumnName="ActionID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -292,14 +325,32 @@
             <ScalarProperty Name="UserID" ColumnName="UserID" />
             <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="UserPermission"><EntityTypeMapping TypeName="MvcBootstrapModel.UserPermission"><MappingFragment StoreEntitySet="UserPermission">
-            <ScalarProperty Name="ID" ColumnName="ID" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="RealName" ColumnName="RealName" />
-            <ScalarProperty Name="Controller" ColumnName="Controller" />
-            <ScalarProperty Name="Action" ColumnName="Action" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrapModel.Store.GetModuleTree" />
+          <EntitySetMapping Name="v_UserAllPermission">
+            <EntityTypeMapping TypeName="MvcBootstrapModel.v_UserAllPermission">
+              <MappingFragment StoreEntitySet="v_UserAllPermission">
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+                <ScalarProperty Name="ModuleEnable" ColumnName="ModuleEnable" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
+                <ScalarProperty Name="RoleEnable" ColumnName="RoleEnable" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUserBrowse" FunctionName="MvcBootstrapModel.Store.GetUserBrowse">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MvcBootstrapModel.UserBrowseViewModel">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserOperation" FunctionName="MvcBootstrapModel.Store.GetUserOperation" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -324,11 +375,11 @@
         <EntityTypeShape EntityType="MvcBootstrapModel.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.7341113281249996" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9700325520833326" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.7790128580729165" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.7790128580729157" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.3520719401041656" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.User" Width="1.5" PointX="4.75" PointY="3.75" Height="3.3071704101562496" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.UserRole" Width="1.5" PointX="6.75" PointY="0.75" Height="1.3969734700520817" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.UserPermission" Width="1.5" PointX="6.75" PointY="3.75" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.v_UserAllPermission" Width="1.5" PointX="6.625" PointY="3.625" Height="2.9251310221354174" />
       </Diagram>
     </Diagrams>
   </Designer>

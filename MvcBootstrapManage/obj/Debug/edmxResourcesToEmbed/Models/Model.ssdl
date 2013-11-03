@@ -8,14 +8,19 @@
     <EntitySet Name="Role" EntityType="MvcBootstrapModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="MvcBootstrapModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserRole" EntityType="MvcBootstrapModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserPermission" EntityType="MvcBootstrapModel.Store.UserPermission" store:Type="Views" store:Schema="dbo" store:Name="UserPermission">
+    <EntitySet Name="v_UserAllPermission" EntityType="MvcBootstrapModel.Store.v_UserAllPermission" store:Type="Views" store:Schema="dbo" store:Name="v_UserAllPermission">
       <DefiningQuery>SELECT 
-      [UserPermission].[ID] AS [ID], 
-      [UserPermission].[Name] AS [Name], 
-      [UserPermission].[RealName] AS [RealName], 
-      [UserPermission].[Controller] AS [Controller], 
-      [UserPermission].[Action] AS [Action]
-      FROM [dbo].[UserPermission] AS [UserPermission]</DefiningQuery>
+      [v_UserAllPermission].[UserID] AS [UserID], 
+      [v_UserAllPermission].[RoleID] AS [RoleID], 
+      [v_UserAllPermission].[RoleEnable] AS [RoleEnable], 
+      [v_UserAllPermission].[ControllerID] AS [ControllerID], 
+      [v_UserAllPermission].[Code] AS [Code], 
+      [v_UserAllPermission].[Name] AS [Name], 
+      [v_UserAllPermission].[ParentId] AS [ParentId], 
+      [v_UserAllPermission].[ModuleEnable] AS [ModuleEnable], 
+      [v_UserAllPermission].[ActionID] AS [ActionID], 
+      [v_UserAllPermission].[ActionName] AS [ActionName]
+      FROM [dbo].[v_UserAllPermission] AS [v_UserAllPermission]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
   <EntityType Name="Log">
@@ -39,7 +44,7 @@
     <Property Name="Code" Type="varchar" MaxLength="20" />
     <Property Name="Controller" Type="varchar" MaxLength="50" />
     <Property Name="ParentId" Type="int" />
-    <Property Name="IsVisible" Type="bit" />
+    <Property Name="IsEnable" Type="bit" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Creator" Type="varchar" MaxLength="20" />
     <Property Name="Operations" Type="varchar" MaxLength="100" />
@@ -101,17 +106,29 @@
     <Property Name="RoleID" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'MvcBootstrap.dbo.UserPermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'MvcBootstrap.dbo.v_UserAllPermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
-  <EntityType Name="UserPermission">
+  <EntityType Name="v_UserAllPermission">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="UserID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="20" />
-    <Property Name="RealName" Type="varchar" MaxLength="20" />
-    <Property Name="Controller" Type="varchar" MaxLength="50" />
-    <Property Name="Action" Type="varchar" MaxLength="20" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="RoleEnable" Type="bit" />
+    <Property Name="ControllerID" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="ModuleEnable" Type="bit" />
+    <Property Name="ActionID" Type="int" />
+    <Property Name="ActionName" Type="varchar" MaxLength="20" />
   </EntityType>
   <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserOperation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+    <Parameter Name="ControllerID" Type="int" Mode="In" />
+  </Function>
 </Schema>
