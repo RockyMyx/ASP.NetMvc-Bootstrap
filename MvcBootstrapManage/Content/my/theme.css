@@ -768,6 +768,10 @@ table.table.list tr:first-child td {
 {
     width:90%;
 }
+.wp50
+{
+    width:50%;
+}
 .h300
 {
     height:300px;
@@ -826,7 +830,7 @@ table.table.list tr:first-child td {
 }
 
 /********************±à¼­Ä£Ì¬´°¿Ú¿í¶È**********************/
-.my-modal 
+.my-modal
 {
     width: 600px;
 }

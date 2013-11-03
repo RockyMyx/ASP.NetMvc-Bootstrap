@@ -103,8 +103,31 @@ namespace MvcBootstrapManage.Controllers
         public ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
             Module module = GetModuleFromForm(searchFormInfo);
+            IQueryable<Module> search = db.GetModuleTree().AsQueryable();
+            if (!string.IsNullOrEmpty(module.Name))
+            {
+                search = search.Where(m => m.Name.Contains(module.Name));
+            }
+            if (!string.IsNullOrEmpty(module.Code))
+            {
+                search = search.Where(m => m.Name.Contains(module.Code));
+            }
+            if (!string.IsNullOrEmpty(module.Controller))
+            {
+                search = search.Where(m => m.Name.Contains(module.Controller));
+            }
+            if (module.ParentId != null)
+            {
+                search = search.Where(m => m.ParentId == module.ParentId);
+            }
 
-            return new EmptyResult();
+            List<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+            if (result.Count == 0)
+            {
+                return new EmptyResult();
+            }
+
+            return PartialView("_ModuleGrid", result);
         }
 
         private Module GetModuleFromForm(FormCollection formInfo)
@@ -113,7 +136,7 @@ namespace MvcBootstrapManage.Controllers
             module.Name = formInfo["Name"].ToString();
             module.Code = formInfo["Code"].ToString();
             module.Controller = formInfo["Controller"].ToString();
-            module.IsEnable = string.Compare(formInfo["IsEnable"], "1") == 0;
+            module.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
             int parentId = Convert.ToInt32(formInfo["ParentId"]);
             if (parentId != 0)
             {

@@ -137,13 +137,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ApiController\ApiPermissionController.cs" />
+    <Compile Include="Controllers\BasicController\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\BasicController\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\SystemAPIController.cs" />
+    <Compile Include="Controllers\ApiController\ApiModuleController.cs" />
     <Compile Include="Filters\Authorize\BrowseAuthorizeAttribute.cs" />
     <Compile Include="Filters\Permission\CheckLoginAttribute.cs" />
     <Compile Include="Filters\Error\ErrorCatcherAttribute.cs" />
@@ -332,6 +333,7 @@
     <Content Include="Scripts\my\json2.js" />
     <Content Include="Scripts\my\myx.combox.js" />
     <Content Include="Scripts\my\myx.formValidate.js" />
+    <Content Include="Scripts\my\myx.extend.js" />
     <Content Include="Scripts\my\myx.pagination.js" />
     <Content Include="Scripts\my\login.js" />
     <Content Include="Scripts\my\myx.page.js" />

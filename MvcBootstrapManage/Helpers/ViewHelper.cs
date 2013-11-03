@@ -38,7 +38,7 @@ public static class ViewHelper
     {
         StringBuilder strBuilder = new StringBuilder();
         string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" data-toggle=\"tooltip\" data-placement=\"top\" data-original-title=\"全选\" /><label class=\"inline mr40 ml20\">{0}</label>";
-        string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" action=\"{0}\" style=\"margin:-2px 8px 0 8px\" />{2}";
+        string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" style=\"margin:-2px 8px 0 8px\" />{2}";
         using (DBEntity db = new DBEntity())
         {
             List<Module> modules = db.Module.Where(m => m.ParentId == moduleId).ToList();

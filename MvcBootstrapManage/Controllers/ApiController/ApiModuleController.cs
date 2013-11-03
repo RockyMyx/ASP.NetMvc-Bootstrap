@@ -8,7 +8,7 @@ using MvcBootstrapManage.Models;
 
 namespace MvcBootstrapManage.Controllers
 {
-    public class SystemAPIController : ApiController
+    public class ApiModuleController : ApiController
     {
         public Module GetModuleById(int id)
         {

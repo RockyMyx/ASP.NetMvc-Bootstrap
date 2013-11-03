@@ -41,15 +41,15 @@
     </div>
 }
 @section permission{
-    <div id="ModalPermission" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+    <div id="ModalPermission" class="modal hide fade wp50" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 ×</button>
             <span class="label label-warning">分配权限</span>
-            <img src="@Url.Content("~/Images/loading.gif")" id="js-loading" class="hide" alt="loading" />
+            <img src="@Url.Content("~/Images/loading.gif")" class="js-loading hide" alt="loading" />
         </div>
-        <div class="modal-body my-modal h300">
+        <div class="modal-body h300">
             <ul id="myTab" class="nav nav-tabs">
                 @foreach (Module module in ViewData["ParentModule"] as IEnumerable<Module>)
                 {
@@ -79,9 +79,12 @@
     <script type="text/javascript">
         $('#myTab a:first').tab('show');
         $('#js-btn-toolbar-permission').on('click', function () {
-            var roleCheck = $('#js-table').find('input:checked');
-            if ($('#js-table').find('.js-check-all').prop('checked') != undefined ||
-                roleCheck.length == 0) {
+            var roleCheck = $('input:checked.js-check-cell');
+            var isCheckAll = $('#js-table').find('#js-check-all').prop('checked');
+            if (isCheckAll) {
+                alert('请取消全选按钮选中状态后重试！');
+            }
+            else if (roleCheck.length == 0) {
                 alert('请选中需要分配权限的角色！');
             }
             else if (roleCheck.length > 1) {
@@ -94,30 +97,52 @@
                     checkboxes.eq(i).prop('checked', '');
                 }
                 $('#myTab a:first').tab('show');
-
                 $('#ModalPermission').modal('show');
+                $('.js-loading').show();
+                //加载现有权限
+                $.getJSON('/api/ApiPermission/' + checkId)
+                 .done(function (result) {
+                     if (result != null) {
+                         var ops = [];
+                         var name;
+                         $.each(result, function (k, v) {
+                             ops = v.split('');
+                             for (var i = 0; i < ops.length; i++) {
+                                 name = k + '-' + ops[i];
+                                 $('input[name="' + name + '"]').prop('checked', 'true');
+                             }
+                         });
+                     }
+                     $('.js-loading').hide();
+                 });
             }
         });
         $('#js-btn-modal-permission').on('click', function () {
-            $.post('/' + thisModel + '/SetPermission/' + checkId,
-                    $('.js-form-permission').serialize())
-              .done(function () {
-                  alert("权限分配成功！");
-              });
+            $.post('/' + thisModel + '/SetPermission/' + checkId, $('.js-form-permission').serialize())
+             .done(function () {
+                 alert("权限分配成功！");
+             });
         });
         $('.js-checkall-permission').tooltip();
         $('.js-checkall-permission').on('click', function () {
             var sibCheckboxes = $(this).closest('form').find('input[type=checkbox]');
+            var thisCheckbox, checkboxName;
             if (!$(this).prop('checked')) {
                 $(this).attr('data-original-title', '全选');
-                for (var i = 0; i < sibCheckboxes.length; i++) {
-                    sibCheckboxes.eq(i).prop('checked', '');
+                for (var i = 1; i < sibCheckboxes.length; i++) {
+                    thisCheckbox = sibCheckboxes.eq(i);
+                    if (thisCheckbox.prop('checked')) {
+                        thisCheckbox.prop('checked', '');
+                    }
                 }
             }
             else {
                 $(this).attr('data-original-title', '反选');
-                for (var i = 0; i < sibCheckboxes.length; i++) {
-                    sibCheckboxes.eq(i).prop('checked', 'true');
+                for (var i = 1; i < sibCheckboxes.length; i++) {
+                    thisCheckbox = sibCheckboxes.eq(i);
+                    if (!thisCheckbox.prop('checked')) {
+                        thisCheckbox.prop('checked', 'true');
+                    }
                 }
             }
         });

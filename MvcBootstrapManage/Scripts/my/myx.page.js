@@ -1,17 +1,20 @@
 ﻿/****************************Common*****************************/
 
+//表格隔行变色
 jQuery.fn.alternateRowColors = function () {
     $("tbody tr:odd", this).removeClass("even").addClass("odd");
     $("tbody tr:even", this).removeClass("odd").addClass("even");
     return this;
 }
 
+//字符串首字母大写
 String.prototype.capitalize = function () {
     return this.replace(/^\w/, function (s) {
         return s.toUpperCase();
     });
 };
 
+//表单验证
 function isValidForm(form) {
     if (form.find('.form-init').length > 0) {
         alert('表单信息不完整，请检查后重新提交！');
@@ -24,6 +27,7 @@ function isValidForm(form) {
     return true;
 }
 
+//展现搜索结果
 function showSearch(result) {
     if (result.length != 0) {
         $('#js-table').html(result);
@@ -44,6 +48,7 @@ $('.modal').on('shown', function (e) {
     return this;
 });
 
+//根据窗口大小调整背景
 function resize() {
     $('.content').css('height', $(window).height() + $(window).scrollTop());
 }
@@ -314,7 +319,7 @@ function bindTable() {
                 var editForm = $('#js-edit-form');
                 editForm.mValidate({ isInline: true, isHideInit: true, tipStyle: 'title' });
                 var id = $(this).find('td').eq(0).html();
-                $("#js-loading").show();
+                $(".js-loading").show();
                 FillEditInfo(id);
                 $('#ModalEdit').modal('show');
             }

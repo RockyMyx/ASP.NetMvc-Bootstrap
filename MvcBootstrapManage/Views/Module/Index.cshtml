@@ -132,12 +132,12 @@
     </div>
 }
 @section searchform{
-    <div id="ModalSearch" class="modal hide fade my-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="ModalSearch" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <span class="label label-warning">高级搜索</span>
         </div>
-        <div class="modal-body my-modal">
+        <div class="modal-body">
             <form id="js-search-form">
                 <div class="row-fluid">
                     <div class="control-group span6">
@@ -145,7 +145,7 @@
                             上级菜单</label>
                         <div class="controls">
                             @{SelectList modules = ViewData["Modules"] as SelectList;}
-                            @Html.DropDownList("ParentId", modules, new { id = "EditParentID", @class = "noCheck my-select" })
+                            @Html.DropDownList("ParentId", modules, new { id = "SearchParentID", @class = "noCheck my-select" })
                         </div>
                     </div>
                     <div class="control-group span6" id="SController">
@@ -227,7 +227,7 @@
         });
         function FillEditInfo(id) {
             $('#EditModuleID').val(id);
-            $.getJSON('/Api/SystemAPI/' + id)
+            $.getJSON('/Api/ApiModule/' + id)
              .done(function (data) {
                  $('#EditParentID').find('option[value=' + data.ParentId + ']').prop('selected', 'true');
                  if (data.ParentId != null) {
@@ -254,13 +254,13 @@
                          $('#op' + i).prop('checked', '');
                      }
                  }
-                 $("#js-loading").hide();
+                 $(".js-loading").hide();
              });
          };
          $('#js-btn-modal-search').on('click', function () {
              $.post('/' + thisModel + '/AdvanceSearch', $('#js-search-form').serialize())
-              .done(function () {
-                  $(this).hide();
+              .done(function (result) {
+                  showSearch(result);
               });
          });
     </script>
