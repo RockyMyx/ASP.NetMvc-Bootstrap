@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MvcBootstrapManage.Models;
 using MvcBootstrapManage.ViewModel;
+using System.Data;
 
 namespace MvcBootstrapManage.Controllers
 {
@@ -22,9 +23,12 @@ namespace MvcBootstrapManage.Controllers
             return View(result);
         }
 
+        [HttpPost]
         public override ActionResult Index(int? pageIndex)
         {
-            throw new NotImplementedException();
+            int index = pageIndex ?? 1;
+            IList<Role> result = db.Role.OrderBy(r => r.ID).Skip((index - 1) * 3).Take(base.PageSize).ToList();
+            return PartialView("_RoleGrid", result);
         }
 
         [HttpPost]
@@ -45,17 +49,41 @@ namespace MvcBootstrapManage.Controllers
 
         public override ActionResult Delete(List<int> ids)
         {
-            throw new NotImplementedException();
+            try
+            {
+                foreach (int id in ids)
+                {
+                    Role role = db.Role.Where(m => m.ID == id).Single();
+                    db.DeleteObject(role);
+                    db.SaveChanges();
+                }
+            }
+            catch (OptimisticConcurrencyException)
+            {
+                db.AcceptAllChanges();
+            }
+
+            return new EmptyResult();
         }
 
         public override ActionResult Create(FormCollection formInfo)
         {
-            throw new NotImplementedException();
+            Role role = GetRoleFromForm(formInfo);
+            role.CreateDate = DateTime.Now;
+            //role.Creator = Session["RealName"].ToString();
+            db.Role.AddObject(role);
+            db.SaveChanges();
+            return new EmptyResult();
         }
 
         public override ActionResult Search(string name)
         {
-            throw new NotImplementedException();
+            IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
+            if (result.Count == 0)
+            {
+                return new EmptyResult();
+            }
+            return PartialView("_RoleGrid", result);
         }
 
         [HttpPost]
@@ -91,6 +119,15 @@ namespace MvcBootstrapManage.Controllers
 
             db.SaveChanges();
             return new EmptyResult();
+        }
+
+        private Role GetRoleFromForm(FormCollection formInfo)
+        {
+            Role role = new Role();
+            role.Name = formInfo["Name"].ToString();
+            role.Remark = formInfo["Remark"].ToString();
+            role.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
+            return role;
         }
     }
 }

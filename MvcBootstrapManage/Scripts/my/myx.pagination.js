@@ -23,8 +23,6 @@ jQuery.fn.pagination = function (maxentries, opts) {
         num_display_entries: 9,
         current_page: 0,
         num_edge_entries: 1,
-        //请求当前页面
-        link_to: location.href,
         table_to: '.table',
         //增加分页控件信息，修改分页显示文字
         first_text: "首页",
@@ -77,7 +75,8 @@ jQuery.fn.pagination = function (maxentries, opts) {
             var params = '{pageIndex : ' + page_id + '}';
             $.ajax({
                 type: 'POST',
-                url: opts.link_to,
+                //请求当前页面
+                url: location.href,
                 contentType: 'application/json',
                 dataType: 'html',
                 data: params,

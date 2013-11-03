@@ -427,7 +427,7 @@ strongClass:      密码强度强图标样式
         };
 
         $.fn.showOnly = function (info, showClass) {
-            this.removeClass(settings.successClass)
+            this.removeClass(settings.initClass)
                 .removeClass(settings.focusClass)
                 .removeClass(settings.errorClass)
                 .addClass(showClass)
@@ -465,7 +465,7 @@ strongClass:      密码强度强图标样式
                 if (!settings.isHideInit) {
                     if (control.attr('class') != undefined) {
                         valType = control.attr('class').split(' ');
-                        if (settings.config[valType[0]] != undefined) {
+                        if (!valType.contains('hide') && settings.config[valType[0]] != undefined) {
                             control.next().showOnly(settings.config[valType[0]]['init'], settings.initClass);
                         }
                     }

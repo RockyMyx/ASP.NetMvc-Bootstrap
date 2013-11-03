@@ -60,7 +60,7 @@ $(window).on('resize', function () {
 $(document).ready(function () {
     /*************************调整窗口大小，初始化分页按钮*************************/
     resize();
-    if (dataCount > pageSize) {
+    if (~~dataCount > ~~pageSize) {
         initPagination(dataCount);
     }
 
