@@ -24,6 +24,18 @@ function isValidForm(form) {
     return true;
 }
 
+function showSearch(result) {
+    if (result.length != 0) {
+        $('#js-table').html(result);
+        $(".pagination").pagination($('#js-table tbody').find('tr').length);
+        $("#js-table tbody tr:gt(" + hideSearch + ")").hide().end();
+    }
+    else {
+        $('#js-table').empty();
+        $('.pagination').empty().html('没有相关信息！');
+    }
+}
+
 //模态窗口展现事件
 $('.modal').on('shown', function (e) {
     var modal = $(this);
@@ -384,7 +396,10 @@ function bindTable() {
 
 //工具栏刷新按钮点击事件
 $('#js-btn-toolbar-refresh').on('click', function () {
-    resetPagination(0);
+    $.post('/' + thisModel + '/Index', function (result) {
+        $('#js-table').html(result);
+        initPagination(dataCount);
+    });
 });
 
 //工具栏添加按钮点击事件
@@ -411,9 +426,7 @@ $('#js-btn-search').on('click', function () {
     }
     else {
         $.post('/' + thisModel + '/Search', { 'name': $('#js-input-search').val() }, function (result) {
-            $('#js-table').html(result);
-            $(".pagination").pagination($('#js-table tbody').find('tr').length);
-            $("#js-table tbody tr:gt(" + hideSearch + ")").hide().end();
+            showSearch(result);
         });
     }
 });
