@@ -53,9 +53,12 @@ namespace MvcBootstrapManage.Controllers
             {
                 foreach (int id in ids)
                 {
-                    Role role = db.Role.Where(m => m.ID == id).Single();
-                    db.DeleteObject(role);
-                    db.SaveChanges();
+                    Role role = db.Role.Where(m => m.ID == id).FirstOrDefault();
+                    if (role != null)
+                    {
+                        db.DeleteObject(role);
+                        db.SaveChanges();
+                    }
                 }
             }
             catch (OptimisticConcurrencyException)

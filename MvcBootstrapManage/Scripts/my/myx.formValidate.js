@@ -427,9 +427,10 @@ strongClass:      密码强度强图标样式
         };
 
         $.fn.showOnly = function (info, showClass) {
-            this.removeClass(settings.initClass)
-                .removeClass(settings.focusClass)
+            this.removeClass(settings.successClass)
                 .removeClass(settings.errorClass)
+                .removeClass(settings.focusClass)
+                .removeClass(settings.initClass)
                 .addClass(showClass)
                 .showTip(info);
         };
@@ -465,7 +466,7 @@ strongClass:      密码强度强图标样式
                 if (!settings.isHideInit) {
                     if (control.attr('class') != undefined) {
                         valType = control.attr('class').split(' ');
-                        if (!valType.contains('hide') && settings.config[valType[0]] != undefined) {
+                        if (!valType.contains('hide') && control.val().length == 0 && settings.config[valType[0]] != undefined) {
                             control.next().showOnly(settings.config[valType[0]]['init'], settings.initClass);
                         }
                     }
@@ -599,7 +600,7 @@ strongClass:      密码强度强图标样式
                     if (control.attr('class') != undefined) {
                         valType = control.attr('class').split(' ')[0];
                         if (settings.config[valType] != undefined &&
-                        control.next().hasClass(settings.initClass)) {
+                            control.next().hasClass(settings.initClass)) {
                             control.next().showHide(settings.config[valType]['init'], settings.errorClass, settings.successClass);
                             if (!settings.showAllError) {
                                 return false;

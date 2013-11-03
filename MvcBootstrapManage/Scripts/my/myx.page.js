@@ -40,6 +40,12 @@ function showSearch(result) {
     }
 }
 
+function showPagination() {
+    if (~ ~dataCount > ~ ~pageSize) {
+        initPagination(dataCount);
+    }
+}
+
 //模态窗口展现事件
 $('.modal').on('shown', function (e) {
     var modal = $(this);
@@ -60,9 +66,7 @@ $(window).on('resize', function () {
 $(document).ready(function () {
     /*************************调整窗口大小，初始化分页按钮*************************/
     resize();
-    if (~~dataCount > ~~pageSize) {
-        initPagination(dataCount);
-    }
+    showPagination();
 
     /****************************搜索标签提示文字处理*****************************/
     var input = $('input.input-place');
@@ -326,6 +330,7 @@ function bindTable() {
         }
         //表格行删除按钮点击事件
         else if (e.target.className == 'icon-remove') {
+            deleteId = [];
             deleteId.push($(this).find('td').eq(0).html());
         }
     });
@@ -333,7 +338,7 @@ function bindTable() {
     /****************************弹出模态窗口*****************************/
 
     //确定删除按钮点击事件
-    $('#js-btn-modal-delete').on('click', function () {
+    $('#js-btn-modal-delete').unbind('click').bind('click', function () {
         $.ajax({
             type: 'POST',
             url: '/' + thisModel + '/Delete',
@@ -341,7 +346,7 @@ function bindTable() {
             dataType: 'html',
             data: JSON.stringify(deleteId),
             success: function () {
-                resetPagination();
+                resetPagination(-1);
             }
         });
     });
@@ -353,7 +358,7 @@ function bindTable() {
         if (isValidForm(form)) {
             $.post('/' + thisModel + '/Update', form.serialize())
              .done(function () {
-                 resetPagination(0);
+                 initPagination(dataCount);
              });
         }
     });
@@ -461,39 +466,55 @@ $('#js-btn-form-cancel').on('click', function () {
 
 /****************************分页相关*****************************/
 
-var pageIndex;
+var pageIndex = 0;
 
 function setPageIndex(index) {
     pageIndex = index;
 }
 
-function initPagination(totalCount) {
-    $(".pagination").pagination(totalCount);
+function initPagination(count) {
+    $(".pagination").pagination(count);
+}
+
+function resetTrigger(index) {
+    $(".pagination").pagination(dataCount);
+    $('#page' + index).trigger('click');
 }
 
 function resetPagination() {
     var change = arguments[0] || -1;
-    //编辑或刷新后跳到相应页
-    if (change == 0) {
-        initPagination(dataCount);
-    }
-    else {
-        var count = parseInt(dataCount) + change;
-        initPagination(count);
-        var currentSize = Math.ceil(count / pageSize);
-        //删除后跳到相应页
-        if (change < 0) {
-            if (currentSize == pageIndex) {
+    dataCount = ~ ~dataCount + change;
+    var newIndex = Math.ceil(dataCount / pageSize) - 1;
+    //删除后跳到相应页
+    if (change < 0) {
+        if (newIndex == 0) {
+            $.post('/Role/Index', { pageIndex: 1 })
+             .done(function (result) {
+                 $('#js-table').html(result);
+                 pageIndex = 0;
+                 $('.pagination').hide();
+             });
+        }
+        else {
+            $('.pagination').show();
+            if (newIndex < pageIndex) {
+                --pageIndex;
                 $('#page' + pageIndex).hide();
-                $('#page' + (pageIndex - 1)).trigger('click');
+                resetTrigger(newIndex);
             }
             else {
-                $('#page' + pageIndex).trigger('click');
+                resetTrigger(pageIndex);
             }
         }
-        //添加后跳到相应页
+    }
+    //添加后跳到相应页
+    else {
+        if (newIndex > pageIndex) {
+            ++pageIndex;
+            resetTrigger(newIndex);
+        }
         else {
-            $('#page' + (currentSize - 1)).trigger('click');
+            resetTrigger(pageIndex);
         }
     }
 }
