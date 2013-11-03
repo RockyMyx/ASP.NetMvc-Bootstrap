@@ -55,11 +55,15 @@
                           }}
                         @{if (ViewData["Search"] != null)
                           {
-                        <button class="btn" id="js-btn-toolbar-refresh">刷新</button>
-                        <form class="form-search inline-right">
-                            <input type="text" placeholder="@ViewBag.SearchName" class="input-place italic" id="js-input-search">
-                            <button type="button" class="btn btn-primary pl10" id="js-btn-search">搜索</button>
-                        </form>
+                            <button class="btn" id="js-btn-toolbar-refresh">刷新</button>
+                            <form class="form-search inline-right">
+                                <input type="text" placeholder="@ViewBag.SearchName" class="input-place italic" id="js-input-search">
+                                <button type="button" class="btn btn-primary pl10" id="js-btn-search">搜索</button>
+                            </form>
+                          }}
+                        @{if (ViewData["AdvanceSearch"] != null)
+                          {
+                            <label class="label label-link mr10 mt5 inline-right" href="#ModalSearch" data-toggle="modal">高级</label>
                           }}
                     </div>
                     <div class="well">
@@ -87,6 +91,7 @@
                     </div>
                 </div>
                 @RenderSection("permission", required: false)
+                @RenderSection("searchform", required: false)
             </div>
         </div>
         <div id="js-div-add" class="hide">
@@ -111,7 +116,6 @@
         var pageSize = '@ViewBag.PageSize';
         var hideSearch = '@ViewBag.HideSearch';
     </script>
-    @RenderBody()
     @Scripts.Render("~/Content/js-manage")
     @RenderSection("script", required: false)
 </body>

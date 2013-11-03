@@ -92,7 +92,19 @@ namespace MvcBootstrapManage.Controllers
         public override ActionResult Search(string name)
         {
             IList<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name)).ToList();
+            if (result.Count == 0)
+            {
+                return new EmptyResult();
+            }
             return PartialView("_ModuleGrid", result);
+        }
+
+        [HttpPost]
+        public ActionResult AdvanceSearch(FormCollection searchFormInfo)
+        {
+            Module module = GetModuleFromForm(searchFormInfo);
+
+            return new EmptyResult();
         }
 
         private Module GetModuleFromForm(FormCollection formInfo)

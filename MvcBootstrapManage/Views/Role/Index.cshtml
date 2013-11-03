@@ -32,10 +32,10 @@
             是否启用</label>
         <div class="controls">
             <label class="radio inline">
-                <input type="radio" name="IsVisible" value="1" checked>是
+                <input type="radio" name="IsEnable" value="1" checked>是
             </label>
             <label class="radio inline">
-                <input type="radio" name="IsVisible" value="0">否
+                <input type="radio" name="IsEnable" value="0">否
             </label>
         </div>
     </div>
@@ -77,7 +77,6 @@
     <script src="@Url.Content("~/Scripts/my/bootstrap-tooltip.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/my/bootstrap-tab.js")" type="text/javascript"></script>
     <script type="text/javascript">
-        $('.js-checkall-permission').tooltip();
         $('#myTab a:first').tab('show');
         $('#js-btn-toolbar-permission').on('click', function () {
             var roleCheck = $('#js-table').find('input:checked');
@@ -106,6 +105,7 @@
                   alert("权限分配成功！");
               });
         });
+        $('.js-checkall-permission').tooltip();
         $('.js-checkall-permission').on('click', function () {
             var sibCheckboxes = $(this).closest('form').find('input[type=checkbox]');
             if (!$(this).prop('checked')) {

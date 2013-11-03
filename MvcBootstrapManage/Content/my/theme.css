@@ -788,6 +788,14 @@ table.table.list tr:first-child td {
 {
     padding-left: 20px;
 }
+.mt5
+{
+    margin-top:5px;
+}
+.mr10
+{
+    margin-right:10px;
+}
 .mr40
 {
     margin-right: 40px;
