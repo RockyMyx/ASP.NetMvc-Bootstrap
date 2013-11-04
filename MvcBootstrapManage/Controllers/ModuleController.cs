@@ -30,6 +30,7 @@ namespace MvcBootstrapManage.Controllers
                     moduleList.Add(new SelectListItem { Text = modules[i].Name, Value = modules[i].ID.ToString() });
                 }
             }
+
             ViewData["ParentId"] = moduleList;
             var result = db.GetModuleTree().Take(base.PageSize).ToList();
             return View(result);
