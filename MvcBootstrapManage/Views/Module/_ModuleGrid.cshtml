@@ -5,9 +5,9 @@
         <th><input id="js-check-all" type="checkbox" style="margin:-2px 5px 0 0;" />选择</th>
 		<th>模块名称</th>
 		<th class="sort-alpha th-sort">模块代码</th>
+		<th>链接</th>
 		<th>Controller</th>
 		<th>是否启用</th>
-		<th class="sort-date">创建日期</th>
         @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
          {
 		<th>操作</th>
@@ -37,6 +37,7 @@
             }
             @item.Name</td>
 		    <td class="js-readonly" key="Code" content="@item.Code">@item.Code</td>
+		    <td key="Url" content="@item.Url" type="notEmpty">@item.Url</td>
 		    <td key="Controller" content="@item.Controller" type="notEmpty">@item.Controller</td>
             <td class="js-bool" key="IsEnable" content="@((bool)item.IsEnable ? "1" : "0")">
             @if ((bool)item.IsEnable)
@@ -48,7 +49,6 @@
                 <img src="../../Images/disable.png" alt="不可用" title="不可用" />
             }
             </td>
-		    <td class="js-readonly" key="CreateDate" content="@item.CreateDate">@item.CreateDate</td>
             @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
               {
             <td>

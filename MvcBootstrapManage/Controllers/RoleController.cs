@@ -93,17 +93,24 @@ namespace MvcBootstrapManage.Controllers
         public ActionResult SetPermission(int id, FormCollection formInfo)
         {
             //Reset
-            string sql = "DELETE FROM permission WHERE roleID = " + id;
-            db.ExecuteStoreCommand(sql);
+            //string sql = "DELETE FROM permission WHERE roleID = " + id;
+            //db.ExecuteStoreCommand(sql);
 
             int controllerId;
             int actionId;
+            //int createUserId = Convert.ToInt32(Session["UserId"]);
+            int modifyUserId = 2;
+
             List<int> parentIds = new List<int>();
             foreach (string item in formInfo.AllKeys)
             {
                 controllerId = Convert.ToInt32(item.Split('-')[0]);
                 actionId = Convert.ToInt32(item.Split('-')[1]);
-                db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = controllerId, ActionID = actionId });
+
+                if (!isPermissionExist(id, controllerId, actionId))
+                {
+                    db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = controllerId, ActionID = actionId, ModifyUserID = modifyUserId, ModifyDate = DateTime.Now });
+                }
 
                 //添加父节点
                 int parentId = Convert.ToInt32(db.Module.Where(m => m.ID == controllerId)
@@ -117,11 +124,21 @@ namespace MvcBootstrapManage.Controllers
 
             foreach (int parentId in parentIds)
             {
-                db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = parentId, ActionID = 1 });
+                if (!isPermissionExist(id, parentId, 1))
+                {
+                    db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = parentId, ActionID = 1, ModifyUserID = modifyUserId, ModifyDate = DateTime.Now });
+                }
             }
 
             db.SaveChanges();
             return new EmptyResult();
+        }
+
+        private bool isPermissionExist(int id, int controllerId, int actionId)
+        {
+            return Convert.ToBoolean(db.Permission.Where(p => p.ID == id &&
+                                       p.ControllerID == controllerId &&
+                                       p.ActionID == actionId).Count());
         }
 
         private Role GetRoleFromForm(FormCollection formInfo)

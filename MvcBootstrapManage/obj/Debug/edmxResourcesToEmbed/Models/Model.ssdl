@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MvcBootstrapModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="MvcBootstrapModelStoreContainer">
+    <EntitySet Name="Favorite" EntityType="MvcBootstrapModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
@@ -22,18 +23,33 @@
       [v_UserAllPermission].[ActionName] AS [ActionName]
       FROM [dbo].[v_UserAllPermission] AS [v_UserAllPermission]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_TBFAVORI_REFERENCE_USER" Association="MvcBootstrapModel.Store.FK_TBFAVORI_REFERENCE_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="Favorite" EntitySet="Favorite" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Favorite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="Log">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" />
     <Property Name="UserName" Type="varchar" MaxLength="20" />
     <Property Name="IpAddress" Type="varchar" MaxLength="20" />
     <Property Name="Module" Type="varchar" MaxLength="50" />
-    <Property Name="Type" Type="varchar" MaxLength="20" />
-    <Property Name="Detail" Type="varchar" MaxLength="100" />
-    <Property Name="DateTime" Type="datetime" />
+    <Property Name="Action" Type="varchar" MaxLength="20" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+    <Property Name="CreateDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Module">
     <Key>
@@ -42,11 +58,10 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Code" Type="varchar" MaxLength="20" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
     <Property Name="Controller" Type="varchar" MaxLength="50" />
     <Property Name="ParentId" Type="int" />
     <Property Name="IsEnable" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="Creator" Type="varchar" MaxLength="20" />
     <Property Name="Operations" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Operation">
@@ -56,8 +71,8 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" MaxLength="20" />
     <Property Name="Action" Type="varchar" MaxLength="20" />
+    <Property Name="CreateUserId" Type="int" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="Creator" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Permission">
     <Key>
@@ -67,6 +82,10 @@
     <Property Name="RoleID" Type="int" />
     <Property Name="ControllerID" Type="int" />
     <Property Name="ActionID" Type="int" />
+    <Property Name="CreateUserID" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifyUserID" Type="int" />
+    <Property Name="ModifyDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -77,8 +96,10 @@
     <Property Name="Remark" Type="varchar" MaxLength="100" />
     <Property Name="IsEnable" Type="bit" />
     <Property Name="ParentID" Type="int" />
+    <Property Name="CreateUserID" Type="int" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="Creators" Type="varchar" MaxLength="20" />
+    <Property Name="ModifyUserID" Type="int" />
+    <Property Name="ModifyDate" Type="datetime" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -88,14 +109,19 @@
     <Property Name="Name" Type="varchar" MaxLength="20" />
     <Property Name="Password" Type="varchar" MaxLength="20" />
     <Property Name="RealName" Type="varchar" MaxLength="20" />
+    <Property Name="DeptID" Type="int" />
     <Property Name="WorkNo" Type="varchar" MaxLength="50" />
     <Property Name="Age" Type="int" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
     <Property Name="Phone" Type="varchar" MaxLength="20" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="IsLocked" Type="bit" />
+    <Property Name="LastLoginTime" Type="datetime" />
+    <Property Name="CreateUserID" Type="int" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="Creator" Type="varchar" MaxLength="20" />
-    <Property Name="Remark" Type="varchar" MaxLength="100" />
+    <Property Name="ModifyUserID" Type="int" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="Remark" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
@@ -123,6 +149,18 @@
     <Property Name="ActionID" Type="int" />
     <Property Name="ActionName" Type="varchar" MaxLength="20" />
   </EntityType>
+  <Association Name="FK_TBFAVORI_REFERENCE_USER">
+    <End Role="User" Type="MvcBootstrapModel.Store.User" Multiplicity="0..1" />
+    <End Role="Favorite" Type="MvcBootstrapModel.Store.Favorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="RoleID" Type="int" Mode="In" />

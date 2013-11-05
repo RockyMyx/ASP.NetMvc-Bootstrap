@@ -14,8 +14,8 @@ namespace MvcBootstrapManage.Controllers
             using (DBEntity db = new DBEntity())
             {
                 var permissions = db.Permission.Where(p => p.RoleID == id)
-                                           .Select(p => new { p.ControllerID, p.ActionID })
-                                           .AsEnumerable();
+                                    .Select(p => new { p.ControllerID, p.ActionID })
+                                    .AsEnumerable();
                 if (permissions.Count() == 0)
                 {
                     return null;

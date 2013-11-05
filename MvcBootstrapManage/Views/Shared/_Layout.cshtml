@@ -116,6 +116,7 @@
         var pageSize = '@ViewBag.PageSize';
         var hideSearch = '@ViewBag.HideSearch';
     </script>
+    @RenderBody()
     @Scripts.Render("~/Content/js-manage")
     @RenderSection("script", required: false)
 </body>

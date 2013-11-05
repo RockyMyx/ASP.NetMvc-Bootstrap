@@ -83,7 +83,6 @@ namespace MvcBootstrapManage.Controllers
         public override ActionResult Create(FormCollection formInfo)
         {
             Module module = GetModuleFromForm(formInfo);
-            module.CreateDate = DateTime.Now;
             //module.Creator = Session["RealName"].ToString();
             db.Module.AddObject(module);
             db.SaveChanges();

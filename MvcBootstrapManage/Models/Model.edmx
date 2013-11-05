@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="MvcBootstrapModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="MvcBootstrapModelStoreContainer">
+          <EntitySet Name="Favorite" EntityType="MvcBootstrapModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Log" EntityType="MvcBootstrapModel.Store.Log" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Module" EntityType="MvcBootstrapModel.Store.Module" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Operation" EntityType="MvcBootstrapModel.Store.Operation" store:Type="Tables" Schema="dbo" />
@@ -27,18 +28,33 @@
       [v_UserAllPermission].[ActionName] AS [ActionName]
       FROM [dbo].[v_UserAllPermission] AS [v_UserAllPermission]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_TBFAVORI_REFERENCE_USER" Association="MvcBootstrapModel.Store.FK_TBFAVORI_REFERENCE_USER">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favorite" EntitySet="Favorite" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Favorite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Url" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
           <Property Name="UserName" Type="varchar" MaxLength="20" />
           <Property Name="IpAddress" Type="varchar" MaxLength="20" />
           <Property Name="Module" Type="varchar" MaxLength="50" />
-          <Property Name="Type" Type="varchar" MaxLength="20" />
-          <Property Name="Detail" Type="varchar" MaxLength="100" />
-          <Property Name="DateTime" Type="datetime" />
+          <Property Name="Action" Type="varchar" MaxLength="20" />
+          <Property Name="Remark" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -47,11 +63,10 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="20" />
+          <Property Name="Url" Type="varchar" MaxLength="100" />
           <Property Name="Controller" Type="varchar" MaxLength="50" />
           <Property Name="ParentId" Type="int" />
           <Property Name="IsEnable" Type="bit" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="Creator" Type="varchar" MaxLength="20" />
           <Property Name="Operations" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Operation">
@@ -61,8 +76,8 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Action" Type="varchar" MaxLength="20" />
+          <Property Name="CreateUserId" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="Creator" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -72,6 +87,10 @@
           <Property Name="RoleID" Type="int" />
           <Property Name="ControllerID" Type="int" />
           <Property Name="ActionID" Type="int" />
+          <Property Name="CreateUserID" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifyUserID" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -82,8 +101,10 @@
           <Property Name="Remark" Type="varchar" MaxLength="100" />
           <Property Name="IsEnable" Type="bit" />
           <Property Name="ParentID" Type="int" />
+          <Property Name="CreateUserID" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="Creators" Type="varchar" MaxLength="20" />
+          <Property Name="ModifyUserID" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -93,14 +114,19 @@
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Password" Type="varchar" MaxLength="20" />
           <Property Name="RealName" Type="varchar" MaxLength="20" />
+          <Property Name="DeptID" Type="int" />
           <Property Name="WorkNo" Type="varchar" MaxLength="50" />
           <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
           <Property Name="Phone" Type="varchar" MaxLength="20" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="IsLocked" Type="bit" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="CreateUserID" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="Creator" Type="varchar" MaxLength="20" />
-          <Property Name="Remark" Type="varchar" MaxLength="100" />
+          <Property Name="ModifyUserID" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -128,6 +154,18 @@
           <Property Name="ActionID" Type="int" />
           <Property Name="ActionName" Type="varchar" MaxLength="20" />
         </EntityType>
+        <Association Name="FK_TBFAVORI_REFERENCE_USER">
+          <End Role="User" Type="MvcBootstrapModel.Store.User" Multiplicity="0..1" />
+          <End Role="Favorite" Type="MvcBootstrapModel.Store.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Favorite">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleID" Type="int" Mode="In" />
@@ -157,6 +195,11 @@
             <Parameter Name="RoleID" Mode="In" Type="Int32" />
             <Parameter Name="ControllerID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Favorite" EntityType="MvcBootstrapModel.Favorite" />
+          <AssociationSet Name="FK_TBFAVORI_REFERENCE_USER" Association="MvcBootstrapModel.FK_TBFAVORI_REFERENCE_USER">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favorite" EntitySet="Favorite" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Log">
           <Key>
@@ -166,9 +209,10 @@
           <Property Name="UserName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IpAddress" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Module" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Type" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Detail" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="DateTime" Type="DateTime" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="String" Name="Action" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Remark" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateDate" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -180,9 +224,8 @@
           <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ParentId" Type="Int32" />
           <Property Name="IsEnable" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" />
-          <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Type="String" Name="Url" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Operation">
           <Key>
@@ -192,7 +235,7 @@
           <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" />
-          <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="CreateUserId" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -202,6 +245,10 @@
           <Property Name="RoleID" Type="Int32" />
           <Property Name="ControllerID" Type="Int32" />
           <Property Name="ActionID" Type="Int32" />
+          <Property Type="Int32" Name="CreateUserID" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="Int32" Name="ModifyUserID" />
+          <Property Type="DateTime" Name="ModifyDate" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -213,7 +260,9 @@
           <Property Name="IsEnable" Type="Boolean" />
           <Property Name="ParentID" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" />
-          <Property Name="Creators" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="CreateUserID" />
+          <Property Type="Int32" Name="ModifyUserID" />
+          <Property Type="DateTime" Name="ModifyDate" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -229,8 +278,14 @@
           <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="IsLocked" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" />
-          <Property Name="Creator" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="DeptID" />
+          <Property Type="String" Name="Gender" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastLoginTime" />
+          <Property Type="Int32" Name="CreateUserID" />
+          <Property Type="Int32" Name="ModifyUserID" />
+          <Property Type="DateTime" Name="ModifyDate" />
+          <NavigationProperty Name="Favorite" Relationship="MvcBootstrapModel.FK_TBFAVORI_REFERENCE_USER" FromRole="User" ToRole="Favorite" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -259,6 +314,29 @@
           <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="Favorite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateTime" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="String" Name="Url" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="MvcBootstrapModel.FK_TBFAVORI_REFERENCE_USER" FromRole="Favorite" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_TBFAVORI_REFERENCE_USER">
+          <End Type="MvcBootstrapModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MvcBootstrapModel.Favorite" Role="Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Favorite">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -266,49 +344,61 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MvcBootstrapModelStoreContainer" CdmEntityContainer="DBEntity">
           <EntitySetMapping Name="Log"><EntityTypeMapping TypeName="MvcBootstrapModel.Log"><MappingFragment StoreEntitySet="Log">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="UserName" ColumnName="UserName" />
             <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
             <ScalarProperty Name="Module" ColumnName="Module" />
-            <ScalarProperty Name="Type" ColumnName="Type" />
-            <ScalarProperty Name="Detail" ColumnName="Detail" />
-            <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+            </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Module"><EntityTypeMapping TypeName="MvcBootstrapModel.Module"><MappingFragment StoreEntitySet="Module">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Code" ColumnName="Code" />
             <ScalarProperty Name="Controller" ColumnName="Controller" />
             <ScalarProperty Name="ParentId" ColumnName="ParentId" />
             <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
-            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-            <ScalarProperty Name="Creator" ColumnName="Creator" />
             <ScalarProperty Name="Operations" ColumnName="Operations" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Operation"><EntityTypeMapping TypeName="MvcBootstrapModel.Operation"><MappingFragment StoreEntitySet="Operation">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Action" ColumnName="Action" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-            <ScalarProperty Name="Creator" ColumnName="Creator" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Permission"><EntityTypeMapping TypeName="MvcBootstrapModel.Permission"><MappingFragment StoreEntitySet="Permission">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
             <ScalarProperty Name="ActionID" ColumnName="ActionID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Role"><EntityTypeMapping TypeName="MvcBootstrapModel.Role"><MappingFragment StoreEntitySet="Role">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Remark" ColumnName="Remark" />
             <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
             <ScalarProperty Name="ParentID" ColumnName="ParentID" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-            <ScalarProperty Name="Creators" ColumnName="Creators" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="User"><EntityTypeMapping TypeName="MvcBootstrapModel.User"><MappingFragment StoreEntitySet="User">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Password" ColumnName="Password" />
             <ScalarProperty Name="RealName" ColumnName="RealName" />
@@ -318,7 +408,6 @@
             <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-            <ScalarProperty Name="Creator" ColumnName="Creator" />
             <ScalarProperty Name="Remark" ColumnName="Remark" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="UserRole"><EntityTypeMapping TypeName="MvcBootstrapModel.UserRole"><MappingFragment StoreEntitySet="UserRole">
@@ -351,6 +440,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetUserOperation" FunctionName="MvcBootstrapModel.Store.GetUserOperation" />
+          <EntitySetMapping Name="Favorite">
+            <EntityTypeMapping TypeName="MvcBootstrapModel.Favorite">
+              <MappingFragment StoreEntitySet="Favorite">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -372,14 +472,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="MvcBootstrapModel.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.7341113281249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9700325520833326" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Log" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5430916341145831" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Module" Width="1.5" PointX="2.75" PointY="0.75" Height="2.5430916341145831" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Operation" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9700325520833331" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.Permission" Width="1.5" PointX="0.75" PointY="4.75" Height="1.7790128580729157" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.3520719401041656" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrapModel.User" Width="1.5" PointX="4.75" PointY="3.75" Height="3.3071704101562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Role" Width="1.5" PointX="2.75" PointY="4.75" Height="2.7341113281249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.User" Width="1.5" PointX="4.75" PointY="3.75" Height="4.45328857421875" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.UserRole" Width="1.5" PointX="6.75" PointY="0.75" Height="1.3969734700520817" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrapModel.v_UserAllPermission" Width="1.5" PointX="6.625" PointY="3.625" Height="2.9251310221354174" />
+        <EntityTypeShape EntityType="MvcBootstrapModel.Favorite" Width="1.5" PointX="7" PointY="8" Height="2.1610522460937496" />
+        <AssociationConnector Association="MvcBootstrapModel.FK_TBFAVORI_REFERENCE_USER" >
+          <ConnectorPoint PointX="6.25" PointY="7.3063150110677082" />
+          <ConnectorPoint PointX="8.34375" PointY="7.3063150110677082" />
+          <ConnectorPoint PointX="8.34375" PointY="8" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
