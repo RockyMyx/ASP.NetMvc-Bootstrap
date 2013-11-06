@@ -1,6 +1,5 @@
 ﻿/****************************Common*****************************/
 
-
 //表单验证
 function isValidForm(form) {
     if (form.find('.form-init').length > 0) {
@@ -11,6 +10,7 @@ function isValidForm(form) {
         alert('表单信息输入有误，请检查后重新提交！')
         return false;
     }
+
     return true;
 }
 
@@ -27,12 +27,6 @@ function showSearch(result) {
     }
 }
 
-function showPagination() {
-    if (~ ~dataCount > ~ ~pageSize) {
-        initPagination(dataCount);
-    }
-}
-
 //模态窗口展现事件
 $('.modal').on('shown', function (e) {
     var modal = $(this);
@@ -40,6 +34,76 @@ $('.modal').on('shown', function (e) {
          .css('margin-left', (modal.outerWidth() / 2) * -1);
     return this;
 });
+
+/****************************分页相关*****************************/
+
+var pageIndex = 0;
+
+//myx.pagination.js中设置当前页码
+function setPageIndex(index) {
+    pageIndex = index;
+}
+
+var paging = {
+    init: function (index) {
+        $(".pagination").pagination(dataCount, { items_per_page: pageSize, current_page: index + 1 || 0 });
+    },
+    show: function (index) {
+        if (~ ~dataCount > ~ ~pageSize) {
+            this.init(index);
+            $('.pagination').showIfHide();
+            $('#page' + index).trigger('click');
+        }
+        else {
+            $('.pagination').hide();
+        }
+    },
+    reset: function () {
+        var change = arguments[0] || -1;  //+为添加，-为删除
+        dataCount = ~ ~dataCount + change;
+        var newIndex = Math.ceil(dataCount / pageSize) - 1;
+        //删除
+        if (change < 0) {
+            //当前数据不超过一页时，重新请求数据
+            if (newIndex == 0) {
+                $.post('/Role/Index', { pageIndex: 1 })
+             .done(function (result) {
+                 $('#js-table').html(result);
+                 $('.pagination').hide();
+                 bindTable();
+             });
+            }
+            else {
+                $('.pagination').showIfHide();
+                //本页数据全部删除，隐藏当前页码，并跳到前一页
+                if (newIndex < pageIndex) {
+                    --pageIndex;
+                    $('#page' + pageIndex).hide();
+                    this.show(newIndex);
+                }
+                //重新请求本页数据
+                else {
+                    this.show(pageIndex);
+                }
+            }
+        }
+        //添加
+        else {
+            //当前数据不超过一页时，重新请求数据
+            if (newIndex == 0) {
+                $.post('/Role/Index', { pageIndex: 1 })
+             .done(function (result) {
+                 $('#js-table').html(result);
+                 $('.pagination').hide();
+                 bindTable();
+             });
+            }
+         else {
+                this.show(newIndex);
+            }
+        }
+    }
+};
 
 //根据窗口大小调整背景
 function resize() {
@@ -53,7 +117,7 @@ $(window).on('resize', function () {
 $(document).ready(function () {
     /*************************调整窗口大小，初始化分页按钮*************************/
     resize();
-    showPagination();
+    paging.show();
 
     /****************************搜索标签提示文字处理*****************************/
     var input = $('input.input-place');
@@ -271,34 +335,33 @@ function bindTable() {
                             contentType: 'application/json',
                             dataType: 'html',
                             //IE6、IE7默认不支持JSON.stringify，可以引入Scripts/my/json2.js解决此问题
-                            data: JSON.stringify(dataInfo),
-                            success: function (result) {
-                                result = JSON.parse(result);
-                                var count = tds.length - 1;
-                                var currentContent;
-                                for (var i = 0; i < count; i++) {
-                                    currentTd = tds.eq(i);
-                                    currentContent = result[currentTd.attr('key')]
-                                    if (currentContent !== undefined) {
-                                        if (currentTd.attr('class') == 'js-bool') {
-                                            if (dataInfo[currentTd.attr('key')] == 1) {
-                                                currentTd.html('<img src="../../Images/enable.png" />');
-                                            }
-                                            else {
-                                                currentTd.html('<img src="../../Images/disable.png" />');
-                                            }
+                            data: JSON.stringify(dataInfo)
+                        }).done(function (result) {
+                            result = JSON.parse(result);
+                            var count = tds.length - 1;
+                            var currentContent;
+                            for (var i = 0; i < count; i++) {
+                                currentTd = tds.eq(i);
+                                currentContent = result[currentTd.attr('key')]
+                                if (currentContent !== undefined) {
+                                    if (currentTd.attr('class') == 'js-bool') {
+                                        if (dataInfo[currentTd.attr('key')] == 1) {
+                                            currentTd.html('<img src="../../Images/enable.png" />');
                                         }
                                         else {
-                                            currentTd.attr('content', currentContent);
-                                            currentTd.html(currentContent);
+                                            currentTd.html('<img src="../../Images/disable.png" />');
                                         }
                                     }
                                     else {
-                                        currentTd.html(beforeEditInfo[i]);
+                                        currentTd.attr('content', currentContent);
+                                        currentTd.html(currentContent);
                                     }
                                 }
-                                resetEditButton();
+                                else {
+                                    currentTd.html(beforeEditInfo[i]);
+                                }
                             }
+                            resetEditButton();
                         });
                     }
                     else {
@@ -322,36 +385,6 @@ function bindTable() {
         }
     });
 
-    /****************************弹出模态窗口*****************************/
-
-    //确定删除按钮点击事件
-    $('#js-btn-modal-delete').unbind('click').bind('click', function () {
-        $.ajax({
-            type: 'POST',
-            url: '/' + thisModel + '/Delete',
-            contentType: 'application/json',
-            dataType: 'html',
-            data: JSON.stringify(deleteId),
-            success: function () {
-                resetPagination(-1);
-            }
-        });
-    });
-
-    //确定编辑按钮点击事件
-    $('#js-btn-modal-edit').on('click', function () {
-        var form = $('#js-edit-form');
-        //myx.page.js
-        if (isValidForm(form)) {
-            $.post('/' + thisModel + '/Update', form.serialize())
-             .done(function () {
-                 initPagination(dataCount);
-             });
-        }
-    });
-
-    /****************************工具栏按钮*****************************/
-
     var isSelectAll = false;
 
     //表格全选CheckBox点击事件
@@ -359,44 +392,75 @@ function bindTable() {
         isSelectAll = !isSelectAll;
         $('#js-table').find('.js-check-cell').attr('checked', isSelectAll);
     });
+};
 
-    //工具栏删除按钮点击事件
-    //unbind为了解决弹出多次confirm的问题
-    $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
-        var trs = $('.table tbody').find('tr');
-        var deletetd, ids = [];
-        for (var i = 0; i < trs.length; i++) {
-            deletetd = trs.eq(i);
-            if (deletetd.find('.js-check-cell').is(':checked')) {
-                ids.push(deletetd.find('td').eq(0).html());
-            }
-        }
-        if (ids.length != 0) {
-            if (confirm('您确定要删除吗？删除后不可恢复！')) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/' + thisModel + '/Delete',
-                    contentType: 'application/json',
-                    dataType: 'html',
-                    data: JSON.stringify(ids),
-                    success: function () {
-                        resetPagination(-ids.length);
-                    }
-                });
-            }
-        }
-        else {
-            alert('请选中需要删除的行');
-        }
+/****************************弹出模态窗口*****************************/
+
+//确定删除按钮点击事件
+$('#js-btn-modal-delete').bind('click', function () {
+    $.ajax({
+        type: 'POST',
+        url: '/' + thisModel + '/Delete',
+        contentType: 'application/json',
+        dataType: 'html',
+        data: JSON.stringify(deleteId)
+    }).done(function () {
+        paging.reset(-1);
     });
-}
+});
+
+//确定编辑按钮点击事件
+$('#js-btn-modal-edit').on('click', function () {
+    var form = $('#js-edit-form');
+    if (isValidForm(form)) {
+        $.ajax({
+            type: 'POST',
+            url: '/' + thisModel + '/Update',
+            data: form.serialize()
+        }).done(function () {
+            paging.show(pageIndex);
+        });
+    }
+});
+
+/****************************工具栏按钮*****************************/
+
+//工具栏删除按钮点击事件
+//unbind为了解决弹出多次confirm的问题
+$('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
+    var trs = $('.table tbody').find('tr');
+    var deletetd, ids = [];
+    for (var i = 0; i < trs.length; i++) {
+        deletetd = trs.eq(i);
+        if (deletetd.find('.js-check-cell').is(':checked')) {
+            ids.push(deletetd.find('td').eq(0).html());
+        }
+    }
+    if (ids.length != 0) {
+        if (confirm('您确定要删除吗？删除后不可恢复！')) {
+            $.ajax({
+                type: 'POST',
+                url: '/' + thisModel + '/Delete',
+                contentType: 'application/json',
+                dataType: 'html',
+                data: JSON.stringify(ids)
+            }).done(function () {
+                paging.reset(-ids.length);
+            });
+        }
+    }
+    else {
+        alert('请选中需要删除的行');
+    }
+});
 
 //工具栏刷新按钮点击事件
 $('#js-btn-toolbar-refresh').on('click', function () {
-    $.post('/' + thisModel + '/Index', function (result) {
-        $('#js-table').html(result);
-        initPagination(dataCount);
-    });
+    $.post('/' + thisModel + '/Index')
+     .done(function (result) {
+         $('#js-table').html(result);
+         paging.show();
+     });
 });
 
 //工具栏添加按钮点击事件
@@ -422,9 +486,10 @@ $('#js-btn-search').on('click', function () {
         alert('请输入搜索的内容');
     }
     else {
-        $.post('/' + thisModel + '/Search', { 'name': $('#js-input-search').val() }, function (result) {
-            showSearch(result);
-        });
+        $.post('/' + thisModel + '/Search', { 'name': $('#js-input-search').val() })
+         .done(function (result) {
+             showSearch(result);
+         });
     }
 });
 
@@ -436,7 +501,7 @@ $('#js-btn-form-add').on('click', function () {
     if (isValidForm(form)) {
         $.post('/' + thisModel + '/Create', form.serialize())
          .done(function () {
-             resetPagination(1);
+             paging.reset(1);
              $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast');
          });
     }
@@ -450,58 +515,3 @@ $('#js-btn-form-cancel').on('click', function () {
         resize();
     });
 });
-
-/****************************分页相关*****************************/
-
-var pageIndex = 0;
-
-function setPageIndex(index) {
-    pageIndex = index;
-}
-
-function initPagination(count) {
-    $(".pagination").pagination(count, { items_per_page: pageSize });
-}
-
-function resetTrigger(index) {
-    $(".pagination").pagination(dataCount);
-    $('#page' + index).trigger('click');
-}
-
-function resetPagination() {
-    var change = arguments[0] || -1;
-    dataCount = ~ ~dataCount + change;
-    var newIndex = Math.ceil(dataCount / pageSize) - 1;
-    //删除后跳到相应页
-    if (change < 0) {
-        if (newIndex == 0) {
-            $.post('/Role/Index', { pageIndex: 1 })
-             .done(function (result) {
-                 $('#js-table').html(result);
-                 pageIndex = 0;
-                 $('.pagination').hide();
-             });
-        }
-        else {
-            $('.pagination').show();
-            if (newIndex < pageIndex) {
-                --pageIndex;
-                $('#page' + pageIndex).hide();
-                resetTrigger(newIndex);
-            }
-            else {
-                resetTrigger(pageIndex);
-            }
-        }
-    }
-    //添加后跳到相应页
-    else {
-        if (newIndex > pageIndex) {
-            ++pageIndex;
-            resetTrigger(newIndex);
-        }
-        else {
-            resetTrigger(pageIndex);
-        }
-    }
-}

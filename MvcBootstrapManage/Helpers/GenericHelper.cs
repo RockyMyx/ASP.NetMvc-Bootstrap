@@ -38,13 +38,4 @@ public static class DBHelper
     {
         return GetPagingInfo<T>(model, 1, pageSize);
     }
-
-    public static void Delete<T>(this ObjectContext context, T entity)
-    {
-        using (context)
-        {
-            context.DeleteObject(entity);
-            context.SaveChanges();
-        }
-    }
 }

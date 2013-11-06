@@ -4,6 +4,18 @@
     return this;
 }
 
+jQuery.fn.showIfHide = function () {
+    if (this.is(':hidden')) {
+        this.show();
+    }
+}
+
+jQuery.fn.hideIfShow = function () {
+    if (this.is(':visible')) {
+        this.hide();
+    }
+}
+
 Array.prototype.contains = function () {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == arguments[0]) {

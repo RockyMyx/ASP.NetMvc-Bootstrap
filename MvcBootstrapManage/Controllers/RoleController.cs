@@ -41,42 +41,39 @@ namespace MvcBootstrapManage.Controllers
             //role.Remark = viewModel.Remark;
             //role.IsEnable = int.Parse(viewModel.IsEnable) == 1 ? true : false;
 
-            Role role = RoleEditViewModel.ToEntity(viewModel);
-            db.SaveChanges();
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
+            //Role role = RoleEditViewModel.ToEntity(viewModel);
+            //db.SaveChanges();
+            RoleEditViewModel.ToSaveEntity(viewModel);
+            return Json(viewModel);
         }
 
-        public override ActionResult Delete(List<int> ids)
+        public override void Delete(List<int> ids)
         {
             try
             {
                 foreach (int id in ids)
                 {
                     Role role = db.Role.GetEntity(r => r.ID == id);
-                    db.Delete(role);
-                    //if (role != null)
-                    //{
-                    //    db.DeleteObject(role);
-                    //    db.SaveChanges();
-                    //}
+                    if (role != null)
+                    {
+                        db.DeleteObject(role);
+                        db.SaveChanges();
+                    }
                 }
             }
             catch (OptimisticConcurrencyException)
             {
                 db.AcceptAllChanges();
             }
-
-            return new EmptyResult();
         }
 
-        public override ActionResult Create(FormCollection formInfo)
+        public override void Create(FormCollection formInfo)
         {
             Role role = FormHelper.GetRoleInfo(formInfo);
             role.CreateDate = DateTime.Now;
             //role.CreateUserID = Convert.ToInt32(Session["UserID"]);
             db.Role.AddObject(role);
             db.SaveChanges();
-            return new EmptyResult();
         }
 
         public override ActionResult Search(string name)

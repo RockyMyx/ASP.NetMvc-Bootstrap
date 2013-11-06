@@ -45,7 +45,7 @@ namespace MvcBootstrapManage.Controllers
         }
 
         [HttpPost]
-        public override ActionResult Update(FormCollection formInfo)
+        public override void Update(FormCollection formInfo)
         {
             int id = Convert.ToInt32(formInfo["ID"]);
             Module module = FormHelper.GetModuleInfo(formInfo);
@@ -56,11 +56,10 @@ namespace MvcBootstrapManage.Controllers
             oldModule.IsEnable = module.IsEnable;
             oldModule.Operations = module.Operations;
             db.SaveChanges();
-            return new EmptyResult();
         }
 
         [HttpPost]
-        public override ActionResult Delete(List<int> ids)
+        public override void Delete(List<int> ids)
         {
             try
             {
@@ -75,17 +74,14 @@ namespace MvcBootstrapManage.Controllers
             {
                 db.AcceptAllChanges();
             }
-
-            return new EmptyResult();
         }
 
         [HttpPost]
-        public override ActionResult Create(FormCollection formInfo)
+        public override void Create(FormCollection formInfo)
         {
             Module module = FormHelper.GetModuleInfo(formInfo);
             db.Module.AddObject(module);
             db.SaveChanges();
-            return new EmptyResult();
         }
 
         public override ActionResult Search(string name)

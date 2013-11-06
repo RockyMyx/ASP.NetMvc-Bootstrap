@@ -16,6 +16,7 @@
 5、修改默认请求连接为当前页面url，即location.href
 6、按钮使用css3圆角美化
 7、修复浏览器兼容性问题
+8、添加编辑删除事件绑定，配合common.js
 */
 jQuery.fn.pagination = function (maxentries, opts) {
     opts = jQuery.extend({
@@ -82,7 +83,7 @@ jQuery.fn.pagination = function (maxentries, opts) {
                 data: params,
                 success: function (result) {
                     $(opts.table_to).html(result);
-                    //绑定表格的编辑和删除点击事件等，依赖于myx.table.js
+                    //绑定表格的编辑和删除点击事件等，依赖于common.js
                     bindTable();
                 }
             });

@@ -13,7 +13,7 @@ namespace MvcBootstrapManage.ViewModel
         public string Remark { get; set; }
         public string IsEnable { get; set; }
 
-        public static Role ToEntity(RoleEditViewModel viewModel)
+        public static void ToSaveEntity(RoleEditViewModel viewModel)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -21,7 +21,7 @@ namespace MvcBootstrapManage.ViewModel
                 role.Name = viewModel.Name;
                 role.Remark = viewModel.Remark;
                 role.IsEnable = int.Parse(viewModel.IsEnable) == 1 ? true : false;
-                return role;
+                db.SaveChanges();
             }
         }
     }
