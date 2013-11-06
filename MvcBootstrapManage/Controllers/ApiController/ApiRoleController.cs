@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using MvcBootstrapManage.Models;
+using MvcBootstrapManage.ViewModel;
 
 namespace MvcBootstrapManage.Controllers
 {
-    public class ApiPermissionController : ApiController
+    public class ApiRoleController : ApiController
     {
         public Dictionary<int,string> GetPermissionByRole(int id)
         {

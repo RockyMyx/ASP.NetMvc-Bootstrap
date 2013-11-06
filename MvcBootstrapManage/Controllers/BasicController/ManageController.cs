@@ -13,14 +13,13 @@ namespace MvcBootstrapManage.Controllers
     {
         public ManageController()
         {
-            ViewBag.TotalCount = this.TotalCount;
+            ViewBag.dataCount = this.DataCount;
             ViewBag.PageSize = this.PageSize;
-            ViewBag.HideSearch = this.PageSize - 1;
         }
 
         protected DBEntity db = new DBEntity();
         protected int PageSize = 3;
-        protected abstract int TotalCount { get; }
+        protected abstract int DataCount { get; }
 
         public abstract ActionResult Index();
         [HttpPost]

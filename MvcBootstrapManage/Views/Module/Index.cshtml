@@ -258,6 +258,13 @@
              });
          };
          $('#js-btn-modal-search').on('click', function () {
+             /*$.ajax({
+                 type: 'POST',
+                 url: '/' + thisModel + '/AdvanceSearch',
+                 data: $('#js-search-form').serialize()
+             }).done(function (result) {
+                  showSearch(result);
+             });*/
              $.post('/' + thisModel + '/AdvanceSearch', $('#js-search-form').serialize())
               .done(function (result) {
                   showSearch(result);

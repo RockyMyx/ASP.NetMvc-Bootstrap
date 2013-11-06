@@ -36,3 +36,4 @@ D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\bin\System.Web.WebPages.R
 D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\obj\Debug\ResolveAssemblyReference.cache
 D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\obj\Debug\MvcBootstrapManage.dll
 D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\obj\Debug\MvcBootstrapManage.pdb
+D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\bin\fastJSON.dll

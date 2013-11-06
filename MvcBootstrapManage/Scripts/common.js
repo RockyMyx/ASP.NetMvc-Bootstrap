@@ -19,7 +19,7 @@ function showSearch(result) {
     if (result.length != 0) {
         $('#js-table').html(result);
         $(".pagination").pagination($('#js-table tbody').find('tr').length);
-        $("#js-table tbody tr:gt(" + hideSearch + ")").hide().end();
+        $("#js-table tbody tr:gt(" + (pageSize - 1) + ")").hide().end();
     }
     else {
         $('#js-table').empty();
@@ -98,7 +98,7 @@ var paging = {
                  bindTable();
              });
             }
-         else {
+            else {
                 this.show(newIndex);
             }
         }

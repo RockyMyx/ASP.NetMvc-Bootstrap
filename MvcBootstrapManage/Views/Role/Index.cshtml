@@ -100,7 +100,7 @@
                 $('#ModalPermission').modal('show');
                 $('.js-loading').show();
                 //加载现有权限
-                $.getJSON('/api/ApiPermission/' + checkId)
+                $.getJSON('/api/ApiRole/' + checkId)
                  .done(function (result) {
                      if (result != null) {
                          var ops = [];

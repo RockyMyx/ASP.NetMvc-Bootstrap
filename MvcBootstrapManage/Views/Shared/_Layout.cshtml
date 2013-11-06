@@ -112,9 +112,8 @@
         </div>
     </div>
     <script type="text/javascript">
-        var dataCount = '@ViewBag.TotalCount';
+        var dataCount = '@ViewBag.dataCount';
         var pageSize = '@ViewBag.PageSize';
-        var hideSearch = '@ViewBag.HideSearch';
     </script>
     @Scripts.Render("~/Content/js-manage")
     @RenderSection("script", required: false)

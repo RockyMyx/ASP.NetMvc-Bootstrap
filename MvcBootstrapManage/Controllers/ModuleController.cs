@@ -12,7 +12,7 @@ namespace MvcBootstrapManage.Controllers
 {
     public class ModuleController : ManageController
     {
-        protected override int TotalCount
+        protected override int DataCount
         {
             get { return db.Module.Count(); }
         }

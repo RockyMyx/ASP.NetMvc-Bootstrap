@@ -11,7 +11,7 @@ namespace MvcBootstrapManage.Controllers
 {
     public class RoleController : ManageController
     {
-        protected override int TotalCount
+        protected override int DataCount
         {
             get { return db.Role.Count(); }
         }
@@ -87,7 +87,7 @@ namespace MvcBootstrapManage.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetPermission(int id, FormCollection formInfo)
+        public void SetPermission(int id, FormCollection formInfo)
         {
             int controllerId;
             int actionId;
@@ -124,7 +124,6 @@ namespace MvcBootstrapManage.Controllers
             }
 
             db.SaveChanges();
-            return new EmptyResult();
         }
 
         private bool isPermissionExist(int id, int controllerId, int actionId)
