@@ -26,13 +26,15 @@ namespace MvcBootstrapManage.Controllers
         [HttpPost]
         public abstract ActionResult Index(int? pageIndex);
         [HttpPost]
-        public abstract ActionResult Delete(List<int> ids);
-        //编辑时使用window方式时实现，否则实现Modify方法
-        [HttpPost]
-        public abstract ActionResult Update(FormCollection formInfo);
-        [HttpPost]
         public abstract ActionResult Create(FormCollection formInfo);
         [HttpPost]
+        public abstract ActionResult Delete(List<int> ids);
+        [HttpPost]
         public abstract ActionResult Search(string name);
+        [HttpPost]
+        public virtual ActionResult AdvanceSearch(string name) { return null; }
+        //编辑时使用window方式时实现Update方法，否则实现Modify方法
+        [HttpPost]
+        public virtual ActionResult Update(FormCollection formInfo) { return null; }
     }
 }

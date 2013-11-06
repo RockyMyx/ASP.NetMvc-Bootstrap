@@ -5,47 +5,59 @@ using System.Web;
 using System.Web.Caching;
 using System.Collections;
 
-namespace MvcBootstrapManage.Helpers
+public class CacheHelper
 {
-    public class CacheHelper
+    public static object Get(string key)
     {
-        public static object TryAddCache(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration,
-            TimeSpan slidingExpiration, CacheItemPriority priority, CacheItemRemovedCallback onRemovedCallback)
-        {
-            if (HttpRuntime.Cache[key] == null && value != null)
-                return HttpRuntime.Cache.Add(key, value, dependencies, absoluteExpiration, slidingExpiration, priority, onRemovedCallback);
-            else
-                return null;
-        }
+        Cache objCache = HttpRuntime.Cache;
+        return objCache[key];
+    }
 
-        public static object TryRemoveCache(string key)
+    public static void Set(string key, object value, DateTime absoluteExpiration, TimeSpan slidingExpiration)
+    {
+        if (HttpRuntime.Cache[key] == null && value != null)
         {
-            if (HttpRuntime.Cache[key] != null)
-                return HttpRuntime.Cache.Remove(key);
-            else
-                return null;
+            Cache objCache = HttpRuntime.Cache;
+            objCache.Insert(key, value, null, absoluteExpiration, slidingExpiration);
         }
+    }
 
-        /// <summary>
-        /// 移除键中带某关键字的缓存
-        /// </summary>
-        public static void RemoveCache(string keyInclude)
+    public static void Set(string key, object value, TimeSpan slidingExpiration)
+    {
+        if (HttpRuntime.Cache[key] == null && value != null)
         {
-            IDictionaryEnumerator CacheEnum = HttpRuntime.Cache.GetEnumerator();
-            while (CacheEnum.MoveNext())
-            {
-                if (CacheEnum.Key.ToString().IndexOf(keyInclude.ToString()) >= 0)
-                    HttpRuntime.Cache.Remove(CacheEnum.Key.ToString());
-            }
+            Cache objCache = HttpRuntime.Cache;
+            objCache.Insert(key, value, null, DateTime.MaxValue, slidingExpiration, CacheItemPriority.NotRemovable, null);
         }
+    }
 
-        public static void RemoveAllCache()
+    public static void Set(string key, object value)
+    {
+        if (HttpRuntime.Cache[key] == null && value != null)
         {
-            IDictionaryEnumerator CacheEnum = HttpRuntime.Cache.GetEnumerator();
-            while (CacheEnum.MoveNext())
-            {
-                HttpRuntime.Cache.Remove(CacheEnum.Key.ToString());
-            }
+            Cache objCache = HttpRuntime.Cache;
+            objCache.Insert(key, value);
+        }
+    }
+
+    public static object Remove(string key)
+    {
+        if (HttpRuntime.Cache[key] != null)
+        {
+            return HttpRuntime.Cache.Remove(key);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static void RemoveAll()
+    {
+        IDictionaryEnumerator CacheEnum = HttpRuntime.Cache.GetEnumerator();
+        while (CacheEnum.MoveNext())
+        {
+            HttpRuntime.Cache.Remove(CacheEnum.Key.ToString());
         }
     }
 }

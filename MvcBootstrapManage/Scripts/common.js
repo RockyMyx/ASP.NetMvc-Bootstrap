@@ -1,18 +1,5 @@
 ﻿/****************************Common*****************************/
 
-//表格隔行变色
-jQuery.fn.alternateRowColors = function () {
-    $("tbody tr:odd", this).removeClass("even").addClass("odd");
-    $("tbody tr:even", this).removeClass("odd").addClass("even");
-    return this;
-}
-
-//字符串首字母大写
-String.prototype.capitalize = function () {
-    return this.replace(/^\w/, function (s) {
-        return s.toUpperCase();
-    });
-};
 
 //表单验证
 function isValidForm(form) {
@@ -473,7 +460,7 @@ function setPageIndex(index) {
 }
 
 function initPagination(count) {
-    $(".pagination").pagination(count);
+    $(".pagination").pagination(count, { items_per_page: pageSize });
 }
 
 function resetTrigger(index) {

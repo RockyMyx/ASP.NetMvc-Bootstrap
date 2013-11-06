@@ -31,7 +31,6 @@
 #left,#right
 {
     _height:100%; 
-    overflow-x: hidden;
     position: fixed;
     top:40px;
 }
@@ -44,12 +43,12 @@
 #right
 {
     width: 85%;
-    float: right;
     left: 15%;
 }
 #frame
 {
     width: 100%;
+    overflow-x:scroll;
 }
 .tc
 {

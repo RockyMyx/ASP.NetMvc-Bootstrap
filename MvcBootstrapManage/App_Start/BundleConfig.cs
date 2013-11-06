@@ -27,16 +27,16 @@ namespace MvcBootstrapManage
             //必须使用~/url的形式
 
             bundles.Add(new StyleBundle("~/Content/css")
-                        .Include("~/Content/my/bootstrap/bootstrap.min.css",
-                                 "~/Content/my/bootstrap/bootstrap-responsive.min.css",
-                                 "~/Content/my/theme.css",
-                                 "~/Content/my/font-awesome/css/font-awesome.css"));
+                        .Include("~/Content/base/bootstrap/bootstrap.min.css",
+                                 "~/Content/base/bootstrap/bootstrap-responsive.min.css",
+                                 "~/Content/base/theme.css",
+                                 "~/Content/base/font-awesome/css/font-awesome.css"));
 
             bundles.Add(new StyleBundle("~/Content/css-login")
-                        .Include("~/Content/my/login.css"));
+                        .Include("~/Content/page/login.css"));
 
             bundles.Add(new StyleBundle("~/Content/css-paging")
-                        .Include("~/Content/my/myx.pagination.css"));
+                        .Include("~/Content/common/myx.pagination.css"));
 
             #endregion
 
@@ -44,18 +44,19 @@ namespace MvcBootstrapManage
 
             bundles.Add(new ScriptBundle("~/Content/js")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
-                                 "~/Scripts/my/bootstrap.min.js"));
+                                 "~/Scripts/bs/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/js-login")
-                        .Include("~/Scripts/my/login.js"));
+                        .Include("~/Scripts/page/login.js"));
 
             bundles.Add(new ScriptBundle("~/Content/js-manage")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
-                                 "~/Scripts/my/myx.validate.js",
-                                 "~/Scripts/my/myx.formValidate.js",
-                                 "~/Scripts/my/bootstrap-modal.js",
-                                 "~/Scripts/my/myx.pagination.js",
-                                 "~/Scripts/my/myx.page.js"));
+                                 "~/Scripts/tool/helper.js",
+                                 "~/Scripts/control/myx.validate.js",
+                                 "~/Scripts/control/myx.formValidate.js",
+                                 "~/Scripts/bs/bootstrap-modal.js",
+                                 "~/Scripts/control/myx.pagination.js",
+                                 "~/Scripts/common.js"));
 
             #endregion
 

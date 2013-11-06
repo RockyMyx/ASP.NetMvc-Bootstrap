@@ -329,25 +329,6 @@ strongClass:      密码强度强图标样式
 
         /*************************Helpers*******************************/
 
-        String.prototype.equal = function (str1, str2) {
-            return str1.localeCompare(str2) == 0;
-        };
-
-        String.prototype.capitalize = function () {
-            return this.replace(/^\w/, function (s) {
-                return s.toUpperCase();
-            });
-        };
-
-        Array.prototype.contains = function () {
-            for (var i = 0; i < this.length; i++) {
-                if (this[i] == arguments[0]) {
-                    return true;
-                }
-            }
-            return false;
-        };
-
         function checkDate(year, month, day) {
             if (year.length != 4 || month.length != 2 || day.length != 2)
                 return false;

@@ -40,7 +40,7 @@ namespace MvcBootstrapManage.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IList<Module> result = db.GetModuleTree().Skip((index - 1) * 3).Take(base.PageSize).ToList();
+            IEnumerable<Module> result = db.GetModuleTree().GetPagingInfo(index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
@@ -48,7 +48,7 @@ namespace MvcBootstrapManage.Controllers
         public override ActionResult Update(FormCollection formInfo)
         {
             int id = Convert.ToInt32(formInfo["ID"]);
-            Module module = GetModuleFromForm(formInfo);
+            Module module = FormHelper.GetModuleInfo(formInfo);
             Module oldModule = db.Module.Where(m => m.ID == id).Single();
             oldModule.ID = id;
             oldModule.Name = module.Name;
@@ -82,8 +82,7 @@ namespace MvcBootstrapManage.Controllers
         [HttpPost]
         public override ActionResult Create(FormCollection formInfo)
         {
-            Module module = GetModuleFromForm(formInfo);
-            //module.Creator = Session["RealName"].ToString();
+            Module module = FormHelper.GetModuleInfo(formInfo);
             db.Module.AddObject(module);
             db.SaveChanges();
             return new EmptyResult();
@@ -102,7 +101,7 @@ namespace MvcBootstrapManage.Controllers
         [HttpPost]
         public ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
-            Module module = GetModuleFromForm(searchFormInfo);
+            Module module = FormHelper.GetModuleInfo(searchFormInfo);
             IQueryable<Module> search = db.GetModuleTree().AsQueryable();
             if (!string.IsNullOrEmpty(module.Name))
             {
@@ -128,33 +127,6 @@ namespace MvcBootstrapManage.Controllers
             }
 
             return PartialView("_ModuleGrid", result);
-        }
-
-        private Module GetModuleFromForm(FormCollection formInfo)
-        {
-            Module module = new Module();
-            module.Name = formInfo["Name"].ToString();
-            module.Code = formInfo["Code"].ToString();
-            module.Controller = formInfo["Controller"].ToString();
-            module.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
-            int parentId = Convert.ToInt32(formInfo["ParentId"]);
-            if (parentId != 0)
-            {
-                module.ParentId = parentId;
-            }
-
-            List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
-            if (operations.Count > 0)
-            {
-                StringBuilder strOperation = new StringBuilder();
-                foreach (string operation in operations)
-                {
-                    strOperation.Append(operation.Replace("op", "") + ",");
-                }
-                module.Operations = strOperation.Remove(strOperation.Length - 1, 1).ToString();
-            }
-
-            return module;
         }
     }
 }

@@ -7,9 +7,6 @@ using System.Net;
 
 namespace MvcBootstrapManage.Helpers
 {
-    /// <summary>
-    /// 发送邮件
-    /// </summary>
     public class MailHelper
     {
         private string _smtpService;
@@ -45,7 +42,7 @@ namespace MvcBootstrapManage.Helpers
         /// <param name="title">邮件标题，默认为Title</param>
         /// <param name="content">发送的内容，默认为Content</param>
         public bool Send(string senderName, string address, string title,
-string content)
+    string content)
         {
             try
             {
