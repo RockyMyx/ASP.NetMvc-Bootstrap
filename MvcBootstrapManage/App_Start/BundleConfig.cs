@@ -29,8 +29,8 @@ namespace MvcBootstrapManage
             bundles.Add(new StyleBundle("~/Content/css")
                         .Include("~/Content/base/bootstrap/bootstrap.min.css",
                                  "~/Content/base/bootstrap/bootstrap-responsive.min.css",
-                                 "~/Content/base/theme.css",
-                                 "~/Content/base/font-awesome/css/font-awesome.css"));
+                                 "~/Content/base/font-awesome/css/font-awesome.css",
+                                 "~/Content/theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/css-login")
                         .Include("~/Content/page/login.css"));

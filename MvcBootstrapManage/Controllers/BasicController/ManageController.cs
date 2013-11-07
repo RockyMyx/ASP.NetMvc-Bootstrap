@@ -14,11 +14,11 @@ namespace MvcBootstrapManage.Controllers
         public ManageController()
         {
             ViewBag.dataCount = this.DataCount;
-            ViewBag.PageSize = this.PageSize;
+            ViewBag.pageSize = this.PageSize;
         }
 
         protected DBEntity db = new DBEntity();
-        protected int PageSize = 3;
+        protected int PageSize { get { return 3; } }
         protected abstract int DataCount { get; }
 
         public abstract ActionResult Index();
@@ -30,6 +30,7 @@ namespace MvcBootstrapManage.Controllers
         public abstract void Delete(List<int> ids);
         [HttpPost]
         public abstract ActionResult Search(string name);
+
         [HttpPost]
         public virtual ActionResult AdvanceSearch(FormCollection searchFormInfo) { return null; }
         //编辑时使用window方式时实现Update方法，否则实现Modify方法

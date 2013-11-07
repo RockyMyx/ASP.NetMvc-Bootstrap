@@ -7,11 +7,7 @@ using MvcBootstrapManage.Models;
 
 namespace MvcBootstrapManage.Controllers
 {
-    //[Log]
     //[CheckLogin]
-    //[MailError]
-    //[DBLogError]
-    [LocalLogError]
     [BrowseAuthorize]
     public class BaseController : Controller
     {

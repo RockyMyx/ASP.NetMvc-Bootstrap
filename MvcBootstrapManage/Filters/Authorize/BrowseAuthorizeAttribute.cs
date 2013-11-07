@@ -10,6 +10,7 @@ public class BrowseAuthorizeAttribute : AuthorizeAttribute
 {
     public override void OnAuthorization(AuthorizationContext filterContext)
     {
+        //ToTest
         //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
         int roleID = 1;
         using (DBEntity db = new DBEntity())

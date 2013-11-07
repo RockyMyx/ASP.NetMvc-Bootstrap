@@ -11,12 +11,12 @@ public class OperationAuthorizeAttribute : AuthorizeAttribute
     {
         using (DBEntity db = new DBEntity())
         {
+            //ToTest
             //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
             int roleID = 1;
 
-            string controller = (string)filterContext.RouteData.Values["Controller"];
-            int controllerID = db.Module.Where(m => m.Controller == controller).Select(m => m.ID).Single();
-
+            string controller = filterContext.RouteData.GetController();
+            int controllerID = db.Module.GetEntityField(m => m.Controller == controller, m => m.ID);
             List<string> actions = db.GetUserOperation(roleID, controllerID).ToList();
             foreach (string action in actions)
             {

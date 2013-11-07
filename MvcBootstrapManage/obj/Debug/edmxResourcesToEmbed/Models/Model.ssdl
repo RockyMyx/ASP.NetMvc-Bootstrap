@@ -46,7 +46,7 @@
     <Property Name="UserId" Type="int" />
     <Property Name="UserName" Type="varchar" MaxLength="20" />
     <Property Name="IpAddress" Type="varchar" MaxLength="20" />
-    <Property Name="Module" Type="varchar" MaxLength="50" />
+    <Property Name="Controller" Type="varchar" MaxLength="50" />
     <Property Name="Action" Type="varchar" MaxLength="20" />
     <Property Name="Remark" Type="varchar" MaxLength="100" />
     <Property Name="CreateDate" Type="datetime" />

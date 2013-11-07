@@ -776,25 +776,17 @@ table.table.list tr:first-child td {
 {
     height:300px;
 }
-.pl10
-{
-    margin-left:10px;
-}
-.pl30
-{
-    padding-left:30px;
-}
-.ml10
-{
-    margin-left: 10px;
-}
-.ml20
-{
-    padding-left: 20px;
-}
 .mt5
 {
     margin-top:5px;
+}
+.ml10
+{
+    margin-left:10px;
+}
+.mlp20
+{
+    margin-left:20%;
 }
 .mr10
 {
@@ -804,9 +796,13 @@ table.table.list tr:first-child td {
 {
     margin-right: 40px;
 }
-.mlp20
+.pl20
 {
-    margin-left:20%;
+    padding-left: 20px;
+}
+.pl30
+{
+    padding-left:30px;
 }
 .italic
 {

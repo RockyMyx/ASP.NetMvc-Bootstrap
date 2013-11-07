@@ -58,7 +58,7 @@
                             <button class="btn" id="js-btn-toolbar-refresh">刷新</button>
                             <form class="form-search inline-right">
                                 <input type="text" placeholder="@ViewBag.SearchName" class="input-place italic" id="js-input-search">
-                                <button type="button" class="btn btn-primary pl10" id="js-btn-search">搜索</button>
+                                <button type="button" class="btn btn-primary ml10" id="js-btn-search">搜索</button>
                             </form>
                           }}
                         @{if (ViewData["AdvanceSearch"] != null)
@@ -113,7 +113,7 @@
     </div>
     <script type="text/javascript">
         var dataCount = '@ViewBag.dataCount';
-        var pageSize = '@ViewBag.PageSize';
+        var pageSize = '@ViewBag.pageSize';
     </script>
     @RenderBody()
     @Scripts.Render("~/Content/js-manage")

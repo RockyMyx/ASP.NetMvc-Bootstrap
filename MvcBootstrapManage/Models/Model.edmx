@@ -51,7 +51,7 @@
           <Property Name="UserId" Type="int" />
           <Property Name="UserName" Type="varchar" MaxLength="20" />
           <Property Name="IpAddress" Type="varchar" MaxLength="20" />
-          <Property Name="Module" Type="varchar" MaxLength="50" />
+          <Property Name="Controller" Type="varchar" MaxLength="50" />
           <Property Name="Action" Type="varchar" MaxLength="20" />
           <Property Name="Remark" Type="varchar" MaxLength="100" />
           <Property Name="CreateDate" Type="datetime" />
@@ -208,11 +208,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IpAddress" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Module" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Type="Int32" Name="UserId" />
           <Property Type="String" Name="Action" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Remark" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="String" Name="Controller" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -344,14 +344,14 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MvcBootstrapModelStoreContainer" CdmEntityContainer="DBEntity">
           <EntitySetMapping Name="Log"><EntityTypeMapping TypeName="MvcBootstrapModel.Log"><MappingFragment StoreEntitySet="Log">
-            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+            <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="UserName" ColumnName="UserName" />
             <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-            <ScalarProperty Name="Module" ColumnName="Module" />
             </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Module"><EntityTypeMapping TypeName="MvcBootstrapModel.Module"><MappingFragment StoreEntitySet="Module">
             <ScalarProperty Name="Url" ColumnName="Url" />

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Log">
       <EntityTypeMapping TypeName="MvcBootstrapModel.Log">
         <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
           <ScalarProperty Name="Action" ColumnName="Action" />
@@ -11,7 +12,6 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-          <ScalarProperty Name="Module" ColumnName="Module" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

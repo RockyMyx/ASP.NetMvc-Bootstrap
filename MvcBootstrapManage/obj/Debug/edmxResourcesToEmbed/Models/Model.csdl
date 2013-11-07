@@ -30,11 +30,11 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="IpAddress" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="Module" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Type="Int32" Name="UserId" />
     <Property Type="String" Name="Action" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Remark" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="DateTime" Name="CreateDate" />
+    <Property Type="String" Name="Controller" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Module">
     <Key>

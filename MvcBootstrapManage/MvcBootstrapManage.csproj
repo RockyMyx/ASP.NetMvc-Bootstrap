@@ -151,23 +151,23 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Filters\Authorize\BrowseAuthorizeAttribute.cs" />
     <Compile Include="Filters\Error\AjaxExceptionAttribute.cs" />
-    <Compile Include="Filters\Error\DBLogErrorAttribute.cs" />
-    <Compile Include="Filters\Error\LocalLogErrorAttribute.cs" />
-    <Compile Include="Filters\Permission\CheckLoginAttribute.cs" />
+    <Compile Include="Filters\Log\DBLogErrorAttribute.cs" />
+    <Compile Include="Filters\Log\LocalLogErrorAttribute.cs" />
+    <Compile Include="Filters\Authorize\CheckLoginAttribute.cs" />
     <Compile Include="Filters\Error\MailErrorAttribute.cs" />
-    <Compile Include="Filters\Log\LogAttribute.cs" />
     <Compile Include="Filters\Authorize\OperationAuthorizeAttribute.cs" />
-    <Compile Include="Filters\Permission\CreateMenuAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CacheHelper.cs" />
-    <Compile Include="Helpers\DBHelper.cs" />
+    <Compile Include="Helpers\ConvertHelper.cs" />
     <Compile Include="Helpers\FormHelper.cs" />
-    <Compile Include="Helpers\GenericHelper.cs" />
+    <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\RandomImgHelper.cs" />
+    <Compile Include="Helpers\RouteDataHelper.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
+    <Compile Include="Helpers\NetHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Models\Model.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -176,6 +176,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\RoleEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,7 +265,7 @@
     <Content Include="Content\base\font-awesome\docs\assets\js\underscore.min.js" />
     <Content Include="Content\base\font-awesome\docs\index.html" />
     <Content Include="Content\page\login.css" />
-    <Content Include="Content\base\theme.css" />
+    <Content Include="Content\theme.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\apple-touch-icon-114-precompos.png" />
     <Content Include="Images\apple-touch-icon-144-precompos.png" />

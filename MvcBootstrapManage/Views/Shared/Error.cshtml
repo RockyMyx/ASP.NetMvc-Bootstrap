@@ -3,6 +3,8 @@
     Layout = null;
 }
 
+@model System.Web.Mvc.HandleErrorInfo
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +23,13 @@
     @Styles.Render("~/Content/css")
 </head>
 <body>
-    <!-------正式环境下注释，改成log并发邮箱方式------------>
-    <h2>
-        Sorry, an error occurred while processing your request.
-    </h2>
-    错误原因：@(((Exception)ViewData["Ex"]).ToString())
+    <!-------ToTest正式环境下注释------------>
+    <div class="pl20">
+        <h2>异常信息</h2>
+        <p> Controller: @Model.ControllerName </p>
+        <p> Action: @Model.ActionName </p>
+        <p> Exception: @Model.Exception.Message </p>
+    </div>
     <!------------------------------->
     <div class="row-fluid errorDiv">
         <div class="http-error">

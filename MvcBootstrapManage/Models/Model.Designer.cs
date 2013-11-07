@@ -661,30 +661,6 @@ namespace MvcBootstrapManage.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Module
-        {
-            get
-            {
-                return _Module;
-            }
-            set
-            {
-                OnModuleChanging(value);
-                ReportPropertyChanging("Module");
-                _Module = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Module");
-                OnModuleChanged();
-            }
-        }
-        private global::System.String _Module;
-        partial void OnModuleChanging(global::System.String value);
-        partial void OnModuleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Int32> UserId
         {
             get
@@ -775,6 +751,30 @@ namespace MvcBootstrapManage.Models
         private Nullable<global::System.DateTime> _CreateDate;
         partial void OnCreateDateChanging(Nullable<global::System.DateTime> value);
         partial void OnCreateDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Controller
+        {
+            get
+            {
+                return _Controller;
+            }
+            set
+            {
+                OnControllerChanging(value);
+                ReportPropertyChanging("Controller");
+                _Controller = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Controller");
+                OnControllerChanged();
+            }
+        }
+        private global::System.String _Controller;
+        partial void OnControllerChanging(global::System.String value);
+        partial void OnControllerChanged();
 
         #endregion
     

@@ -18,9 +18,6 @@ namespace MvcBootstrapManage.Controllers
 
         public override ActionResult Index()
         {
-            //var result = db.Role.Take(base.PageSize).ToList();
-            //ViewData["ParentModule"] = db.Module.Where(m => m.ParentId == null).ToList();
-
             var result = db.Role.GetPagingInfo(base.PageSize);
             ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
             return View(result);
@@ -30,38 +27,24 @@ namespace MvcBootstrapManage.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            //IList<Role> result = db.Role.OrderBy(r => r.ID).Skip((index - 1) * base.PageSize).Take(base.PageSize).ToList();
             IEnumerable<Role> result = db.Role.GetPagingInfo(r => r.ID, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
         public ActionResult Modify(RoleEditViewModel viewModel)
         {
-            //Role role = db.Role.Where(m => m.ID == viewModel.ID).Single();
-            //role.Name = viewModel.Name;
-            //role.Remark = viewModel.Remark;
-            //role.IsEnable = int.Parse(viewModel.IsEnable) == 1 ? true : false;
-
-            //Role role = RoleEditViewModel.ToEntity(viewModel);
-            //db.SaveChanges();
             RoleEditViewModel.ToSaveEntity(viewModel);
             return Json(viewModel);
         }
 
         public override void Delete(List<int> ids)
         {
-            try
+            Role role = null;
+            foreach (int id in ids)
             {
-                foreach (int id in ids)
-                {
-                    Role role = db.Role.GetEntity(r => r.ID == id);
-                    db.DeleteObject(role);
-                    db.SaveChanges();
-                }
-            }
-            catch (OptimisticConcurrencyException)
-            {
-                db.AcceptAllChanges();
+                role = db.Role.GetEntity(r => r.ID == id);
+                db.DeleteObject(role);
+                db.SaveChanges();
             }
         }
 
@@ -69,6 +52,7 @@ namespace MvcBootstrapManage.Controllers
         {
             Role role = FormHelper.GetRoleInfo(formInfo);
             role.CreateDate = DateTime.Now;
+            //ToTest
             //role.CreateUserID = Convert.ToInt32(Session["UserID"]);
             db.Role.AddObject(role);
             db.SaveChanges();
@@ -81,6 +65,7 @@ namespace MvcBootstrapManage.Controllers
             {
                 return new EmptyResult();
             }
+
             return PartialView("_RoleGrid", result);
         }
 
@@ -122,7 +107,9 @@ namespace MvcBootstrapManage.Controllers
         {
             int controllerId;
             int actionId;
-            //int createUserId = Convert.ToInt32(Session["UserId"]);
+
+            //ToTest
+            //int modifyUserId = Convert.ToInt32(Session["UserId"]);
             int modifyUserId = 2;
 
             List<int> parentIds = new List<int>();
