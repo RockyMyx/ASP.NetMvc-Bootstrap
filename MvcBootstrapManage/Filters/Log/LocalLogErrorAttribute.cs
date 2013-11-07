@@ -20,20 +20,18 @@ public class LocalLogErrorAttribute : HandleErrorAttribute
         if (new HttpException(null, filterContext.Exception).GetHttpCode() != 500) return;
         if (!ExceptionType.IsInstanceOfType(filterContext.Exception)) return;
 
-        string controllerName = filterContext.RouteData.Values["controller"].ToString();
-        string actionName = filterContext.RouteData.Values["action"].ToString();
+        string controllerName = filterContext.GetController();
+        string actionName = filterContext.GetAction();
         HandleErrorInfo model = new HandleErrorInfo(filterContext.Exception, controllerName, actionName);
 
         filterContext.Result = new ViewResult
         {
             ViewName = View,
             MasterName = Master,
-            ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
-            TempData = filterContext.Controller.TempData
+            ViewData = new ViewDataDictionary<HandleErrorInfo>(model)
         };
 
-        filterContext.Controller.ViewData["Ex"] = filterContext.Exception;
-
+        //使用log4net写入本地日志
         _logger.Error(filterContext.Exception.Message, filterContext.Exception);
 
         filterContext.HttpContext.Response.Clear();

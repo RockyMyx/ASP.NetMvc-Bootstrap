@@ -258,19 +258,10 @@
              });
          };
          $('#js-btn-modal-search').on('click', function () {
-             $.ajax({
-                 type: 'POST',
-                 url: '/' + controller + '/AdvanceSearch',
-                 contentType: 'application/json',
-                 dataType: 'html',
-                 data: $('#js-search-form').serialize()
-             }).done(function (result) {
+             $.post('/' + controller + '/AdvanceSearch', $('#js-search-form').serialize())
+              .done(function (result) {
                  showSearch(result);
-             });
-             /*$.post('/' + controller + '/AdvanceSearch', $('#js-search-form').serialize())
-             .done(function (result) {
-             showSearch(result);
-             });*/
+              });
          });
     </script>
 }

@@ -41,7 +41,7 @@ public static class ViewHelper
         string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" style=\"margin:-2px 8px 0 8px\" />{2}";
         using (DBEntity db = new DBEntity())
         {
-            List<Module> modules = db.Module.Where(m => m.ParentId == moduleId).ToList();
+            IEnumerable<Module> modules = db.Module.GetEntities(m => m.ParentId == moduleId);
             string[] operations = null;
             int actionId = 0;
             Operation operation = null;
@@ -54,7 +54,7 @@ public static class ViewHelper
                     foreach (string op in operations)
                     {
                         actionId = Convert.ToInt32(op);
-                        operation = db.Operation.Where(o => o.ID == actionId).Single();
+                        operation = db.Operation.GetEntity(o => o.ID == actionId);
                         strBuilder.AppendFormat(checkbox, module.ID, operation.ID, operation.Name);
                     }
                     strBuilder.Append("</form><p></p>");

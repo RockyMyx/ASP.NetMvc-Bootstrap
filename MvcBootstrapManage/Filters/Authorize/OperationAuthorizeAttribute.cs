@@ -15,12 +15,12 @@ public class OperationAuthorizeAttribute : AuthorizeAttribute
             //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
             int roleID = 1;
 
-            string controller = filterContext.RouteData.GetController();
+            string controller = filterContext.GetController();
             int controllerID = db.Module.GetEntityField(m => m.Controller == controller, m => m.ID);
-            List<string> actions = db.GetUserOperation(roleID, controllerID).ToList();
+            IEnumerable<string> actions = db.GetUserOperation(roleID, controllerID);
             foreach (string action in actions)
             {
-                filterContext.Controller.ViewData[action] = true;
+                filterContext.SetViewData(action, true);
             }
         }
     }

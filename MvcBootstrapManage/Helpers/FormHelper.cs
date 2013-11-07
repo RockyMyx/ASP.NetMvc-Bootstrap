@@ -11,15 +11,11 @@ public class FormHelper
     public static Module GetModuleInfo(FormCollection formInfo)
     {
         Module module = new Module();
-        module.Name = formInfo["Name"].ToString();
-        module.Code = formInfo["Code"].ToString();
-        module.Controller = formInfo["Controller"].ToString();
+        module.Name = formInfo["Name"].ObjToStr();
+        module.Code = formInfo["Code"].ObjToStr();
+        module.Controller = formInfo["Controller"].ObjToStr();
         module.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
-        int parentId = Convert.ToInt32(formInfo["ParentId"]);
-        if (parentId != 0)
-        {
-            module.ParentId = parentId;
-        }
+        module.ParentId = formInfo["ParentId"].ObjToInt();
 
         List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
         if (operations.Count > 0)
@@ -29,6 +25,7 @@ public class FormHelper
             {
                 strOperation.Append(operation.Replace("op", "") + ",");
             }
+
             module.Operations = strOperation.Remove(strOperation.Length - 1, 1).ToString();
         }
 
@@ -38,8 +35,8 @@ public class FormHelper
     public static Role GetRoleInfo(FormCollection formInfo)
     {
         Role role = new Role();
-        role.Name = formInfo["Name"].ToString();
-        role.Remark = formInfo["Remark"].ToString();
+        role.Name = formInfo["Name"].ObjToStr();
+        role.Remark = formInfo["Remark"].ObjToStr();
         role.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
         return role;
     }

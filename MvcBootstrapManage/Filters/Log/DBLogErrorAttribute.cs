@@ -26,11 +26,12 @@ public class DBLogErrorAttribute : HandleErrorAttribute
         //log.UserId = Convert.ToInt32(filterContext.HttpContext.Session["UserId"]);
         //log.UserName = filterContext.HttpContext.Session["UserName"].ToString();
         log.IpAddress = NetHelper.GetPrivateIPAddress();
-        log.Controller = filterContext.RouteData.Values["controller"].ToString();
-        log.Action = filterContext.RouteData.Values["action"].ToString();
+        log.Controller = filterContext.GetController();
+        log.Action = filterContext.GetAction();
         log.Remark = filterContext.Exception.Message;
         log.CreateDate = DateTime.Now;
 
+        //ToTest
         //using (DBEntity db = new DBEntity())
         //{
         //    db.Log.AddObject(log);

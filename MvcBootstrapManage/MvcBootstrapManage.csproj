@@ -165,7 +165,7 @@
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\RandomImgHelper.cs" />
-    <Compile Include="Helpers\RouteDataHelper.cs" />
+    <Compile Include="Helpers\ControllerContextHelper.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Helpers\NetHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />

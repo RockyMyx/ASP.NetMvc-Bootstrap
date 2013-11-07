@@ -18,7 +18,7 @@ public class BrowseAuthorizeAttribute : AuthorizeAttribute
             IEnumerable<UserBrowseViewModel> modules = db.GetUserBrowse(roleID).AsEnumerable();
             foreach (UserBrowseViewModel module in modules)
             {
-                filterContext.Controller.ViewData[module.Code] = module.Name;
+                filterContext.SetViewData(module.Code, module.Name);
             }
         }
     }
