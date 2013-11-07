@@ -37,3 +37,4 @@ D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\obj\Debug\ResolveAssembly
 D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\obj\Debug\MvcBootstrapManage.dll
 D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\obj\Debug\MvcBootstrapManage.pdb
 D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\bin\fastJSON.dll
+D:\Rocky\Dropbox\MvcBootstrapManage\MvcBootstrapManage\bin\log4net.dll

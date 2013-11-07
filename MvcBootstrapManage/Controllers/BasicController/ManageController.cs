@@ -31,7 +31,7 @@ namespace MvcBootstrapManage.Controllers
         [HttpPost]
         public abstract ActionResult Search(string name);
         [HttpPost]
-        public virtual ActionResult AdvanceSearch(string name) { return null; }
+        public virtual ActionResult AdvanceSearch(FormCollection searchFormInfo) { return null; }
         //编辑时使用window方式时实现Update方法，否则实现Modify方法
         [HttpPost]
         public virtual void Update(FormCollection formInfo) { }

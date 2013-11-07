@@ -32,94 +32,96 @@
 <!--[if (gt IE 9)|!(IE)]><!--> 
 <body class=""> 
 <!--<![endif]-->
-<div id="container">
-    <div class="navbar" id="header">
-        <div class="navbar-inner">
-            <a class="brand" href="#">LOGO</a>
-            <ul class="nav pull-right">
-                <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button"><i class="icon-cog"></i>设置</a></li>
-                <li id="fat-menu" class="dropdown">
-                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-user"></i> @Session["RealName"]
-                        <i class="icon-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#">我的账户</a></li>
-                        <li class="divider"></li>
-                        <li><a tabindex="-1" class="visible-phone" href="#">修改信息</a></li>
-                        <li class="divider visible-phone"></li>
-                        <li><a tabindex="-1" href="#">注销</a></li>
-                    </ul>
-                </li>
-            </ul>
+    <div id="container">
+        <div class="navbar" id="header">
+            <div class="navbar-inner">
+                <a class="brand" href="#">LOGO</a>
+                <ul class="nav pull-right">
+                    <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button"><i class="icon-cog"></i>设置</a></li>
+                    <li id="fat-menu" class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-user"></i> @Session["RealName"]
+                            <i class="icon-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">我的账户</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" class="visible-phone" href="#">修改信息</a></li>
+                            <li class="divider visible-phone"></li>
+                            <li><a tabindex="-1" href="#">注销</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div id="page">
-        <div id="left" class="sidebar-nav">
-            @{if (ViewData["xtgl"] != null)
-              {
-                <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>系统管理</a>
-              }}
-            <ul id="dashboard-menu" class="nav nav-list collapse in">
-            @{if (ViewData["yhgl"] != null)
-              {
-                <li><a href="javascript:;"><i class="icon-user"></i>@ViewData["yhgl"]</a></li>
-              }}
-            @{if (ViewData["jsgl"] != null)
-              {
-                <li><a target="content" href="/Role/Index"><i class="icon-star"></i>@ViewData["jsgl"]</a></li>
-              }}
-            @{if (ViewData["mkgl"] != null)
-              {
-                <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>@ViewData["mkgl"]</a></li>
-              }}
-            @{if (ViewData["qxgl"] != null)
-              {
-                <li><a target="content" href="javascript:;"><i class="icon-lock"></i>@ViewData["qxgl"]</a></li>
-              }}
-            </ul>
+        <div id="page">
+            <div id="left" class="sidebar-nav">
+                @{if (ViewData["xtgl"] != null)
+                  {
+                    <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>系统管理</a>
+                  }}
+                <ul id="dashboard-menu" class="nav nav-list collapse in">
+                @{if (ViewData["yhgl"] != null)
+                  {
+                    <li><a href="javascript:;"><i class="icon-user"></i>@ViewData["yhgl"]</a></li>
+                  }}
+                @{if (ViewData["jsgl"] != null)
+                  {
+                    <li><a target="content" href="/Role/Index"><i class="icon-star"></i>@ViewData["jsgl"]</a></li>
+                  }}
+                @{if (ViewData["mkgl"] != null)
+                  {
+                    <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>@ViewData["mkgl"]</a></li>
+                  }}
+                @{if (ViewData["qxgl"] != null)
+                  {
+                    <li><a target="content" href="javascript:;"><i class="icon-lock"></i>@ViewData["qxgl"]</a></li>
+                  }}
+                </ul>
             
-            <!--同上操作-->
-            <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>基本数据管理</a>
-            <ul id="accounts-menu" class="nav nav-list collapse">
-                <li><a href="#">资产分类设置</a></li>
-                <li><a href="#">资产单位设置</a></li>
-                <li><a href="#">部门信息设置</a></li>
-            </ul>
-            <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-exclamation-sign"></i>固定资产管理</a>
-            <ul id="error-menu" class="nav nav-list collapse">
-                <li><a href="#">资产入库</a></li>
-                <li><a href="#">资产修改、删除</a></li>
-                <li><a href="#">资产调拨</a></li>
-                <li><a href="#">资产借出</a></li>
-                <li><a href="#">资产送修</a></li>
-                <li><a href="#">资产归还</a></li>
-                <li><a href="#">资产折旧</a></li>
-                <li><a href="#">资产注销</a></li>
-            </ul>
-            <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>统计查询</a>
-            <ul id="legal-menu" class="nav nav-list collapse">
-                <li><a href="#">资产查询</a></li>
-                <li><a href="#">资产转移记录</a></li>
-                <li><a href="#">报表打印</a></li>
-            </ul>
-            <a href="#" class="nav-header" data-toggle="collapse"><i class="icon-question-sign"></i>系统帮助</a>
+                <!--同上操作-->
+                <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>基本数据管理</a>
+                <ul id="accounts-menu" class="nav nav-list collapse">
+                    <li><a href="#">资产分类设置</a></li>
+                    <li><a href="#">资产单位设置</a></li>
+                    <li><a href="#">部门信息设置</a></li>
+                </ul>
+                <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-exclamation-sign"></i>固定资产管理</a>
+                <ul id="error-menu" class="nav nav-list collapse">
+                    <li><a href="#">资产入库</a></li>
+                    <li><a href="#">资产修改、删除</a></li>
+                    <li><a href="#">资产调拨</a></li>
+                    <li><a href="#">资产借出</a></li>
+                    <li><a href="#">资产送修</a></li>
+                    <li><a href="#">资产归还</a></li>
+                    <li><a href="#">资产折旧</a></li>
+                    <li><a href="#">资产注销</a></li>
+                </ul>
+                <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>统计查询</a>
+                <ul id="legal-menu" class="nav nav-list collapse">
+                    <li><a href="#">资产查询</a></li>
+                    <li><a href="#">资产转移记录</a></li>
+                    <li><a href="#">报表打印</a></li>
+                </ul>
+                <a href="#" class="nav-header" data-toggle="collapse"><i class="icon-question-sign"></i>系统帮助</a>
+            </div>
+            <div id="right">
+                <iframe id="frame" frameborder="0" name="content" src="/Home/Welcome">
+                </iframe>
+            </div>
         </div>
-        <div id="right">
-            <iframe id="frame" frameborder="0" name="content" src="/Home/Welcome">
-            </iframe>
+        <div id="footer" class="navbar">
+            <div class="navbar-inner tc">
+                <span>Copyright © xxxxxxxxxxxx公司</span>
+            </div>
         </div>
     </div>
-    <div id="footer" class="navbar">
-        <div class="navbar-inner tc">
-            <span>Copyright © xxxxxxxxxxxx公司</span>
-        </div>
-    </div>
-</div>
-@Scripts.Render("~/Content/js")
-<script type="text/javascript">
-    var visibleHeight = document.body.clientHeight;
-    var left = document.getElementById('left');
-    var frame = document.getElementById('frame');
-    left.style.height = frame.style.height = visibleHeight+ "px";
-</script>
+    @Scripts.Render("~/Content/js")
+    <script type="text/javascript">
+        var visibleHeight = document.body.clientHeight;
+        var left = document.getElementById('left');
+        var frame = document.getElementById('frame');
+        left.style.height = frame.style.height = visibleHeight+ "px";
+    </script>
+</body>
+</html>

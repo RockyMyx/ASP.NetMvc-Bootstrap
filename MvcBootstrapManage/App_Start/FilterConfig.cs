@@ -7,7 +7,11 @@ namespace MvcBootstrapManage
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
+            filters.Add(new DBLogErrorAttribute());
+            filters.Add(new LocalLogErrorAttribute());
+            filters.Add(new MailErrorAttribute());
+            filters.Add(new AjaxExceptionAttribute());
         }
     }
 }

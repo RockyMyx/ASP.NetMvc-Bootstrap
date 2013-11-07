@@ -227,7 +227,7 @@
         });
         function FillEditInfo(id) {
             $('#EditModuleID').val(id);
-            $.getJSON('/Api/ApiModule/' + id)
+            $.getJSON('/Module/Get/' + id)
              .done(function (data) {
                  $('#EditParentID').find('option[value=' + data.ParentId + ']').prop('selected', 'true');
                  if (data.ParentId != null) {
@@ -258,17 +258,19 @@
              });
          };
          $('#js-btn-modal-search').on('click', function () {
-             /*$.ajax({
+             $.ajax({
                  type: 'POST',
-                 url: '/' + thisModel + '/AdvanceSearch',
+                 url: '/' + controller + '/AdvanceSearch',
+                 contentType: 'application/json',
+                 dataType: 'html',
                  data: $('#js-search-form').serialize()
              }).done(function (result) {
-                  showSearch(result);
+                 showSearch(result);
+             });
+             /*$.post('/' + controller + '/AdvanceSearch', $('#js-search-form').serialize())
+             .done(function (result) {
+             showSearch(result);
              });*/
-             $.post('/' + thisModel + '/AdvanceSearch', $('#js-search-form').serialize())
-              .done(function (result) {
-                  showSearch(result);
-              });
          });
     </script>
 }

@@ -38,6 +38,9 @@
     <Reference Include="fastJSON">
       <HintPath>..\packages\fastJSON\fastJSON.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Portable.Licensing">
       <HintPath>..\packages\Portable.Licensing.1.1.0\lib\portable-net40+sl4+wp7+win8\Portable.Licensing.dll</HintPath>
@@ -140,17 +143,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ApiController\ApiRoleController.cs" />
     <Compile Include="Controllers\BasicController\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\BasicController\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\ApiController\ApiModuleController.cs" />
     <Compile Include="Filters\Authorize\BrowseAuthorizeAttribute.cs" />
+    <Compile Include="Filters\Error\AjaxExceptionAttribute.cs" />
+    <Compile Include="Filters\Error\DBLogErrorAttribute.cs" />
+    <Compile Include="Filters\Error\LocalLogErrorAttribute.cs" />
     <Compile Include="Filters\Permission\CheckLoginAttribute.cs" />
-    <Compile Include="Filters\Error\ErrorCatcherAttribute.cs" />
+    <Compile Include="Filters\Error\MailErrorAttribute.cs" />
     <Compile Include="Filters\Log\LogAttribute.cs" />
     <Compile Include="Filters\Authorize\OperationAuthorizeAttribute.cs" />
     <Compile Include="Filters\Permission\CreateMenuAttribute.cs" />
@@ -380,7 +384,9 @@
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Log\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

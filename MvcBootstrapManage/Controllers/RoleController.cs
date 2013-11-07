@@ -20,6 +20,7 @@ namespace MvcBootstrapManage.Controllers
         {
             //var result = db.Role.Take(base.PageSize).ToList();
             //ViewData["ParentModule"] = db.Module.Where(m => m.ParentId == null).ToList();
+
             var result = db.Role.GetPagingInfo(base.PageSize);
             ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
             return View(result);
@@ -54,11 +55,8 @@ namespace MvcBootstrapManage.Controllers
                 foreach (int id in ids)
                 {
                     Role role = db.Role.GetEntity(r => r.ID == id);
-                    if (role != null)
-                    {
-                        db.DeleteObject(role);
-                        db.SaveChanges();
-                    }
+                    db.DeleteObject(role);
+                    db.SaveChanges();
                 }
             }
             catch (OptimisticConcurrencyException)
@@ -78,12 +76,45 @@ namespace MvcBootstrapManage.Controllers
 
         public override ActionResult Search(string name)
         {
-            IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
-            if (result.Count == 0)
+            IEnumerable<Role> result = db.Role.Where(m => m.Name.Contains(name));
+            if (result.Count() == 0)
             {
                 return new EmptyResult();
             }
             return PartialView("_RoleGrid", result);
+        }
+
+        public ActionResult GetPermission(int id)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                var permissions = db.Permission.Where(p => p.RoleID == id)
+                                    .Select(p => new { p.ControllerID, p.ActionID })
+                                    .AsEnumerable();
+                if (permissions.Count() == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    Dictionary<string, string> result = new Dictionary<string, string>();
+                    string controllerId;
+                    foreach (var permission in permissions)
+                    {
+                        controllerId = permission.ControllerID.ToString();
+                        if (!result.ContainsKey(controllerId))
+                        {
+                            result.Add(controllerId, permission.ActionID.ToString());
+                        }
+                        else
+                        {
+                            result[controllerId] += permission.ActionID.ToString();
+                        }
+                    }
+
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+            }
         }
 
         [HttpPost]

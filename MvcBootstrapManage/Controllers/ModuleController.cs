@@ -65,7 +65,7 @@ namespace MvcBootstrapManage.Controllers
             {
                 foreach (int id in ids)
                 {
-                    Module module = db.Module.Where(m => m.ID == id).Single();
+                    Module module = db.Module.GetEntity(m => m.ID == id);
                     db.DeleteObject(module);
                     db.SaveChanges();
                 }
@@ -86,43 +86,59 @@ namespace MvcBootstrapManage.Controllers
 
         public override ActionResult Search(string name)
         {
-            IList<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name)).ToList();
-            if (result.Count == 0)
+            IEnumerable<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name));
+            if (result.Count() == 0)
             {
                 return new EmptyResult();
             }
             return PartialView("_ModuleGrid", result);
         }
 
-        [HttpPost]
-        public ActionResult AdvanceSearch(FormCollection searchFormInfo)
+        public ActionResult Get(int id)
         {
-            Module module = FormHelper.GetModuleInfo(searchFormInfo);
-            IQueryable<Module> search = db.GetModuleTree().AsQueryable();
-            if (!string.IsNullOrEmpty(module.Name))
+            using (DBEntity db = new DBEntity())
             {
-                search = search.Where(m => m.Name.Contains(module.Name));
+                Module module = db.Module.Where(m => m.ID == id).Single();
+                return Json(module, JsonRequestBehavior.AllowGet);
             }
-            if (!string.IsNullOrEmpty(module.Code))
-            {
-                search = search.Where(m => m.Name.Contains(module.Code));
-            }
-            if (!string.IsNullOrEmpty(module.Controller))
-            {
-                search = search.Where(m => m.Name.Contains(module.Controller));
-            }
-            if (module.ParentId != null)
-            {
-                search = search.Where(m => m.ParentId == module.ParentId);
-            }
+        }
 
-            List<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
-            if (result.Count == 0)
+        [HttpPost]
+        public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
+        {
+            try
             {
-                return new EmptyResult();
-            }
+                Module module = FormHelper.GetModuleInfo(searchFormInfo);
+                IQueryable<Module> search = db.GetModuleTree().AsQueryable();
+                if (!string.IsNullOrEmpty(module.Name))
+                {
+                    search = search.Where(m => m.Name.Contains(module.Name));
+                }
+                if (!string.IsNullOrEmpty(module.Code))
+                {
+                    search = search.Where(m => m.Name.Contains(module.Code));
+                }
+                if (!string.IsNullOrEmpty(module.Controller))
+                {
+                    search = search.Where(m => m.Name.Contains(module.Controller));
+                }
+                if (module.ParentId != null)
+                {
+                    search = search.Where(m => m.ParentId == module.ParentId);
+                }
 
-            return PartialView("_ModuleGrid", result);
+                List<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+                if (result.Count == 0)
+                {
+                    return new EmptyResult();
+                }
+
+                return PartialView("_ModuleGrid", result);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

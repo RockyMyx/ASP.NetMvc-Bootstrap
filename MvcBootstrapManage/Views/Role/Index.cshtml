@@ -100,7 +100,7 @@
                 $('#ModalPermission').modal('show');
                 $('.js-loading').show();
                 //加载现有权限
-                $.getJSON('/api/ApiRole/' + checkId)
+                $.getJSON('/Role/GetPermission/' + checkId)
                  .done(function (result) {
                      if (result != null) {
                          var ops = [];
@@ -118,7 +118,7 @@
             }
         });
         $('#js-btn-modal-permission').on('click', function () {
-            $.post('/' + thisModel + '/SetPermission/' + checkId, $('.js-form-permission').serialize())
+            $.post('/' + controller + '/SetPermission/' + checkId, $('.js-form-permission').serialize())
              .done(function () {
                  alert("权限分配成功！");
              });

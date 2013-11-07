@@ -115,6 +115,7 @@
         var dataCount = '@ViewBag.dataCount';
         var pageSize = '@ViewBag.PageSize';
     </script>
+    @RenderBody()
     @Scripts.Render("~/Content/js-manage")
     @RenderSection("script", required: false)
 </body>

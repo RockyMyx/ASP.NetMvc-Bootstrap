@@ -1,25 +1,41 @@
 ﻿@{
     ViewBag.Title = "系统错误";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<!-------正式环境下注释，改成log并发邮箱方式------------>
-
-<h2>
-    Sorry, an error occurred while processing your request.
-</h2>
-
-错误原因：@(((Exception)ViewData["Ex"]).ToString())
-
-<!------------------------------->
-
-<div class="row-fluid errorDiv">
-    <div class="http-error">
-        <h1>Oops!</h1>
-        <p class="info">系统出错，请及时联系管理员!</p>
-        <p>
-           <button class="btn btn-large btn-info" type="button" onclick="history.back();">返回上一页</button>
-           <button class="btn btn-large btn-info" type="button" onclick="location.href='/'">返回首页</button>
-        </p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!-- fav and touch icons -->
+    <link rel="shortcut icon" href="../../Images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../Images/apple-touch-icon-144-precompos.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../Images/apple-touch-icon-114-precompos.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../Images/apple-touch-icon-72-precompose.png">
+    <link rel="apple-touch-icon-precomposed" href="../../Images/apple-touch-icon-57-precompose.png">
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <!-------正式环境下注释，改成log并发邮箱方式------------>
+    <h2>
+        Sorry, an error occurred while processing your request.
+    </h2>
+    错误原因：@(((Exception)ViewData["Ex"]).ToString())
+    <!------------------------------->
+    <div class="row-fluid errorDiv">
+        <div class="http-error">
+            <h1>Oops!</h1>
+            <p class="info">系统出错，请及时联系管理员!</p>
+            <p>
+               <button class="btn btn-large btn-info" type="button" onclick="history.back();">返回上一页</button>
+               <button class="btn btn-large btn-info" type="button" onclick="location.href='/'">返回首页</button>
+            </p>
+        </div>
     </div>
-</div>
+</body> 
+</html>

@@ -1,5 +1,15 @@
 ﻿/****************************Common*****************************/
 
+$(document).ajaxError(function (evt, xhr) {
+    try {
+        var json = $.parseJSON(xhr.responseText);
+        //from AjaxExceptionAttribute
+        alert(json.errorMessage);
+    } catch (e) {
+        alert('未知错误');
+    }
+});
+
 //表单验证
 function isValidForm(form) {
     if (form.find('.form-init').length > 0) {
@@ -205,9 +215,9 @@ $(document).ready(function () {
     });
 });
 
-//获得当前的Controller名，如/Module/Index，则thisModel为Module
+//获得当前的Controller名，如/Module/Index，则controller为Module
 var removeController = location.href.substring(0, location.href.lastIndexOf('/'));
-var thisModel = removeController.substring(removeController.lastIndexOf('/') + 1).capitalize();
+var controller = removeController.substring(removeController.lastIndexOf('/') + 1).capitalize();
 var checkId, deleteId = [];
 
 function bindTable() {
@@ -331,7 +341,7 @@ function bindTable() {
                     if (isCommit) {
                         $.ajax({
                             type: 'POST',
-                            url: '/' + thisModel + '/Modify',
+                            url: '/' + controller + '/Modify',
                             contentType: 'application/json',
                             dataType: 'html',
                             //IE6、IE7默认不支持JSON.stringify，可以引入Scripts/my/json2.js解决此问题
@@ -400,7 +410,7 @@ function bindTable() {
 $('#js-btn-modal-delete').bind('click', function () {
     $.ajax({
         type: 'POST',
-        url: '/' + thisModel + '/Delete',
+        url: '/' + controller + '/Delete',
         contentType: 'application/json',
         dataType: 'html',
         data: JSON.stringify(deleteId)
@@ -415,7 +425,7 @@ $('#js-btn-modal-edit').on('click', function () {
     if (isValidForm(form)) {
         $.ajax({
             type: 'POST',
-            url: '/' + thisModel + '/Update',
+            url: '/' + controller + '/Update',
             data: form.serialize()
         }).done(function () {
             paging.show(pageIndex);
@@ -440,7 +450,7 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
         if (confirm('您确定要删除吗？删除后不可恢复！')) {
             $.ajax({
                 type: 'POST',
-                url: '/' + thisModel + '/Delete',
+                url: '/' + controller + '/Delete',
                 contentType: 'application/json',
                 dataType: 'html',
                 data: JSON.stringify(ids)
@@ -456,7 +466,7 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
 
 //工具栏刷新按钮点击事件
 $('#js-btn-toolbar-refresh').on('click', function () {
-    $.post('/' + thisModel + '/Index')
+    $.post('/' + controller + '/Index')
      .done(function (result) {
          $('#js-table').html(result);
          paging.show();
@@ -486,7 +496,7 @@ $('#js-btn-search').on('click', function () {
         alert('请输入搜索的内容');
     }
     else {
-        $.post('/' + thisModel + '/Search', { 'name': $('#js-input-search').val() })
+        $.post('/' + controller + '/Search', { 'name': $('#js-input-search').val() })
          .done(function (result) {
              showSearch(result);
          });
@@ -499,7 +509,7 @@ $('#js-btn-search').on('click', function () {
 $('#js-btn-form-add').on('click', function () {
     var form = $(this).closest('form');
     if (isValidForm(form)) {
-        $.post('/' + thisModel + '/Create', form.serialize())
+        $.post('/' + controller + '/Create', form.serialize())
          .done(function () {
              paging.reset(1);
              $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast');

@@ -9,7 +9,9 @@ namespace MvcBootstrapManage.Controllers
 {
     //[Log]
     //[CheckLogin]
-    [ErrorCatcher]
+    //[MailError]
+    //[DBLogError]
+    [LocalLogError]
     [BrowseAuthorize]
     public class BaseController : Controller
     {
