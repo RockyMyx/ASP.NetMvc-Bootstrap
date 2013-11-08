@@ -206,6 +206,7 @@
     <Content Include="Images\ui-bg-click.png" />
     <Content Include="Images\ui-bg-hover.png" />
     <Content Include="Images\warning.png" />
+    <Content Include="Scripts\control\myx.table.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\plugin\My97DatePicker\calendar.js" />
     <Content Include="Scripts\plugin\My97DatePicker\lang\en.js" />
@@ -281,7 +282,7 @@
     <Content Include="Scripts\control\myx.pagination.js" />
     <Content Include="Scripts\page\login.js" />
     <Content Include="Scripts\common.js" />
-    <Content Include="Scripts\control\myx.validate.js" />
+    <Content Include="Scripts\control\myx.editValidate.js" />
     <Content Include="Scripts\tool\pinyin.js" />
     <Content Include="Images\table.png" />
     <Content Include="Web.config">

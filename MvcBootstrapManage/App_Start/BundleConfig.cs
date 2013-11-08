@@ -52,9 +52,9 @@ namespace MvcBootstrapManage
             bundles.Add(new ScriptBundle("~/Content/js-manage")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
                                  "~/Scripts/tool/helper.js",
-                                 "~/Scripts/control/myx.validate.js",
-                                 "~/Scripts/control/myx.formValidate.js",
                                  "~/Scripts/bs/bootstrap-modal.js",
+                                 "~/Scripts/control/myx.editValidate.js",
+                                 "~/Scripts/control/myx.formValidate.js",
                                  "~/Scripts/control/myx.pagination.js",
                                  "~/Scripts/common.js"));
 

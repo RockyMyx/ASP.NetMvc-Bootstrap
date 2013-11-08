@@ -43,8 +43,11 @@ namespace MvcBootstrapManage.Controllers
             foreach (int id in ids)
             {
                 role = db.Role.GetEntity(r => r.ID == id);
-                db.DeleteObject(role);
-                db.SaveChanges();
+                if (role != null)
+                {
+                    db.DeleteObject(role);
+                    db.SaveChanges();
+                }
             }
         }
 
@@ -60,7 +63,8 @@ namespace MvcBootstrapManage.Controllers
 
         public override ActionResult Search(string name)
         {
-            IEnumerable<Role> result = db.Role.Where(m => m.Name.Contains(name));
+            name = name.Trim();
+            IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
             if (result.Count() == 0)
             {
                 return new EmptyResult();

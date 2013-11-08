@@ -1,4 +1,5 @@
-﻿var mValidate = {
+﻿//用于在编辑时将当前表格行内容变成可编辑的表单时进行验证
+var mValidate = {
     notEmpty: function (value) {
         return !/^\s*$/.test(value);
     },

@@ -1,60 +1,93 @@
 ﻿/****************************Common*****************************/
 
-$(document).ajaxError(function (evt, xhr) {
-    try {
-        var json = $.parseJSON(xhr.responseText);
-        //from AjaxExceptionAttribute
-        alert(json.errorMessage);
-    } catch (e) {
-        alert('未知错误');
-    }
+$(window).on('resize', function () {
+    jPage.resize();
 });
 
-//表单验证
-function isValidForm(form) {
-    if (form.find('.form-init').length > 0) {
-        alert('表单信息不完整，请检查后重新提交！');
-        return false;
-    }
-    else if (form.find('.form-error').length > 0) {
-        alert('表单信息输入有误，请检查后重新提交！')
-        return false;
+var jPage = (function (jQ) {
+    var page = {};
+
+    //根据窗口大小调整背景
+    page.resize = function () {
+        jQ(".content").css('height', $(window).height() + $(window).scrollTop());
+    };
+
+    //判断表单是否合法
+    page.isValidForm = function (form) {
+        if (form.find('.form-init').length > 0) {
+            alert('表单信息不完整，请检查后重新提交！');
+            return false;
+        }
+        else if (form.find('.form-error').length > 0) {
+            alert('表单信息输入有误，请检查后重新提交！')
+            return false;
+        }
+
+        return true;
+    };
+
+    //展现搜索结果
+    page.showSearch = function (result) {
+        if (result.length != 0) {
+            $('#js-table').html(result);
+            $(".pagination").pagination($('#js-table tbody').find('tr').length);
+            $("#js-table tbody tr:gt(" + (pageSize - 1) + ")").hide().end();
+        }
+        else {
+            $('#js-table').empty();
+            $('.pagination').empty().html('没有相关信息！');
+        }
     }
 
-    return true;
-}
+    //获得当前的Controller名，如.../Module/Index，则controller为Module
+    var beforeController = location.href.substring(0, location.href.lastIndexOf('/'));
+    var controller = beforeController.substring(beforeController.lastIndexOf('/') + 1).capitalize();
 
-//展现搜索结果
-function showSearch(result) {
-    if (result.length != 0) {
-        $('#js-table').html(result);
-        $(".pagination").pagination($('#js-table tbody').find('tr').length);
-        $("#js-table tbody tr:gt(" + (pageSize - 1) + ")").hide().end();
+    page.getController = function () {
+        return controller;
     }
-    else {
-        $('#js-table').empty();
-        $('.pagination').empty().html('没有相关信息！');
-    }
-}
 
-//模态窗口展现事件
-$('.modal').on('shown', function (e) {
-    var modal = $(this);
-    modal.css('margin-top', (modal.outerHeight() / 2) * -1.3)
-         .css('margin-left', (modal.outerWidth() / 2) * -1);
-    return this;
-});
+    page.getUrl = function () {
+        if (!arguments[0]) {
+            alert('Ajax操作Url无效')
+        }
+        else {
+            return '/' + controller + '/' + arguments[0];
+        }
+    }
+
+    //选中表格行的ID
+    var checkId;
+
+    page.getCheckId = function () {
+        return checkId;
+    }
+
+    page.setCheckId = function (id) {
+        checkId = id;
+    }
+
+    //删除表格行的ID
+    var deleteId = [];
+
+    page.setDeleteId = function (id) {
+        if (deleteId.length > 0) {
+            deleteId = [];
+        }
+        deleteId.push(id);
+    }
+
+    page.getDeleteId = function () {
+        return deleteId;
+    }
+
+    return page;
+})(jQuery);
 
 /****************************分页相关*****************************/
 
-var pageIndex = 0;
-
-//myx.pagination.js中设置当前页码
-function setPageIndex(index) {
-    pageIndex = index;
-}
-
 var paging = {
+    pageIndex: 0,
     init: function (index) {
         $(".pagination").pagination(dataCount, { items_per_page: pageSize, current_page: index + 1 || 0 });
     },
@@ -76,24 +109,24 @@ var paging = {
         if (change < 0) {
             //当前数据不超过一页时，重新请求数据
             if (newIndex == 0) {
-                $.post('/Role/Index', { pageIndex: 1 })
-             .done(function (result) {
-                 $('#js-table').html(result);
-                 $('.pagination').hide();
-                 bindTable();
-             });
+                $.post(jPage.getUrl('Index'), { "pageIndex": 1 })
+                 .done(function (result) {
+                     $('#js-table').html(result);
+                     $('.pagination').hide();
+                     bindTable();
+                 });
             }
             else {
                 $('.pagination').showIfHide();
                 //本页数据全部删除，隐藏当前页码，并跳到前一页
-                if (newIndex < pageIndex) {
-                    --pageIndex;
-                    $('#page' + pageIndex).hide();
+                if (newIndex < paging.pageIndex) {
+                    --paging.pageIndex;
+                    $('#page' + paging.pageIndex).hide();
                     this.show(newIndex);
                 }
                 //重新请求本页数据
                 else {
-                    this.show(pageIndex);
+                    this.show(paging.pageIndex);
                 }
             }
         }
@@ -101,12 +134,12 @@ var paging = {
         else {
             //当前数据不超过一页时，重新请求数据
             if (newIndex == 0) {
-                $.post('/Role/Index', { pageIndex: 1 })
-             .done(function (result) {
-                 $('#js-table').html(result);
-                 $('.pagination').hide();
-                 bindTable();
-             });
+                $.post(jPage.getUrl('Index'), { "pageIndex": 1 })
+                 .done(function (result) {
+                     $('#js-table').html(result);
+                     $('.pagination').hide();
+                     bindTable();
+                 });
             }
             else {
                 this.show(newIndex);
@@ -115,19 +148,21 @@ var paging = {
     }
 };
 
-//根据窗口大小调整背景
-function resize() {
-    $('.content').css('height', $(window).height() + $(window).scrollTop());
-}
+/***********************************************************************/
 
-$(window).on('resize', function () {
-    resize();
+$(document).ajaxError(function (evt, xhr) {
+    try {
+        var json = $.parseJSON(xhr.responseText);
+        //from AjaxExceptionAttribute
+        alert(json.errorMessage);
+    } catch (e) {
+        alert('未知错误');
+    }
 });
 
 $(document).ready(function () {
-    /*************************调整窗口大小，初始化分页按钮*************************/
-    resize();
     paging.show();
+    bindTable();
 
     /****************************搜索标签提示文字处理*****************************/
     var input = $('input.input-place');
@@ -135,19 +170,19 @@ $(document).ready(function () {
     if ($.browser.msie && !$.support.style) {
         input.val(placeholder);
     }
-
     input.on('focus', function () {
         $(this).removeClass('italic');
         $(this).attr('placeholder', '');
     });
-
     input.on('blur', function () {
         if ($(this).val().length == 0) {
             $(this).addClass('italic');
             $(this).attr('placeholder', placeholder);
         }
     });
+});
 
+function bindTable() {
     /****************************表格排序处理*****************************/
     $("#js-table").each(function () {
         $table = $(this);
@@ -210,17 +245,8 @@ $(document).ready(function () {
                 });
             };
         });
-
-        bindTable();
     });
-});
 
-//获得当前的Controller名，如/Module/Index，则controller为Module
-var removeController = location.href.substring(0, location.href.lastIndexOf('/'));
-var controller = removeController.substring(removeController.lastIndexOf('/') + 1).capitalize();
-var checkId, deleteId = [];
-
-function bindTable() {
     var currentTd, input;
     var key, content;
     var beforeEditInfo = [];
@@ -242,7 +268,7 @@ function bindTable() {
     $('#js-table').find('tr').click(function (e) {
         //点击选择框
         if (e.target.type == 'checkbox' && e.target.checked) {
-            checkId = $(this).find('td').eq(0).html();
+            jPage.setCheckId($(this).find('td').eq(0).html());
         }
         //点击编辑图标
         if (e.target.className == 'icon-pencil') {
@@ -341,7 +367,7 @@ function bindTable() {
                     if (isCommit) {
                         $.ajax({
                             type: 'POST',
-                            url: '/' + controller + '/Modify',
+                            url: jPage.getUrl('Modify'),
                             contentType: 'application/json',
                             dataType: 'html',
                             //IE6、IE7默认不支持JSON.stringify，可以引入Scripts/my/json2.js解决此问题
@@ -390,8 +416,7 @@ function bindTable() {
         }
         //表格行删除按钮点击事件
         else if (e.target.className == 'icon-remove') {
-            deleteId = [];
-            deleteId.push($(this).find('td').eq(0).html());
+            jPage.setDeleteId($(this).find('td').eq(0).html());
         }
     });
 
@@ -406,14 +431,22 @@ function bindTable() {
 
 /****************************弹出模态窗口*****************************/
 
+//模态窗口展现事件
+$('.modal').on('shown', function (e) {
+    var modal = $(this);
+    modal.css('margin-top', (modal.outerHeight() / 2) * -1.3)
+         .css('margin-left', (modal.outerWidth() / 2) * -1);
+    return this;
+});
+
 //确定删除按钮点击事件
 $('#js-btn-modal-delete').bind('click', function () {
     $.ajax({
         type: 'POST',
-        url: '/' + controller + '/Delete',
+        url: jPage.getUrl('Delete'),
         contentType: 'application/json',
         dataType: 'html',
-        data: JSON.stringify(deleteId)
+        data: JSON.stringify(jPage.getDeleteId())
     }).done(function () {
         paging.reset(-1);
     });
@@ -425,10 +458,10 @@ $('#js-btn-modal-edit').on('click', function () {
     if (isValidForm(form)) {
         $.ajax({
             type: 'POST',
-            url: '/' + controller + '/Update',
+            url: jPage.getUrl('Update'),
             data: form.serialize()
         }).done(function () {
-            paging.show(pageIndex);
+            paging.show(paging.pageIndex);
         });
     }
 });
@@ -450,7 +483,7 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
         if (confirm('您确定要删除吗？删除后不可恢复！')) {
             $.ajax({
                 type: 'POST',
-                url: '/' + controller + '/Delete',
+                url: jPage.getUrl('Delete'),
                 contentType: 'application/json',
                 dataType: 'html',
                 data: JSON.stringify(ids)
@@ -466,7 +499,7 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
 
 //工具栏刷新按钮点击事件
 $('#js-btn-toolbar-refresh').on('click', function () {
-    $.post('/' + controller + '/Index')
+    $.post(jPage.getUrl('Index'))
      .done(function (result) {
          $('#js-table').html(result);
          paging.show();
@@ -485,7 +518,7 @@ $('#js-btn-toolbar-add').on('click', function () {
     var scrollHeight = ~ ~$('#js-grid').height() + 'px';
     $('body').css('height', ~ ~$(document).height() + ~ ~$('#js-div-add').height() + 'px');
     $('body').animate({ scrollTop: scrollHeight }, 'fast', function () {
-        resize();
+        jPage.resize();
     });
     $('#js-div-add').show();
 });
@@ -496,7 +529,7 @@ $('#js-btn-search').on('click', function () {
         alert('请输入搜索的内容');
     }
     else {
-        $.post('/' + controller + '/Search', { 'name': $('#js-input-search').val() })
+        $.post(jPage.getUrl('Search'), { 'name': $('#js-input-search').val() })
          .done(function (result) {
              showSearch(result);
          });
@@ -508,8 +541,8 @@ $('#js-btn-search').on('click', function () {
 //确定按钮点击事件
 $('#js-btn-form-add').on('click', function () {
     var form = $(this).closest('form');
-    if (isValidForm(form)) {
-        $.post('/' + controller + '/Create', form.serialize())
+    if (jPage.isValidForm(form)) {
+        $.post(jPage.getUrl('Create'), form.serialize())
          .done(function () {
              paging.reset(1);
              $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast');

@@ -86,7 +86,8 @@ namespace MvcBootstrapManage.Controllers
 
         public override ActionResult Search(string name)
         {
-            IEnumerable<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name));
+            name = name.Trim();
+            IList<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name)).ToList();
             if (result.Count() == 0)
             {
                 return new EmptyResult();

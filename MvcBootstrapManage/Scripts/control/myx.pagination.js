@@ -69,7 +69,8 @@ jQuery.fn.pagination = function (maxentries, opts) {
         */
         function pageSelected(page_id, evt) {
             current_page = page_id;
-            setPageIndex(current_page);
+            //common.js记录页码
+            paging.pageIndex = current_page;
             drawLinks();
             //AJAX请求数据
             $('.current-page').html('当前第' + (++page_id) + '页');
