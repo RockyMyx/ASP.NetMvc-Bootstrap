@@ -4,12 +4,12 @@ $(window).on('resize', function () {
     jPage.resize();
 });
 
-var jPage = (function (jQ) {
+var jPage = (function ($) {
     var page = {};
 
     //根据窗口大小调整背景
     page.resize = function () {
-        jQ(".content").css('height', $(window).height() + $(window).scrollTop());
+        $(".content").css('height', $(window).height() + $(window).scrollTop());
     };
 
     //判断表单是否合法
@@ -468,6 +468,23 @@ $('#js-btn-modal-edit').on('click', function () {
 
 /****************************工具栏按钮*****************************/
 
+//工具栏添加按钮点击事件
+$('#js-btn-toolbar-add').on('click', function () {
+    //重置隐藏控件
+    var hideElments = $('#js-add-form').find('.hide');
+    for (var i = 0; i < hideElments.length; i++) {
+        hideElments[i].style.display = 'none';
+    }
+
+    $('#js-add-form').mValidate();
+    var scrollHeight = ~ ~$('#js-grid').height() + 'px';
+    $('body').css('height', ~ ~$(document).height() + ~ ~$('#js-div-add').height() + 'px');
+    $('body').animate({ scrollTop: scrollHeight }, 'fast', function () {
+        jPage.resize();
+    });
+    $('#js-div-add').show();
+});
+
 //工具栏删除按钮点击事件
 //unbind为了解决弹出多次confirm的问题
 $('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
@@ -506,23 +523,6 @@ $('#js-btn-toolbar-refresh').on('click', function () {
      });
 });
 
-//工具栏添加按钮点击事件
-$('#js-btn-toolbar-add').on('click', function () {
-    //重置隐藏控件
-    var hideElments = $('#js-add-form').find('.hide');
-    for (var i = 0; i < hideElments.length; i++) {
-        hideElments[i].style.display = 'none';
-    }
-
-    $('#js-add-form').mValidate();
-    var scrollHeight = ~ ~$('#js-grid').height() + 'px';
-    $('body').css('height', ~ ~$(document).height() + ~ ~$('#js-div-add').height() + 'px');
-    $('body').animate({ scrollTop: scrollHeight }, 'fast', function () {
-        jPage.resize();
-    });
-    $('#js-div-add').show();
-});
-
 //工具栏搜索按钮点击事件
 $('#js-btn-search').on('click', function () {
     if ($('#js-input-search').val() == '') {
@@ -552,9 +552,6 @@ $('#js-btn-form-add').on('click', function () {
 
 //取消按钮点击事件
 $('#js-btn-form-cancel').on('click', function () {
+    $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast');
     $('#js-div-add').hide();
-    $('body').css('height', $(window).height());
-    $('body').animate({ scrollTop: -$('#js-div-add').height() }, 'fast', function () {
-        resize();
-    });
 });

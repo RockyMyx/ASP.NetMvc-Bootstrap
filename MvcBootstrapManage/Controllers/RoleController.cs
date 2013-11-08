@@ -43,11 +43,8 @@ namespace MvcBootstrapManage.Controllers
             foreach (int id in ids)
             {
                 role = db.Role.GetEntity(r => r.ID == id);
-                if (role != null)
-                {
-                    db.DeleteObject(role);
-                    db.SaveChanges();
-                }
+                db.DeleteObject(role);
+                db.SaveChanges();
             }
         }
 
