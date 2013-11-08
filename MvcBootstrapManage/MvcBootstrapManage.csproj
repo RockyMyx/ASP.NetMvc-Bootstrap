@@ -160,12 +160,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CacheHelper.cs" />
-    <Compile Include="Helpers\ConvertHelper.cs" />
+    <Compile Include="Helpers\Extensions\ConvertHelper.cs" />
     <Compile Include="Helpers\FormHelper.cs" />
-    <Compile Include="Helpers\DBHelper.cs" />
+    <Compile Include="Helpers\Extensions\DBHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\RandomImgHelper.cs" />
-    <Compile Include="Helpers\ControllerContextHelper.cs" />
+    <Compile Include="Helpers\Extensions\ControllerContextHelper.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Helpers\NetHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
