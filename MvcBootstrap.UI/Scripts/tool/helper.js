@@ -40,3 +40,12 @@ String.prototype.capitalize = function () {
 String.prototype.equal = function (str1, str2) {
     return str1.localeCompare(str2) == 0;
 };
+
+String.prototype.format = function () {
+    if (arguments.length == 0) return "";
+    var formatter = this;
+    for (var i = 0; i < arguments.length; i++) {
+        formatter = formatter.replace(new RegExp("\\{" + i + "\\}"), arguments[i]);
+    }
+    return formatter;
+};

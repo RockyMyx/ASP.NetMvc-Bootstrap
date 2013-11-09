@@ -161,6 +161,7 @@ $(document).ajaxError(function (evt, xhr) {
 });
 
 $(document).ready(function () {
+    jPage.resize();
     paging.show();
     bindTable();
 

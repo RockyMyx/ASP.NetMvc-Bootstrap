@@ -8,7 +8,6 @@ using MvcBootstrap.EFModel;
 namespace MvcBootstrap.Controllers
 {
     //[CheckLogin]
-    [BrowseAuthorize]
     public class BaseController : Controller
     {
     }

@@ -19,8 +19,8 @@ public static class ViewHelper
             int roleID = 1;
             IEnumerable<UserBrowseViewModel> modules = db.GetUserBrowse(roleID).AsEnumerable();
 
-            string parentMenu = "<a href=\"{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
-            string childMenu = "<ul id=\"dashboard-menu\" class=\"nav nav-list collapse in\">{0}</ul>";
+            string parentMenu = "<a href=\"#{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
+            string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in\">{1}</ul>";
             string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
 
             IList<UserBrowseViewModel> parentModules = modules.GetEntities(m => m.ParentId == null).ToList();
@@ -29,14 +29,14 @@ public static class ViewHelper
             StringBuilder childBuilder = new StringBuilder();
             foreach (var parent in parentModules)
             {
-                strBuilder.AppendFormat(parentMenu, "javascript:;", parent.Code, parent.Name);
+                strBuilder.AppendFormat(parentMenu, parent.Name + "-menu", parent.Code, parent.Name);
                 childModules = db.Module.GetEntities(m => m.ParentId == parent.ID);
                 foreach (var child in childModules)
                 {
                     childBuilder.AppendFormat(childContent, child.Url, child.Code, child.Name);
                 }
 
-                strBuilder.AppendFormat(childMenu, childBuilder.ToString());
+                strBuilder.AppendFormat(childMenu, parent.Name + "-menu", childBuilder.ToString());
                 childBuilder.Clear();
             }
 

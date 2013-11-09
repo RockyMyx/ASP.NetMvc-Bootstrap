@@ -2,7 +2,6 @@
     ViewBag.Title = "资产管理系统首页";
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +9,8 @@
     <title>@ViewBag.Title</title>
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="../../Images/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../Images/apple-touch-icon-144-precompos.png">
@@ -29,20 +28,19 @@
 <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
 <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
 <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> 
-<body class=""> 
-<!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<body class="">
+    <!--<![endif]-->
     <div id="container">
         <div class="navbar" id="header">
             <div class="navbar-inner">
                 <a class="brand" href="#">LOGO</a>
                 <ul class="nav pull-right">
-                    <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button"><i class="icon-cog"></i>设置</a></li>
-                    <li id="fat-menu" class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i> @Session["RealName"]
-                            <i class="icon-caret-down"></i>
-                        </a>
+                    <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button"><i
+                        class="icon-cog"></i>设置</a></li>
+                    <li id="fat-menu" class="dropdown"><a href="#" role="button" class="dropdown-toggle"
+                        data-toggle="dropdown"><i class="icon-user"></i>@Session["RealName"] <i class="icon-caret-down">
+                        </i></a>
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户</a></li>
                             <li class="divider"></li>
@@ -59,8 +57,14 @@
                 @Html.CreateMenu()
             </div>
             <div id="right">
-                <iframe id="frame" frameborder="0" name="content" src="/Home/Welcome">
-                </iframe>
+                @*<div class="header tab-title">
+                    <span class="tab-arrow tab-left-arrow hide"></span>
+                    <ul class="tab-ul">
+                        <li class="tab-main"><span>主页</span> </li>
+                    </ul>
+                    <span class="tab-arrow tab-right-arrow hide"></span>
+                </div>*@
+                <iframe id="frame" frameborder="0" name="content" src="/Home/Welcome"></iframe>
             </div>
         </div>
         <div id="footer" class="navbar">
@@ -73,8 +77,69 @@
     <script type="text/javascript">
         var visibleHeight = document.body.clientHeight;
         var left = document.getElementById('left');
-        var frame = document.getElementById('frame');
-        left.style.height = frame.style.height = visibleHeight+ "px";
+        left.style.height = frame.style.height = visibleHeight + "px";
+
+        /*
+        String.prototype.format = function () {
+            if (arguments.length == 0) return "";
+            var formatter = this;
+            for (var i = 0; i < arguments.length; i++) {
+                formatter = formatter.replace(new RegExp("\\{" + i + "\\}"), arguments[i]);
+            }
+            return formatter;
+        };
+
+        function clearActive(obj) {
+            var currentActive = obj.find('.tab-active');
+            if (currentActive.length > 0) {
+                currentActive.eq(0).removeClass('tab-active');
+            }
+        }
+
+        $('#left ul').find('li').on('click', function () {
+            var tabBar = $('.tab-ul');
+            clearActive(tabBar);
+            var tabText = $(this).text();
+            if (tabBar.text().indexOf(tabText) == -1) {
+                var href = $(this).find('a').attr('href');
+                $("<li class=\"tab-active\"><button type=\"button\" class=\"close\">×</button><a target=\"content\" href=\"" + href + "\" class=\"tab-link\">" + tabText + "</a></li>").bind('click', function (e) {
+                    if (e.target.tagName == 'A') {
+                        clearActive(tabBar);
+                        $(this).addClass('tab-active');
+                    }
+                }).appendTo(tabBar);
+            }
+            else {
+                tabBar.find('a:contains("' + tabText + '")').parent().addClass('tab-active');
+            }
+
+            if (tabBar.width() + $(this).width() > $('#frame').width()) {
+                tabBar.animate({ left: -$(this).width() }, 'fast', function () {
+                    $('.tab-arrow').show();
+                });
+            }
+
+        });
+
+        $('.tab-left-arrow').on('click', function () {
+            var tabBar = $('.tab-ul');
+            var left = parseInt($('.tab-ul').get(0).style.left);
+            alert(left);
+            if (left < 0) {
+                tabBar.animate({ left: left + 60 }, 'fast', function () {
+                });
+            }
+        });
+
+        $('.tab-right-arrow').on('click', function () {
+            var tabBar = $('.tab-ul');
+            var left = parseInt($('.tab-ul').get(0).style.left);
+            var move = tabBar.width() - $('#frame').width();
+            if (left < move && left < 0) {
+                tabBar.animate({ left: left + 60 }, 'fast', function () {
+                });
+            }
+        });*/
     </script>
 </body>
 </html>
