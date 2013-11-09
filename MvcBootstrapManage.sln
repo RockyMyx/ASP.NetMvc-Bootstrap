@@ -1,7 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrapManage", "MvcBootstrapManage\MvcBootstrapManage.csproj", "{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrap.Controllers", "MvcBootstrap.Controllers\MvcBootstrap.Controllers.csproj", "{7C5EEB72-2E54-4539-B73C-8A26AB45581E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrap.Filters", "MvcBootstrap.Filters\MvcBootstrap.Filters.csproj", "{0B6D24B6-03CC-46AA-B17F-D3716FB45839}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrap.UI", "MvcBootstrap.UI\MvcBootstrap.UI.csproj", "{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrap.ViewModels", "MvcBootstrap.ViewModels\MvcBootstrap.ViewModels.csproj", "{F04F960E-4490-489D-97CD-7F53B7F639FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcBootstrap.Common", "MvcBootstrap.Common", "{216FA1C2-D63E-478C-831B-1A4BFD6A5BFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcBootstrap.Model", "MvcBootstrap.Model", "{12A0A236-49C6-45C8-9CD1-959DCEEFF72C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcBootstrap.View", "MvcBootstrap.View", "{0CC02495-E94C-4032-86CC-24A646771A30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrap.ViewHelper", "MvcBootstrap.ViewHelper\MvcBootstrap.ViewHelper.csproj", "{F941FDA0-4E85-4D39-8973-DCBD9A392742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootstrap.EFModel", "MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj", "{C298EABF-74D0-4103-9582-88C05EDA64F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +25,40 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C5EEB72-2E54-4539-B73C-8A26AB45581E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5EEB72-2E54-4539-B73C-8A26AB45581E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5EEB72-2E54-4539-B73C-8A26AB45581E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5EEB72-2E54-4539-B73C-8A26AB45581E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6D24B6-03CC-46AA-B17F-D3716FB45839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6D24B6-03CC-46AA-B17F-D3716FB45839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6D24B6-03CC-46AA-B17F-D3716FB45839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6D24B6-03CC-46AA-B17F-D3716FB45839}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F04F960E-4490-489D-97CD-7F53B7F639FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04F960E-4490-489D-97CD-7F53B7F639FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04F960E-4490-489D-97CD-7F53B7F639FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04F960E-4490-489D-97CD-7F53B7F639FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F941FDA0-4E85-4D39-8973-DCBD9A392742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F941FDA0-4E85-4D39-8973-DCBD9A392742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F941FDA0-4E85-4D39-8973-DCBD9A392742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F941FDA0-4E85-4D39-8973-DCBD9A392742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C298EABF-74D0-4103-9582-88C05EDA64F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C298EABF-74D0-4103-9582-88C05EDA64F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C298EABF-74D0-4103-9582-88C05EDA64F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C298EABF-74D0-4103-9582-88C05EDA64F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B6D24B6-03CC-46AA-B17F-D3716FB45839} = {0CC02495-E94C-4032-86CC-24A646771A30}
+		{50C7F5A8-6C02-42E0-8A53-7B49745A8DAB} = {0CC02495-E94C-4032-86CC-24A646771A30}
+		{7C5EEB72-2E54-4539-B73C-8A26AB45581E} = {0CC02495-E94C-4032-86CC-24A646771A30}
+		{F04F960E-4490-489D-97CD-7F53B7F639FD} = {12A0A236-49C6-45C8-9CD1-959DCEEFF72C}
+		{C298EABF-74D0-4103-9582-88C05EDA64F4} = {12A0A236-49C6-45C8-9CD1-959DCEEFF72C}
+		{F941FDA0-4E85-4D39-8973-DCBD9A392742} = {216FA1C2-D63E-478C-831B-1A4BFD6A5BFB}
 	EndGlobalSection
 EndGlobal

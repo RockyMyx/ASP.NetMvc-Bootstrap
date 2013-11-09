@@ -1,0 +1,35 @@
+﻿@model List<MvcBootstrap.EFModel.Role>
+<thead>
+	<tr>
+        <th><input id="js-check-all" type="checkbox" style="margin:-2px 5px 0 0;" />选择</th>
+		<th>角色名称</th>
+		<th>角色说明</th>
+		<th>是否启用</th>
+		<th>创建日期</th>
+		<th>操作</th>
+	</tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="hide">@item.ID</td>
+            <td class="js-check"><input class="js-check-cell" type="checkbox" /></td>
+		    <td key="Name" content="@item.Name" type="notEmpty">@item.Name</td>
+		    <td key="Remark" content="@item.Remark" type="notEmpty">@item.Remark</td>
+            <td class="js-bool" key="IsEnable" content="@((bool)item.IsEnable ? "1" : "0")">
+            @if ((bool)item.IsEnable)
+            {
+                <img src="../../Images/enable.png" alt="可用" title="可用" />
+            }
+            else
+            {
+                <img src="../../Images/disable.png" alt="不可用" title="不可用" />
+            }
+            </td>
+		    <td class="js-readonly" key="CreateDate" content="@item.CreateDate">@item.CreateDate</td>
+            <td><a href="javascript:;"><i class="icon-pencil" type="table"></i></a>
+                <a href="#ModalDel" role="button" data-toggle="modal"><i class="icon-remove"></i></a></td>
+        </tr>
+    }
+</tbody>
