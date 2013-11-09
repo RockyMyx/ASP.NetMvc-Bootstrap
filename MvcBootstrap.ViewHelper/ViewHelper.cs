@@ -10,6 +10,41 @@ using MvcBootstrap.EFModel;
 public static class ViewHelper
 {
     /// <summary>
+    /// 生成用户功能菜单
+    /// </summary>
+    public static MvcHtmlString CreateMenu(this HtmlHelper helper)
+    {
+        using (DBEntity db = new DBEntity())
+        {
+            int roleID = 1;
+            IEnumerable<UserBrowseViewModel> modules = db.GetUserBrowse(roleID).AsEnumerable();
+
+            string parentMenu = "<a href=\"{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
+            string childMenu = "<ul id=\"dashboard-menu\" class=\"nav nav-list collapse in\">{0}</ul>";
+            string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
+
+            IList<UserBrowseViewModel> parentModules = modules.GetEntities(m => m.ParentId == null).ToList();
+            IEnumerable<Module> childModules = null;
+            StringBuilder strBuilder = new StringBuilder();
+            StringBuilder childBuilder = new StringBuilder();
+            foreach (var parent in parentModules)
+            {
+                strBuilder.AppendFormat(parentMenu, "javascript:;", parent.Code, parent.Name);
+                childModules = db.Module.GetEntities(m => m.ParentId == parent.ID);
+                foreach (var child in childModules)
+                {
+                    childBuilder.AppendFormat(childContent, child.Url, child.Code, child.Name);
+                }
+
+                strBuilder.AppendFormat(childMenu, childBuilder.ToString());
+                childBuilder.Clear();
+            }
+
+            return MvcHtmlString.Create(strBuilder.ToString());
+        }
+    }
+
+    /// <summary>
     /// 生成权限操作选项
     /// </summary>
     public static MvcHtmlString Operations(this HtmlHelper helper)

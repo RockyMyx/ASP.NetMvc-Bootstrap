@@ -30,9 +30,26 @@
 <!--<![endif]-->
     <div class="content">
         <div id="js-grid">
-            <div class="header">
-                <h1>@ViewBag.Title</h1>
+            <div class="header tab-title">
+                <span class="tab-arrow tab-left-arrow"></span>
+                <ul class="tab-ul">
+                    <li class="tab-main">
+                        <span>主页</span>
+                    </li>
+                    <li class="tab-active">
+                        <button type="button" class="close">×</button>
+                        <span>@ViewBag.Title</span>
+                    </li>
+                    <li>
+                        <button type="button" class="close">×</button>
+                        <span>@ViewBag.Title</span>
+                    </li>
+                </ul>
+                <span class="tab-arrow tab-right-arrow"></span>
             </div>
+            @*<div class="header">
+                <h1>@ViewBag.Title</h1>
+            </div>*@
             <ul class="breadcrumb">
                 <li class="active"><span>@ViewBag.ParentEnName</span><span class="divider">/</span></li>
                 <li>@ViewBag.CurrentEnName</li>

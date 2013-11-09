@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="MvcBootstrap.EFModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="MvcBootstrapModelsStoreContainer">
+        <EntityContainer Name="MvcBootstrapEFModelStoreContainer">
           <EntitySet Name="Favorite" EntityType="MvcBootstrap.EFModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Log" EntityType="MvcBootstrap.EFModel.Store.Log" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Module" EntityType="MvcBootstrap.EFModel.Store.Module" store:Type="Tables" Schema="dbo" />
@@ -194,12 +194,12 @@
             <End Role="Favorite" EntitySet="Favorite" />
           </AssociationSet>
           <FunctionImport Name="GetModuleTree" EntitySet="Module" ReturnType="Collection(MvcBootstrap.EFModel.Module)" />
-          <FunctionImport Name="GetUserBrowse" ReturnType="Collection(MvcBootstrap.EFModel.UserBrowseViewModel)">
-            <Parameter Name="RoleID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetUserOperation" ReturnType="Collection(String)">
             <Parameter Name="RoleID" Mode="In" Type="Int32" />
             <Parameter Name="ControllerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserBrowse" ReturnType="Collection(MvcBootstrap.EFModel.UserBrowseViewModel)">
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Favorite">
@@ -335,15 +335,18 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="UserBrowseViewModel">
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ParentId" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MvcBootstrapModelsStoreContainer" CdmEntityContainer="DBEntity">
+        <EntityContainerMapping StorageEntityContainer="MvcBootstrapEFModelStoreContainer" CdmEntityContainer="DBEntity">
           <EntitySetMapping Name="Favorite"><EntityTypeMapping TypeName="MvcBootstrap.EFModel.Favorite"><MappingFragment StoreEntitySet="Favorite">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="Name" ColumnName="Name" />
@@ -435,15 +438,18 @@
             <ScalarProperty Name="ActionName" ColumnName="ActionName" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetModuleTree" FunctionName="MvcBootstrap.EFModel.Store.GetModuleTree" />
+          <FunctionImportMapping FunctionImportName="GetUserOperation" FunctionName="MvcBootstrap.EFModel.Store.GetUserOperation" />
           <FunctionImportMapping FunctionImportName="GetUserBrowse" FunctionName="MvcBootstrap.EFModel.Store.GetUserBrowse">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MvcBootstrap.EFModel.UserBrowseViewModel">
-                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUserOperation" FunctionName="MvcBootstrap.EFModel.Store.GetUserOperation" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

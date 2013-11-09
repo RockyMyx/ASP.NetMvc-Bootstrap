@@ -312,25 +312,6 @@ namespace MvcBootstrap.EFModel
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="roleID">No Metadata Documentation available.</param>
-        public ObjectResult<UserBrowseViewModel> GetUserBrowse(Nullable<global::System.Int32> roleID)
-        {
-            ObjectParameter roleIDParameter;
-            if (roleID.HasValue)
-            {
-                roleIDParameter = new ObjectParameter("RoleID", roleID);
-            }
-            else
-            {
-                roleIDParameter = new ObjectParameter("RoleID", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<UserBrowseViewModel>("GetUserBrowse", roleIDParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="roleID">No Metadata Documentation available.</param>
         /// <param name="controllerID">No Metadata Documentation available.</param>
         public ObjectResult<global::System.String> GetUserOperation(Nullable<global::System.Int32> roleID, Nullable<global::System.Int32> controllerID)
         {
@@ -355,6 +336,25 @@ namespace MvcBootstrap.EFModel
             }
     
             return base.ExecuteFunction<global::System.String>("GetUserOperation", roleIDParameter, controllerIDParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="roleID">No Metadata Documentation available.</param>
+        public ObjectResult<UserBrowseViewModel> GetUserBrowse(Nullable<global::System.Int32> roleID)
+        {
+            ObjectParameter roleIDParameter;
+            if (roleID.HasValue)
+            {
+                roleIDParameter = new ObjectParameter("RoleID", roleID);
+            }
+            else
+            {
+                roleIDParameter = new ObjectParameter("RoleID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<UserBrowseViewModel>("GetUserBrowse", roleIDParameter);
         }
 
         #endregion
@@ -2454,7 +2454,69 @@ namespace MvcBootstrap.EFModel
     [Serializable()]
     public partial class UserBrowseViewModel : ComplexObject
     {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserBrowseViewModel object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static UserBrowseViewModel CreateUserBrowseViewModel(global::System.Int32 id)
+        {
+            UserBrowseViewModel userBrowseViewModel = new UserBrowseViewModel();
+            userBrowseViewModel.ID = id;
+            return userBrowseViewModel;
+        }
+
+        #endregion
         #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                OnIDChanging(value);
+                ReportPropertyChanging("ID");
+                _ID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID");
+                OnIDChanged();
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2485,24 +2547,48 @@ namespace MvcBootstrap.EFModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Name
+        public global::System.String Url
         {
             get
             {
-                return _Name;
+                return _Url;
             }
             set
             {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
             }
         }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ParentId
+        {
+            get
+            {
+                return _ParentId;
+            }
+            set
+            {
+                OnParentIdChanging(value);
+                ReportPropertyChanging("ParentId");
+                _ParentId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentId");
+                OnParentIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ParentId;
+        partial void OnParentIdChanging(Nullable<global::System.Int32> value);
+        partial void OnParentIdChanged();
 
         #endregion
     }

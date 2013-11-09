@@ -819,6 +819,43 @@ table.table.list tr:first-child td {
     float: right;
 }
 
+/********************系统菜单图标****************************/
+
+.ico-menu
+{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    line-height:24px;
+    margin-right:6px;
+    vertical-align:middle;
+}
+
+.ico-xtgl
+{
+    background-image:url('/Images/ico-xtgl.png');
+}
+
+.ico-yhgl
+{
+    background-image:url('/Images/ico-yhgl.png');
+}
+
+.ico-jsgl
+{
+    background-image:url('/Images/ico-jsgl.png');
+}
+
+.ico-mkgl
+{
+    background-image:url('/Images/ico-mkgl.png');
+}
+
+.ico-qxgl
+{
+    background-image:url('/Images/ico-qxgl.png');
+}
+
 /********************下拉框样式****************************/
 .my-select
 {
@@ -922,23 +959,74 @@ table.table.list tr:first-child td {
 }
 
 /**************************TAB样式*********************/
-/*.tab-content {
-    border: 1px solid #bbb;
-    padding: 10px;
+.tab-title
+{
+    height:35px;
+    padding:0;
+    margin:0;
+    position: relative;
+    overflow:hidden;
 }
 
-.nav-tabs 
+.tab-arrow
 {
-    border:none;
-    margin-bottom: 0;
+    width: 17px;
+    height: 23px;
+    margin-top: 5px;
+    vertical-align: middle;
+    background-image: url(/Images/tabs-tools.gif);
+    cursor:pointer;
+    z-index:13;
 }
 
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus 
+.tab-left-arrow
 {
-    border:1px solid #aaa;
-    color: #555555;
-    cursor: default;
-    background-color: #ffffff;
-} */
+    background-position: 0px 0px;
+    position: absolute;
+    top: 1px;
+    left: 0;
+}
+
+.tab-right-arrow
+{
+    background-position: -51px 0px;
+    position: absolute;
+    top: 1px;
+    right: 0;
+}
+
+.tab-ul
+{
+    margin: 0;
+    padding: 0;
+    width: 9999px;
+    position: absolute;
+    top: 0;
+    left:25px;
+}
+
+.tab-ul li
+{
+    width:100px;
+    height:28px;
+    line-height:28px;
+    background-repeat:repeat-x;
+    display:inline-block;
+    text-align:center;
+    border-top:1px solid #BED5F3;
+    border-left:1px solid #BED5F3;
+    border-right:1px solid #BED5F3;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+.tab-ul li.tab-main
+{
+    width:70px;
+    background-image:url('/Images/ui-bg-hover.png');
+}
+
+.tab-ul li.tab-active
+{
+    background-image:url('/Images/ui-bg.png');
+}

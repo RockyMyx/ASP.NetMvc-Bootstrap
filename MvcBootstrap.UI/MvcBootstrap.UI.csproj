@@ -159,6 +159,11 @@
     <Content Include="Content\page\index.css" />
     <Content Include="Content\common\myx.checkbox.css" />
     <Content Include="Content\common\myx.combox.css" />
+    <Content Include="Images\ico-mkgl.png" />
+    <Content Include="Images\ico-jsgl.png" />
+    <Content Include="Images\ico-qxgl.png" />
+    <Content Include="Images\ico-xtgl.png" />
+    <Content Include="Images\ico-yhgl.png" />
     <Content Include="Images\sort-up.png" />
     <Content Include="Images\sort-down.png" />
     <Content Include="Images\accept.png" />
@@ -172,8 +177,15 @@
     <Content Include="Images\input.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\pwd_sprite.png" />
+    <Content Include="Images\tabs-bg.gif" />
+    <Content Include="Images\tabs-item-bg.gif" />
+    <Content Include="Images\tabs-item-left-bg.gif" />
+    <Content Include="Images\tabs-item-over-bg.gif" />
+    <Content Include="Images\tabs-item-right-bg.gif" />
+    <Content Include="Images\tabs-tools.gif" />
     <Content Include="Images\ui-bg-click.png" />
     <Content Include="Images\ui-bg-hover.png" />
+    <Content Include="Images\ui-bg.png" />
     <Content Include="Images\warning.png" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\plugin\My97DatePicker\calendar.js" />
@@ -376,7 +388,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>15678</DevelopmentServerPort>
+          <DevelopmentServerPort>39722</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
