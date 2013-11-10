@@ -221,9 +221,11 @@
 
 .tab-arrow
 {
+    position: absolute;
+    top: 1px;
+    margin-top: 5px;
     width: 17px;
     height: 23px;
-    margin-top: 5px;
     vertical-align: middle;
     background-image: url(/Images/tabs-tools.gif);
     cursor:pointer;
@@ -233,16 +235,12 @@
 .tab-left-arrow
 {
     background-position: 0px 0px;
-    position: absolute;
-    top: 1px;
     left: 0;
 }
 
 .tab-right-arrow
 {
     background-position: -51px 0px;
-    position: absolute;
-    top: 1px;
     right: 0;
 }
 
@@ -264,7 +262,8 @@
     line-height:28px;
     background-repeat:repeat-x;
     display:inline-block;
-    display:-moz-inline-stack; *display:inline;
+    display:-moz-inline-stack; 
+    *display:inline;
     text-align:center;
     border-top:1px solid #BED5F3;
     border-left:1px solid #BED5F3;

@@ -55,15 +55,39 @@
         <div id="page">
             <div id="left" class="sidebar-nav">
                 @Html.CreateMenu()
+                <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="ico-menu ico-xtgl">
+                </i>系统管理</a>
+                <ul id="dashboard-menu" class="nav nav-list collapse in">
+                    <li><a href="javascript:;"><i class="ico-menu ico-yhgl"></i>a</a></li>
+                    <li><a target="content" href="/Role/Index"><i class="icon-star"></i>b</a></li>
+                    <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>c</a></li>
+                    <li><a target="content" href="javascript:;"><i class="icon-lock"></i>d</a></li>
+                </ul>
+                <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="ico-menu ico-xtgl">
+                </i>系统管理</a>
+                <ul id="dashboard-menu" class="nav nav-list collapse in">
+                    <li><a href="javascript:;"><i class="ico-menu ico-yhgl"></i>e</a></li>
+                    <li><a target="content" href="/Role/Index"><i class="icon-star"></i>f</a></li>
+                    <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>g</a></li>
+                    <li><a target="content" href="javascript:;"><i class="icon-lock"></i>h</a></li>
+                </ul>
+                <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="ico-menu ico-xtgl">
+                </i>系统管理</a>
+                <ul id="dashboard-menu" class="nav nav-list collapse in">
+                    <li><a href="javascript:;"><i class="ico-menu ico-yhgl"></i>i</a></li>
+                    <li><a target="content" href="/Role/Index"><i class="icon-star"></i>j</a></li>
+                    <li><a target="content" href="/Module/Index"><i class="icon-th-large"></i>k</a></li>
+                    <li><a target="content" href="javascript:;"><i class="icon-lock"></i>l</a></li>
+                </ul>
             </div>
             <div id="right">
-                @*<div class="header tab-title">
+                <div class="header tab-title">
                     <span class="tab-arrow tab-left-arrow hide"></span>
                     <ul class="tab-ul">
                         <li class="tab-main"><span>主页</span> </li>
                     </ul>
                     <span class="tab-arrow tab-right-arrow hide"></span>
-                </div>*@
+                </div>
                 <iframe id="frame" frameborder="0" name="content" src="/Home/Welcome"></iframe>
             </div>
         </div>
@@ -79,7 +103,7 @@
         var left = document.getElementById('left');
         left.style.height = frame.style.height = visibleHeight + "px";
 
-        /*
+
         String.prototype.format = function () {
             if (arguments.length == 0) return "";
             var formatter = this;
@@ -96,8 +120,11 @@
             }
         }
 
+        var tabBar = $('.tab-ul');
+        var tabOffset = tabBar.offset().left - tabBar.parent().offset().left;
+        var initOffset = tabBar.offset().left;
+
         $('#left ul').find('li').on('click', function () {
-            var tabBar = $('.tab-ul');
             clearActive(tabBar);
             var tabText = $(this).text();
             if (tabBar.text().indexOf(tabText) == -1) {
@@ -113,8 +140,9 @@
                 tabBar.find('a:contains("' + tabText + '")').parent().addClass('tab-active');
             }
 
-            if (tabBar.width() + $(this).width() > $('#frame').width()) {
-                tabBar.animate({ left: -$(this).width() }, 'fast', function () {
+            if (tabBar.width() + tabOffset > $('#frame').width()) {
+                var move = tabBar.width() + tabOffset - $('#frame').width();
+                tabBar.animate({ left: -move }, 'fast', function () {
                     $('.tab-arrow').show();
                 });
             }
@@ -124,22 +152,40 @@
         $('.tab-left-arrow').on('click', function () {
             var tabBar = $('.tab-ul');
             var left = parseInt($('.tab-ul').get(0).style.left);
-            alert(left);
             if (left < 0) {
-                tabBar.animate({ left: left + 60 }, 'fast', function () {
-                });
+                if (left + 105 > tabOffset) {
+                    tabBar.animate({ left: tabOffset }, 'fast', function () {
+                    });
+                }
+                else {
+                    tabBar.animate({ left: left + 105 }, 'fast', function () {
+                    });
+                }
             }
         });
 
         $('.tab-right-arrow').on('click', function () {
             var tabBar = $('.tab-ul');
-            var left = parseInt($('.tab-ul').get(0).style.left);
-            var move = tabBar.width() - $('#frame').width();
-            if (left < move && left < 0) {
-                tabBar.animate({ left: left + 60 }, 'fast', function () {
+
+            var arrowLeft = $(this).offset().left;
+            var ulLeft = tabBar.offset().left;
+            var currentIndex = Math.ceil((arrowLeft - ulLeft) / 105);
+            //            var nextLeft = tabBar.find('li').eq(currentIndex).offset().left;
+            //            var lastOffset = tabBar.find('li:last').offset().left;
+
+
+            var left = parseInt($('.tab-ul').offset().left);
+            if (currentIndex != tabBar.find('li').length) {
+                //                if (parseInt(ulLeft) == Math.ceil(initOffset)) {
+                //                    tabBar.animate({ left: -(nextLeft - arrowLeft) }, 'fast', function () {
+                //                    });
+                //                }
+                //                else {
+                tabBar.animate({ left: tabOffset - 105 }, 'fast', function () {
                 });
+                //                }
             }
-        });*/
+        });
     </script>
 </body>
 </html>
