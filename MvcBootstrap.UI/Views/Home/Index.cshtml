@@ -165,25 +165,24 @@
         });
 
         $('.tab-right-arrow').on('click', function () {
+//            var tabBar = $('.tab-ul');
+//            var arrowLeft = $(this).offset().left;
+//            var ulLeft = tabBar.offset().left;
+//            var currentIndex = Math.ceil((arrowLeft - ulLeft) / 105);
+//            var nextLeft = tabBar.find('li').eq(currentIndex).offset().left;
+//            var lastOffset = tabBar.find('li:last').offset().left;
+//            var left = parseInt($('.tab-ul').offset().left);
+//            if (currentIndex != tabBar.find('li').length) {
+//                tabBar.animate({ left: - (tabBar.find('li').eq(currentIndex).offset().left - arrowLeft) }, 'fast', function () {
+//                    });
+//            }
+
             var tabBar = $('.tab-ul');
-
-            var arrowLeft = $(this).offset().left;
-            var ulLeft = tabBar.offset().left;
-            var currentIndex = Math.ceil((arrowLeft - ulLeft) / 105);
-            //            var nextLeft = tabBar.find('li').eq(currentIndex).offset().left;
-            //            var lastOffset = tabBar.find('li:last').offset().left;
-
-
-            var left = parseInt($('.tab-ul').offset().left);
-            if (currentIndex != tabBar.find('li').length) {
-                //                if (parseInt(ulLeft) == Math.ceil(initOffset)) {
-                //                    tabBar.animate({ left: -(nextLeft - arrowLeft) }, 'fast', function () {
-                //                    });
-                //                }
-                //                else {
-                tabBar.animate({ left: tabOffset - 105 }, 'fast', function () {
+            var left = parseInt($('.tab-ul').get(0).style.left);
+            var move = tabBar.width() - $('#frame').width();
+            if (left < move && left < initOffset) {
+                tabBar.animate({ left: left - 60 }, 'fast', function () {
                 });
-                //                }
             }
         });
     </script>
