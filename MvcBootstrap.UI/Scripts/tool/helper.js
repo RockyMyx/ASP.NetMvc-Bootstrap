@@ -16,6 +16,14 @@ jQuery.fn.hideIfShow = function () {
     }
 }
 
+jQuery.fn.cssInt = function (prop) {
+    return parseInt(this.css(prop), 10) || 0;
+}
+
+jQuery.fn.cssFloat = function () {
+    return parseFloat(this.css(prop), 10) || 0;
+}
+
 Array.prototype.contains = function () {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == arguments[0]) {

@@ -44,7 +44,8 @@ namespace MvcBootstrap.UI
 
             bundles.Add(new ScriptBundle("~/Content/js")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
-                                 "~/Scripts/bs/bootstrap.min.js"));
+                                 "~/Scripts/bs/bootstrap.min.js",
+                                 "~/Scripts/tool/helper.js"));
 
             bundles.Add(new StyleBundle("~/Content/js-login")
                         .Include("~/Scripts/page/login.js"));

@@ -222,8 +222,7 @@
 .tab-arrow
 {
     position: absolute;
-    top: 1px;
-    margin-top: 5px;
+    top: 5px;
     width: 17px;
     height: 23px;
     vertical-align: middle;
@@ -265,9 +264,7 @@
     display:-moz-inline-stack; 
     *display:inline;
     text-align:center;
-    border-top:1px solid #BED5F3;
-    border-left:1px solid #BED5F3;
-    border-right:1px solid #BED5F3;
+    border:1px solid #BED5F3;
     cursor:pointer;
     margin-top:5px;
     margin-left:5px;
