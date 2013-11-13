@@ -17,7 +17,7 @@ namespace MvcBootstrap.Controllers
         public ActionResult Welcome()
         {
             //test
-            ViewData["Source"] = "[1,2,3,4,5,6]";
+            //ViewData["Source"] = "[1,2,3,4,5,6]";
             return View();
         }
     }
