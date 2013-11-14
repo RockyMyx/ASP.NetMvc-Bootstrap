@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using MvcBootstrap.IDAO;
 using MvcBootstrap.EFModel;
+using System.Data;
+using System.Data.Objects;
 
 namespace MvcBootstrap.DAO
 {
-    public class BaseEFDao<T> : IBaseDao<T> where T : class
+    public abstract class BaseEFDao<T> : IBaseDao<T> where T : class
     {
         #region IBaseDao<T> Members
 
-        public T GetEntity(Func<T, bool> whereExp)
+        public virtual T GetEntity(Func<T, bool> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -19,7 +21,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public IEnumerable<T> GetEntities(Func<T, bool> whereExp)
+        public virtual IEnumerable<T> GetEntities(Func<T, bool> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -27,7 +29,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public int GetEntitiesCount(Func<T, bool> whereExp)
+        public virtual int GetEntitiesCount(Func<T, bool> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -35,42 +37,85 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public IEnumerable<T> GetPagingInfo(Func<T, int> orderby, int? pageIndex, int pageSize)
+
+        public virtual IEnumerable<T> GetPagingInfo(Func<T, int> orderby, int pageIndex, int pageSize)
         {
-            IEnumerable<T> result = null;
             using (DBEntity db = new DBEntity())
             {
-                if (orderby != null)
-                {
-                    result = db.CreateObjectSet<T>().OrderBy(orderby);
-                }
-                if (pageIndex != null)
-                {
-                    result = db.CreateObjectSet<T>()
-                }
-                return db.OrderBy(orderby).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                return db.CreateObjectSet<T>()
+                         .OrderBy(orderby)
+                         .Skip((pageIndex - 1) * pageSize)
+                         .Take(pageSize);
             }
         }
 
-        public bool Create(T entity)
+        public virtual IEnumerable<T> GetPagingInfo(int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            using (DBEntity db = new DBEntity())
+            {
+                return db.CreateObjectSet<T>()
+                         .Skip((pageIndex - 1) * pageSize)
+                         .Take(pageSize);
+            }
         }
 
-        public bool Update(T entity)
+        public virtual IEnumerable<T> GetPagingInfo(int pageSize)
         {
-            throw new NotImplementedException();
+            using (DBEntity db = new DBEntity())
+            {
+                return db.CreateObjectSet<T>().Take(pageSize);
+            }
         }
 
-        public bool Delete(T entity)
+        public virtual bool Create(T entity)
         {
-            throw new NotImplementedException();
+            using (DBEntity db = new DBEntity())
+            {
+                db.CreateObjectSet<T>().AddObject(entity);
+                return db.SaveChanges() > 0;
+            }
         }
 
-        public bool Delete(List<int> ids)
+        public virtual bool Update(T entity)
         {
-            throw new NotImplementedException();
+            using (DBEntity db = new DBEntity())
+            {
+                try
+                {
+                    var obj = db.CreateObjectSet<T>();
+                    obj.Attach(entity);
+                    db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+                    return db.SaveChanges() > 0;
+                }
+                catch (OptimisticConcurrencyException)
+                {
+                    db.Refresh(RefreshMode.StoreWins, entity);
+                    return false;
+                }
+            }
         }
+
+        public virtual bool Delete(T entity)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                try
+                {
+                    var obj = db.CreateObjectSet<T>();
+                    obj.Attach(entity);
+                    db.ObjectStateManager.ChangeObjectState(entity, EntityState.Deleted);
+                    obj.DeleteObject(entity);
+                    return db.SaveChanges() > 0;
+                }
+                catch (OptimisticConcurrencyException)
+                {
+                    db.Refresh(RefreshMode.StoreWins, entity);
+                    return false;
+                }
+            }
+        }
+
+        public abstract bool Delete(List<int> ids);
 
         #endregion
     }

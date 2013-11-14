@@ -456,7 +456,7 @@ $('#js-btn-modal-delete').bind('click', function () {
 //确定编辑按钮点击事件
 $('#js-btn-modal-edit').on('click', function () {
     var form = $('#js-edit-form');
-    if (isValidForm(form)) {
+    if (jPage.isValidForm(form)) {
         $.ajax({
             type: 'POST',
             url: jPage.getUrl('Update'),

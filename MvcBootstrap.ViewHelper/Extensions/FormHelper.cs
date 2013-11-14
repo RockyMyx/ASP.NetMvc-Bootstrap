@@ -11,11 +11,15 @@ public class FormHelper
     public static Module GetModuleInfo(FormCollection formInfo)
     {
         Module module = new Module();
+        module.ID = formInfo["ID"].ObjToInt();
         module.Name = formInfo["Name"].ObjToStr();
         module.Code = formInfo["Code"].ObjToStr();
         module.Controller = formInfo["Controller"].ObjToStr();
         module.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
-        module.ParentId = formInfo["ParentId"].ObjToInt();
+        if (formInfo["ParentId"] != "NULL")
+        {
+            module.ParentId = formInfo["ParentId"].ObjToInt();
+        }
 
         List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
         if (operations.Count > 0)
