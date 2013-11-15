@@ -6,7 +6,7 @@ using MvcBootstrap.EFModel;
 
 namespace MvcBootstrap.ViewModels
 {
-    public class RoleEditViewModel : BaseViewModel
+    public class RoleEditViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }

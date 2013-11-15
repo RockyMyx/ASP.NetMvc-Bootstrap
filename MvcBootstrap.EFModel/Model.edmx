@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MvcBootstrap.EFModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="MvcBootstrap.EFModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="MvcBootstrapEFModelStoreContainer">
           <EntitySet Name="Favorite" EntityType="MvcBootstrap.EFModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Log" EntityType="MvcBootstrap.EFModel.Store.Log" store:Type="Tables" Schema="dbo" />
@@ -166,6 +166,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DeleteObjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ids" Type="varchar" Mode="In" />
+          <Parameter Name="table" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleID" Type="int" Mode="In" />
@@ -174,8 +178,7 @@
           <Parameter Name="RoleID" Type="int" Mode="In" />
           <Parameter Name="ControllerID" Type="int" Mode="In" />
         </Function>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MvcBootstrap.EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -199,7 +202,11 @@
             <Parameter Name="ControllerID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserBrowse" ReturnType="Collection(MvcBootstrap.EFModel.UserBrowseViewModel)">
-            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteObjects">
+            <Parameter Name="ids" Mode="In" Type="String" />
+            <Parameter Name="table" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Favorite">
@@ -450,6 +457,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteObjects" FunctionName="MvcBootstrap.EFModel.Store.DeleteObjects" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

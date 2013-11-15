@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MvcBootstrap.EFModel;
-using MvcBootstrap.IDAO;
-using System.Data;
 
-namespace MvcBootstrap.DAO
+namespace MvcBootstrap.IBLL
 {
-    public class RoleDao : BaseEFDao<Role>, IRoleDao<Role>
+    public class IRoleService : IBaseService<Role>
     {
     }
 }

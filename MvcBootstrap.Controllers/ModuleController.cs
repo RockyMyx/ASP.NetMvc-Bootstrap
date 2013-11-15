@@ -7,11 +7,18 @@ using MvcBootstrap.EFModel;
 using System.Text;
 using System.Data;
 using System.Data.Objects;
+using MvcBootstrap.BLL;
 
 namespace MvcBootstrap.Controllers
 {
     public class ModuleController : ManageController
     {
+        ModuleService service = null;
+        public ModuleController()
+        {
+            service = new ModuleService();
+        }
+
         protected override int DataCount
         {
             get { return db.Module.Count(); }
@@ -19,19 +26,20 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
-            List<Module> modules = db.Module.ToList();
-            List<SelectListItem> moduleList = new List<SelectListItem>();
-            int isParent;
-            moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
-            for (int i = 0; i < modules.Count; i++)
-            {
-                if (!int.TryParse(modules[i].ParentId.ToString(), out isParent))
-                {
-                    moduleList.Add(new SelectListItem { Text = modules[i].Name, Value = modules[i].ID.ToString() });
-                }
-            }
+            //List<Module> modules = db.Module.ToList();
+            //List<SelectListItem> moduleList = new List<SelectListItem>();
+            //int isParent;
+            //moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
+            //for (int i = 0; i < modules.Count; i++)
+            //{
+            //    if (!int.TryParse(modules[i].ParentId.ToString(), out isParent))
+            //    {
+            //        moduleList.Add(new SelectListItem { Text = modules[i].Name, Value = modules[i].ID.ToString() });
+            //    }
+            //}
+            //ViewData["ParentId"] = moduleList;
 
-            ViewData["ParentId"] = moduleList;
+            ViewData["ParentId"] = service.GetModuleSelect();
             var result = db.GetModuleTree().Take(base.PageSize).ToList();
             return View(result);
         }

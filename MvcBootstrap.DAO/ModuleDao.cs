@@ -11,26 +11,5 @@ namespace MvcBootstrap.DAO
 {
     public class ModuleDao : BaseEFDao<Module>, IModuleDao<Module>
     {
-        public override bool Delete(List<int> ids)
-        {
-            using (DBEntity db = new DBEntity())
-            {
-                try
-                {
-                    Module module = null;
-                    foreach (int id in ids)
-                    {
-                        module = db.Module.GetEntity(m => m.ID == id);
-                        db.DeleteObject(module);
-                        db.SaveChanges();
-                    }
-                    return true;
-                }
-                catch (OptimisticConcurrencyException)
-                {
-                    return false;
-                }
-            }
-        }
     }
 }

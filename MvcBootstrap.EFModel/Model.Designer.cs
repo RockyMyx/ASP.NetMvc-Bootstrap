@@ -356,6 +356,36 @@ namespace MvcBootstrap.EFModel
     
             return base.ExecuteFunction<UserBrowseViewModel>("GetUserBrowse", roleIDParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="ids">No Metadata Documentation available.</param>
+        /// <param name="table">No Metadata Documentation available.</param>
+        public int DeleteObjects(global::System.String ids, global::System.String table)
+        {
+            ObjectParameter idsParameter;
+            if (ids != null)
+            {
+                idsParameter = new ObjectParameter("ids", ids);
+            }
+            else
+            {
+                idsParameter = new ObjectParameter("ids", typeof(global::System.String));
+            }
+    
+            ObjectParameter tableParameter;
+            if (table != null)
+            {
+                tableParameter = new ObjectParameter("table", table);
+            }
+            else
+            {
+                tableParameter = new ObjectParameter("table", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("DeleteObjects", idsParameter, tableParameter);
+        }
 
         #endregion
     }

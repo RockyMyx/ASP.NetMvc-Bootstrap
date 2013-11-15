@@ -57,6 +57,10 @@
     <Compile Include="RoleController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MvcBootstrap.BLL\MvcBootstrap.BLL.csproj">
+      <Project>{32821D90-187F-4223-9CD9-B94506E3DAAC}</Project>
+      <Name>MvcBootstrap.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj">
       <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
       <Name>MvcBootstrap.EFModel</Name>

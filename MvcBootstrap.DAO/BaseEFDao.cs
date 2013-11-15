@@ -11,6 +11,14 @@ namespace MvcBootstrap.DAO
 {
     public abstract class BaseEFDao<T> : IBaseDao<T> where T : class
     {
+        protected virtual string tableName
+        {
+            get
+            {
+                return this.GetType().Name.ToString().Replace("Dao", "");
+            }
+        }
+
         #region IBaseDao<T> Members
 
         public virtual T GetEntity(Func<T, bool> whereExp)
@@ -18,6 +26,14 @@ namespace MvcBootstrap.DAO
             using (DBEntity db = new DBEntity())
             {
                 return db.CreateObjectSet<T>().Where(whereExp).SingleOrDefault();
+            }
+        }
+
+        public virtual IList<T> GetAll()
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return db.CreateObjectSet<T>().ToList();
             }
         }
 
@@ -115,7 +131,22 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public abstract bool Delete(List<int> ids);
+        public virtual bool Delete(List<int> idList)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                try
+                {
+                    string ids = string.Join(",", idList.ToArray());
+                    db.DeleteObjects(ids, tableName);
+                    return true;
+                }
+                catch (OptimisticConcurrencyException)
+                {
+                    return false;
+                }
+            }
+        }
 
         #endregion
     }
