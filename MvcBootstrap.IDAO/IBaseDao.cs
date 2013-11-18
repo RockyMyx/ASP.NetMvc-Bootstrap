@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Objects.DataClasses;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IBaseDao<T> where T:class
+    public interface IBaseDao<T> where T : EntityObject
     {
         T GetEntity(Func<T, bool> whereExp);
         IList<T> GetAll();

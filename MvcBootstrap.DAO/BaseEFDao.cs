@@ -6,10 +6,11 @@ using MvcBootstrap.IDAO;
 using MvcBootstrap.EFModel;
 using System.Data;
 using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 
 namespace MvcBootstrap.DAO
 {
-    public abstract class BaseEFDao<T> : IBaseDao<T> where T : class
+    public abstract class BaseEFDao<T> : IBaseDao<T> where T : EntityObject
     {
         protected virtual string tableName
         {
