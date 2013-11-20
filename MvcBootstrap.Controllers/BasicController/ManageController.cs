@@ -5,7 +5,6 @@ using System.Web;
 using MvcBootstrap.EFModel;
 using System.Web.Mvc;
 using MvcBootstrap.ViewModels;
-using MvcBootstrap.BLL;
 using System.Data.Objects.DataClasses;
 
 namespace MvcBootstrap.Controllers

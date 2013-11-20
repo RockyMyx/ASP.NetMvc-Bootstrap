@@ -29,16 +29,16 @@ public static class DBHelper
 
     public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, Func<T, int> orderby, int pageIndex, int pageSize)
     {
-        return model.OrderBy(orderby).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        return model.OrderBy(orderby).Skip((pageIndex - 1) * pageSize).Take(pageSize);
     }
 
     public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, int pageIndex, int pageSize)
     {
-        return model.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        return model.Skip((pageIndex - 1) * pageSize).Take(pageSize);
     }
 
     public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, int pageSize)
     {
-        return model.Take(pageSize).ToList();
+        return model.Take(pageSize);
     }
 }

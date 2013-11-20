@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using MvcBootstrap.EFModel;
 using System.Web.Mvc;
+using MvcBootstrap.IDAO;
 using MvcBootstrap.DAO;
 
 namespace MvcBootstrap.BLL
 {
     public class ModuleService : BaseService<Module>
     {
-        public ModuleDao dao = null;
+        public IModuleDao dao = null;
         public ModuleService()
         {
             dao = new ModuleDao();

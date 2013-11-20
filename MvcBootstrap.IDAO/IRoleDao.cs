@@ -6,7 +6,7 @@ using MvcBootstrap.EFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IRoleDao<T> : IBaseDao<Role>
+    public interface IRoleDao : IBaseDao<Role>
     {
     }
 }

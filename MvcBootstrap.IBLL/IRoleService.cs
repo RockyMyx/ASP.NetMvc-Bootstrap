@@ -6,7 +6,7 @@ using MvcBootstrap.EFModel;
 
 namespace MvcBootstrap.IBLL
 {
-    public class IRoleService : IBaseService<Role>
+    public interface IRoleService : IBaseService<Role>
     {
     }
 }

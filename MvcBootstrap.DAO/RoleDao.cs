@@ -8,7 +8,7 @@ using System.Data;
 
 namespace MvcBootstrap.DAO
 {
-    public class RoleDao : BaseEFDao<Role>, IRoleDao<Role>
+    public class RoleDao : BaseEFDao<Role>, IRoleDao
     {
     }
 }

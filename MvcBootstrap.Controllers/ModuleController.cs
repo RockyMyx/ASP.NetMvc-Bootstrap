@@ -7,16 +7,17 @@ using MvcBootstrap.EFModel;
 using System.Text;
 using System.Data;
 using System.Data.Objects;
-using MvcBootstrap.BLL;
+using MvcBootstrap.DAO;
+using MvcBootstrap.IDAO;
 
 namespace MvcBootstrap.Controllers
 {
     public class ModuleController : ManageController
     {
-        ModuleService service = null;
+        IModuleDao dao = null;
         public ModuleController()
         {
-            service = new ModuleService();
+            dao = new ModuleDao();
         }
 
         protected override int DataCount
@@ -26,8 +27,8 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
-            ViewData["ParentId"] = service.GetModuleSelect();
-            var result = db.GetModuleTree().Take(base.PageSize).ToList();
+            ViewData["ParentId"] = dao.GetModuleSelect();
+            var result = dao.GetPagingInfo(base.PageSize);
             return View(result);
         }
 

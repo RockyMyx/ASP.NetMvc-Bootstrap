@@ -10,7 +10,7 @@ using System.Data.Objects.DataClasses;
 
 namespace MvcBootstrap.DAO
 {
-    public abstract class BaseEFDao<T> : IBaseDao<T> where T : EntityObject
+    public abstract class BaseEFDao<T> where T : EntityObject
     {
         protected virtual string tableName
         {
