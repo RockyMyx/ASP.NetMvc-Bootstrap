@@ -10,7 +10,7 @@ using System.Data.Objects.DataClasses;
 
 namespace MvcBootstrap.DAO
 {
-    public abstract class BaseEFDao<T> where T : EntityObject
+    public abstract class BaseEFDao<T> : IBaseDao<T> where T : EntityObject
     {
         protected virtual string tableName
         {
@@ -30,7 +30,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public virtual IList<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             using (DBEntity db = new DBEntity())
             {
@@ -42,7 +42,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.CreateObjectSet<T>().Where(whereExp);
+                return db.CreateObjectSet<T>().Where(whereExp).ToList();
             }
         }
 
@@ -62,7 +62,8 @@ namespace MvcBootstrap.DAO
                 return db.CreateObjectSet<T>()
                          .OrderBy(orderby)
                          .Skip((pageIndex - 1) * pageSize)
-                         .Take(pageSize);
+                         .Take(pageSize)
+                         .ToList();
             }
         }
 
@@ -72,7 +73,8 @@ namespace MvcBootstrap.DAO
             {
                 return db.CreateObjectSet<T>()
                          .Skip((pageIndex - 1) * pageSize)
-                         .Take(pageSize);
+                         .Take(pageSize)
+                         .ToList();
             }
         }
 
@@ -80,7 +82,9 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.CreateObjectSet<T>().Take(pageSize);
+                return db.CreateObjectSet<T>()
+                         .Take(pageSize)
+                         .ToList();
             }
         }
 

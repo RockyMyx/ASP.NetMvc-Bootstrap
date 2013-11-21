@@ -9,7 +9,7 @@ namespace MvcBootstrap.IDAO
     public interface IBaseDao<T> where T : EntityObject
     {
         T GetEntity(Func<T, bool> whereExp);
-        IList<T> GetAll();
+        IEnumerable<T> GetAll();
         IEnumerable<T> GetEntities(Func<T, bool> whereExp);
         int GetEntitiesCount(Func<T, bool> whereExp);
         IEnumerable<T> GetPagingInfo(Func<T, int> orderby, int pageIndex, int pageSize);

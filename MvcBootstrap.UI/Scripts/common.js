@@ -532,7 +532,7 @@ $('#js-btn-search').on('click', function () {
     else {
         $.post(jPage.getUrl('Search'), { 'name': $('#js-input-search').val() })
          .done(function (result) {
-             showSearch(result);
+             jPage.showSearch(result);
          });
     }
 });

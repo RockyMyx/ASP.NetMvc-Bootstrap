@@ -35,8 +35,9 @@ namespace MvcBootstrap.Controllers
         [HttpPost]
         public override ActionResult Index(int? pageIndex)
         {
+            ViewData["ParentId"] = dao.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<Module> result = db.GetModuleTree().GetPagingInfo(index, base.PageSize);
+            IEnumerable<Module> result = dao.GetPagingInfo(index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
@@ -44,65 +45,34 @@ namespace MvcBootstrap.Controllers
         public override void Update(FormCollection formInfo)
         {
             Module module = FormHelper.GetModuleInfo(formInfo);
-            //Module oldModule = db.Module.Where(m => m.ID == id).Single();
-            //oldModule.ID = id;
-            //oldModule.Name = module.Name;
-            //oldModule.Controller = module.Controller;
-            //oldModule.IsEnable = module.IsEnable;
-            //oldModule.Operations = module.Operations;
-            //db.SaveChanges();
-
-            try
-            {
-                var obj = db.CreateObjectSet<Module>();
-                obj.Attach(module);
-                db.ObjectStateManager.ChangeObjectState(module, EntityState.Modified);
-                db.SaveChanges();
-            }
-            catch (OptimisticConcurrencyException)
-            {
-                db.Refresh(RefreshMode.StoreWins, module);
-            }
+            dao.Update(module);
         }
 
         [HttpPost]
         public override void Delete(List<int> ids)
         {
-            Module module = null;
-            foreach (int id in ids)
-            {
-                module = db.Module.GetEntity(m => m.ID == id);
-                db.DeleteObject(module);
-                db.SaveChanges();
-            }
+            dao.Delete(ids);
         }
 
         [HttpPost]
         public override void Create(FormCollection formInfo)
         {
             Module module = FormHelper.GetModuleInfo(formInfo);
-            db.Module.AddObject(module);
-            db.SaveChanges();
+            dao.Create(module);
         }
 
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IList<Module> result = db.GetModuleTree().Where(m => m.Name.Contains(name)).ToList();
-            if (result.Count() == 0)
-            {
-                return new EmptyResult();
-            }
+            IEnumerable<Module> result = dao.GetEntities(m => m.Name.Contains(name));
+            if (result.Count() == 0) return new EmptyResult();
             return PartialView("_ModuleGrid", result);
         }
 
         public ActionResult Get(int id)
         {
-            using (DBEntity db = new DBEntity())
-            {
-                Module module = db.Module.Where(m => m.ID == id).Single();
-                return Json(module, JsonRequestBehavior.AllowGet);
-            }
+            Module module = dao.GetEntity(m => m.ID == id);
+            return Json(module, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

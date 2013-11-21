@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Text;
 using System.Collections;
 using MvcBootstrap.EFModel;
+using MvcBootstrap.DAO;
+using MvcBootstrap.IDAO;
 
 public static class ViewHelper
 {

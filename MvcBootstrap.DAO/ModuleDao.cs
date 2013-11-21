@@ -20,28 +20,36 @@ namespace MvcBootstrap.DAO
             }
         }
 
+        public override IEnumerable<Module> GetPagingInfo(int pageIndex, int pageSize)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return db.GetModuleTree().GetPagingInfo(pageIndex, pageSize).ToList();
+            }
+        }
+
         public override IEnumerable<Module> GetEntities(Func<Module, bool> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetModuleTree().Where(whereExp);
+                return db.GetModuleTree().Where(whereExp).ToList();
             }
         }
 
         public List<SelectListItem> GetModuleSelect()
         {
-            IList<Module> modules = this.GetAll();
+            IEnumerable<Module> modules = this.GetAll();
             List<SelectListItem> moduleList = new List<SelectListItem>();
             int isParent;
             moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
-            for (int i = 0; i < modules.Count; i++)
+            foreach (Module module in modules)
             {
-                if (!int.TryParse(modules[i].ParentId.ToString(), out isParent))
+                if (!int.TryParse(module.ParentId.ToString(), out isParent))
                 {
                     moduleList.Add(new SelectListItem
                     {
-                        Text = modules[i].Name,
-                        Value = modules[i].ID.ToString()
+                        Text = module.Name,
+                        Value = module.ID.ToString()
                     });
                 }
             }

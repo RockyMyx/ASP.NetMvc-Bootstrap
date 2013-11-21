@@ -61,9 +61,17 @@
     <Compile Include="ViewHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MvcBootstrap.DAO\MvcBootstrap.DAO.csproj">
+      <Project>{8C83B2F1-16E4-4455-8CDB-E3C3D187653D}</Project>
+      <Name>MvcBootstrap.DAO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj">
       <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
       <Name>MvcBootstrap.EFModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.IDAO\MvcBootstrap.IDAO.csproj">
+      <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
+      <Name>MvcBootstrap.IDAO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
