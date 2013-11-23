@@ -6,6 +6,8 @@ using MvcBootstrap.EFModel;
 using System.Web.Mvc;
 using MvcBootstrap.ViewModels;
 using System.Data.Objects.DataClasses;
+using MvcBootstrap.IDAO;
+using MvcBootstrap.DAO;
 
 namespace MvcBootstrap.Controllers
 {
@@ -34,6 +36,7 @@ namespace MvcBootstrap.Controllers
 
         [HttpPost]
         public virtual ActionResult AdvanceSearch(FormCollection searchFormInfo) { return null; }
+
         //编辑时使用window方式时实现Update方法，否则实现Modify方法
         [HttpPost]
         public virtual void Update(FormCollection formInfo) { }

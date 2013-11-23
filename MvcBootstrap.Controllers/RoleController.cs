@@ -6,11 +6,19 @@ using System.Web.Mvc;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.ViewModels;
 using System.Data;
+using MvcBootstrap.IDAO;
+using MvcBootstrap.DAO;
 
 namespace MvcBootstrap.Controllers
 {
     public class RoleController : ManageController
     {
+        IRoleDao dao = null;
+        public RoleController()
+        {
+            dao = new RoleDao();
+        }
+
         protected override int DataCount
         {
             get { return db.Role.Count(); }
@@ -18,8 +26,10 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
-            var result = db.Role.GetPagingInfo(base.PageSize);
+            var result = dao.GetPagingInfo(base.PageSize);
             ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
+            //var result = db.Role.GetPagingInfo(base.PageSize);
+            //ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
             return View(result);
         }
 
@@ -27,7 +37,8 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IEnumerable<Role> result = db.Role.GetPagingInfo(r => r.ID, index, base.PageSize);
+            //IEnumerable<Role> result = db.Role.GetPagingInfo(r => r.ID, index, base.PageSize);
+            IEnumerable<Role> result = dao.GetPagingInfo(r => r.ID, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
@@ -39,13 +50,14 @@ namespace MvcBootstrap.Controllers
 
         public override void Delete(List<int> ids)
         {
-            Role role = null;
-            foreach (int id in ids)
-            {
-                role = db.Role.GetEntity(r => r.ID == id);
-                db.DeleteObject(role);
-                db.SaveChanges();
-            }
+            //Role role = null;
+            //foreach (int id in ids)
+            //{
+            //    role = db.Role.GetEntity(r => r.ID == id);
+            //    db.DeleteObject(role);
+            //    db.SaveChanges();
+            //}
+            dao.Delete(ids);
         }
 
         public override void Create(FormCollection formInfo)
@@ -54,19 +66,18 @@ namespace MvcBootstrap.Controllers
             role.CreateDate = DateTime.Now;
             //ToTest
             //role.CreateUserID = Convert.ToInt32(Session["UserID"]);
-            db.Role.AddObject(role);
-            db.SaveChanges();
+            //db.Role.AddObject(role);
+            //db.SaveChanges();
+
+            dao.Create(role);
         }
 
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
-            if (result.Count() == 0)
-            {
-                return new EmptyResult();
-            }
-
+            //IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
+            IEnumerable<Role> result = dao.GetEntities(m => m.Name.Contains(name));
+            if (result.Count() == 0) return new EmptyResult();
             return PartialView("_RoleGrid", result);
         }
 
