@@ -259,7 +259,7 @@
          $('#js-btn-modal-search').on('click', function () {
              $.post('/' + controller + '/AdvanceSearch', $('#js-search-form').serialize())
               .done(function (result) {
-                 showSearch(result);
+                 jPage.showSearch(result);
               });
          });
     </script>
