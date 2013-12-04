@@ -14,13 +14,15 @@ namespace MvcBootstrap.Controllers
     [OperationAuthorize]
     public abstract class ManageController : BaseController
     {
+        protected DBEntity db = null;
+
         public ManageController()
         {
+            db = new DBEntity();
             ViewBag.dataCount = this.DataCount;
             ViewBag.pageSize = this.PageSize;
         }
 
-        protected DBEntity db = new DBEntity();
         protected int PageSize { get { return 3; } }
         protected abstract int DataCount { get; }
 

@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IBaseDao<T> where T : EntityObject
+    public interface IBaseDao<T> where T : class
     {
         T GetEntity(Expression<Func<T, bool>> whereExp);
         IEnumerable<T> GetAll();

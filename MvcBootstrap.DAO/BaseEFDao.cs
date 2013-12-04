@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace MvcBootstrap.DAO
 {
-    public abstract class BaseEFDao<T> : IBaseDao<T> where T : EntityObject
+    public abstract class BaseEFDao<T> : IBaseDao<T> where T : class
     {
         protected virtual string tableName
         {
