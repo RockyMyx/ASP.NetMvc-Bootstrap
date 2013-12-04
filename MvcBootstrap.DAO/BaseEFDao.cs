@@ -7,6 +7,7 @@ using MvcBootstrap.EFModel;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
+using System.Linq.Expressions;
 
 namespace MvcBootstrap.DAO
 {
@@ -22,7 +23,7 @@ namespace MvcBootstrap.DAO
 
         #region IBaseDao<T> Members
 
-        public virtual T GetEntity(Func<T, bool> whereExp)
+        public virtual T GetEntity(Expression<Func<T, bool>> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -38,7 +39,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public virtual IEnumerable<T> GetEntities(Func<T, bool> whereExp)
+        public virtual IEnumerable<T> GetEntities(Expression<Func<T, bool>> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -46,7 +47,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public virtual int GetEntitiesCount(Func<T, bool> whereExp)
+        public virtual int GetEntitiesCount(Expression<Func<T, bool>> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
@@ -55,7 +56,7 @@ namespace MvcBootstrap.DAO
         }
 
 
-        public virtual IEnumerable<T> GetPagingInfo(Func<T, int> orderby, int pageIndex, int pageSize)
+        public virtual IEnumerable<T> GetPagingInfo(Expression<Func<T, int>> orderby, int pageIndex, int pageSize)
         {
             using (DBEntity db = new DBEntity())
             {

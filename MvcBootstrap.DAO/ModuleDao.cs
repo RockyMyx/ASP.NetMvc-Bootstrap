@@ -7,6 +7,7 @@ using MvcBootstrap.IDAO;
 using System.Data;
 using System.Data.Objects;
 using System.Web.Mvc;
+using System.Linq.Expressions;
 
 namespace MvcBootstrap.DAO
 {
@@ -28,11 +29,11 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public override IEnumerable<Module> GetEntities(Func<Module, bool> whereExp)
+        public override IEnumerable<Module> GetEntities(Expression<Func<Module, bool>> whereExp)
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetModuleTree().Where(whereExp).ToList();
+                return db.GetModuleTree().AsQueryable().Where(whereExp).ToList();
             }
         }
 
