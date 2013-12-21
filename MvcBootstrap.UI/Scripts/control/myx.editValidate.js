@@ -127,7 +127,7 @@ var mValidate = {
                 return false;
             else {
                 //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
-                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 4, 2);
+                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
                 var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
                 var temp = 0, i;
                 for (i = 0; i < 17; i++) {
