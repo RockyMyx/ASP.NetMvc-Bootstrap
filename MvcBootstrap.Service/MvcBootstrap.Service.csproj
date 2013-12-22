@@ -65,10 +65,6 @@
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcBootstrap.IService\MvcBootstrap.IService.csproj">
-      <Project>{9FBF6574-07A2-4FB9-A0D2-A40FB5E86C82}</Project>
-      <Name>MvcBootstrap.IService</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

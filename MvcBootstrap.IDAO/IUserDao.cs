@@ -9,5 +9,6 @@ namespace MvcBootstrap.IDAO
     public interface IUserDao : IBaseDao<User>
     {
         IEnumerable<UserBrowseViewModel> GetUserBrowse(int roleId);
+        IEnumerable<string> GetUserOperation(int roleID, int controllerID);
     }
 }

@@ -76,26 +76,25 @@ public static class ViewHelper
         StringBuilder strBuilder = new StringBuilder();
         string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" data-toggle=\"tooltip\" data-placement=\"top\" data-original-title=\"全选\" /><label class=\"inline mr40 pl20\">{0}</label>";
         string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" style=\"margin:-2px 8px 0 8px\" />{2}";
-        using (DBEntity db = new DBEntity())
+        ModuleService moduleService = new ModuleService();
+        IEnumerable<Module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
+        string[] operations = null;
+        int actionId = 0;
+        Operation operation = null;
+        OperationService operationService = new OperationService();
+        foreach (Module module in modules)
         {
-            IEnumerable<Module> modules = db.Module.GetEntities(m => m.ParentId == moduleId);
-            string[] operations = null;
-            int actionId = 0;
-            Operation operation = null;
-            foreach (Module module in modules)
+            if (!string.IsNullOrWhiteSpace(module.Operations))
             {
-                if (!string.IsNullOrWhiteSpace(module.Operations))
+                strBuilder.AppendFormat(label, module.Name);
+                operations = module.Operations.Split(',');
+                foreach (string op in operations)
                 {
-                    strBuilder.AppendFormat(label, module.Name);
-                    operations = module.Operations.Split(',');
-                    foreach (string op in operations)
-                    {
-                        actionId = Convert.ToInt32(op);
-                        operation = db.Operation.GetEntity(o => o.ID == actionId);
-                        strBuilder.AppendFormat(checkbox, module.ID, operation.ID, operation.Name);
-                    }
-                    strBuilder.Append("</form><p></p>");
+                    actionId = Convert.ToInt32(op);
+                    operation = operationService.GetEntity(o => o.ID == actionId);
+                    strBuilder.AppendFormat(checkbox, module.ID, operation.ID, operation.Name);
                 }
+                strBuilder.Append("</form><p></p>");
             }
         }
 

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Objects.DataClasses;
-using MvcBootstrap.IService;
 using MvcBootstrap.IDAO;
 using System.Linq.Expressions;
 
 namespace MvcBootstrap.Service
 {
-    public abstract class BaseService<T, U> : IBaseService<T, U>
+    public abstract class BaseService<T, U>
         where T : EntityObject
         where U : IBaseDao<T>
     {

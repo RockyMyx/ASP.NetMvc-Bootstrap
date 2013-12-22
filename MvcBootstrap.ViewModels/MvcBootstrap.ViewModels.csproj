@@ -54,10 +54,6 @@
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcBootstrap.IService\MvcBootstrap.IService.csproj">
-      <Project>{9FBF6574-07A2-4FB9-A0D2-A40FB5E86C82}</Project>
-      <Name>MvcBootstrap.IService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
       <Project>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</Project>
       <Name>MvcBootstrap.Service</Name>

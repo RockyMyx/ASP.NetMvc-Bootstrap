@@ -15,9 +15,10 @@ public class OperationAuthorizeAttribute : AuthorizeAttribute
         int roleID = 1;
 
         string controller = filterContext.GetController();
-        ModuleService service = new ModuleService();
-        int controllerID = service.GetControllerIDByName(controller);
-        IEnumerable<string> actions = db.GetUserOperation(roleID, controllerID);
+        ModuleService moduleService = new ModuleService();
+        int controllerID = moduleService.GetControllerIDByName(controller);
+        UserService userService = new UserService();
+        IEnumerable<string> actions = userService.GetUserOperation(roleID, controllerID);
         foreach (string action in actions)
         {
             filterContext.SetViewData(action, true);

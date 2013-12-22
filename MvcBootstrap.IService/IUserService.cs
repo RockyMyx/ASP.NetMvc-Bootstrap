@@ -10,5 +10,6 @@ namespace MvcBootstrap.IService
     public interface IUserService : IBaseService<User, IUserDao>
     {
         IEnumerable<UserBrowseViewModel> GetUserBrowse(int roleId);
+        IEnumerable<string> GetUserOperation(int roleID, int controllerID);
     }
 }

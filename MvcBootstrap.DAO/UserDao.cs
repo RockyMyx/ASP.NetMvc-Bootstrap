@@ -17,5 +17,13 @@ namespace MvcBootstrap.DAO
                 return db.GetUserBrowse(roleId).AsEnumerable();
             }
         }
+
+        public IEnumerable<string> GetUserOperation(int roleID, int controllerID)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return db.GetUserOperation(roleID, controllerID);
+            }
+        }
     }
 }

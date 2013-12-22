@@ -8,6 +8,5 @@ namespace MvcBootstrap.IDAO
 {
     public interface IOperationDao : IBaseDao<Operation>
     {
-        IEnumerable<string> GetUserOperation(int roleID, int controllerID);
     }
 }

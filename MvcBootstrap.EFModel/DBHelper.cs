@@ -7,10 +7,10 @@ using System.Data.Objects.DataClasses;
 
 public static class DBHelper
 {
-    //public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
-    //{
-    //    return model.Where(where);
-    //}
+    public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
+    {
+        return model.Where(where);
+    }
 
     //public static T GetEntity<T>(this IEnumerable<T> model, Func<T, bool> where)
     //{
