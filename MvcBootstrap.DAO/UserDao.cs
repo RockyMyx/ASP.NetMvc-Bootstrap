@@ -14,7 +14,8 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetUserBrowse(roleId).AsEnumerable();
+                //ToList立即执行，否则会出错：The ObjectContext instance has been disposed and can no longer be used for operations that require a connection
+                return db.GetUserBrowse(roleId).ToList();
             }
         }
 
@@ -22,7 +23,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetUserOperation(roleID, controllerID);
+                return db.GetUserOperation(roleID, controllerID).ToList();
             }
         }
     }
