@@ -32,6 +32,7 @@ namespace MvcBootstrap.Controllers
                     parent.Add(module);
                 }
             }
+
             ViewData["ParentModule"] = parent;
             return View(result);
         }
@@ -44,21 +45,14 @@ namespace MvcBootstrap.Controllers
             return PartialView("_RoleGrid", result);
         }
 
-        public ActionResult Modify(RoleEditViewModel viewModel)
+        public ActionResult Modify(Role role)
         {
-            RoleEditViewModel.ToSaveEntity(viewModel);
-            return Json(viewModel);
+            service.Update(role);
+            return Json(role);
         }
 
         public override void Delete(List<int> ids)
         {
-            //Role role = null;
-            //foreach (int id in ids)
-            //{
-            //    role = db.Role.GetEntity(r => r.ID == id);
-            //    db.DeleteObject(role);
-            //    db.SaveChanges();
-            //}
             service.Delete(ids);
         }
 
@@ -68,8 +62,6 @@ namespace MvcBootstrap.Controllers
             role.CreateDate = DateTime.Now;
             //ToTest
             //role.CreateUserID = Convert.ToInt32(Session["UserID"]);
-            //db.Role.AddObject(role);
-            //db.SaveChanges();
 
             service.Create(role);
         }
@@ -77,7 +69,6 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            //IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
             IEnumerable<Role> result = service.GetEntities(m => m.Name.Contains(name));
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_RoleGrid", result);
@@ -124,7 +115,7 @@ namespace MvcBootstrap.Controllers
 
             //ToTest
             //int modifyUserId = Convert.ToInt32(Session["UserId"]);
-            int modifyUserId = 2;
+            int modifyUserId = 1;
 
             List<int> parentIds = new List<int>();
             foreach (string item in formInfo.AllKeys)

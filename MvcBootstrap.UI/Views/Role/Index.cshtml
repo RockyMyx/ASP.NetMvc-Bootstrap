@@ -118,7 +118,7 @@
             }
         });
         $('#js-btn-modal-permission').on('click', function () {
-            $.post('/' + controller + '/SetPermission/' + checkId, $('.js-form-permission').serialize())
+            $.post(jPage.getUrl('SetPermission/' + jPage.getCheckId()), $('.js-form-permission').serialize())
              .done(function () {
                  alert("权限分配成功！");
              });
