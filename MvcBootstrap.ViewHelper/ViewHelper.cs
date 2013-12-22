@@ -18,6 +18,7 @@ public static class ViewHelper
     {
         //ToTest
         int roleID = 1;
+
         UserService userService = new UserService();
         IEnumerable<UserBrowseViewModel> modules = userService.GetUserBrowse(roleID);
 
@@ -25,14 +26,22 @@ public static class ViewHelper
         string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in\">{1}</ul>";
         string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
 
-        IList<UserBrowseViewModel> parentModules = modules.GetEntities(m => m.ParentId == null).ToList();
+        IList<UserBrowseViewModel> parentModules = new List<UserBrowseViewModel>();
+        foreach (UserBrowseViewModel module in modules)
+        {
+            if (module.ParentId == null)
+            {
+                parentModules.Add(module);
+            }
+        }
+
         IEnumerable<Module> childModules = null;
         StringBuilder strBuilder = new StringBuilder();
         StringBuilder childBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
         foreach (var parent in parentModules)
         {
-            strBuilder.AppendFormat(parentMenu, parent.Name + "-menu", parent.Code, parent.Name);
+            strBuilder.AppendFormat(parentMenu, parent.Code + "-menu", parent.Code, parent.Name);
             childModules = moduleService.GetEntities(m => m.ParentId == parent.ID);
             foreach (var child in childModules)
             {

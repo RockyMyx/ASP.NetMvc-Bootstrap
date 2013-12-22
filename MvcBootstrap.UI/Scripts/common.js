@@ -534,7 +534,7 @@ $('#js-btn-search').on('click', function () {
          .done(function (result) {
              jPage.showSearch(result);
          });
-    }
+     }
 });
 
 /****************************添加表单*****************************/

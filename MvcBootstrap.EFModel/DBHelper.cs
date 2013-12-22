@@ -9,7 +9,7 @@ public static class DBHelper
 {
     public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
     {
-        return model.Where(where);
+        return model.Where(where).ToList();
     }
 
     //public static T GetEntity<T>(this IEnumerable<T> model, Func<T, bool> where)

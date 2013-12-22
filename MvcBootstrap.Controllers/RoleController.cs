@@ -22,10 +22,17 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index()
         {
             var result = service.GetPagingInfo(base.PageSize);
-            ModuleService module = new ModuleService();
-            ViewData["ParentModule"] = module.GetEntities(m => m.ParentId == null);
-            //var result = db.Role.GetPagingInfo(base.PageSize);
-            //ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
+            ModuleService moduleService = new ModuleService();
+            IEnumerable<Module> modules = moduleService.GetAll().ToList();
+            IList<Module> parent = new List<Module>();
+            foreach (Module module in modules)
+            {
+                if (module.ParentId == null)
+                {
+                    parent.Add(module);
+                }
+            }
+            ViewData["ParentModule"] = parent;
             return View(result);
         }
 
@@ -33,7 +40,6 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            //IEnumerable<Role> result = db.Role.GetPagingInfo(r => r.ID, index, base.PageSize);
             IEnumerable<Role> result = service.GetPagingInfo(r => r.ID, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
