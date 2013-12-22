@@ -12,11 +12,10 @@ namespace MvcBootstrap.IService
         where T : EntityObject
         where U : IBaseDao<T>
     {
-        int GetCount();
         T GetEntity(Expression<Func<T, bool>> whereExp);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetEntities(Expression<Func<T, bool>> whereExp);
-        int GetEntitiesCount(Expression<Func<T, bool>> whereExp);
+        int GetEntitiesCount(Expression<Func<T, bool>> whereExp = null);
         IEnumerable<T> GetPagingInfo(Expression<Func<T, int>> orderby, int pageIndex, int pageSize);
         IEnumerable<T> GetPagingInfo(int pageIndex, int pageSize);
         IEnumerable<T> GetPagingInfo(int pageSize);

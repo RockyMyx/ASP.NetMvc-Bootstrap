@@ -15,11 +15,6 @@ namespace MvcBootstrap.Service
 
         #region IBaseService<T> Members
 
-        public int GetCount()
-        {
-            return dao.GetCount();
-        }
-
         public T GetEntity(Expression<Func<T, bool>> whereExp)
         {
             return dao.GetEntity(whereExp);
@@ -35,7 +30,7 @@ namespace MvcBootstrap.Service
             return dao.GetEntities(whereExp);
         }
 
-        public int GetEntitiesCount(Expression<Func<T, bool>> whereExp)
+        public int GetEntitiesCount(Expression<Func<T, bool>> whereExp = null)
         {
             return dao.GetEntitiesCount(whereExp);
         }

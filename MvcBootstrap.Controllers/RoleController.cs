@@ -16,7 +16,7 @@ namespace MvcBootstrap.Controllers
 
         protected override int DataCount
         {
-            get { return service.GetCount(); }
+            get { return service.GetEntitiesCount(); }
         }
 
         public override ActionResult Index()

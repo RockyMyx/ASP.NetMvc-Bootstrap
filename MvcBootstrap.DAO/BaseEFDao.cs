@@ -23,14 +23,6 @@ namespace MvcBootstrap.DAO
 
         #region IBaseDao<T> Members
 
-        public int GetCount()
-        {
-            using (DBEntity db = new DBEntity())
-            {
-                return db.CreateObjectSet<T>().ToList().Count;
-            }
-        }
-
         public virtual T GetEntity(Expression<Func<T, bool>> whereExp)
         {
             using (DBEntity db = new DBEntity())
@@ -55,11 +47,18 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public virtual int GetEntitiesCount(Expression<Func<T, bool>> whereExp)
+        public virtual int GetEntitiesCount(Expression<Func<T, bool>> whereExp = null)
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.CreateObjectSet<T>().Where(whereExp).Count();
+                if (whereExp == null)
+                {
+                    return db.CreateObjectSet<T>().Count();
+                }
+                else
+                {
+                    return db.CreateObjectSet<T>().Where(whereExp).Count();
+                }
             }
         }
 
