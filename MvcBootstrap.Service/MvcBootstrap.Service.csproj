@@ -65,6 +65,10 @@
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.ViewModels\MvcBootstrap.ViewModels.csproj">
+      <Project>{F04F960E-4490-489D-97CD-7F53B7F639FD}</Project>
+      <Name>MvcBootstrap.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

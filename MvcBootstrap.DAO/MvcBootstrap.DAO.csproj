@@ -34,10 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MVC\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +56,10 @@
     <ProjectReference Include="..\MvcBootstrap.IDAO\MvcBootstrap.IDAO.csproj">
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.ViewModels\MvcBootstrap.ViewModels.csproj">
+      <Project>{F04F960E-4490-489D-97CD-7F53B7F639FD}</Project>
+      <Name>MvcBootstrap.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

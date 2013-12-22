@@ -32,9 +32,6 @@ namespace MvcBootstrap.UI
                                  "~/Content/base/font-awesome/css/font-awesome.css",
                                  "~/Content/theme.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css-login")
-                        .Include("~/Content/page/login.css"));
-
             bundles.Add(new StyleBundle("~/Content/css-paging")
                         .Include("~/Content/common/myx.pagination.css"));
 
@@ -46,9 +43,6 @@ namespace MvcBootstrap.UI
                         .Include("~/Scripts/jquery-1.8.3.min.js",
                                  "~/Scripts/bs/bootstrap.min.js",
                                  "~/Scripts/tool/helper.js"));
-
-            bundles.Add(new StyleBundle("~/Content/js-login")
-                        .Include("~/Scripts/page/login.js"));
 
             bundles.Add(new ScriptBundle("~/Content/js-manage")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
