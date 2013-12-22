@@ -14,5 +14,10 @@ namespace MvcBootstrap.Service
         {
             base.dao = new OperationDao();
         }
+
+        public IDictionary<int, string> GetOperations()
+        {
+            return base.dao.GetOperations();
+        }
     }
 }

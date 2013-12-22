@@ -7,10 +7,10 @@ using System.Data.Objects.DataClasses;
 
 public static class DBHelper
 {
-    public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
-    {
-        return model.Where(where).ToList();
-    }
+    //public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
+    //{
+    //    return model.Where(where);
+    //}
 
     //public static T GetEntity<T>(this IEnumerable<T> model, Func<T, bool> where)
     //{
@@ -27,18 +27,18 @@ public static class DBHelper
     //    return model.Where(where).Select(select).SingleOrDefault();
     //}
 
-    public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, Func<T, int> orderby, int pageIndex, int pageSize)
-    {
-        return model.OrderBy(orderby).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-    }
+    //public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, Func<T, int> orderby, int pageIndex, int pageSize)
+    //{
+    //    return model.OrderBy(orderby).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+    //}
 
-    public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, int pageIndex, int pageSize)
-    {
-        return model.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-    }
+    //public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, int pageIndex, int pageSize)
+    //{
+    //    return model.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+    //}
 
-    public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, int pageSize)
-    {
-        return model.Take(pageSize);
-    }
+    //public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, int pageSize)
+    //{
+    //    return model.Take(pageSize);
+    //}
 }

@@ -60,21 +60,16 @@ public static class ViewHelper
     /// </summary>
     public static MvcHtmlString Operations(this HtmlHelper helper)
     {
-        using (DBEntity db = new DBEntity())
+        OperationService service = new OperationService();
+        IDictionary<int, string> operations = service.GetOperations();
+        string label = "<label class=\"checkbox inline ml10\"><input type=\"checkbox\" id=\"op{0}\" name=\"op{0}\" />{1}</label>";
+        StringBuilder strBuilder = new StringBuilder();
+        foreach (KeyValuePair<int, string> item in operations)
         {
-            IDictionary<int, string> operations = db.Operation
-                                                    .Select(s => new { s.ID, s.Name })
-                                                    .AsEnumerable()
-                                                    .ToDictionary(k => k.ID, k => k.Name);
-            string label = "<label class=\"checkbox inline ml10\"><input type=\"checkbox\" id=\"op{0}\" name=\"op{0}\" />{1}</label>";
-            StringBuilder strBuilder = new StringBuilder();
-            foreach (KeyValuePair<int, string> item in operations)
-            {
-                strBuilder.AppendFormat(label, item.Key, item.Value);
-            }
-
-            return MvcHtmlString.Create(strBuilder.ToString());
+            strBuilder.AppendFormat(label, item.Key, item.Value);
         }
+
+        return MvcHtmlString.Create(strBuilder.ToString());
     }
 
     /// <summary>
@@ -87,6 +82,7 @@ public static class ViewHelper
         string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" style=\"margin:-2px 8px 0 8px\" />{2}";
         ModuleService moduleService = new ModuleService();
         IEnumerable<Module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
+
         string[] operations = null;
         int actionId = 0;
         Operation operation = null;

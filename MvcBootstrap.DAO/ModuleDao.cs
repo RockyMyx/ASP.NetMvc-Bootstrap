@@ -25,7 +25,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetModuleTree().GetPagingInfo(pageIndex, pageSize).ToList();
+                return db.GetModuleTree().Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             }
         }
 
