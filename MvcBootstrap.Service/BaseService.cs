@@ -13,6 +13,13 @@ namespace MvcBootstrap.Service
     {
         protected U dao = default(U);
 
+        protected abstract void SetCurrentDao();
+
+        public BaseService()
+        {
+            SetCurrentDao();
+        }
+
         #region IBaseService<T> Members
 
         public T GetEntity(Expression<Func<T, bool>> whereExp)

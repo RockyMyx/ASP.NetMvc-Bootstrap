@@ -22,7 +22,8 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index()
         {
             var result = service.GetPagingInfo(base.PageSize);
-            ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
+            ModuleService module = new ModuleService();
+            ViewData["ParentModule"] = module.GetEntities(m => m.ParentId == null);
             //var result = db.Role.GetPagingInfo(base.PageSize);
             //ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
             return View(result);

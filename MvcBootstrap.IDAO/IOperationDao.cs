@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MvcBootstrap.EFModel;
-using System.Web.Mvc;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IModuleDao : IBaseDao<Module>
+    public interface IOperationDao : IBaseDao<Operation>
     {
+        IEnumerable<string> GetUserOperation(int roleID, int controllerID);
     }
 }

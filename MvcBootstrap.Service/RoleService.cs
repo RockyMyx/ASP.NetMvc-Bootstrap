@@ -10,7 +10,7 @@ namespace MvcBootstrap.Service
 {
     public class RoleService : BaseService<Role, IRoleDao>
     {
-        public RoleService()
+        protected override void SetCurrentDao()
         {
             base.dao = new RoleDao();
         }

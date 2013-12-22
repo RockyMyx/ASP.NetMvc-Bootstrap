@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEFDao.cs" />
+    <Compile Include="OperationDao.cs" />
+    <Compile Include="UserDao.cs" />
     <Compile Include="ModuleDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleDao.cs" />

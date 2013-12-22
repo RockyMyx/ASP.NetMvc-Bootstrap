@@ -10,6 +10,7 @@ namespace MvcBootstrap.IService
 {
     public interface IModuleService : IBaseService<Module, IModuleDao>
     {
+        int GetControllerIDByName(string controllerName);
         List<SelectListItem> GetModuleSelect();
     }
 }

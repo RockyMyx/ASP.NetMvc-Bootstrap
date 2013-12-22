@@ -36,26 +36,5 @@ namespace MvcBootstrap.DAO
                 return db.GetModuleTree().AsQueryable().Where(whereExp).ToList();
             }
         }
-
-        public List<SelectListItem> GetModuleSelect()
-        {
-            IEnumerable<Module> modules = this.GetAll();
-            List<SelectListItem> moduleList = new List<SelectListItem>();
-            int isParent;
-            moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
-            foreach (Module module in modules)
-            {
-                if (!int.TryParse(module.ParentId.ToString(), out isParent))
-                {
-                    moduleList.Add(new SelectListItem
-                    {
-                        Text = module.Name,
-                        Value = module.ID.ToString()
-                    });
-                }
-            }
-
-            return moduleList;
-        }
     }
 }

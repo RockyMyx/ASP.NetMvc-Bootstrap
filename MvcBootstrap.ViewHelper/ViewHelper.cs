@@ -6,8 +6,8 @@ using System.Web.Mvc;
 using System.Text;
 using System.Collections;
 using MvcBootstrap.EFModel;
-using MvcBootstrap.DAO;
-using MvcBootstrap.IDAO;
+using MvcBootstrap.ViewHelper;
+using MvcBootstrap.Service;
 
 public static class ViewHelper
 {
@@ -16,34 +16,34 @@ public static class ViewHelper
     /// </summary>
     public static MvcHtmlString CreateMenu(this HtmlHelper helper)
     {
-        using (DBEntity db = new DBEntity())
+        //ToTest
+        int roleID = 1;
+        UserService userService = new UserService();
+        IEnumerable<UserBrowseViewModel> modules = userService.GetUserBrowse(roleID);
+
+        string parentMenu = "<a href=\"#{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
+        string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in\">{1}</ul>";
+        string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
+
+        IList<UserBrowseViewModel> parentModules = modules.GetEntities(m => m.ParentId == null).ToList();
+        IEnumerable<Module> childModules = null;
+        StringBuilder strBuilder = new StringBuilder();
+        StringBuilder childBuilder = new StringBuilder();
+        ModuleService moduleService = new ModuleService();
+        foreach (var parent in parentModules)
         {
-            int roleID = 1;
-            IEnumerable<UserBrowseViewModel> modules = db.GetUserBrowse(roleID).AsEnumerable();
-
-            string parentMenu = "<a href=\"#{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
-            string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in\">{1}</ul>";
-            string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
-
-            IList<UserBrowseViewModel> parentModules = modules.GetEntities(m => m.ParentId == null).ToList();
-            IEnumerable<Module> childModules = null;
-            StringBuilder strBuilder = new StringBuilder();
-            StringBuilder childBuilder = new StringBuilder();
-            foreach (var parent in parentModules)
+            strBuilder.AppendFormat(parentMenu, parent.Name + "-menu", parent.Code, parent.Name);
+            childModules = moduleService.GetEntities(m => m.ParentId == parent.ID);
+            foreach (var child in childModules)
             {
-                strBuilder.AppendFormat(parentMenu, parent.Name + "-menu", parent.Code, parent.Name);
-                childModules = db.Module.GetEntities(m => m.ParentId == parent.ID);
-                foreach (var child in childModules)
-                {
-                    childBuilder.AppendFormat(childContent, child.Url, child.Code, child.Name);
-                }
-
-                strBuilder.AppendFormat(childMenu, parent.Name + "-menu", childBuilder.ToString());
-                childBuilder.Clear();
+                childBuilder.AppendFormat(childContent, child.Url, child.Code, child.Name);
             }
 
-            return MvcHtmlString.Create(strBuilder.ToString());
+            strBuilder.AppendFormat(childMenu, parent.Name + "-menu", childBuilder.ToString());
+            childBuilder.Clear();
         }
+
+        return MvcHtmlString.Create(strBuilder.ToString());
     }
 
     /// <summary>

@@ -7,25 +7,25 @@ using System.Data.Objects.DataClasses;
 
 public static class DBHelper
 {
-    public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
-    {
-        return model.Where(where);
-    }
+    //public static IEnumerable<T> GetEntities<T>(this IEnumerable<T> model, Func<T, bool> where)
+    //{
+    //    return model.Where(where);
+    //}
 
-    public static T GetEntity<T>(this IEnumerable<T> model, Func<T, bool> where)
-    {
-        return model.Where(where).SingleOrDefault();
-    }
+    //public static T GetEntity<T>(this IEnumerable<T> model, Func<T, bool> where)
+    //{
+    //    return model.Where(where).SingleOrDefault();
+    //}
 
-    public static int GetEntityField<T>(this IEnumerable<T> model, Func<T, bool> where, Func<T, int> select)
-    {
-        return model.Where(where).Select(select).SingleOrDefault();
-    }
+    //public static int GetEntityField<T>(this IEnumerable<T> model, Func<T, bool> where, Func<T, int> select)
+    //{
+    //    return model.Where(where).Select(select).SingleOrDefault();
+    //}
 
-    public static string GetEntityField<T>(this IEnumerable<T> model, Func<T, bool> where, Func<T, string> select)
-    {
-        return model.Where(where).Select(select).SingleOrDefault();
-    }
+    //public static string GetEntityField<T>(this IEnumerable<T> model, Func<T, bool> where, Func<T, string> select)
+    //{
+    //    return model.Where(where).Select(select).SingleOrDefault();
+    //}
 
     public static IEnumerable<T> GetPagingInfo<T>(this IEnumerable<T> model, Func<T, int> orderby, int pageIndex, int pageSize)
     {

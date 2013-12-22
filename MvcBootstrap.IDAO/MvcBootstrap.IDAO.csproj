@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="IBaseDao.cs" />
     <Compile Include="IModuleDao.cs" />
+    <Compile Include="IOperationDao.cs" />
     <Compile Include="IRoleDao.cs" />
+    <Compile Include="IUserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

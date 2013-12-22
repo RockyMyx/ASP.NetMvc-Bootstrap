@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MvcBootstrap.EFModel;
+using MvcBootstrap.Service;
 
 namespace MvcBootstrap.ViewModels
 {
@@ -17,7 +18,8 @@ namespace MvcBootstrap.ViewModels
         {
             using (DBEntity db = new DBEntity())
             {
-                Role role = db.Role.GetEntity(m => m.ID == viewModel.ID);
+                RoleService service = new RoleService();
+                Role role = service.GetEntity(m => m.ID == viewModel.ID);
                 role.Name = viewModel.Name;
                 role.Remark = viewModel.Remark;
                 role.IsEnable = int.Parse(viewModel.IsEnable) == 1 ? true : false;

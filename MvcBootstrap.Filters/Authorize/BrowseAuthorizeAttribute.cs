@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MvcBootstrap.EFModel;
 using System.Data.Objects;
+using MvcBootstrap.Service;
 
 public class BrowseAuthorizeAttribute : AuthorizeAttribute
 {
@@ -13,13 +14,11 @@ public class BrowseAuthorizeAttribute : AuthorizeAttribute
         //ToTest
         //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
         int roleID = 1;
-        using (DBEntity db = new DBEntity())
+        UserService service = new UserService();
+        IEnumerable<UserBrowseViewModel> modules = service.GetUserBrowse(roleID).AsEnumerable();
+        foreach (UserBrowseViewModel module in modules)
         {
-            IEnumerable<UserBrowseViewModel> modules = db.GetUserBrowse(roleID).AsEnumerable();
-            foreach (UserBrowseViewModel module in modules)
-            {
-                filterContext.SetViewData(module.Code, module.Name);
-            }
+            filterContext.SetViewData(module.Code, module.Name);
         }
     }
 }
