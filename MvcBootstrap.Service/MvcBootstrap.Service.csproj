@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{32821D90-187F-4223-9CD9-B94506E3DAAC}</ProjectGuid>
+    <ProjectGuid>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcBootstrap.BLL</RootNamespace>
-    <AssemblyName>MvcBootstrap.BLL</AssemblyName>
+    <RootNamespace>MvcBootstrap.Service</RootNamespace>
+    <AssemblyName>MvcBootstrap.Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -59,13 +59,13 @@
       <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
       <Name>MvcBootstrap.EFModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcBootstrap.IBLL\MvcBootstrap.IBLL.csproj">
-      <Project>{80A30D60-5BEB-4FFF-B2D7-A883A5501A50}</Project>
-      <Name>MvcBootstrap.IBLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.IDAO\MvcBootstrap.IDAO.csproj">
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.IService\MvcBootstrap.IService.csproj">
+      <Project>{9FBF6574-07A2-4FB9-A0D2-A40FB5E86C82}</Project>
+      <Name>MvcBootstrap.IService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

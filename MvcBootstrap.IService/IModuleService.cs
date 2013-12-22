@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using MvcBootstrap.EFModel;
 using System.Web.Mvc;
+using MvcBootstrap.IDAO;
 
-namespace MvcBootstrap.IBLL
+namespace MvcBootstrap.IService
 {
-    public interface IModuleService : IBaseService<Module>
+    public interface IModuleService : IBaseService<Module, IModuleDao>
     {
         List<SelectListItem> GetModuleSelect();
     }

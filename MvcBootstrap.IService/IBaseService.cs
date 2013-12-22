@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Objects.DataClasses;
-using System.Data.Objects;
 using System.Linq.Expressions;
+using MvcBootstrap.IDAO;
 
-namespace MvcBootstrap.IDAO
+namespace MvcBootstrap.IService
 {
-    public interface IBaseDao<T> where T : EntityObject
+    public interface IBaseService<T, U>
+        where T : EntityObject
+        where U : IBaseDao<T>
     {
         int GetCount();
         T GetEntity(Expression<Func<T, bool>> whereExp);

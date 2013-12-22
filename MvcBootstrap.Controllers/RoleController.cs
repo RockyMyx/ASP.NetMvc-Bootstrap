@@ -6,27 +6,22 @@ using System.Web.Mvc;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.ViewModels;
 using System.Data;
-using MvcBootstrap.IDAO;
-using MvcBootstrap.DAO;
+using MvcBootstrap.Service;
 
 namespace MvcBootstrap.Controllers
 {
     public class RoleController : ManageController
     {
-        IRoleDao dao = null;
-        public RoleController()
-        {
-            dao = new RoleDao();
-        }
+        RoleService service = new RoleService();
 
         protected override int DataCount
         {
-            get { return db.Role.Count(); }
+            get { return service.GetCount(); }
         }
 
         public override ActionResult Index()
         {
-            var result = dao.GetPagingInfo(base.PageSize);
+            var result = service.GetPagingInfo(base.PageSize);
             ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
             //var result = db.Role.GetPagingInfo(base.PageSize);
             //ViewData["ParentModule"] = db.Module.GetEntities(m => m.ParentId == null);
@@ -38,7 +33,7 @@ namespace MvcBootstrap.Controllers
         {
             int index = pageIndex ?? 1;
             //IEnumerable<Role> result = db.Role.GetPagingInfo(r => r.ID, index, base.PageSize);
-            IEnumerable<Role> result = dao.GetPagingInfo(r => r.ID, index, base.PageSize);
+            IEnumerable<Role> result = service.GetPagingInfo(r => r.ID, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
@@ -57,7 +52,7 @@ namespace MvcBootstrap.Controllers
             //    db.DeleteObject(role);
             //    db.SaveChanges();
             //}
-            dao.Delete(ids);
+            service.Delete(ids);
         }
 
         public override void Create(FormCollection formInfo)
@@ -69,14 +64,14 @@ namespace MvcBootstrap.Controllers
             //db.Role.AddObject(role);
             //db.SaveChanges();
 
-            dao.Create(role);
+            service.Create(role);
         }
 
         public override ActionResult Search(string name)
         {
             name = name.Trim();
             //IList<Role> result = db.Role.Where(m => m.Name.Contains(name)).ToList();
-            IEnumerable<Role> result = dao.GetEntities(m => m.Name.Contains(name));
+            IEnumerable<Role> result = service.GetEntities(m => m.Name.Contains(name));
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_RoleGrid", result);
         }

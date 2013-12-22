@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MvcBootstrap.BLL")]
+[assembly: AssemblyTitle("MvcBootstrap.IService")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("MvcBootstrap.BLL")]
+[assembly: AssemblyProduct("MvcBootstrap.IService")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c10a24cd-3e88-4728-9bf2-1e03663bd473")]
+[assembly: Guid("16b84a86-a634-4ffb-8429-c2713de277c3")]
 
 // Version information for an assembly consists of the following four values:
 //

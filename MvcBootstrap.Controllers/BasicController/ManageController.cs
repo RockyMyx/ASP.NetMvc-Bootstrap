@@ -6,8 +6,6 @@ using MvcBootstrap.EFModel;
 using System.Web.Mvc;
 using MvcBootstrap.ViewModels;
 using System.Data.Objects.DataClasses;
-using MvcBootstrap.IDAO;
-using MvcBootstrap.DAO;
 
 namespace MvcBootstrap.Controllers
 {

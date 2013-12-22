@@ -1,43 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MvcBootstrap.EFModel;
-using System.Text;
-using System.Data;
-using System.Data.Objects;
-using MvcBootstrap.DAO;
-using MvcBootstrap.IDAO;
+using MvcBootstrap.Service;
 
 namespace MvcBootstrap.Controllers
 {
     public class ModuleController : ManageController
     {
-        IModuleDao dao = null;
-        public ModuleController()
-        {
-            dao = new ModuleDao();
-        }
+        ModuleService service = new ModuleService();
 
         protected override int DataCount
         {
-            get { return db.Module.Count(); }
+            get { return service.GetCount(); }
         }
 
         public override ActionResult Index()
         {
-            ViewData["ParentId"] = dao.GetModuleSelect();
-            var result = dao.GetPagingInfo(base.PageSize);
+            ViewData["ParentId"] = service.GetModuleSelect();
+            var result = service.GetPagingInfo(base.PageSize);
             return View(result);
         }
 
         [HttpPost]
         public override ActionResult Index(int? pageIndex)
         {
-            ViewData["ParentId"] = dao.GetModuleSelect();
+            ViewData["ParentId"] = service.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<Module> result = dao.GetPagingInfo(index, base.PageSize);
+            IEnumerable<Module> result = service.GetPagingInfo(index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
@@ -45,33 +36,33 @@ namespace MvcBootstrap.Controllers
         public override void Update(FormCollection formInfo)
         {
             Module module = FormHelper.GetModuleInfo(formInfo);
-            dao.Update(module);
+            service.Update(module);
         }
 
         [HttpPost]
         public override void Delete(List<int> ids)
         {
-            dao.Delete(ids);
+            service.Delete(ids);
         }
 
         [HttpPost]
         public override void Create(FormCollection formInfo)
         {
             Module module = FormHelper.GetModuleInfo(formInfo);
-            dao.Create(module);
+            service.Create(module);
         }
 
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Module> result = dao.GetEntities(m => m.Name.Contains(name));
+            IEnumerable<Module> result = service.GetEntities(m => m.Name.Contains(name));
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_ModuleGrid", result);
         }
 
         public ActionResult Get(int id)
         {
-            Module module = dao.GetEntity(m => m.ID == id);
+            Module module = service.GetEntity(m => m.ID == id);
             return Json(module, JsonRequestBehavior.AllowGet);
         }
 

@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace MvcBootstrap.DAO
 {
-    public abstract class BaseEFDao<T> : IBaseDao<T> where T : class
+    public abstract class BaseEFDao<T> : IBaseDao<T> where T : EntityObject
     {
         protected virtual string tableName
         {
@@ -22,6 +22,14 @@ namespace MvcBootstrap.DAO
         }
 
         #region IBaseDao<T> Members
+
+        public int GetCount()
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return db.CreateObjectSet<T>().ToList().Count;
+            }
+        }
 
         public virtual T GetEntity(Expression<Func<T, bool>> whereExp)
         {
