@@ -76,35 +76,29 @@ namespace MvcBootstrap.Controllers
 
         public ActionResult GetPermission(int id)
         {
-            using (DBEntity db = new DBEntity())
+            PermissionService service = new PermissionService();
+            IEnumerable<PermissionViewModel> permissions = service.GetPermission(id);
+            if (permissions.Count() != 0)
             {
-                var permissions = db.Permission.Where(p => p.RoleID == id)
-                                    .Select(p => new { p.ControllerID, p.ActionID })
-                                    .AsEnumerable();
-                if (permissions.Count() == 0)
+                Dictionary<string, string> result = new Dictionary<string, string>();
+                string controllerId;
+                foreach (var permission in permissions)
                 {
-                    return null;
-                }
-                else
-                {
-                    Dictionary<string, string> result = new Dictionary<string, string>();
-                    string controllerId;
-                    foreach (var permission in permissions)
+                    controllerId = permission.ControllerID.ToString();
+                    if (!result.ContainsKey(controllerId))
                     {
-                        controllerId = permission.ControllerID.ToString();
-                        if (!result.ContainsKey(controllerId))
-                        {
-                            result.Add(controllerId, permission.ActionID.ToString());
-                        }
-                        else
-                        {
-                            result[controllerId] += permission.ActionID.ToString();
-                        }
+                        result.Add(controllerId, permission.ActionID.ToString());
                     }
-
-                    return Json(result, JsonRequestBehavior.AllowGet);
+                    else
+                    {
+                        result[controllerId] += permission.ActionID.ToString();
+                    }
                 }
+
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
+
+            return null;
         }
 
         [HttpPost]
@@ -118,20 +112,26 @@ namespace MvcBootstrap.Controllers
             int modifyUserId = 1;
 
             List<int> parentIds = new List<int>();
+            PermissionService service = new PermissionService();
+            service.ClearPermission(id);
+
             foreach (string item in formInfo.AllKeys)
             {
                 controllerId = Convert.ToInt32(item.Split('-')[0]);
                 actionId = Convert.ToInt32(item.Split('-')[1]);
 
-                if (!isPermissionExist(id, controllerId, actionId))
-                {
-                    db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = controllerId, ActionID = actionId, ModifyUserID = modifyUserId, ModifyDate = DateTime.Now });
-                }
+                service.Create(new Permission() 
+                                { 
+                                    RoleID = id, 
+                                    ControllerID = controllerId, 
+                                    ActionID = actionId, 
+                                    ModifyUserID = modifyUserId, 
+                                    ModifyDate = DateTime.Now 
+                                });
 
+                ModuleService moduleService = new ModuleService();
                 //添加父节点
-                int parentId = Convert.ToInt32(db.Module.Where(m => m.ID == controllerId)
-                                                        .Select(m => m.ParentId)
-                                                        .Single());
+                int parentId = moduleService.GetModuleParentId(controllerId);
                 if (!parentIds.Contains(parentId))
                 {
                     parentIds.Add(parentId);
@@ -140,20 +140,15 @@ namespace MvcBootstrap.Controllers
 
             foreach (int parentId in parentIds)
             {
-                if (!isPermissionExist(id, parentId, 1))
+                service.Create(new Permission()
                 {
-                    db.Permission.AddObject(new Permission() { RoleID = id, ControllerID = parentId, ActionID = 1, ModifyUserID = modifyUserId, ModifyDate = DateTime.Now });
-                }
+                    RoleID = id,
+                    ControllerID = parentId,
+                    ActionID = 1,
+                    ModifyUserID = modifyUserId,
+                    ModifyDate = DateTime.Now
+                });
             }
-
-            db.SaveChanges();
-        }
-
-        private bool isPermissionExist(int id, int controllerId, int actionId)
-        {
-            return Convert.ToBoolean(db.Permission.Where(p => p.ID == id &&
-                                       p.ControllerID == controllerId &&
-                                       p.ActionID == actionId).Count());
         }
     }
 }

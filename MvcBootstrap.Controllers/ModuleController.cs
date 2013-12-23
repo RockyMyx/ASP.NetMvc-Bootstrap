@@ -72,7 +72,7 @@ namespace MvcBootstrap.Controllers
             try
             {
                 Module module = FormHelper.GetModuleInfo(searchFormInfo);
-                IQueryable<Module> search = db.GetModuleTree().AsQueryable();
+                IQueryable<Module> search = service.GetSortedModules();
                 if (!string.IsNullOrEmpty(module.Name))
                 {
                     search = search.Where(m => m.Name.Contains(module.Name));

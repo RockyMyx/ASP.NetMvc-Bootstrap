@@ -16,10 +16,20 @@ namespace MvcBootstrap.Service
             base.dao = new ModuleDao();  
         }
 
-        public int GetControllerIDByName(string controllerName)
+        public IQueryable<Module> GetSortedModules()
+        {
+            return base.dao.GetSortedModules();
+        }
+
+        public int GetModuleIdByName(string controllerName)
         {
             Module module = base.dao.GetEntity(m => m.Controller == controllerName);
             return module.ID;
+        }
+
+        public int GetModuleParentId(int moduleId)
+        {
+            return base.dao.GetModuleParentId(moduleId);
         }
 
         public List<SelectListItem> GetModuleSelect()

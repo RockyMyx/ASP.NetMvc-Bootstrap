@@ -188,6 +188,7 @@
     <Content Include="Images\ui-bg.png" />
     <Content Include="Images\warning.png" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\page\home.js" />
     <Content Include="Scripts\page\module.js" />
     <Content Include="Scripts\page\role.js" />
     <Content Include="Scripts\plugin\My97DatePicker\calendar.js" />
@@ -406,7 +407,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>8365</DevelopmentServerPort>
+          <DevelopmentServerPort>30978</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

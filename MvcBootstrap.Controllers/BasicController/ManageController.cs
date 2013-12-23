@@ -12,11 +12,8 @@ namespace MvcBootstrap.Controllers
     [OperationAuthorize]
     public abstract class ManageController : BaseController
     {
-        protected DBEntity db = null;
-
         public ManageController()
         {
-            db = new DBEntity();
             ViewBag.dataCount = this.DataCount;
             ViewBag.pageSize = this.PageSize;
         }

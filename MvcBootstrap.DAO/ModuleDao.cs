@@ -35,5 +35,23 @@ namespace MvcBootstrap.DAO
                 return db.GetModuleTree().AsQueryable().Where(whereExp).ToList();
             }
         }
+
+        public IQueryable<Module> GetSortedModules()
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return db.GetModuleTree().AsQueryable();
+            }
+        }
+
+        public int GetModuleParentId(int moduleId)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return Convert.ToInt32(db.Module.Where(m => m.ID == moduleId)
+                                                .Select(m => m.ParentId)
+                                                .Single());
+            }
+        }
     }
 }

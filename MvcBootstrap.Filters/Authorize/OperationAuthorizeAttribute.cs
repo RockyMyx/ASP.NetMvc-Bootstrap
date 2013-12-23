@@ -16,7 +16,7 @@ public class OperationAuthorizeAttribute : AuthorizeAttribute
 
         string controller = filterContext.GetController();
         ModuleService moduleService = new ModuleService();
-        int controllerID = moduleService.GetControllerIDByName(controller);
+        int controllerID = moduleService.GetModuleIdByName(controller);
         UserService userService = new UserService();
         IEnumerable<string> actions = userService.GetUserOperation(roleID, controllerID);
         foreach (string action in actions)
