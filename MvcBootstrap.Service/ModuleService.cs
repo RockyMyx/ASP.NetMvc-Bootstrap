@@ -32,10 +32,10 @@ namespace MvcBootstrap.Service
             return base.dao.GetModuleParentId(moduleId);
         }
 
-        public List<SelectListItem> GetModuleSelect()
+        public IList<SelectListItem> GetModuleSelect()
         {
             IEnumerable<Module> modules = base.dao.GetAll();
-            List<SelectListItem> moduleList = new List<SelectListItem>();
+            IList<SelectListItem> moduleList = new List<SelectListItem>();
             int isParent;
             moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
             foreach (Module module in modules)
@@ -51,6 +51,21 @@ namespace MvcBootstrap.Service
             }
 
             return moduleList;
+        }
+
+        public IList<Module> GetParentModules()
+        {
+            IEnumerable<Module> allModules = base.dao.GetAll().ToList();
+            IList<Module> parentModules = new List<Module>();
+            foreach (Module module in allModules)
+            {
+                if (module.ParentId == null)
+                {
+                    parentModules.Add(module);
+                }
+            }
+
+            return parentModules;
         }
     }
 }

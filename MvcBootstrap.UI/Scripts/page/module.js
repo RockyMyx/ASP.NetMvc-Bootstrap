@@ -6,14 +6,14 @@ $('#ParentId').on('change', function () {
         $('#Controller').show();
         $('#Controller').find('.hide').show();
         $('#Controller').find('.hide').next()
-                                              .addClass('form-init')
-                                              .html('请输入信息');
+                                      .addClass('form-init')
+                                      .html('请输入信息');
     }
     else {
         $('#Controller').hide();
         $('#Controller').find('.hide').hide();
         $('#Controller').find('.hide').next()
-                                              .removeClass('form-init');
+                                      .removeClass('form-init');
     }
 });
 $('#EditParentID').on('change', function () {
@@ -29,38 +29,38 @@ $('#EditParentID').on('change', function () {
 function FillEditInfo(id) {
     $('#EditModuleID').val(id);
     $.getJSON('/Module/Get/' + id)
-             .done(function (data) {
-                 $('#EditParentID').find('option[value=' + data.ParentId + ']').prop('selected', 'true');
-                 if (data.ParentId != null) {
-                     $('#EController').show();
-                 }
-                 $('#EditName').val(data.Name);
-                 $('#EditCode').val(data.Code);
-                 $('#EditController').val(data.Controller);
-                 if (data.IsEnable) {
-                     $('#EditVisible').prop('checked', 'true');
-                 }
-                 else {
-                     $('#EditHide').prop('checked', 'true');
-                 }
-                 if (data.Operations != null) {
-                     var operations = data.Operations.split(',');
-                     for (var i = 1; i <= operations.length; i++) {
-                         $('#op' + i).prop('checked', 'true');
-                     }
-                 }
-                 else {
-                     var opLength = $('#EditOp').find('input[id^="op"]').length;
-                     for (var i = 1; i <= opLength; i++) {
-                         $('#op' + i).prop('checked', '');
-                     }
-                 }
-                 $(".js-loading").hide();
-             });
+     .done(function (data) {
+         $('#EditParentID').find('option[value=' + data.ParentId + ']').prop('selected', 'true');
+         if (data.ParentId != null) {
+             $('#EController').show();
+         }
+         $('#EditName').val(data.Name);
+         $('#EditCode').val(data.Code);
+         $('#EditController').val(data.Controller);
+         if (data.IsEnable) {
+             $('#EditVisible').prop('checked', 'true');
+         }
+         else {
+             $('#EditHide').prop('checked', 'true');
+         }
+         if (data.Operations != null) {
+             var operations = data.Operations.split(',');
+             for (var i = 1; i <= operations.length; i++) {
+                 $('#op' + i).prop('checked', 'true');
+             }
+         }
+         else {
+             var opLength = $('#EditOp').find('input[id^="op"]').length;
+             for (var i = 1; i <= opLength; i++) {
+                 $('#op' + i).prop('checked', '');
+             }
+         }
+         $(".js-loading").hide();
+     });
 };
 $('#js-btn-modal-search').on('click', function () {
     $.post(jPage.getUrl('AdvanceSearch'), $('#js-search-form').serialize())
-              .done(function (result) {
-                  jPage.showSearch(result);
-              });
+     .done(function (result) {
+         jPage.showSearch(result);
+     });
 });

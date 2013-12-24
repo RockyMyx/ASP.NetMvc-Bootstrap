@@ -35,7 +35,7 @@ var jPage = (function ($) {
         }
         else {
             $('#js-table').empty();
-            $('.pagination').empty().html('没有相关信息！');
+            $('.pagination').empty().html('没有相关信息！').show();
         }
     }
 

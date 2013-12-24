@@ -22,27 +22,27 @@ $('#js-btn-toolbar-permission').on('click', function () {
         $('.js-loading').show();
         //加载现有权限
         $.getJSON('/Role/GetPermission/' + jPage.getCheckId())
-                 .done(function (result) {
-                     if (result != null) {
-                         var ops = [];
-                         var name;
-                         $.each(result, function (k, v) {
-                             ops = v.split('');
-                             for (var i = 0; i < ops.length; i++) {
-                                 name = k + '-' + ops[i];
-                                 $('input[name="' + name + '"]').prop('checked', 'true');
-                             }
-                         });
+         .done(function (result) {
+             if (result != null) {
+                 var ops = [];
+                 var name;
+                 $.each(result, function (k, v) {
+                     ops = v.split('');
+                     for (var i = 0; i < ops.length; i++) {
+                         name = k + '-' + ops[i];
+                         $('input[name="' + name + '"]').prop('checked', 'true');
                      }
-                     $('.js-loading').hide();
                  });
+             }
+             $('.js-loading').hide();
+         });
     }
 });
 $('#js-btn-modal-permission').on('click', function () {
     $.post(jPage.getUrl('SetPermission/' + jPage.getCheckId()), $('.js-form-permission').serialize())
-             .done(function () {
-                 alert("权限分配成功！");
-             });
+     .done(function () {
+         alert("权限分配成功！");
+     });
 });
 $('.js-checkall-permission').tooltip();
 $('.js-checkall-permission').on('click', function () {
