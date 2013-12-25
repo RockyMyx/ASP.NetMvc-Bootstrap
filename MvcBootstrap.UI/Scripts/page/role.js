@@ -47,7 +47,7 @@ $('#js-btn-modal-permission').on('click', function () {
 $('.js-checkall-permission').tooltip();
 $('.js-checkall-permission').on('click', function () {
     var sibCheckboxes = $(this).closest('form').find('input[type=checkbox]');
-    var thisCheckbox, checkboxName;
+    var thisCheckbox;
     if (!$(this).prop('checked')) {
         $(this).attr('data-original-title', '全选');
         for (var i = 1; i < sibCheckboxes.length; i++) {

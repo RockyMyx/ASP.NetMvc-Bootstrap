@@ -6,10 +6,10 @@
         contentType: 'application/json',
         dataType: 'json',
         data: params,
-        success: function (result) {
+        success: function () {
             location.href = "/Home/Index";
         },
-        error: function (result) {
+        error: function () {
             location.href = "/Login/Index";
         }
     });

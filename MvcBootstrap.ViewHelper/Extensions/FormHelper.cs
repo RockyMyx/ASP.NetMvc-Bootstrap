@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using System.Text;
+using System.Web.Mvc;
 using MvcBootstrap.EFModel;
 
 public class FormHelper
 {
     public static Module GetModuleInfo(FormCollection formInfo)
     {
-        Module module = new Module();
-        module.ID = formInfo["ID"].ObjToInt();
-        module.Name = formInfo["Name"].ObjToStr();
-        module.Code = formInfo["Code"].ObjToStr();
-        module.Controller = formInfo["Controller"].ObjToStr();
-        module.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
+        Module module = new Module
+        {
+            ID = formInfo["ID"].ObjToInt(),
+            Name = formInfo["Name"].ObjToStr(),
+            Code = formInfo["Code"].ObjToStr(),
+            Controller = formInfo["Controller"].ObjToStr(),
+            IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
+        };
         if (formInfo["ParentId"] != "NULL")
         {
             module.ParentId = formInfo["ParentId"].ObjToInt();
@@ -38,10 +38,12 @@ public class FormHelper
 
     public static Role GetRoleInfo(FormCollection formInfo)
     {
-        Role role = new Role();
-        role.Name = formInfo["Name"].ObjToStr();
-        role.Remark = formInfo["Remark"].ObjToStr();
-        role.IsEnable = formInfo["IsEnable"] == null ? true : string.Compare(formInfo["IsEnable"], "1") == 0;
+        Role role = new Role
+        {
+            Name = formInfo["Name"].ObjToStr(),
+            Remark = formInfo["Remark"].ObjToStr(),
+            IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
+        };
         return role;
     }
 }

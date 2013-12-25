@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MvcBootstrap.IDAO;
 using MvcBootstrap.EFModel;
+using MvcBootstrap.IDAO;
 
 namespace MvcBootstrap.DAO
 {

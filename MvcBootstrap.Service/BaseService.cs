@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Objects.DataClasses;
-using MvcBootstrap.IDAO;
 using System.Linq.Expressions;
+using MvcBootstrap.IDAO;
 
 namespace MvcBootstrap.Service
 {
@@ -14,7 +14,7 @@ namespace MvcBootstrap.Service
 
         protected abstract void SetCurrentDao();
 
-        public BaseService()
+        protected BaseService()
         {
             SetCurrentDao();
         }

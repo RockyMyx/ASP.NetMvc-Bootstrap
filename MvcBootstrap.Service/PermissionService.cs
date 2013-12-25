@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
-using MvcBootstrap.DAO;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
@@ -61,7 +60,7 @@ namespace MvcBootstrap.Service
             {
                 controllerId = Convert.ToInt32(item.Split('-')[0]);
                 actionId = Convert.ToInt32(item.Split('-')[1]);
-                base.dao.Create(new Permission()
+                base.dao.Create(new Permission
                 {
                     RoleID = roleId,
                     ControllerID = controllerId,
@@ -81,7 +80,7 @@ namespace MvcBootstrap.Service
 
             foreach (int parentId in parentIds)
             {
-                base.dao.Create(new Permission()
+                base.dao.Create(new Permission
                 {
                     RoleID = roleId,
                     ControllerID = parentId,

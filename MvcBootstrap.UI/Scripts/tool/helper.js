@@ -1,28 +1,28 @@
-﻿jQuery.fn.alternateRowColors = function () {
+﻿jQuery.fn.alternateRowColors = function() {
     $("tbody tr:odd", this).removeClass("even").addClass("odd");
     $("tbody tr:even", this).removeClass("odd").addClass("even");
     return this;
-}
+};
 
-jQuery.fn.showIfHide = function () {
+jQuery.fn.showIfHide = function() {
     if (this.is(':hidden')) {
         this.show();
     }
-}
+};
 
-jQuery.fn.hideIfShow = function () {
+jQuery.fn.hideIfShow = function() {
     if (this.is(':visible')) {
         this.hide();
     }
-}
+};
 
-jQuery.fn.cssInt = function (prop) {
+jQuery.fn.cssInt = function(prop) {
     return parseInt(this.css(prop), 10) || 0;
-}
+};
 
-jQuery.fn.cssFloat = function () {
+jQuery.fn.cssFloat = function() {
     return parseFloat(this.css(prop), 10) || 0;
-}
+};
 
 Array.prototype.contains = function () {
     for (var i = 0; i < this.length; i++) {
@@ -33,11 +33,11 @@ Array.prototype.contains = function () {
     return false;
 };
 
-Array.prototype.remove = function (s) {
+Array.prototype.remove = function(s) {
     if (this.indexOf(s) !== -1) {
         this.splice(this.indexOf(s), 1);
     }
-}
+};
 
 String.prototype.capitalize = function () {
     return this.replace(/^\w/, function (s) {

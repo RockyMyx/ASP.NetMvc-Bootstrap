@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MvcBootstrap.IDAO;
-using MvcBootstrap.EFModel;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
+using System.Linq;
 using System.Linq.Expressions;
+using MvcBootstrap.EFModel;
+using MvcBootstrap.IDAO;
 
 namespace MvcBootstrap.DAO
 {
@@ -17,7 +16,7 @@ namespace MvcBootstrap.DAO
         {
             get
             {
-                return this.GetType().Name.ToString().Replace("Dao", "");
+                return this.GetType().Name.Replace("Dao", "");
             }
         }
 
@@ -55,10 +54,8 @@ namespace MvcBootstrap.DAO
                 {
                     return db.CreateObjectSet<T>().Count();
                 }
-                else
-                {
-                    return db.CreateObjectSet<T>().Where(whereExp).Count();
-                }
+
+                return db.CreateObjectSet<T>().Where(whereExp).Count();
             }
         }
 

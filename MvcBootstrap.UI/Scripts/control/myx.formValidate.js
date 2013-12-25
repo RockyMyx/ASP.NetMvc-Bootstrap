@@ -30,7 +30,7 @@ midClass:         密码强度中等图标样式
 strongClass:      密码强度强图标样式
 **/
 (function ($) {
-    'use strict'
+    'use strict';
 
     var validationInit = {
         pwdLevel: 3,
@@ -57,7 +57,7 @@ strongClass:      密码强度强图标样式
             return /^.{6,15}$/.test(value);
         },
         pwdLevel: function (value) {
-            var charMode = function (c) {
+            var charMode = function(c) {
                 if (c >= 48 && c <= 57) //数字
                     return 1;
                 else if (c >= 65 && c <= 90) //大写字母
@@ -66,7 +66,7 @@ strongClass:      密码强度强图标样式
                     return 2;
                 else
                     return 4; //特殊字符
-            }
+            };
             var modes, level = 0;
             for (var i = 0; i < value.length; i++) {
                 modes |= charMode(value.charCodeAt(i));
@@ -344,7 +344,7 @@ strongClass:      密码强度强图标样式
         }
     };
 
-    $.fn.mValidate = function (options) {
+    $.fn.mValidate = function(options) {
         var settings = {
             init: validationInit,
             func: validationFunc,
@@ -380,10 +380,10 @@ strongClass:      密码强度强图标样式
             }
             if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
                 //闰年2月不可大于29天
-                if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 29
+                if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 29;
             } else {
                 //平年2月不可大于28天
-                if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 28
+                if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 28;
             }
             var monthArr = [1, 3, 5, 7, 8, 10, 12];
             for (var i = 0; i < monthArr.length; i++) {
@@ -398,24 +398,23 @@ strongClass:      密码强度强图标样式
             return true;
         };
 
-        $.fn.showTip = function (info) {
+        $.fn.showTip = function(info) {
             if (settings.tipStyle == 'text') {
                 this.html(info);
-            }
-            else if (settings.tipStyle == 'title') {
+            } else if (settings.tipStyle == 'title') {
                 this.attr('title', info);
             }
         };
 
-        $.fn.showInit = function (info) {
+        $.fn.showInit = function(info) {
             this.next()
                 .removeClass(settings.successClass)
                 .removeClass(settings.errorClass)
                 .addClass(settings.initClass)
                 .showTip(info);
-        }
+        };
 
-        $.fn.showFocus = function (info) {
+        $.fn.showFocus = function(info) {
             this.next()
                 .removeClass(settings.initClass)
                 .removeClass(settings.successClass)
@@ -424,7 +423,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showError = function (info) {
+        $.fn.showError = function(info) {
             this.next()
                 .removeClass(settings.initClass)
                 .removeClass(settings.successClass)
@@ -432,7 +431,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showSuccess = function (info) {
+        $.fn.showSuccess = function(info) {
             this.next()
                 .removeClass(settings.initClass)
                 .removeClass(settings.errorClass)
@@ -440,14 +439,14 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showHide = function (info, showClass, hideClass) {
+        $.fn.showHide = function(info, showClass, hideClass) {
             this.removeClass(settings.initClass)
                 .removeClass(hideClass)
                 .addClass(showClass)
                 .showTip(info);
         };
 
-        $.fn.showOnly = function (info, showClass) {
+        $.fn.showOnly = function(info, showClass) {
             this.removeClass(settings.successClass)
                 .removeClass(settings.errorClass)
                 .removeClass(settings.focusClass)
@@ -456,7 +455,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.hideOnly = function (info, hideClas) {
+        $.fn.hideOnly = function(info, hideClas) {
             this.removeClass(hideClas)
                 .showTip(info);
         };
@@ -478,12 +477,10 @@ strongClass:      密码强度强图标样式
             if (control.is('select')) {
                 if (!control.hasClass('noCheck')) {
                     control.parent().find(settings.tipClass).showOnly('请选择', settings.initClass);
-                }
-                else {
+                } else {
                     control.parent().find(settings.tipClass).addClass(settings.successClass);
                 }
-            }
-            else {
+            } else {
                 if (!settings.isHideInit) {
                     if (control.attr('class') != undefined) {
                         valType = control.attr('class').split(' ');
@@ -491,8 +488,7 @@ strongClass:      密码强度强图标样式
                             control.next().showOnly(settings.config[valType[0]]['init'], settings.initClass);
                         }
                     }
-                }
-                else {
+                } else {
                     control.next().showOnly('', settings.successClass);
                 }
             }
@@ -500,13 +496,12 @@ strongClass:      密码强度强图标样式
 
         var selects = $(this).find('select');
 
-        selects.on('change', function () {
+        selects.on('change', function() {
             var tipSelect = $(this).parent().find(settings.tipClass);
             if (!$(this).hasClass('noCheck')) {
                 if (this.selectedIndex == 0) {
                     tipSelect.showHide('请选择内容', settings.errorClass, settings.successClass);
-                }
-                else {
+                } else {
                     tipSelect.showHide('OK', settings.successClass, settings.errorClass);
                 }
             }
@@ -515,35 +510,31 @@ strongClass:      密码强度强图标样式
         var inputs = $(this).find('input');
         var valType;
 
-        inputs.on('focus', function () {
+        inputs.on('focus', function() {
             if ($(this).attr('class') != undefined) {
                 valType = $(this).attr('class').split(' ')[0];
                 if (settings.config[valType] != undefined &&
-                   (settings.func.empty(this.value) || $(this).next().hasClass(settings.errorClass))) {
+                (settings.func.empty(this.value) || $(this).next().hasClass(settings.errorClass))) {
                     $(this).showFocus(settings.config[valType].focus);
                 }
             }
         });
 
         if (settings.tipSweep) {
-            inputs.on('blur', function () {
+            inputs.on('blur', function() {
                 var value = $(this).val();
 
                 if (settings.config[valType] != undefined) {
                     if (settings.config[valType].empty && settings.func.empty(value)) {
                         $(this).showError(settings.config[valType]['empty']);
-                    }
-                    else if (settings.config[valType].length &&
-                     settings.func.length(value, settings.config[valType]['min'], settings.config[valType]['max'])) {
+                    } else if (settings.config[valType].length &&
+                        settings.func.length(value, settings.config[valType]['min'], settings.config[valType]['max'])) {
                         $(this).showError(settings.config[valType]['length']);
-                    }
-                    else if (settings.config[valType].name && !settings.func.name(value)) {
+                    } else if (settings.config[valType].name && !settings.func.name(value)) {
                         $(this).showError(settings.config[valType]['name']);
-                    }
-                    else if (settings.config[valType].pwd && !settings.func.pwd(value)) {
+                    } else if (settings.config[valType].pwd && !settings.func.pwd(value)) {
                         $(this).showError(settings.config[valType]['pwd']);
-                    }
-                    else if (settings.config[valType].pwdLevelTip) {
+                    } else if (settings.config[valType].pwdLevelTip) {
                         var result = settings.func.pwdLevel(value);
                         if (result == 1) {
                             $(settings.config[pwdLevelTip]).attr('class', settings.config[pwdLevelTip] + ' ' + settings.weakClass);
@@ -555,59 +546,46 @@ strongClass:      密码强度强图标样式
                             $('.' + validations.pwdLevelTip).attr('class', settings.config[pwdLevelTip] + ' ' + settings.strongClass);
                             $(this).showOther(settings.config[valType]['strongLevel'], settings.successClass);
                         }
-                    }
-                    else if (settings.config[valType].compare &&
-                    settings.config[valType].compareTo && !$(settings.config[valType].compareTo).val().equal(value)) {
+                    } else if (settings.config[valType].compare &&
+                        settings.config[valType].compareTo && !$(settings.config[valType].compareTo).val().equal(value)) {
                         $(this).showError(settings.config[valType]['compare']);
-                    }
-                    else if (settings.config[valType].date && !settings.func.date(value, '-')) {
+                    } else if (settings.config[valType].date && !settings.func.date(value, '-')) {
                         $(this).showError(settings.config[valType]['date']);
-                    }
-                    else if (settings.config[valType].age &&
-                      (!settings.func.digit(value) ||
+                    } else if (settings.config[valType].age &&
+                    (!settings.func.digit(value) ||
                         parseInt(value) < settings.config[valType].min ||
                         parseInt(value) > settings.config[valType].max)) {
                         $(this).showError(settings.config[valType]['age']);
-                    }
-                    else if (settings.config[valType].cid && !settings.func.cid(value)) {
+                    } else if (settings.config[valType].cid && !settings.func.cid(value)) {
                         $(this).showError(settings.config[valType]['cid']);
-                    }
-                    else if (settings.config[valType].mobile && !settings.func.mobile(value)) {
+                    } else if (settings.config[valType].mobile && !settings.func.mobile(value)) {
                         $(this).showError(settings.config[valType]['mobile']);
-                    }
-                    else if (settings.config[valType].phone && !settings.func.phone(value)) {
+                    } else if (settings.config[valType].phone && !settings.func.phone(value)) {
                         $(this).showError(settings.config[valType]['phone']);
-                    }
-                    else if (settings.config[valType].email && !settings.func.email(value)) {
+                    } else if (settings.config[valType].email && !settings.func.email(value)) {
                         $(this).showError(settings.config[valType]['email']);
-                    }
-                    else if (settings.config[valType].url && !settings.func.url(value)) {
+                    } else if (settings.config[valType].url && !settings.func.url(value)) {
                         $(this).showError(settings.config[valType]['url']);
-                    }
-                    else if (settings.config[valType].letter && !settings.func.letter(value)) {
+                    } else if (settings.config[valType].letter && !settings.func.letter(value)) {
                         $(this).showError(settings.config[valType]['letter']);
-                    }
-                    else if (settings.config[valType].digit && !settings.func.digit(value)) {
+                    } else if (settings.config[valType].digit && !settings.func.digit(value)) {
                         $(this).showError(settings.config[valType]['digit']);
-                    }
-                    else if (settings.config[valType].chinese && !settings.func.chinese(value)) {
+                    } else if (settings.config[valType].chinese && !settings.func.chinese(value)) {
                         $(this).showError(settings.config[valType]['chinese']);
-                    }
-                    else {
+                    } else {
                         $(this).showSuccess(settings.init.success);
                     }
                 }
             });
         }
 
-        $(this).find('input[type=submit]').on('click', function (e) {
+        $(this).find('input[type=submit]').on('click', function() {
             for (var i = 0; i < controls.length; i++) {
                 control = controls.eq(i);
                 if (control.is('select')) {
                     if (control.hasClass('noCheck')) {
                         control.hideOnly('', settings.initClass);
-                    }
-                    else {
+                    } else {
                         var tipSelect = control.parent().find(settings.tipClass);
                         if (tipSelect.hasClass(settings.initClass)) {
                             tipSelect.showHide('请选择', settings.errorClass, settings.successClass);
@@ -616,8 +594,7 @@ strongClass:      密码强度强图标样式
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     if (control.attr('class') != undefined) {
                         valType = control.attr('class').split(' ')[0];
                         if (settings.config[valType] != undefined &&
@@ -632,5 +609,5 @@ strongClass:      密码强度强图标样式
                 return false;
             }
         });
-    }
+    };
 })(jQuery);

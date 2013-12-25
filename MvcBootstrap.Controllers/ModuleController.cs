@@ -69,39 +69,32 @@ namespace MvcBootstrap.Controllers
         [HttpPost]
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
-            try
+            Module module = FormHelper.GetModuleInfo(searchFormInfo);
+            IQueryable<Module> search = service.GetSortedModules();
+            if (!string.IsNullOrEmpty(module.Name))
             {
-                Module module = FormHelper.GetModuleInfo(searchFormInfo);
-                IQueryable<Module> search = service.GetSortedModules();
-                if (!string.IsNullOrEmpty(module.Name))
-                {
-                    search = search.Where(m => m.Name.Contains(module.Name));
-                }
-                if (!string.IsNullOrEmpty(module.Code))
-                {
-                    search = search.Where(m => m.Name.Contains(module.Code));
-                }
-                if (!string.IsNullOrEmpty(module.Controller))
-                {
-                    search = search.Where(m => m.Name.Contains(module.Controller));
-                }
-                if (module.ParentId != null)
-                {
-                    search = search.Where(m => m.ParentId == module.ParentId);
-                }
-
-                List<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
-                if (result.Count == 0)
-                {
-                    return new EmptyResult();
-                }
-
-                return PartialView("_ModuleGrid", result);
+                search = search.Where(m => m.Name.Contains(module.Name));
             }
-            catch (Exception e)
+            if (!string.IsNullOrEmpty(module.Code))
             {
-                throw;
+                search = search.Where(m => m.Name.Contains(module.Code));
             }
+            if (!string.IsNullOrEmpty(module.Controller))
+            {
+                search = search.Where(m => m.Name.Contains(module.Controller));
+            }
+            if (module.ParentId != null)
+            {
+                search = search.Where(m => m.ParentId == module.ParentId);
+            }
+
+            List<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+            if (result.Count == 0)
+            {
+                return new EmptyResult();
+            }
+
+            return PartialView("_ModuleGrid", result);
         }
     }
 }

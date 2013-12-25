@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MvcBootstrap.EFModel;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using MvcBootstrap.ViewModels;
-using System.Data.Objects.DataClasses;
 
 namespace MvcBootstrap.Controllers
 {
     [OperationAuthorize]
     public abstract class ManageController : BaseController
     {
-        public ManageController()
+        protected ManageController()
         {
             ViewBag.dataCount = this.DataCount;
             ViewBag.pageSize = this.PageSize;

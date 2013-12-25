@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Drawing;
 using System.Security.Cryptography;
 
@@ -16,7 +13,7 @@ namespace MvcBootstrap.ViewHelper
         /// <summary>
         /// 生成随机数字
         /// </summary>
-        /// <param name="length">生成长度</param>
+        /// <param name="Length">生成长度</param>
         public static string Number(int Length)
         {
             return Number(Length, false);
@@ -44,7 +41,7 @@ namespace MvcBootstrap.ViewHelper
         /// <summary>
         /// 生成随机字母与数字
         /// </summary>
-        /// <param name="IntStr">生成长度</param>
+        /// <param name="Length">生成长度</param>
         public static string Str(int Length)
         {
             return Str(Length, false);
@@ -58,7 +55,7 @@ namespace MvcBootstrap.ViewHelper
         public static string Str(int Length, bool Sleep)
         {
             if (Sleep) System.Threading.Thread.Sleep(3);
-            char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            char[] Pattern = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
             string result = "";
             int n = Pattern.Length;
             System.Random random = new Random(~unchecked((int)DateTime.Now.Ticks));
@@ -75,7 +72,7 @@ namespace MvcBootstrap.ViewHelper
         /// <summary>
         /// 生成随机纯字母随机数
         /// </summary>
-        /// <param name="IntStr">生成长度</param>
+        /// <param name="Length">生成长度</param>
         public static string Str_char(int Length)
         {
             return Str_char(Length, false);
@@ -89,7 +86,7 @@ namespace MvcBootstrap.ViewHelper
         public static string Str_char(int Length, bool Sleep)
         {
             if (Sleep) System.Threading.Thread.Sleep(3);
-            char[] Pattern = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            char[] Pattern = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
             string result = "";
             int n = Pattern.Length;
             System.Random random = new Random(~unchecked((int)DateTime.Now.Ticks));
@@ -242,7 +239,7 @@ namespace MvcBootstrap.ViewHelper
         /// </summary>
         /// <param name="srcBmp">图片路径</param>
         /// <param name="bXDir">如果扭曲则选择为True</param>
-        /// <param name="nMultValue">波形的幅度倍数，越大扭曲的程度越高,一般为3</param>
+        /// <param name="dMultValue">波形的幅度倍数，越大扭曲的程度越高,一般为3</param>
         /// <param name="dPhase">波形的起始相位,取值区间[0-2*PI)</param>
         public System.Drawing.Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
         {
@@ -251,13 +248,13 @@ namespace MvcBootstrap.ViewHelper
             Graphics graph = Graphics.FromImage(destBmp);
             graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
             graph.Dispose();
-            double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
+            double dBaseAxisLen = bXDir ? destBmp.Height : destBmp.Width;
             for (int i = 0; i < destBmp.Width; i++)
             {
                 for (int j = 0; j < destBmp.Height; j++)
                 {
                     double dx = 0;
-                    dx = bXDir ? (PI * (double)j) / dBaseAxisLen : (PI * (double)i) / dBaseAxisLen;
+                    dx = bXDir ? (PI * j) / dBaseAxisLen : (PI * i) / dBaseAxisLen;
                     dx += dPhase;
                     double dy = Math.Sin(dx);
                     int nOldX = 0, nOldY = 0;

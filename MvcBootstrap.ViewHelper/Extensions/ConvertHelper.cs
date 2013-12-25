@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 public static class ConvertHelper
 {
@@ -27,9 +24,9 @@ public static class ConvertHelper
         }
         try
         {
-            return new DateTime?(Convert.ToDateTime(obj));
+            return Convert.ToDateTime(obj);
         }
-        catch (ArgumentNullException ex)
+        catch (ArgumentNullException)
         {
             return null;
         }
@@ -79,7 +76,7 @@ public static class ConvertHelper
         {
             return null;
         }
-        return new int?(ObjToInt(obj));
+        return ObjToInt(obj);
     }
 
     public static string ObjToStr(this object obj)
@@ -125,6 +122,6 @@ public static class ConvertHelper
         {
             return null;
         }
-        return new decimal?(ObjToDecimal(obj));
+        return ObjToDecimal(obj);
     }
 }

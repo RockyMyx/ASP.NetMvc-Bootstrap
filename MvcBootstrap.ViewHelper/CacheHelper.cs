@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using System.Web;
 using System.Web.Caching;
-using System.Collections;
 
 public class CacheHelper
 {
@@ -46,10 +44,8 @@ public class CacheHelper
         {
             return HttpRuntime.Cache.Remove(key);
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 
     public static void RemoveAll()

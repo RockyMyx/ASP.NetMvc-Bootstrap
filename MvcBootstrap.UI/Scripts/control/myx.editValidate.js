@@ -10,7 +10,7 @@ var mValidate = {
         return /^.{6,15}$/.test(value);
     },
     pwdLevel: function (value) {
-        var charMode = function (c) {
+        var charMode = function(c) {
             if (c >= 48 && c <= 57) //数字
                 return 1;
             else if (c >= 65 && c <= 90) //大写字母
@@ -19,7 +19,7 @@ var mValidate = {
                 return 2;
             else
                 return 4; //特殊字符
-        }
+        };
         var modes, level = 0;
         for (var i = 0; i < value.length; i++) {
             modes |= charMode(value.charCodeAt(i));

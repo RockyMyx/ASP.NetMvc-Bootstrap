@@ -19,7 +19,7 @@ var jPage = (function ($) {
             return false;
         }
         else if (form.find('.form-error').length > 0) {
-            alert('表单信息输入有误，请检查后重新提交！')
+            alert('表单信息输入有误，请检查后重新提交！');
             return false;
         }
 
@@ -27,59 +27,57 @@ var jPage = (function ($) {
     };
 
     //展现搜索结果
-    page.showSearch = function (result) {
+    page.showSearch = function(result) {
         if (result.length != 0) {
             $('#js-table').html(result);
             $(".pagination").pagination($('#js-table tbody').find('tr').length);
             $("#js-table tbody tr:gt(" + (pageSize - 1) + ")").hide().end();
-        }
-        else {
+        } else {
             $('#js-table').empty();
             $('.pagination').empty().html('没有相关信息！').show();
         }
-    }
+    };
 
     //获得当前的Controller名，如.../Module/Index，则controller为Module
     var beforeController = location.href.substring(0, location.href.lastIndexOf('/'));
     var controller = beforeController.substring(beforeController.lastIndexOf('/') + 1).capitalize();
 
-    page.getController = function () {
+    page.getController = function() {
         return controller;
-    }
+    };
 
-    page.getUrl = function () {
+    page.getUrl = function() {
         if (!arguments[0]) {
-            alert('Ajax操作Url无效')
-        }
-        else {
+            alert('Ajax操作Url无效');
+        } else {
             return '/' + controller + '/' + arguments[0];
         }
-    }
+    };
 
     //选中表格行的ID
     var checkId;
 
-    page.getCheckId = function () {
+    page.getCheckId = function() {
         return checkId;
-    }
+    };
 
-    page.setCheckId = function (id) {
+    page.setCheckId = function(id) {
         checkId = id;
-    }
+    };
 
     //删除表格行的ID
     var deleteId = [];
 
-    page.setDeleteId = function (id) {
+    page.setDeleteId = function(id) {
         if (deleteId.length > 0) {
             deleteId = [];
         }
         deleteId.push(id);
-    }
+    };
 
-    page.getDeleteId = function () {
+    page.getDeleteId = function() {
         return deleteId;
-    }
+    };
 
     return page;
 })(jQuery);
@@ -186,7 +184,7 @@ $(document).ready(function () {
 function bindTable() {
     /****************************表格排序处理*****************************/
     $("#js-table").each(function () {
-        $table = $(this);
+        var $table = $(this);
         $table.alternateRowColors();
         $("th", $table).each(function (column) {
             var findSortKey;
@@ -253,7 +251,7 @@ function bindTable() {
     var beforeEditInfo = [];
     var dataInfo = {};
 
-    $('#js-table').find('th').click(function (e) {
+    $('#js-table').find('th').click(function () {
         if ($(this).get(0).className.indexOf('sort') != -1) {
             if (!$(this).hasClass('sort-down')) {
                 $(this).removeClass('sort-up')
@@ -379,7 +377,7 @@ function bindTable() {
                             var currentContent;
                             for (var i = 0; i < count; i++) {
                                 currentTd = tds.eq(i);
-                                currentContent = result[currentTd.attr('key')]
+                                currentContent = result[currentTd.attr('key')];
                                 if (currentContent !== undefined) {
                                     if (currentTd.attr('class') == 'js-bool') {
                                         if (dataInfo[currentTd.attr('key')] == 1) {
@@ -433,7 +431,7 @@ function bindTable() {
 /****************************弹出模态窗口*****************************/
 
 //模态窗口展现事件
-$('.modal').on('shown', function (e) {
+$('.modal').on('shown', function () {
     var modal = $(this);
     modal.css('margin-top', (modal.outerHeight() / 2) * -1.3)
          .css('margin-left', (modal.outerWidth() / 2) * -1);
@@ -488,7 +486,7 @@ $('#js-btn-toolbar-add').on('click', function () {
 
 //工具栏删除按钮点击事件
 //unbind为了解决弹出多次confirm的问题
-$('#js-btn-toolbar-delete').unbind('click').bind('click', function (e) {
+$('#js-btn-toolbar-delete').unbind('click').bind('click', function () {
     var trs = $('.table tbody').find('tr');
     var deletetd, ids = [];
     for (var i = 0; i < trs.length; i++) {

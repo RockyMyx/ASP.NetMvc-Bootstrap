@@ -13,7 +13,7 @@ Params  : scope：   指定美化的select
           noscroll：强制下拉框不出现滚动条
 **/
 (function ($) {
-    $.mCombox = function (options) {
+    $.mCombox = function(options) {
         var settings = {
             scope: '.js-combo',
             height: "200px",
@@ -30,21 +30,21 @@ Params  : scope：   指定美化的select
         if (selects.length > 0) {
             $("body").append("<div id='combo-data' style='position:absolute; display:none'></div>");
 
-            selects.each(function () {
+            selects.each(function() {
                 var select = this;
                 var input = $("<input type='text' readonly='readonly' class='combo-input' />")
-                            .attr("disabled", this.disabled)
-                            .css("display", $(this).css("display"))
-                            .css("width", parseInt($(this).css("width")) + "px")
-                            .css("height", parseInt($(this).css("height")) + "px")
-                            .val(this.options[this.selectedIndex].text)
-                            .insertAfter(this);
+                    .attr("disabled", this.disabled)
+                    .css("display", $(this).css("display"))
+                    .css("width", parseInt($(this).css("width")) + "px")
+                    .css("height", parseInt($(this).css("height")) + "px")
+                    .val(this.options[this.selectedIndex].text)
+                    .insertAfter(this);
 
                 this.style.display = "none";
 
-                input.on('click', function () {
+                input.on('click', function() {
                     var div = $("#combo-data")
-                              .empty();
+                        .empty();
 
                     //使用select标签的样式
                     if (settings.selClass) {
@@ -65,14 +65,14 @@ Params  : scope：   指定美化的select
                             .appendTo(div);
 
                         if (settings.opClass) {
-                            a.addClass(item.className)
+                            a.addClass(item.className);
                         }
 
                         if (i == select.selectedIndex) {
                             a.addClass("selected");
                         }
 
-                        a.on('click', function () {
+                        a.on('click', function() {
                             var n = $(this).index();
                             select.selectedIndex = n;
                             input.val(select.options[n].text);
@@ -92,9 +92,9 @@ Params  : scope：   指定美化的select
                     }
 
                     //如果有.onside修饰，弹出的选项层将在侧面，否则是在下面
-                    $(select).hasClass("onside")
-                             ? div.locateBeside(this, -2)
-                             : div.locateBelow(this);
+                    $(select).hasClass('onside')
+                        ? div.locateBeside(this, -2)
+                        : div.locateBelow(this);
 
                     if (window.activeSelect == select) {
                         div.slideToggle(100);
@@ -105,13 +105,13 @@ Params  : scope：   指定美化的select
                 });
             });
 
-            $(document).click(function (e) {
+            $(document).click(function(e) {
                 if (!$(e.target).is(".combo-input") && !$(e.target).is("#combo-data")) {
                     $("#combo-data").hide();
                 }
             });
         }
-    }
+    };
 })(jQuery);
 
 $.fn.extend({

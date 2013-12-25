@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
+using System.Text;
 
 public class MailHelper
 {
@@ -64,14 +63,16 @@ string content)
                 }
             }
 
-            SmtpClient smtp = new SmtpClient();
-            smtp.Credentials = new NetworkCredential(this._loginName, this._password);
-            smtp.Host = this._smtpService;
-            smtp.EnableSsl = this._enableSSL;
+            SmtpClient smtp = new SmtpClient
+            {
+                Credentials = new NetworkCredential(this._loginName, this._password),
+                Host = this._smtpService,
+                EnableSsl = this._enableSSL
+            };
             smtp.Send(mail);
             return true;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return false;
         }

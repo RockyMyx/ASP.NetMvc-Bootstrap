@@ -39,8 +39,8 @@
 		    <td class="js-readonly" key="Code" content="@item.Code">@item.Code</td>
 		    <td key="Url" content="@item.Url" type="notEmpty">@item.Url</td>
 		    <td key="Controller" content="@item.Controller" type="notEmpty">@item.Controller</td>
-            <td class="js-bool" key="IsEnable" content="@((bool)item.IsEnable ? "1" : "0")">
-            @if ((bool)item.IsEnable)
+            <td class="js-bool" key="IsEnable" content="@(item.IsEnable != null && (bool)item.IsEnable ? "1" : "0")">
+            @if (item.IsEnable != null && (bool)item.IsEnable)
             {
                 <img src="../../Images/enable.png" alt="可用" title="可用" />
             }

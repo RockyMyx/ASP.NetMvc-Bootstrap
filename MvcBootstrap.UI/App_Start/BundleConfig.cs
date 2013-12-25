@@ -1,6 +1,5 @@
-﻿using System.Web;
+﻿using System;
 using System.Web.Optimization;
-using System;
 
 namespace MvcBootstrap.UI
 {

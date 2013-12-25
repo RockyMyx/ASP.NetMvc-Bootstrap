@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 public class SessionHelper
 {
@@ -27,7 +24,7 @@ public class SessionHelper
 
     public static void Remove(string name)
     {
-        if (HttpContext.Current.Session[name] != null)
+        if (HttpContext.Current.Session != null && HttpContext.Current.Session[name] != null)
         {
             HttpContext.Current.Session[name] = null;
         }
