@@ -4,7 +4,7 @@ var visibleHeight = document.body.clientHeight;
 var left = document.getElementById('left');
 left.style.height = frame.style.height = visibleHeight - headerHeight - footerHeight + "px";
 
-/******************链接标签工具栏*****************************/
+/******************链接标签工具栏（可用，效果有待加强）*****************************/
 
 /*function clearActive(obj) {
     var currentActive = obj.find('.tab-active');

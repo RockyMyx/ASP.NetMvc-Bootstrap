@@ -58,6 +58,7 @@ function FillEditInfo(id) {
          $(".js-loading").hide();
      });
 };
+
 $('#js-btn-modal-search').on('click', function () {
     $.post(jPage.getUrl('AdvanceSearch'), $('#js-search-form').serialize())
      .done(function (result) {
