@@ -44,7 +44,7 @@ public static class ViewHelper
                 childBuilder.AppendFormat(childContent, child.Url, child.Code, child.Name);
             }
 
-            strBuilder.AppendFormat(childMenu, parent.Name + "-menu", childBuilder.ToString());
+            strBuilder.AppendFormat(childMenu, parent.Code + "-menu", childBuilder.ToString());
             childBuilder.Clear();
         }
 
