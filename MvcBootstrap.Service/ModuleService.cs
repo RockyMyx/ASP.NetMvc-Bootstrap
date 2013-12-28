@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using System.Text;
 
 namespace MvcBootstrap.Service
 {
@@ -79,6 +80,36 @@ namespace MvcBootstrap.Service
             }
 
             return parentModules;
+        }
+
+        public Module GetModuleInfo(FormCollection formInfo)
+        {
+            Module module = new Module
+            {
+                ID = formInfo["ID"].ObjToInt(),
+                Name = formInfo["Name"].ObjToStr(),
+                Code = formInfo["Code"].ObjToStr(),
+                Controller = formInfo["Controller"].ObjToStr(),
+                IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
+            };
+            if (formInfo["ParentId"] != "NULL")
+            {
+                module.ParentId = formInfo["ParentId"].ObjToInt();
+            }
+
+            List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
+            if (operations.Count > 0)
+            {
+                StringBuilder strOperation = new StringBuilder();
+                foreach (string operation in operations)
+                {
+                    strOperation.Append(operation.Replace("op", "") + ",");
+                }
+
+                module.Operations = strOperation.Remove(strOperation.Length - 1, 1).ToString();
+            }
+
+            return module;
         }
     }
 }

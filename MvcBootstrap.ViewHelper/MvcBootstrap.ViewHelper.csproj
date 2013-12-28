@@ -36,12 +36,10 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MVC\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,9 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheHelper.cs" />
-    <Compile Include="Extensions\ControllerContextHelper.cs" />
-    <Compile Include="Extensions\ConvertHelper.cs" />
-    <Compile Include="Extensions\FormHelper.cs" />
     <Compile Include="MailHelper.cs" />
     <Compile Include="NetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,7 +66,7 @@
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
       <Project>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</Project>
-      <Name>MvcBootstrap.Service %28MvcBootstrap.Service\MvcBootstrap.Service%29</Name>
+      <Name>MvcBootstrap.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

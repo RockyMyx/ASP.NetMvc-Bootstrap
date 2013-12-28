@@ -1,6 +1,7 @@
 ﻿using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using System.Web.Mvc;
 
 namespace MvcBootstrap.Service
 {
@@ -9,6 +10,18 @@ namespace MvcBootstrap.Service
         protected override void SetCurrentDao()
         {
             base.dao = new RoleDao();
+        }
+
+        public Role GetRoleInfo(FormCollection formInfo)
+        {
+            Role role = new Role
+            {
+                Name = formInfo["Name"].ObjToStr(),
+                Remark = formInfo["Remark"].ObjToStr(),
+                IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
+            };
+
+            return role;
         }
     }
 }

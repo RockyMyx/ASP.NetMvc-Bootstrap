@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0B6D24B6-03CC-46AA-B17F-D3716FB45839}</ProjectGuid>
+    <ProjectGuid>{22DFFA82-1789-431D-A01E-A4AE53698FFF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcBootstrap.Filters</RootNamespace>
-    <AssemblyName>MvcBootstrap.Filters</AssemblyName>
+    <RootNamespace>MvcBootStrap.Extension</RootNamespace>
+    <AssemblyName>MvcBootStrap.Extension</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,12 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -51,36 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorize\BrowseAuthorizeAttribute.cs" />
-    <Compile Include="Authorize\CheckLoginAttribute.cs" />
-    <Compile Include="Authorize\OperationAuthorizeAttribute.cs" />
-    <Compile Include="Error\AjaxExceptionAttribute.cs" />
-    <Compile Include="Error\MailErrorAttribute.cs" />
-    <Compile Include="Log\DBLogErrorAttribute.cs" />
-    <Compile Include="Log\LocalLogErrorAttribute.cs" />
+    <Compile Include="ControllerContextHelper.cs" />
+    <Compile Include="ConvertHelper.cs" />
+    <Compile Include="GenericHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj">
-      <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
-      <Name>MvcBootstrap.EFModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcBootStrap.Extension\MvcBootStrap.Extension.csproj">
-      <Project>{22DFFA82-1789-431D-A01E-A4AE53698FFF}</Project>
-      <Name>MvcBootStrap.Extension</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcBootstrap.IDAO\MvcBootstrap.IDAO.csproj">
-      <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
-      <Name>MvcBootstrap.IDAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
-      <Project>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</Project>
-      <Name>MvcBootstrap.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcBootstrap.ViewHelper\MvcBootstrap.ViewHelper.csproj">
-      <Project>{F941FDA0-4E85-4D39-8973-DCBD9A392742}</Project>
-      <Name>MvcBootstrap.ViewHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

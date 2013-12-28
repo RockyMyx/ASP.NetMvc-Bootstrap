@@ -9,68 +9,68 @@ namespace MvcBootstrap.Controllers
 {
     public class ModuleController : ManageController
     {
-        ModuleService service = new ModuleService();
+        ModuleService moduleService = new ModuleService();
 
         protected override int DataCount
         {
-            get { return service.GetEntitiesCount(); }
+            get { return moduleService.GetEntitiesCount(); }
         }
 
         public override ActionResult Index()
         {
-            ViewData["ParentId"] = service.GetModuleSelect();
-            var result = service.GetPagingInfo(base.PageSize);
+            ViewData["ParentId"] = moduleService.GetModuleSelect();
+            var result = moduleService.GetPagingInfo(base.PageSize);
             return View(result);
         }
 
         [HttpPost]
         public override ActionResult Index(int? pageIndex)
         {
-            ViewData["ParentId"] = service.GetModuleSelect();
+            ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<Module> result = service.GetPagingInfo(index, base.PageSize);
+            IEnumerable<Module> result = moduleService.GetPagingInfo(index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
         [HttpPost]
         public override void Update(FormCollection formInfo)
         {
-            Module module = FormHelper.GetModuleInfo(formInfo);
-            service.Update(module);
+            Module module = moduleService.GetModuleInfo(formInfo);
+            moduleService.Update(module);
         }
 
         [HttpPost]
         public override void Delete(List<int> ids)
         {
-            service.Delete(ids);
+            moduleService.Delete(ids);
         }
 
         [HttpPost]
         public override void Create(FormCollection formInfo)
         {
-            Module module = FormHelper.GetModuleInfo(formInfo);
-            service.Create(module);
+            Module module = moduleService.GetModuleInfo(formInfo);
+            moduleService.Create(module);
         }
 
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Module> result = service.GetEntities(m => m.Name.Contains(name));
+            IEnumerable<Module> result = moduleService.GetEntities(m => m.Name.Contains(name));
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_ModuleGrid", result);
         }
 
         public ActionResult Get(int id)
         {
-            Module module = service.GetEntity(m => m.ID == id);
+            Module module = moduleService.GetEntity(m => m.ID == id);
             return Json(module, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
-            Module module = FormHelper.GetModuleInfo(searchFormInfo);
-            IQueryable<Module> search = service.GetSortedModules();
+            Module module = moduleService.GetModuleInfo(searchFormInfo);
+            IQueryable<Module> search = moduleService.GetSortedModules();
             if (!string.IsNullOrEmpty(module.Name))
             {
                 search = search.Where(m => m.Name.Contains(module.Name));

@@ -45,7 +45,7 @@ namespace MvcBootstrap.Controllers
 
         public override void Create(FormCollection formInfo)
         {
-            Role role = FormHelper.GetRoleInfo(formInfo);
+            Role role = roleService.GetRoleInfo(formInfo);
             role.CreateDate = DateTime.Now;
             //ToTest
             //role.CreateUserID = Convert.ToInt32(Session["UserID"]);

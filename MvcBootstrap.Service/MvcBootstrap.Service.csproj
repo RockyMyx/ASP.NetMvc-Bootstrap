@@ -62,6 +62,10 @@
       <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
       <Name>MvcBootstrap.EFModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcBootStrap.Extension\MvcBootStrap.Extension.csproj">
+      <Project>{22DFFA82-1789-431D-A01E-A4AE53698FFF}</Project>
+      <Name>MvcBootStrap.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.IDAO\MvcBootstrap.IDAO.csproj">
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>

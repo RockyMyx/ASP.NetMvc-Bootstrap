@@ -384,7 +384,7 @@
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
       <Project>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</Project>
-      <Name>MvcBootstrap.Service %28MvcBootstrap.Service\MvcBootstrap.Service%29</Name>
+      <Name>MvcBootstrap.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.ViewHelper\MvcBootstrap.ViewHelper.csproj">
       <Project>{F941FDA0-4E85-4D39-8973-DCBD9A392742}</Project>
