@@ -5,6 +5,7 @@ using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
 using System.Text;
+using System;
 
 namespace MvcBootstrap.Service
 {
@@ -20,66 +21,49 @@ namespace MvcBootstrap.Service
             return base.dao.GetSortedModules();
         }
 
-        public int GetModuleIdByName(string controllerName)
-        {
-            Module module = base.dao.GetEntity(m => m.Controller == controllerName);
-            return module.ID;
-        }
-
         public int GetModuleParentId(int moduleId)
         {
-            return base.dao.GetModuleParentId(moduleId);
+            IEnumerable<Module> modules = base.dao.GetAll();
+            return Convert.ToInt32(modules.Where(m => m.ID == moduleId)
+                                          .Select(m => m.ParentId)
+                                          .Single());
+        }
+
+        public int GetModuleIdByName(string controllerName)
+        {
+            return base.dao.GetEntity(m => m.Controller == controllerName).ID;
         }
 
         public IList<Module> GetChildModules(int parentId)
         {
             IEnumerable<Module> allModules = base.dao.GetAll();
             IList<Module> childModules = new List<Module>();
-            foreach (Module module in allModules)
-            {
-                if (module.ParentId != null && module.ParentId == parentId)
-                {
-                    childModules.Add(module);
-                }
-            }
-
+            allModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId, 
+                                 m => childModules.Add(m));
             return childModules;
+        }
+
+        public IList<Module> GetParentModules()
+        {
+            IEnumerable<Module> allModules = base.dao.GetAll();
+            IList<Module> parentModules = new List<Module>();
+            allModules.Enumerate(m => m.ParentId == null,
+                                 m => parentModules.Add(m));
+            return parentModules;
         }
 
         public IList<SelectListItem> GetModuleSelect()
         {
             IEnumerable<Module> modules = base.dao.GetAll();
             IList<SelectListItem> moduleList = new List<SelectListItem>();
-            int isParent;
             moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
-            foreach (Module module in modules)
-            {
-                if (!int.TryParse(module.ParentId.ToString(), out isParent))
-                {
-                    moduleList.Add(new SelectListItem
-                    {
-                        Text = module.Name,
-                        Value = module.ID.ToString()
-                    });
-                }
-            }
-
+            modules.Enumerate(m => m.ParentId == null,
+                              m => moduleList.Add(new SelectListItem
+                              {
+                                  Text = m.Name,
+                                  Value = m.ID.ToString()
+                              }));
             return moduleList;
-        }
-
-        public IList<Module> GetParentModules()
-        {
-            IEnumerable<Module> allModules = base.dao.GetAll().ToList();
-            IList<Module> parentModules = new List<Module>();
-            foreach (Module module in allModules)
-            {
-                if (module.ParentId == null)
-                {
-                    parentModules.Add(module);
-                }
-            }
-
-            return parentModules;
         }
 
         public Module GetModuleInfo(FormCollection formInfo)
