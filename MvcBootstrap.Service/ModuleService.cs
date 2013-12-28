@@ -11,7 +11,7 @@ namespace MvcBootstrap.Service
     {
         protected override void SetCurrentDao()
         {
-            base.dao = new ModuleDao();  
+            base.dao = new ModuleDao();
         }
 
         public IQueryable<Module> GetSortedModules()
@@ -28,6 +28,21 @@ namespace MvcBootstrap.Service
         public int GetModuleParentId(int moduleId)
         {
             return base.dao.GetModuleParentId(moduleId);
+        }
+
+        public IList<Module> GetChildModules(int parentId)
+        {
+            IEnumerable<Module> allModules = base.dao.GetAll();
+            IList<Module> childModules = new List<Module>();
+            foreach (Module module in allModules)
+            {
+                if (module.ParentId != null && module.ParentId == parentId)
+                {
+                    childModules.Add(module);
+                }
+            }
+
+            return childModules;
         }
 
         public IList<SelectListItem> GetModuleSelect()

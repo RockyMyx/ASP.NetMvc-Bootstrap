@@ -38,7 +38,7 @@ public static class ViewHelper
         foreach (var parent in parentModules)
         {
             strBuilder.AppendFormat(parentMenu, parent.Code + "-menu", parent.Code, parent.Name);
-            childModules = moduleService.GetEntities(m => m.ParentId == parent.ID);
+            childModules = moduleService.GetChildModules(parent.ID);
             foreach (var child in childModules)
             {
                 childBuilder.AppendFormat(childContent, child.Url, child.Code, child.Name);

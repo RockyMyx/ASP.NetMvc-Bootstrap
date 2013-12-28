@@ -29,7 +29,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetModuleTree().Where(whereExp).ToList();
+                return db.GetModuleTree().AsQueryable().Where(whereExp).ToList();
             }
         }
 

@@ -71,7 +71,7 @@
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
       <Project>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</Project>
-      <Name>MvcBootstrap.Service</Name>
+      <Name>MvcBootstrap.Service %28MvcBootstrap.Service\MvcBootstrap.Service%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
