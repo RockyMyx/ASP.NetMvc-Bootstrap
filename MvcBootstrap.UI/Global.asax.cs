@@ -25,5 +25,10 @@ namespace MvcBootstrap.UI
 
             log4net.Config.XmlConfigurator.Configure();
         }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            SessionHelper.Remove("haha");
+        }
     }
 }

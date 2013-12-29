@@ -27,25 +27,25 @@ namespace MvcBootstrap.Service
 
         public Dictionary<string, string> BuildPermission(int roleId)
         {
-            IEnumerable<PermissionViewModel> permissions = this.GetPermission(roleId);
-            if (permissions.Count() != 0)
+            IEnumerable<PermissionViewModel> rolePermissions = this.GetPermission(roleId);
+            if (rolePermissions.Count() != 0)
             {
-                Dictionary<string, string> result = new Dictionary<string, string>();
+                Dictionary<string, string> permissionDict = new Dictionary<string, string>();
                 string controllerId;
-                foreach (var permission in permissions)
+                foreach (var permission in rolePermissions)
                 {
                     controllerId = permission.ControllerID.ToString();
-                    if (!result.ContainsKey(controllerId))
+                    if (!permissionDict.ContainsKey(controllerId))
                     {
-                        result.Add(controllerId, permission.ActionID.ToString());
+                        permissionDict.Add(controllerId, permission.ActionID.ToString());
                     }
                     else
                     {
-                        result[controllerId] += permission.ActionID.ToString();
+                        permissionDict[controllerId] += permission.ActionID.ToString();
                     }
                 }
 
-                return result;
+                return permissionDict;
             }
 
             return null;
@@ -78,6 +78,7 @@ namespace MvcBootstrap.Service
                 }
             }
 
+            //创建对父节点的浏览权限
             foreach (int parentId in parentIds)
             {
                 base.dao.Create(new Permission
