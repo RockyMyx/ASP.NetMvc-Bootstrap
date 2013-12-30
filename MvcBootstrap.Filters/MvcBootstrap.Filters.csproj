@@ -47,6 +47,7 @@
     <Compile Include="Authorize\BrowseAuthorizeAttribute.cs" />
     <Compile Include="Authorize\CheckLoginAttribute.cs" />
     <Compile Include="Authorize\OperationAuthorizeAttribute.cs" />
+    <Compile Include="Cache\ResultCacheAttribute.cs" />
     <Compile Include="Error\AjaxExceptionAttribute.cs" />
     <Compile Include="Error\MailErrorAttribute.cs" />
     <Compile Include="Log\DBLogErrorAttribute.cs" />

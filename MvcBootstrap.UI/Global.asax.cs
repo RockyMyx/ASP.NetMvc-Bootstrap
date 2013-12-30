@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Caching;
 
 namespace MvcBootstrap.UI
 {
@@ -28,7 +29,9 @@ namespace MvcBootstrap.UI
 
         protected void Session_End(object sender, EventArgs e)
         {
-            SessionHelper.Remove("haha");
+            Cache cache = HttpRuntime.Cache;
+            cache.RemoveAll();
+            Session.RemoveAll();
         }
     }
 }
