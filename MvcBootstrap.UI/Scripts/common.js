@@ -66,17 +66,17 @@ var jPage = (function ($) {
     };
 
     //删除表格行的ID
-    var deleteId = [];
+    var rowId = [];
 
-    page.setDeleteId = function(id) {
-        if (deleteId.length > 0) {
-            deleteId = [];
+    page.setRowId = function(id) {
+        if (rowId.length > 0) {
+            rowId = [];
         }
-        deleteId.push(id);
+        rowId.push(id);
     };
 
-    page.getDeleteId = function() {
-        return deleteId;
+    page.getRowId = function () {
+        return rowId;
     };
 
     return page;
@@ -265,6 +265,7 @@ function bindTable() {
     });
 
     $('#js-table').find('tr').click(function (e) {
+        var id;
         //点击选择框
         if (e.target.type == 'checkbox' && e.target.checked) {
             jPage.setCheckId($(this).find('td').eq(0).html());
@@ -415,7 +416,15 @@ function bindTable() {
         }
         //表格行删除按钮点击事件
         else if (e.target.className == 'icon-remove') {
-            jPage.setDeleteId($(this).find('td').eq(0).html());
+            jPage.setRowId($(this).find('td').eq(0).html());
+        }
+        else if (e.target.className == 'icon-info-sign') {
+            id = $(this).find('td').eq(0).html();
+            $.getJSON('/Module/Get/' + id)
+             .done(function (data) {
+                 //TODO
+                 alert(data.Controller);
+             });
         }
     });
 
@@ -445,7 +454,7 @@ $('#js-btn-modal-delete').bind('click', function () {
         url: jPage.getUrl('Delete'),
         contentType: 'application/json',
         dataType: 'html',
-        data: JSON.stringify(jPage.getDeleteId())
+        data: JSON.stringify(jPage.getRowId())
     }).done(function () {
         paging.reset(-1);
     });

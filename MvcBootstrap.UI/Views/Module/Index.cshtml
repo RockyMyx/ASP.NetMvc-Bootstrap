@@ -193,6 +193,59 @@
         </div>
     </div>
 }
+@section DetailForm{
+    <div id="ModalDetail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <span class="label label-warning">详细信息</span>
+        </div>
+        <div class="modal-body">
+            <form id="js-detail-form">
+                <div class="row-fluid">
+                    <div class="control-group span6">
+                        <label class="control-label">
+                            上级菜单</label>
+                        <div class="controls">
+                        </div>
+                    </div>
+                    <div class="control-group span6" id="SController">
+                        <label class="control-label">
+                            Controller</label>
+                        <div class="controls">
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="control-group span6">
+                        <label class="control-label">
+                            模块名称</label>
+                        <div class="controls">
+                        </div>
+                    </div>
+                    <div class="control-group span6">
+                        <label class="control-label">
+                            模块代码</label>
+                        <div class="controls">
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="control-group span12">
+                        <label class="control-label">
+                            是否启用</label>
+                        <div class="controls">
+                           
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button class="btn btn-primary" id="js-btn-modal-search" data-dismiss="modal">搜索</button>
+        </div>
+    </div>
+}
 @section script{
     <script src="@Url.Content("~/Scripts/tool/pinyin.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/page/module.js")" type="text/javascript"></script>
