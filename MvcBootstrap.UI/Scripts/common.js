@@ -418,14 +418,6 @@ function bindTable() {
         else if (e.target.className == 'icon-remove') {
             jPage.setRowId($(this).find('td').eq(0).html());
         }
-        else if (e.target.className == 'icon-info-sign') {
-            id = $(this).find('td').eq(0).html();
-            $.getJSON('/Module/Get/' + id)
-             .done(function (data) {
-                 //TODO
-                 alert(data.Controller);
-             });
-        }
     });
 
     var isSelectAll = false;
@@ -475,6 +467,26 @@ $('#js-btn-modal-edit').on('click', function () {
 });
 
 /****************************工具栏按钮*****************************/
+//工具栏查看按钮点击事件
+$('#js-btn-toolbar-detail').on('click', function () {
+    var rowCheck = $('input:checked.js-check-cell');
+    var isCheckAll = $('#js-table').find('#js-check-all').prop('checked');
+    if (isCheckAll) {
+        alert('一次只能查看一条记录的详细信息！');
+    }
+    else if (rowCheck.length == 0) {
+        alert('请选择需要查看的记录！');
+    }
+    else if (rowCheck.length > 1) {
+        alert('一次只能查看一条记录的详细信息！');
+    }
+    else {
+        $.getJSON('/Module/Get/' + jPage.getCheckId())
+         .done(function (data) {
+             showDetail(data);
+         });
+    }
+});
 
 //工具栏添加按钮点击事件
 $('#js-btn-toolbar-add').on('click', function () {

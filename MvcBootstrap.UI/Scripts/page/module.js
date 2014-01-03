@@ -1,6 +1,7 @@
 ﻿$('.js-module-name').on('blur', function () {
     $('.js-module-code').val(makePy($(this).val()));
 });
+
 $('#ParentId').on('change', function () {
     if ($(this).get(0).selectedIndex != 0) {
         $('#Controller').show();
@@ -16,6 +17,7 @@ $('#ParentId').on('change', function () {
                                       .removeClass('form-init');
     }
 });
+
 $('#EditParentID').on('change', function () {
     if ($(this).get(0).selectedIndex != 0) {
         $('#EController').show();
@@ -26,6 +28,7 @@ $('#EditParentID').on('change', function () {
         $('#EController').find('.form-tip').toggleClass('form-init');
     }
 });
+
 function FillEditInfo(id) {
     $('#EditModuleID').val(id);
     $.getJSON('/Module/Get/' + id)
@@ -65,3 +68,11 @@ $('#js-btn-modal-search').on('click', function () {
          jPage.showSearch(result);
      });
 });
+
+function showDetail(data) {
+    $('#detailController').html(data.Controller);
+    $('#detailName').html(data.Name);
+    $('#detailCode').html(data.Code);
+    $('#detailIsEnable').html(data.IsEnable == 0 ? '是' : '否');
+    $('#detailCode').html(data.Code);
+}
