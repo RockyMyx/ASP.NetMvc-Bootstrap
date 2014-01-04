@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorize\BrowseAuthorizeAttribute.cs" />
-    <Compile Include="Authorize\CheckLoginAttribute.cs" />
+    <Compile Include="Authenticate\CheckLoginAttribute.cs" />
     <Compile Include="Authorize\OperationAuthorizeAttribute.cs" />
     <Compile Include="Cache\ResultCacheAttribute.cs" />
     <Compile Include="Error\AjaxExceptionAttribute.cs" />

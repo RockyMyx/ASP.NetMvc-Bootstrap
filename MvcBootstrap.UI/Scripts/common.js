@@ -69,9 +69,7 @@ var jPage = (function ($) {
     var rowId = [];
 
     page.setRowId = function(id) {
-        if (rowId.length > 0) {
-            rowId = [];
-        }
+        if (rowId.length > 0) rowId = [];
         rowId.push(id);
     };
 
@@ -470,15 +468,13 @@ $('#js-btn-modal-edit').on('click', function () {
 //工具栏查看按钮点击事件
 $('#js-btn-toolbar-detail').on('click', function () {
     var rowCheck = $('input:checked.js-check-cell');
-    var isCheckAll = $('#js-table').find('#js-check-all').prop('checked');
-    if (isCheckAll) {
-        alert('一次只能查看一条记录的详细信息！');
-    }
-    else if (rowCheck.length == 0) {
+    if (rowCheck.length == 0) {
         alert('请选择需要查看的记录！');
+        return false;
     }
     else if (rowCheck.length > 1) {
         alert('一次只能查看一条记录的详细信息！');
+        return false;
     }
     else {
         $.getJSON('/Module/Get/' + jPage.getCheckId())
