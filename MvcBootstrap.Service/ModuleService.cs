@@ -6,6 +6,8 @@ using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
 using System.Text;
 using System;
+using System.Web.Caching;
+using System.Web;
 
 namespace MvcBootstrap.Service
 {
@@ -21,9 +23,15 @@ namespace MvcBootstrap.Service
             return base.dao.GetSortedModules();
         }
 
+        private IEnumerable<Module> GetModuleCache()
+        {
+            Cache cache = HttpRuntime.Cache;
+            return cache.GetOrStore("AllModules", () => base.dao.GetAll());
+        }
+
         public int GetModuleParentId(int moduleId)
         {
-            IEnumerable<Module> modules = base.dao.GetAll();
+            IEnumerable<Module> modules = this.GetModuleCache();
             return Convert.ToInt32(modules.Where(m => m.ID == moduleId)
                                           .Select(m => m.ParentId)
                                           .Single());
@@ -36,7 +44,7 @@ namespace MvcBootstrap.Service
 
         public IList<Module> GetChildModules(int parentId)
         {
-            IEnumerable<Module> allModules = base.dao.GetAll();
+            IEnumerable<Module> allModules = this.GetModuleCache();
             IList<Module> childModules = new List<Module>();
             allModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId, 
                                  m => childModules.Add(m));
@@ -45,7 +53,7 @@ namespace MvcBootstrap.Service
 
         public IList<Module> GetParentModules()
         {
-            IEnumerable<Module> allModules = base.dao.GetAll();
+            IEnumerable<Module> allModules = this.GetModuleCache();
             IList<Module> parentModules = new List<Module>();
             allModules.Enumerate(m => m.ParentId == null,
                                  m => parentModules.Add(m));
@@ -54,7 +62,7 @@ namespace MvcBootstrap.Service
 
         public IList<SelectListItem> GetModuleSelect()
         {
-            IEnumerable<Module> modules = base.dao.GetAll();
+            IEnumerable<Module> modules = this.GetModuleCache();
             IList<SelectListItem> moduleList = new List<SelectListItem>();
             moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
             modules.Enumerate(m => m.ParentId == null,

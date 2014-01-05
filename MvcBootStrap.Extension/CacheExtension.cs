@@ -10,10 +10,6 @@ public static class CacheExtension
 {
     public const int DefaultCacheExpiration = 20;
 
-    // var user = HttpRuntime.Cache
-    //            .GetOrStore<User>
-    //            (string.Format("User{0}", _userId), 
-    //            () => Repository.GetUser(_userId));
     public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator)
     {
         return cache.GetOrStore(key, generator, DefaultCacheExpiration);
