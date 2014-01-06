@@ -33,11 +33,11 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public IQueryable<Module> GetSortedModules()
+        public IEnumerable<Module> GetSortedModules()
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.GetModuleTree().AsQueryable();
+                return db.GetModuleTree().AsQueryable().ToList();
             }
         }
     }

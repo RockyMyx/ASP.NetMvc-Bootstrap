@@ -55,7 +55,7 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Module> result = moduleService.GetEntities(m => m.Name.Contains(name));
+            IEnumerable<Module> result = moduleService.GetModuleCache().Where(m => m.Name.Contains(name));
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_ModuleGrid", result);
         }
@@ -70,7 +70,7 @@ namespace MvcBootstrap.Controllers
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
             Module module = moduleService.GetModuleInfo(searchFormInfo);
-            IQueryable<Module> search = moduleService.GetSortedModules();
+            IEnumerable<Module> search = moduleService.GetSortedModules();
             if (!string.IsNullOrEmpty(module.Name))
             {
                 search = search.Where(m => m.Name.Contains(module.Name));

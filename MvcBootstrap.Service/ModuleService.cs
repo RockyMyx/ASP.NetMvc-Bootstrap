@@ -18,12 +18,12 @@ namespace MvcBootstrap.Service
             base.dao = new ModuleDao();
         }
 
-        public IQueryable<Module> GetSortedModules()
+        public IEnumerable<Module> GetSortedModules()
         {
             return base.dao.GetSortedModules();
         }
 
-        private IEnumerable<Module> GetModuleCache()
+        public IEnumerable<Module> GetModuleCache()
         {
             Cache cache = HttpRuntime.Cache;
             return cache.GetOrStore("AllModules", () => base.dao.GetAll());
@@ -84,6 +84,7 @@ namespace MvcBootstrap.Service
                 Controller = formInfo["Controller"].ObjToStr(),
                 IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
             };
+
             if (formInfo["ParentId"] != "NULL")
             {
                 module.ParentId = formInfo["ParentId"].ObjToInt();

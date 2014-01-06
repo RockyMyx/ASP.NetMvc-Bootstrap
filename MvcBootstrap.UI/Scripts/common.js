@@ -479,7 +479,9 @@ $('#js-btn-toolbar-detail').on('click', function () {
     else {
         $.getJSON('/Module/Get/' + jPage.getCheckId())
          .done(function (data) {
-             showDetail(data);
+             if (window.showDetail) {
+                 showDetail(data);
+             }
          });
     }
 });
