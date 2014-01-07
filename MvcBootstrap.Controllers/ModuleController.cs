@@ -66,7 +66,6 @@ namespace MvcBootstrap.Controllers
             return Json(module, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
             Module module = moduleService.GetModuleInfo(searchFormInfo);

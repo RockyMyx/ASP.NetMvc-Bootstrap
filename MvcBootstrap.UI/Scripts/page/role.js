@@ -44,7 +44,7 @@ $('#js-btn-modal-permission').on('click', function () {
          alert("权限分配成功！");
      });
 });
-$('.js-checkall-permission').tooltip();
+//$('.js-checkall-permission').tooltip();
 $('.js-checkall-permission').on('click', function () {
     var sibCheckboxes = $(this).closest('form').find('input[type=checkbox]');
     var thisCheckbox;

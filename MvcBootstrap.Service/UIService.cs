@@ -63,7 +63,8 @@ public static class UIService
     /// </summary>
     public static MvcHtmlString DistributeOptions(this HtmlHelper helper, int moduleId)
     {
-        string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" data-toggle=\"tooltip\" data-placement=\"top\" data-original-title=\"全选\" /><label class=\"inline mr40 pl20\">{0}</label>";
+        //string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" data-toggle=\"tooltip\" data-placement=\"top\" data-original-title=\"全选\" /><label class=\"inline mr40 pl20\">{0}</label>";
+        string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" title=\"全选\" /><label class=\"inline mr40 pl20\">{0}</label>";
         string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" style=\"margin:-2px 8px 0 8px\" />{2}";
         StringBuilder opBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
