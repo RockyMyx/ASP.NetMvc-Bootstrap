@@ -13,6 +13,12 @@ namespace MvcBootstrap.Service
 {
     public class ModuleService : BaseService<Module, IModuleDao>
     {
+        Cache cache = null;
+        public ModuleService()
+        {
+            cache = HttpRuntime.Cache;
+        }
+
         protected override void SetCurrentDao()
         {
             base.dao = new ModuleDao();
@@ -25,8 +31,24 @@ namespace MvcBootstrap.Service
 
         public IEnumerable<Module> GetModuleCache()
         {
-            Cache cache = HttpRuntime.Cache;
             return cache.GetOrStore("AllModules", () => base.dao.GetAll());
+        }
+
+        public IEnumerable<Module> GetSearchModuleCache(IEnumerable<Module> searchResult = null, bool isReplace = false)
+        {
+            if (cache.IsExist("SearchModules"))
+            {
+                return cache.GetOrStore("SearchModules", () => searchResult, isReplace);
+            }
+            else
+            {
+                return cache.GetOrStore("SearchModules", () => GetModuleCache());
+            }
+        }
+
+        public IEnumerable<Module> GetSearchModules(IEnumerable<Module> modules, int pageIndex, int pageSize)
+        {
+            return base.dao.GetSearchModules(modules, pageIndex, pageSize);
         }
 
         public int GetModuleParentId(int moduleId)

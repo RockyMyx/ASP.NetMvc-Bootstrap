@@ -28,7 +28,9 @@ namespace MvcBootstrap.Controllers
         {
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<Module> result = moduleService.GetPagingInfo(index, base.PageSize);
+            //IEnumerable<Module> result = moduleService.GetPagingInfo(index, base.PageSize);
+            IEnumerable<Module> searchResult = moduleService.GetSearchModuleCache();
+            IEnumerable<Module> result = moduleService.GetSearchModules(searchResult, index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
@@ -87,7 +89,8 @@ namespace MvcBootstrap.Controllers
                 search = search.Where(m => m.ParentId == module.ParentId);
             }
 
-            List<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+            IList<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+            moduleService.GetSearchModuleCache(result, true);
             if (result.Count == 0)
             {
                 return new EmptyResult();

@@ -10,25 +10,25 @@ public static class CacheExtension
 {
     public const int DefaultCacheExpiration = 20;
 
-    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator)
+    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, bool isReplace = false)
     {
-        return cache.GetOrStore(key, generator, DefaultCacheExpiration);
+        return cache.GetOrStore(key, generator, DefaultCacheExpiration, isReplace);
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, double expireInMinutes)
+    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, double expireInMinutes, bool isReplace = false)
     {
-        return cache.GetOrStore(key, generator, DateTime.Now.AddMinutes(expireInMinutes), Cache.NoSlidingExpiration);
+        return cache.GetOrStore(key, generator, DateTime.Now.AddMinutes(expireInMinutes), Cache.NoSlidingExpiration, isReplace);
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, TimeSpan slidingExpiration)
+    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, TimeSpan slidingExpiration, bool isReplace = false)
     {
-        return cache.GetOrStore(key, generator, Cache.NoAbsoluteExpiration, slidingExpiration);
+        return cache.GetOrStore(key, generator, Cache.NoAbsoluteExpiration, slidingExpiration, isReplace);
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, DateTime absoluteExpiration, TimeSpan slidingExpiration)
+    public static T GetOrStore<T>(this Cache cache, string key, Func<T> generator, DateTime absoluteExpiration, TimeSpan slidingExpiration, bool isReplace = false)
     {
         var result = cache[key];
-        if (result == null)
+        if (result == null || isReplace)
         {
             result = generator != null ? generator() : default(T);
             cache.Insert(key, result, null, absoluteExpiration, slidingExpiration);
@@ -37,31 +37,36 @@ public static class CacheExtension
         return (T)result;
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, T obj)
+    public static T GetOrStore<T>(this Cache cache, string key, T obj, bool isReplace = false)
     {
-        return cache.GetOrStore(key, obj, DefaultCacheExpiration);
+        return cache.GetOrStore(key, obj, DefaultCacheExpiration, isReplace);
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, T obj, double expireInMinutes)
+    public static T GetOrStore<T>(this Cache cache, string key, T obj, double expireInMinutes, bool isReplace = false)
     {
-        return cache.GetOrStore(key, obj, DateTime.Now.AddMinutes(expireInMinutes), Cache.NoSlidingExpiration);
+        return cache.GetOrStore(key, obj, DateTime.Now.AddMinutes(expireInMinutes), Cache.NoSlidingExpiration, isReplace);
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, T obj, TimeSpan slidingExpiration)
+    public static T GetOrStore<T>(this Cache cache, string key, T obj, TimeSpan slidingExpiration, bool isReplace = false)
     {
-        return cache.GetOrStore(key, obj, Cache.NoAbsoluteExpiration, slidingExpiration);
+        return cache.GetOrStore(key, obj, Cache.NoAbsoluteExpiration, slidingExpiration, isReplace);
     }
 
-    public static T GetOrStore<T>(this Cache cache, string key, T obj, DateTime absoluteExpiration, TimeSpan slidingExpiration)
+    public static T GetOrStore<T>(this Cache cache, string key, T obj, DateTime absoluteExpiration, TimeSpan slidingExpiration, bool isReplace = false)
     {
         var result = cache[key];
-        if (result == null)
+        if (result == null || isReplace)
         {
             result = obj != null ? obj : default(T);
             cache.Insert(key, result, null, absoluteExpiration, slidingExpiration);
         }
 
         return (T)result;
+    }
+
+    public static bool IsExist(this Cache cache, string key)
+    {
+        return cache[key] != null;
     }
 
     public static void Remove(this Cache cache, string key)
