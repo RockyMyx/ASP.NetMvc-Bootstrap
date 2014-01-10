@@ -18,6 +18,7 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
+            moduleService.RemoveModuleCache();
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             var result = moduleService.GetPagingInfo(base.PageSize);
             return View(result);
@@ -28,7 +29,6 @@ namespace MvcBootstrap.Controllers
         {
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
-            //IEnumerable<Module> result = moduleService.GetPagingInfo(index, base.PageSize);
             IEnumerable<Module> searchResult = moduleService.GetSearchModuleCache();
             IEnumerable<Module> result = moduleService.GetSearchModules(searchResult, index, base.PageSize);
             return PartialView("_ModuleGrid", result);

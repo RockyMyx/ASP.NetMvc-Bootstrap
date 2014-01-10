@@ -534,11 +534,12 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function () {
 
 //工具栏刷新按钮点击事件
 $('#js-btn-toolbar-refresh').on('click', function () {
-    $.post(jPage.getUrl('Index'))
-     .done(function (result) {
-         $('#js-table').html(result);
-         paging.show();
-     });
+    //    $.post(jPage.getUrl('Index'))
+    //     .done(function (result) {
+    //         $('#js-table').html(result);
+    //         paging.show();
+    //     });
+    location.reload();
 });
 
 //工具栏搜索按钮点击事件

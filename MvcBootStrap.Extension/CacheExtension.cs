@@ -69,7 +69,7 @@ public static class CacheExtension
         return cache[key] != null;
     }
 
-    public static void Remove(this Cache cache, string key)
+    public static void RemoveExist(this Cache cache, string key)
     {
         if (cache[key] != null) cache.Remove(key);
     }

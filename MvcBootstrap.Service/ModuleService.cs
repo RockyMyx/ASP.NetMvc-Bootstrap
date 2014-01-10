@@ -34,6 +34,11 @@ namespace MvcBootstrap.Service
             return cache.GetOrStore("AllModules", () => base.dao.GetAll());
         }
 
+        public void RemoveModuleCache()
+        {
+            cache.RemoveExist("SearchModules");
+        }
+
         public IEnumerable<Module> GetSearchModuleCache(IEnumerable<Module> searchResult = null, bool isReplace = false)
         {
             if (cache.IsExist("SearchModules"))
