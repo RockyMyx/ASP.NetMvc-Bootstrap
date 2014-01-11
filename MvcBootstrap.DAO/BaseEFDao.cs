@@ -93,6 +93,16 @@ namespace MvcBootstrap.DAO
             }
         }
 
+        public virtual IEnumerable<T> GetSearchPagingInfo(IEnumerable<T> entities, int pageIndex, int pageSize)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return entities.Skip((pageIndex - 1) * pageSize)
+                               .Take(pageSize)
+                               .ToList();
+            }
+        }
+
         public virtual bool Create(T entity)
         {
             using (DBEntity db = new DBEntity())

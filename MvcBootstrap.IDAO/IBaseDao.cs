@@ -14,6 +14,7 @@ namespace MvcBootstrap.IDAO
         IEnumerable<T> GetPagingInfo(Expression<Func<T, int>> orderby, int pageIndex, int pageSize);
         IEnumerable<T> GetPagingInfo(int pageIndex, int pageSize);
         IEnumerable<T> GetPagingInfo(int pageSize);
+        IEnumerable<T> GetSearchPagingInfo(IEnumerable<T> entities, int pageIndex, int pageSize);
         bool Create(T entity);
         bool Update(T entity);
         bool Delete(T entity);

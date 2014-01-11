@@ -40,13 +40,5 @@ namespace MvcBootstrap.DAO
                 return db.GetModuleTree().AsQueryable().ToList();
             }
         }
-
-        public IEnumerable<Module> GetSearchModules(IEnumerable<Module> modules, int pageIndex, int pageSize)
-        {
-            using (DBEntity db = new DBEntity())
-            {
-                return modules.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-            }
-        }
     }
 }
