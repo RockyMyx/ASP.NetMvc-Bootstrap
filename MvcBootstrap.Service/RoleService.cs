@@ -1,12 +1,22 @@
-﻿using MvcBootstrap.DAO;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Caching;
+using System.Web.Mvc;
+using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
-using System.Web.Mvc;
 
 namespace MvcBootstrap.Service
 {
     public class RoleService : BaseService<Role, IRoleDao>
     {
+        public RoleService()
+        {
+            base.cacheAllKey = "AllRoles";
+            base.cacheSearchKey = "SearchRoles";
+        }
+
         protected override void SetCurrentDao()
         {
             base.dao = new RoleDao();

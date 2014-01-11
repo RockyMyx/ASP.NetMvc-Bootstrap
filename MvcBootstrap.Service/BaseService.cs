@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Objects.DataClasses;
 using System.Linq.Expressions;
 using MvcBootstrap.IDAO;
+using System.Web.Caching;
+using System.Web;
 
 namespace MvcBootstrap.Service
 {
@@ -12,10 +14,13 @@ namespace MvcBootstrap.Service
     {
         protected U dao = default(U);
 
+        protected Cache cache = null;
+
         protected abstract void SetCurrentDao();
 
         protected BaseService()
         {
+            cache = HttpRuntime.Cache;
             SetCurrentDao();
         }
 
@@ -56,6 +61,11 @@ namespace MvcBootstrap.Service
             return dao.GetPagingInfo(pageSize);
         }
 
+        public IEnumerable<T> GetSearchPagingInfo(IEnumerable<T> entities, int pageIndex, int pageSize)
+        {
+            return dao.GetSearchPagingInfo(entities, pageIndex, pageSize);
+        }
+
         public bool Create(T entity)
         {
             return dao.Create(entity);
@@ -74,6 +84,36 @@ namespace MvcBootstrap.Service
         public bool Delete(List<int> idList)
         {
             return dao.Delete(idList);
+        }
+
+        #endregion
+
+        #region Cache
+
+        public virtual string cacheAllKey { get; protected set; }
+        public virtual string cacheSearchKey { get; protected set; }
+
+        public virtual IEnumerable<T> GetEntityCache()
+        {
+            return string.IsNullOrWhiteSpace(cacheAllKey) ? null : 
+                   cache.GetOrStore(cacheAllKey, () => dao.GetAll());
+        }
+
+        public virtual void RemoveSearchCache()
+        {
+            cache.RemoveExist(cacheSearchKey);
+        }
+
+        public virtual IEnumerable<T> GetSearchCache(IEnumerable<T> searchResult = null, bool isReplace = false)
+        {
+            if (!string.IsNullOrWhiteSpace(cacheSearchKey))
+            {
+                Func<IEnumerable<T>> cacheModules = () => cache.IsExist(cacheSearchKey) ?
+                                                          searchResult : GetEntityCache();
+                return cache.GetOrStore(cacheSearchKey, cacheModules, isReplace);
+            }
+
+            return null;
         }
 
         #endregion

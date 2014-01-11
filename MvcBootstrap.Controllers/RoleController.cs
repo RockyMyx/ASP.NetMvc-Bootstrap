@@ -18,6 +18,7 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
+            roleService.RemoveSearchCache();
             var result = roleService.GetPagingInfo(base.PageSize);
             ModuleService moduleService = new ModuleService();
             ViewData["ParentModule"] = moduleService.GetParentModules();
@@ -28,7 +29,8 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IEnumerable<Role> result = roleService.GetPagingInfo(r => r.ID, index, base.PageSize);
+            IEnumerable<Role> result = roleService.GetSearchPagingInfo(
+                                       roleService.GetSearchCache(), index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
@@ -55,7 +57,9 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Role> result = roleService.GetEntities(m => m.Name.Contains(name));
+            IEnumerable<Role> result = roleService.GetSearchCache(
+                                       roleService.GetEntityCache().Where(m => m.Name.Contains(name)),
+                                       true);
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_RoleGrid", result);
         }

@@ -13,10 +13,10 @@ namespace MvcBootstrap.Service
 {
     public class ModuleService : BaseService<Module, IModuleDao>
     {
-        Cache cache = null;
         public ModuleService()
         {
-            cache = HttpRuntime.Cache;
+            base.cacheAllKey = "AllModules";
+            base.cacheSearchKey = "SearchModules";
         }
 
         protected override void SetCurrentDao()
@@ -29,36 +29,9 @@ namespace MvcBootstrap.Service
             return base.dao.GetSortedModules();
         }
 
-        public IEnumerable<Module> GetModuleCache()
-        {
-            return cache.GetOrStore("AllModules", () => base.dao.GetAll());
-        }
-
-        public void RemoveModuleCache()
-        {
-            cache.RemoveExist("SearchModules");
-        }
-
-        public IEnumerable<Module> GetSearchModuleCache(IEnumerable<Module> searchResult = null, bool isReplace = false)
-        {
-            if (cache.IsExist("SearchModules"))
-            {
-                return cache.GetOrStore("SearchModules", () => searchResult, isReplace);
-            }
-            else
-            {
-                return cache.GetOrStore("SearchModules", () => GetModuleCache());
-            }
-        }
-
-        public IEnumerable<Module> GetSearchModules(IEnumerable<Module> modules, int pageIndex, int pageSize)
-        {
-            return base.dao.GetSearchModules(modules, pageIndex, pageSize);
-        }
-
         public int GetModuleParentId(int moduleId)
         {
-            IEnumerable<Module> modules = this.GetModuleCache();
+            IEnumerable<Module> modules = this.GetEntityCache();
             return Convert.ToInt32(modules.Where(m => m.ID == moduleId)
                                           .Select(m => m.ParentId)
                                           .Single());
@@ -71,16 +44,16 @@ namespace MvcBootstrap.Service
 
         public IList<Module> GetChildModules(int parentId)
         {
-            IEnumerable<Module> allModules = this.GetModuleCache();
+            IEnumerable<Module> allModules = this.GetEntityCache();
             IList<Module> childModules = new List<Module>();
-            allModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId, 
+            allModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId,
                                  m => childModules.Add(m));
             return childModules;
         }
 
         public IList<Module> GetParentModules()
         {
-            IEnumerable<Module> allModules = this.GetModuleCache();
+            IEnumerable<Module> allModules = this.GetEntityCache();
             IList<Module> parentModules = new List<Module>();
             allModules.Enumerate(m => m.ParentId == null,
                                  m => parentModules.Add(m));
@@ -89,7 +62,7 @@ namespace MvcBootstrap.Service
 
         public IList<SelectListItem> GetModuleSelect()
         {
-            IEnumerable<Module> modules = this.GetModuleCache();
+            IEnumerable<Module> modules = this.GetEntityCache();
             IList<SelectListItem> moduleList = new List<SelectListItem>();
             moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
             modules.Enumerate(m => m.ParentId == null,

@@ -18,7 +18,7 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
-            moduleService.RemoveModuleCache();
+            moduleService.RemoveSearchCache();
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             var result = moduleService.GetPagingInfo(base.PageSize);
             return View(result);
@@ -29,8 +29,9 @@ namespace MvcBootstrap.Controllers
         {
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<Module> searchResult = moduleService.GetSearchModuleCache();
-            IEnumerable<Module> result = moduleService.GetSearchModules(searchResult, index, base.PageSize);
+            IEnumerable<Module> result = moduleService.GetSearchPagingInfo(
+                                         moduleService.GetSearchCache(), 
+                                         index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
@@ -57,7 +58,9 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Module> result = moduleService.GetModuleCache().Where(m => m.Name.Contains(name));
+            IEnumerable<Module> result = moduleService.GetSearchCache(
+                                         moduleService.GetEntityCache().Where(m => m.Name.Contains(name)),
+                                         true);
             if (result.Count() == 0) return new EmptyResult();
             return PartialView("_ModuleGrid", result);
         }
@@ -71,7 +74,7 @@ namespace MvcBootstrap.Controllers
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
             Module module = moduleService.GetModuleInfo(searchFormInfo);
-            IEnumerable<Module> search = moduleService.GetSortedModules();
+            IEnumerable<Module> search = moduleService.GetEntityCache();
             if (!string.IsNullOrEmpty(module.Name))
             {
                 search = search.Where(m => m.Name.Contains(module.Name));
@@ -90,7 +93,7 @@ namespace MvcBootstrap.Controllers
             }
 
             IList<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
-            moduleService.GetSearchModuleCache(result, true);
+            moduleService.GetSearchCache(result, true);
             if (result.Count == 0)
             {
                 return new EmptyResult();
