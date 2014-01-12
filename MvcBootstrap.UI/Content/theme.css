@@ -132,9 +132,13 @@
 }
 
 /********************表格头排序样式***********************/
-#js-table th
+.table th
 {
     cursor: pointer;
+}
+.table .th-check-all
+{
+    margin:-2px 5px 0 0;
 }
 .th-sort
 {
