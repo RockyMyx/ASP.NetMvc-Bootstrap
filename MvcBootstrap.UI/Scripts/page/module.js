@@ -2,22 +2,6 @@
     $('.js-module-code').val(makePy($(this).val()));
 });
 
-$('#ParentId').on('change', function () {
-    if ($(this).get(0).selectedIndex != 0) {
-        $('#Controller').show();
-        $('#Controller').find('.hide').show();
-        $('#Controller').find('.hide').next()
-                                      .addClass('form-init')
-                                      .html('请输入信息');
-    }
-    else {
-        $('#Controller').hide();
-        $('#Controller').find('.hide').hide();
-        $('#Controller').find('.hide').next()
-                                      .removeClass('form-init');
-    }
-});
-
 $('#EditParentID').on('change', function () {
     if ($(this).get(0).selectedIndex != 0) {
         $('#EController').show();
@@ -69,6 +53,7 @@ $('#js-btn-modal-search').on('click', function () {
      });
 });
 
+//实现common.js中的方法
 function showDetail(data) {
     $('#detailController').html(data.Controller);
     $('#detailName').html(data.Name);

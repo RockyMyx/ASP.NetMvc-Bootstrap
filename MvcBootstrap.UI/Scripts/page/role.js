@@ -1,4 +1,5 @@
 ﻿$('#myTab a:first').tab('show');
+
 $('#js-btn-toolbar-permission').on('click', function () {
     var roleCheck = $('input:checked.js-check-cell');
     var isCheckAll = $('#js-table').find('#js-check-all').prop('checked');
@@ -38,13 +39,14 @@ $('#js-btn-toolbar-permission').on('click', function () {
          });
     }
 });
+
 $('#js-btn-modal-permission').on('click', function () {
     $.post(jPage.getUrl('SetPermission/' + jPage.getCheckId()), $('.js-form-permission').serialize())
      .done(function () {
          alert("权限分配成功！");
      });
-});
-//$('.js-checkall-permission').tooltip();
+ });
+
 $('.js-checkall-permission').on('click', function () {
     var sibCheckboxes = $(this).closest('form').find('input[type=checkbox]');
     var thisCheckbox;
