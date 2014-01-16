@@ -4,6 +4,7 @@ using System.Text;
 using System.Web.Mvc;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.Service;
+using System.Web.SessionState;
 
 public static class UIService
 {
@@ -12,8 +13,11 @@ public static class UIService
     /// </summary>
     public static MvcHtmlString CreateMenu(this HtmlHelper helper)
     {
+        //HttpSessionState session = new HttpSessionState();
+        //session.Get("RoleId");
+
         //ToTest
-        int roleID = 1;
+        int roleID = 1; 
         string parentMenu = "<a href=\"#{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
         string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in\">{1}</ul>";
         string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
@@ -66,9 +70,11 @@ public static class UIService
         //string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" data-toggle=\"tooltip\" data-placement=\"top\" data-original-title=\"全选\" /><label class=\"inline mr40 pl20\">{0}</label>";
         string label = "<form class=\"js-form-permission\" name=\"setPermission\"><input type=\"checkbox\" class=\"js-checkall-permission\" style=\"margin-top:-2px\" title=\"全选\" /><label class=\"inline mr40 pl20\">{0}</label>";
         string checkbox = "<input type=\"checkbox\" name=\"{0}-{1}\" style=\"margin:-2px 8px 0 8px\" />{2}";
+
         StringBuilder opBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
         IEnumerable<Module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
+
         string[] operations = null;
         int actionId = 0;
         Operation operation = null;
@@ -85,6 +91,7 @@ public static class UIService
                     operation = operationService.GetEntity(o => o.ID == actionId);
                     opBuilder.AppendFormat(checkbox, module.ID, operation.ID, operation.Name);
                 }
+
                 opBuilder.Append("</form><p></p>");
             }
         }

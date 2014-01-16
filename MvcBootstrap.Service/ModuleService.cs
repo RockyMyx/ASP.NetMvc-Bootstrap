@@ -24,6 +24,11 @@ namespace MvcBootstrap.Service
             base.dao = new ModuleDao();
         }
 
+        private IEnumerable<Module> CacheModules
+        {
+            get { return this.GetEntityCache(); }
+        }
+
         public IEnumerable<Module> GetSortedModules()
         {
             return base.dao.GetSortedModules();
@@ -31,46 +36,42 @@ namespace MvcBootstrap.Service
 
         public int GetModuleParentId(int moduleId)
         {
-            IEnumerable<Module> modules = this.GetEntityCache();
-            return Convert.ToInt32(modules.Where(m => m.ID == moduleId)
-                                          .Select(m => m.ParentId)
-                                          .Single());
+            return Convert.ToInt32(CacheModules.Where(m => m.ID == moduleId)
+                                               .Select(m => m.ParentId)
+                                               .Single());
         }
 
         public int GetModuleIdByName(string controllerName)
         {
-            return base.dao.GetEntity(m => m.Controller == controllerName).ID;
+            return CacheModules.Where(m => m.Controller == controllerName).Single().ID;
         }
 
         public IList<Module> GetChildModules(int parentId)
         {
-            IEnumerable<Module> allModules = this.GetEntityCache();
             IList<Module> childModules = new List<Module>();
-            allModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId,
-                                 m => childModules.Add(m));
+            CacheModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId,
+                                   m => childModules.Add(m));
             return childModules;
         }
 
         public IList<Module> GetParentModules()
         {
-            IEnumerable<Module> allModules = this.GetEntityCache();
             IList<Module> parentModules = new List<Module>();
-            allModules.Enumerate(m => m.ParentId == null,
-                                 m => parentModules.Add(m));
+            CacheModules.Enumerate(m => m.ParentId == null,
+                                   m => parentModules.Add(m));
             return parentModules;
         }
 
         public IList<SelectListItem> GetModuleSelect()
         {
-            IEnumerable<Module> modules = this.GetEntityCache();
             IList<SelectListItem> moduleList = new List<SelectListItem>();
             moduleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
-            modules.Enumerate(m => m.ParentId == null,
-                              m => moduleList.Add(new SelectListItem
-                              {
-                                  Text = m.Name,
-                                  Value = m.ID.ToString()
-                              }));
+            CacheModules.Enumerate(m => m.ParentId == null,
+                                   m => moduleList.Add(new SelectListItem
+                                   {
+                                       Text = m.Name,
+                                       Value = m.ID.ToString()
+                                   }));
             return moduleList;
         }
 

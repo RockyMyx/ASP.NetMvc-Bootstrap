@@ -14,9 +14,9 @@ namespace MvcBootstrap.Service
     {
         protected U dao = default(U);
 
-        protected Cache cache = null;
-
         protected abstract void SetCurrentDao();
+
+        protected Cache cache = null;
 
         protected BaseService()
         {
