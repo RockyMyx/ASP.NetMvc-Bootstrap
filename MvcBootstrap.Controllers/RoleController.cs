@@ -42,7 +42,7 @@ namespace MvcBootstrap.Controllers
         public ActionResult Modify(Role role)
         {
             roleService.Update(role);
-            return Json(role);
+            return MyJson(role);
         }
 
         public override void Delete(List<int> ids)
