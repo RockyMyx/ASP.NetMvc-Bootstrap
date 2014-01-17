@@ -514,7 +514,7 @@ strongClass:      密码强度强图标样式
             if ($(this).attr('class') != undefined) {
                 valType = $(this).attr('class').split(' ')[0];
                 if (settings.config[valType] != undefined &&
-                (settings.func.empty(this.value) || $(this).next().hasClass(settings.errorClass))) {
+                   (settings.func.empty(this.value) || $(this).next().hasClass(settings.errorClass))) {
                     $(this).showFocus(settings.config[valType].focus);
                 }
             }
@@ -523,7 +523,6 @@ strongClass:      密码强度强图标样式
         if (settings.tipSweep) {
             inputs.on('blur', function() {
                 var value = $(this).val();
-
                 if (settings.config[valType] != undefined) {
                     if (settings.config[valType].empty && settings.func.empty(value)) {
                         $(this).showError(settings.config[valType]['empty']);

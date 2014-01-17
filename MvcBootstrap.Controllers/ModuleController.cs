@@ -16,9 +16,14 @@ namespace MvcBootstrap.Controllers
             get { return moduleService.GetEntitiesCount(); }
         }
 
+        public override void RemoveCache()
+        {
+            moduleService.RemoveEntityCache();
+            moduleService.RemoveSearchCache();
+        }
+
         public override ActionResult Index()
         {
-            moduleService.RemoveSearchCache();
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             var result = moduleService.GetPagingInfo(base.PageSize);
             return View(result);
@@ -30,8 +35,7 @@ namespace MvcBootstrap.Controllers
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
             IEnumerable<Module> result = moduleService.GetSearchPagingInfo(
-                                         moduleService.GetSearchCache(), 
-                                         index, base.PageSize);
+                                         moduleService.GetSearchCache(), index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 

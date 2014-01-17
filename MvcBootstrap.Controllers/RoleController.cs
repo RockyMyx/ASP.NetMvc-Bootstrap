@@ -16,9 +16,14 @@ namespace MvcBootstrap.Controllers
             get { return roleService.GetEntitiesCount(); }
         }
 
+        public override void RemoveCache()
+        {
+            roleService.RemoveEntityCache();
+            roleService.RemoveSearchCache();
+        }
+
         public override ActionResult Index()
         {
-            roleService.RemoveSearchCache();
             var result = roleService.GetPagingInfo(base.PageSize);
             ModuleService moduleService = new ModuleService();
             ViewData["ParentModule"] = moduleService.GetParentModules();

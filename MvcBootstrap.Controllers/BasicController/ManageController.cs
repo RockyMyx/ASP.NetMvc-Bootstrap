@@ -10,10 +10,13 @@ namespace MvcBootstrap.Controllers
         {
             ViewBag.dataCount = this.DataCount;
             ViewBag.pageSize = this.PageSize;
+            RemoveCache();
         }
 
         protected int PageSize { get { return 3; } }
         protected abstract int DataCount { get; }
+
+        public virtual void RemoveCache() { }
 
         public abstract ActionResult Index();
         [HttpPost]

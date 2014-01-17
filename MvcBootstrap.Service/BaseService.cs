@@ -99,6 +99,11 @@ namespace MvcBootstrap.Service
                    cache.GetOrStore(cacheAllKey, () => dao.GetAll());
         }
 
+        public virtual void RemoveEntityCache()
+        {
+            cache.RemoveExist(cacheAllKey);
+        }
+
         public virtual void RemoveSearchCache()
         {
             cache.RemoveExist(cacheSearchKey);
