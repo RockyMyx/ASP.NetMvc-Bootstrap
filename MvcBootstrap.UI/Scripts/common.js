@@ -27,7 +27,7 @@ var jPage = (function ($) {
     };
 
     //展现搜索结果
-    page.showSearch = function(result) {
+    page.showSearch = function (result) {
         if (result.length != 0) {
             $('#js-table').html(result);
             $(".pagination").pagination($('#js-table tbody').find('tr').length);
@@ -42,11 +42,11 @@ var jPage = (function ($) {
     var beforeController = location.href.substring(0, location.href.lastIndexOf('/'));
     var controller = beforeController.substring(beforeController.lastIndexOf('/') + 1).capitalize();
 
-    page.getController = function() {
+    page.getController = function () {
         return controller;
     };
 
-    page.getUrl = function() {
+    page.getUrl = function () {
         if (!arguments[0]) {
             alert('Ajax操作Url无效');
         } else {
@@ -57,18 +57,18 @@ var jPage = (function ($) {
     //选中表格行的ID
     var checkId;
 
-    page.getCheckId = function() {
+    page.getCheckId = function () {
         return checkId;
     };
 
-    page.setCheckId = function(id) {
+    page.setCheckId = function (id) {
         checkId = id;
     };
 
     //删除表格行的ID
     var rowId = [];
 
-    page.setRowId = function(id) {
+    page.setRowId = function (id) {
         if (rowId.length > 0) rowId = [];
         rowId.push(id);
     };
@@ -247,7 +247,6 @@ function bindTable() {
     var currentTd, input;
     var key, content;
     var beforeEditInfo = [];
-    var dataInfo = {};
 
     $('#js-table').find('th').click(function () {
         if ($(this).get(0).className.indexOf('sort') != -1) {
@@ -263,7 +262,7 @@ function bindTable() {
     });
 
     $('#js-table').find('tr').click(function (e) {
-        var id;
+        var id, dataInfo = {};
         //点击选择框
         if (e.target.type == 'checkbox' && e.target.checked) {
             jPage.setCheckId($(this).find('td').eq(0).html());
@@ -279,23 +278,23 @@ function bindTable() {
                 //生成编辑信息表单
                 for (var i = 1; i < tdLength - 1; i++) {
                     currentTd = tds.eq(i);
+                    beforeEditInfo.push(currentTd.html());
                     key = currentTd.attr('key');
                     content = currentTd.attr('content');
-                    beforeEditInfo.push(currentTd.html());
-                    if (currentTd.attr('class') == 'js-readonly') {
-                        input = '<input type="text" value="' + content + '" style="width:150px" readonly />';
+                    if (currentTd.attr('class') == 'js-check') {
+                        input = '<input type="checkbox" disabled />';
+                    }
+                    else if (currentTd.attr('class') == 'js-bool') {
+                        var shouldChecked = content == 1 ? "checked" : "";
+                        content = content == 1 ? "True" : "False";
+                        input = '<input type="checkbox" class="edit-check" content="' + content + '" key="' + key + '" ' + shouldChecked + '/>';
+                        dataInfo[key] = content;
                     }
                     else {
                         content = content === undefined ? "" : content;
-                        if (dataInfo[key] === undefined) {
-                            dataInfo[key] = content;
-                        }
-                        if (currentTd.attr('class') == 'js-bool') {
-                            var shouldChecked = dataInfo[currentTd.attr('key')] == 1 ? "checked" : "";
-                            input = '<input type="checkbox" class="edit-check" content="' + currentTd.attr('content') + '" key="' + key + '" ' + shouldChecked + '/>';
-                        }
-                        else if (currentTd.attr('class') == 'js-check') {
-                            input = '<input type="checkbox" disabled />';
+                        dataInfo[key] = content;
+                        if (currentTd.attr('class') == 'js-readonly') {
+                            input = '<input type="text" value="' + content + '" style="width:150px" readonly />';
                         }
                         else {
                             input = '<input type="text" class="edit-txt" value="' + content + '" style="width:150px" key="' + key + '" validate="' + currentTd.attr('type') + '" />';
@@ -307,7 +306,7 @@ function bindTable() {
 
                 //表格行选择CheckBox点击事件
                 $('.edit-check').on('click', function () {
-                    var ischecked = $(this).is(':checked') ? 1 : 0;
+                    var ischecked = $(this).is(':checked') ? 'True' : 'False';
                     dataInfo[$(this).attr('key')] = ischecked;
                     $(this).attr('content', ischecked);
                 });
@@ -371,28 +370,26 @@ function bindTable() {
                             //IE6、IE7默认不支持JSON.stringify，可以引入Scripts/my/json2.js解决此问题
                             data: JSON.stringify(dataInfo)
                         }).done(function (result) {
-                            result = JSON.parse(result);
+                            //result = JSON.parse(result);
+                            result = $.parseJSON(result);
                             var count = tds.length - 1;
                             var currentContent;
                             for (var i = 0; i < count; i++) {
                                 currentTd = tds.eq(i);
                                 currentContent = result[currentTd.attr('key')];
-                                if (currentContent !== undefined) {
-                                    if (currentTd.attr('class') == 'js-bool') {
-                                        if (dataInfo[currentTd.attr('key')] == 1) {
-                                            currentTd.html('<img src="../../Images/enable.png" />');
-                                        }
-                                        else {
-                                            currentTd.html('<img src="../../Images/disable.png" />');
-                                        }
+                                if (currentTd.attr('class') == 'js-bool') {
+                                    if (dataInfo[currentTd.attr('key')] == 'True') {
+                                        currentTd.attr('content', '1');
+                                        currentTd.html('<img src="../../Images/enable.png" />');
                                     }
                                     else {
-                                        currentTd.attr('content', currentContent);
-                                        currentTd.html(currentContent);
+                                        currentTd.attr('content', '0');
+                                        currentTd.html('<img src="../../Images/disable.png" />');
                                     }
                                 }
                                 else {
-                                    currentTd.html(beforeEditInfo[i]);
+                                    currentTd.attr('content', currentContent);
+                                    currentTd.html(currentContent);
                                 }
                             }
                             resetEditButton();
@@ -552,7 +549,7 @@ $('#js-btn-search').on('click', function () {
          .done(function (result) {
              jPage.showSearch(result);
          });
-     }
+    }
 });
 
 /****************************添加表单*****************************/
