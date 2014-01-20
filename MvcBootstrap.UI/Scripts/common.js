@@ -70,7 +70,7 @@ var jPage = (function ($) {
 
     page.setRowId = function (id) {
         if (rowId.length > 0) rowId = [];
-        rowId.push(id);
+        rowId[rowId.length] = id;
     };
 
     page.getRowId = function () {
@@ -273,12 +273,12 @@ function bindTable() {
                 var tdLength = $(this).find('td').length;
                 var tds = $(this).find('td');
                 dataInfo["ID"] = tds.eq(0).html();
-                beforeEditInfo.push(tds.eq(0).html());
+                beforeEditInfo[beforeEditInfo.length] = tds.eq(0).html();
 
                 //生成编辑信息表单
                 for (var i = 1; i < tdLength - 1; i++) {
                     currentTd = tds.eq(i);
-                    beforeEditInfo.push(currentTd.html());
+                    beforeEditInfo[beforeEditInfo.length] = currentTd.html();
                     key = currentTd.attr('key');
                     content = currentTd.attr('content');
                     if (currentTd.attr('class') == 'js-check') {
@@ -508,7 +508,7 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function () {
     for (var i = 0; i < trs.length; i++) {
         deletetd = trs.eq(i);
         if (deletetd.find('.js-check-cell').is(':checked')) {
-            ids.push(deletetd.find('td').eq(0).html());
+            ids[ids.length] = deletetd.find('td').eq(0).html();
         }
     }
     if (ids.length != 0) {
