@@ -14,7 +14,6 @@ namespace MvcBootstrap.Service
         public RoleService()
         {
             base.cacheAllKey = "AllRoles";
-            base.cacheSearchKey = "SearchRoles";
         }
 
         protected override void SetCurrentDao()

@@ -16,7 +16,6 @@ namespace MvcBootstrap.Service
         public ModuleService()
         {
             base.cacheAllKey = "AllModules";
-            base.cacheSearchKey = "SearchModules";
         }
 
         protected override void SetCurrentDao()

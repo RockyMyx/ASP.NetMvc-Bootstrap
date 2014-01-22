@@ -68,6 +68,7 @@ jQuery.fn.pagination = function (maxentries, opts) {
         * @param {int} page_id The new page number
         */
         function pageSelected(page_id, evt) {
+            evt = evt || window.event;
             current_page = page_id;
             //common.js记录页码
             paging.pageIndex = current_page;

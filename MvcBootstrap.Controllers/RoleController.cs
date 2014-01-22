@@ -19,7 +19,7 @@ namespace MvcBootstrap.Controllers
         public override void RemoveCache()
         {
             roleService.RemoveEntityCache();
-            roleService.RemoveSearchCache();
+            roleService.RemoveSearchResult();
         }
 
         public override ActionResult Index()
@@ -34,8 +34,9 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IEnumerable<Role> result = roleService.GetSearchPagingInfo(
-                                       roleService.GetSearchCache(), index, base.PageSize);
+            IEnumerable<Role> roleSearch = RoleService.SearchResult;
+            roleSearch = roleSearch ?? roleService.GetEntityCache();
+            IEnumerable<Role> result = roleService.GetSearchPagingInfo(roleSearch, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
@@ -62,11 +63,10 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Role> result = roleService.GetSearchCache(
-                                       roleService.GetEntityCache().Where(m => m.Name.Contains(name)),
-                                       true);
-            if (result.Count() == 0) return new EmptyResult();
-            return PartialView("_RoleGrid", result);
+            IEnumerable<Role> filterEntities = roleService.GetEntityCache().Where(m => m.Name.Contains(name));
+            IEnumerable<Role> searchResult = roleService.GetSearchResult(filterEntities, true);
+            if (searchResult.Count() == 0) return new EmptyResult();
+            return PartialView("_RoleGrid", searchResult);
         }
 
         public ActionResult GetPermission(int id)

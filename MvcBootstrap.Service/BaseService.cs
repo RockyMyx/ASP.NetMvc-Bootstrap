@@ -91,12 +91,12 @@ namespace MvcBootstrap.Service
         #region Cache
 
         public virtual string cacheAllKey { get; protected set; }
-        public virtual string cacheSearchKey { get; protected set; }
+        public static IEnumerable<T> SearchResult { get; private set; }
 
         public virtual IEnumerable<T> GetEntityCache()
         {
-            return string.IsNullOrWhiteSpace(cacheAllKey) ? null : 
-                   cache.GetOrStore(cacheAllKey, () => dao.GetAll());
+            return string.IsNullOrWhiteSpace(cacheAllKey) ? null :
+                   cache.GetOrStore(cacheAllKey, dao.GetAll());
         }
 
         public virtual void RemoveEntityCache()
@@ -104,21 +104,19 @@ namespace MvcBootstrap.Service
             cache.RemoveExist(cacheAllKey);
         }
 
-        public virtual void RemoveSearchCache()
+        public virtual void RemoveSearchResult()
         {
-            cache.RemoveExist(cacheSearchKey);
+            SearchResult = null;
         }
 
-        public virtual IEnumerable<T> GetSearchCache(IEnumerable<T> searchResult = null, bool isReplace = false)
+        public virtual IEnumerable<T> GetSearchResult(IEnumerable<T> filterEntities, bool isReplace = false)
         {
-            if (!string.IsNullOrWhiteSpace(cacheSearchKey))
+            if (SearchResult == null || isReplace)
             {
-                Func<IEnumerable<T>> cacheModules = () => cache.IsExist(cacheSearchKey) ?
-                                                          searchResult : GetEntityCache();
-                return cache.GetOrStore(cacheSearchKey, cacheModules, isReplace);
+                SearchResult = filterEntities;
             }
 
-            return null;
+            return filterEntities;
         }
 
         #endregion
