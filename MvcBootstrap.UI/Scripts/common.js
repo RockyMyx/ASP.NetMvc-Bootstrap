@@ -329,6 +329,7 @@ function bindTable() {
                             $('<span style="background-image:url(/Images/error.png);width:16px;height:16px;display:inline-block;margin-left:5px;" title="' + validationTip[validateType] + '"></span>').insertAfter($(this));
                         }
                         else {
+                            isCommit = true;
                             $(this).next().hide();
                             newtxt = $(this).val();
                             if (newtxt != oldtxt) {
