@@ -2,6 +2,7 @@
 using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using System.Web.Mvc;
 
 namespace MvcBootstrap.Service
 {
@@ -15,6 +16,17 @@ namespace MvcBootstrap.Service
         public IDictionary<int, string> GetOperations()
         {
             return base.dao.GetOperations();
+        }
+
+        public Operation GetOperationInfo(FormCollection formInfo)
+        {
+            Operation operation = new Operation
+            {
+                Name = formInfo["Name"].ObjToStr(),
+                Action = formInfo["Action"].ObjToStr(),
+            };
+
+            return operation;
         }
     }
 }

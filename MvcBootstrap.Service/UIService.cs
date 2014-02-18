@@ -19,12 +19,15 @@ public static class UIService
         //ToTest
         int roleID = 1; 
         string parentMenu = "<a href=\"#{0}\" class=\"nav-header\" data-toggle=\"collapse\"><i class=\"ico-menu ico-{1}\"></i>{2}</a>";
-        string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in\">{1}</ul>";
+        string childMenu = "<ul id=\"{0}\" class=\"nav nav-list collapse in pl20\">{1}</ul>";
         string childContent = "<li><a target=\"content\" href=\"/{0}\"><i class=\"ico-menu ico-{1}\"></i>{2}</a></li>";
         UserService userService = new UserService();
+        //获取可以浏览的菜单
         IEnumerable<UserBrowseViewModel> modules = userService.GetUserBrowse(roleID);
+        //获取父菜单
         IList<UserBrowseViewModel> parentModules = new List<UserBrowseViewModel>();
         modules.Enumerate(m => m.ParentId == null, m => parentModules.Add(m));
+        //获取子菜单
         IEnumerable<Module> childModules = null;
         StringBuilder menuBuilder = new StringBuilder();
         StringBuilder childBuilder = new StringBuilder();
