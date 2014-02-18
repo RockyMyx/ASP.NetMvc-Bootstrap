@@ -13,11 +13,6 @@ namespace MvcBootstrap.Service
 {
     public class ModuleService : BaseService<Module, IModuleDao>
     {
-        public ModuleService()
-        {
-            base.cacheAllKey = "AllModules";
-        }
-
         protected override void SetCurrentDao()
         {
             base.dao = new ModuleDao();
@@ -25,7 +20,7 @@ namespace MvcBootstrap.Service
 
         private IEnumerable<Module> CacheModules
         {
-            get { return this.GetEntityCache(); }
+            get { return this.GetAll(); }
         }
 
         public IEnumerable<Module> GetSortedModules()
@@ -81,7 +76,7 @@ namespace MvcBootstrap.Service
                 ID = formInfo["ID"].ObjToInt(),
                 Name = formInfo["Name"].ObjToStr(),
                 Code = formInfo["Code"].ObjToStr(),
-                Controller = formInfo["Controller"].ObjToStr(),
+                Url = formInfo["Url"].ObjToStr(),
                 IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
             };
 

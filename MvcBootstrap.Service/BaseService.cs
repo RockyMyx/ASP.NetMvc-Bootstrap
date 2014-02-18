@@ -13,14 +13,10 @@ namespace MvcBootstrap.Service
         where U : IBaseDao<T>
     {
         protected U dao = default(U);
-
         protected abstract void SetCurrentDao();
-
-        protected Cache cache = null;
 
         protected BaseService()
         {
-            cache = HttpRuntime.Cache;
             SetCurrentDao();
         }
 
@@ -84,39 +80,6 @@ namespace MvcBootstrap.Service
         public bool Delete(List<int> idList)
         {
             return dao.Delete(idList);
-        }
-
-        #endregion
-
-        #region Cache
-
-        public virtual string cacheAllKey { get; protected set; }
-        public static IEnumerable<T> SearchResult { get; private set; }
-
-        public virtual IEnumerable<T> GetEntityCache()
-        {
-            return string.IsNullOrWhiteSpace(cacheAllKey) ? null :
-                   cache.GetOrStore(cacheAllKey, dao.GetAll());
-        }
-
-        public virtual void RemoveEntityCache()
-        {
-            cache.RemoveExist(cacheAllKey);
-        }
-
-        public virtual void RemoveSearchResult()
-        {
-            SearchResult = null;
-        }
-
-        public virtual IEnumerable<T> GetSearchResult(IEnumerable<T> filterEntities, bool isReplace = false)
-        {
-            if (SearchResult == null || isReplace)
-            {
-                SearchResult = filterEntities;
-            }
-
-            return filterEntities;
         }
 
         #endregion

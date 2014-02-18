@@ -11,11 +11,6 @@ namespace MvcBootstrap.Service
 {
     public class RoleService : BaseService<Role, IRoleDao>
     {
-        public RoleService()
-        {
-            base.cacheAllKey = "AllRoles";
-        }
-
         protected override void SetCurrentDao()
         {
             base.dao = new RoleDao();
