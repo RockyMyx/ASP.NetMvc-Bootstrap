@@ -6,17 +6,22 @@ namespace MvcBootstrap.Controllers
     [OperationAuthorize]
     public abstract class ManageController : BaseController
     {
-        protected ManageController()
-        {
-            ViewBag.dataCount = this.DataCount;
-            ViewBag.pageSize = this.PageSize;
-            RemoveCache();
-        }
+        public string cacheAllKey = string.Empty;
+        public string cacheSearchKey = string.Empty;
 
         protected int PageSize { get { return 3; } }
         protected abstract int DataCount { get; }
 
-        public virtual void RemoveCache() { }
+        protected ManageController()
+        {
+            ViewData["DataCount"] = this.DataCount;
+            ViewData["PageSize"] = this.PageSize;
+        }
+
+        public void SetDetailButton()
+        {
+            ViewData["HasShowDetailButton"] = true;
+        }
 
         public abstract ActionResult Index();
         [HttpPost]

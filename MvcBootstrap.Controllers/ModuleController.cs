@@ -11,19 +11,22 @@ namespace MvcBootstrap.Controllers
     {
         ModuleService moduleService = new ModuleService();
 
+        public ModuleController()
+        {
+            base.cacheAllKey = "AllModules";
+            base.cacheSearchKey = "SearchModules";
+            base.SetDetailButton();
+        }
+
         protected override int DataCount
         {
             get { return moduleService.GetEntitiesCount(); }
         }
 
-        public override void RemoveCache()
-        {
-            moduleService.RemoveEntityCache();
-            moduleService.RemoveSearchCache();
-        }
-
         public override ActionResult Index()
         {
+            Session.Remove(cacheAllKey);
+            Session.Remove(cacheSearchKey);
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             var result = moduleService.GetPagingInfo(base.PageSize);
             return View(result);
@@ -34,8 +37,9 @@ namespace MvcBootstrap.Controllers
         {
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<Module> result = moduleService.GetSearchPagingInfo(
-                                         moduleService.GetSearchCache(), index, base.PageSize);
+            IEnumerable<Module> entities = (IEnumerable<Module>)Session[cacheSearchKey] ??
+                                           moduleService.GetAll();
+            IEnumerable<Module> result = moduleService.GetSearchPagingInfo(entities, index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
@@ -62,11 +66,10 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Module> result = moduleService.GetSearchCache(
-                                         moduleService.GetEntityCache().Where(m => m.Name.Contains(name)),
-                                         true);
-            if (result.Count() == 0) return new EmptyResult();
-            return PartialView("_ModuleGrid", result);
+            IEnumerable<Module> filterEntities = moduleService.GetAll().Where(m => m.Name.Contains(name));
+            Session[cacheSearchKey] = filterEntities;
+            if (filterEntities.Count() == 0) return new EmptyResult();
+            return PartialView("_ModuleGrid", filterEntities);
         }
 
         public ActionResult Get(int id)
@@ -78,32 +81,32 @@ namespace MvcBootstrap.Controllers
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
             Module module = moduleService.GetModuleInfo(searchFormInfo);
-            IEnumerable<Module> search = moduleService.GetEntityCache();
+            IEnumerable<Module> search = moduleService.GetAll().ToList();
             if (!string.IsNullOrEmpty(module.Name))
             {
                 search = search.Where(m => m.Name.Contains(module.Name));
             }
             if (!string.IsNullOrEmpty(module.Code))
             {
-                search = search.Where(m => m.Name.Contains(module.Code));
+                search = search.Where(m => m.Code.Contains(module.Code));
             }
-            if (!string.IsNullOrEmpty(module.Controller))
+            if (!string.IsNullOrEmpty(module.Url))
             {
-                search = search.Where(m => m.Name.Contains(module.Controller));
+                search = search.Where(m => m.Url.Contains(module.Url));
             }
             if (module.ParentId != null)
             {
                 search = search.Where(m => m.ParentId == module.ParentId);
             }
 
-            IList<Module> result = search.Where(m => m.IsEnable == module.IsEnable).ToList();
-            moduleService.GetSearchCache(result, true);
-            if (result.Count == 0)
+            IList<Module> filterEntities = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+            Session[cacheSearchKey] = filterEntities;
+            if (filterEntities.Count == 0)
             {
                 return new EmptyResult();
             }
 
-            return PartialView("_ModuleGrid", result);
+            return PartialView("_ModuleGrid", filterEntities);
         }
     }
 }

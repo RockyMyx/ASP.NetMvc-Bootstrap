@@ -11,15 +11,15 @@ namespace MvcBootstrap.Controllers
     {
         RoleService roleService = new RoleService();
 
+        public RoleController()
+        {
+            base.cacheAllKey = "AllRoles";
+            base.cacheSearchKey = "SearchRoles";
+        }
+
         protected override int DataCount
         {
             get { return roleService.GetEntitiesCount(); }
-        }
-
-        public override void RemoveCache()
-        {
-            roleService.RemoveEntityCache();
-            roleService.RemoveSearchResult();
         }
 
         public override ActionResult Index()
@@ -27,6 +27,8 @@ namespace MvcBootstrap.Controllers
             var result = roleService.GetPagingInfo(base.PageSize);
             ModuleService moduleService = new ModuleService();
             ViewData["ParentModule"] = moduleService.GetParentModules();
+            Session.Remove(cacheAllKey);
+            Session.Remove(cacheSearchKey);
             return View(result);
         }
 
@@ -34,9 +36,9 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IEnumerable<Role> roleSearch = RoleService.SearchResult;
-            roleSearch = roleSearch ?? roleService.GetEntityCache();
-            IEnumerable<Role> result = roleService.GetSearchPagingInfo(roleSearch, index, base.PageSize);
+            IEnumerable<Role> entities = (IEnumerable<Role>)Session[cacheSearchKey] ??
+                                         roleService.GetAll();
+            IEnumerable<Role> result = roleService.GetSearchPagingInfo(entities, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
@@ -63,10 +65,10 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Role> filterEntities = roleService.GetEntityCache().Where(m => m.Name.Contains(name));
-            IEnumerable<Role> searchResult = roleService.GetSearchResult(filterEntities, true);
-            if (searchResult.Count() == 0) return new EmptyResult();
-            return PartialView("_RoleGrid", searchResult);
+            IEnumerable<Role> filterEntities = roleService.GetAll().Where(m => m.Name.Contains(name));
+            Session[cacheSearchKey] = filterEntities;
+            if (filterEntities.Count() == 0) return new EmptyResult();
+            return PartialView("_RoleGrid", filterEntities);
         }
 
         public ActionResult GetPermission(int id)

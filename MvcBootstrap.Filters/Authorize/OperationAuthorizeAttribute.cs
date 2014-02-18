@@ -13,7 +13,7 @@ public class OperationAuthorizeAttribute : AuthorizeAttribute
         //ToTest
         //int roleID = Convert.ToInt32(HttpContext.Current.Session["RoleID"]);
         int roleID = 1;
-
+        
         string controller = filterContext.GetController();
         ModuleService moduleService = new ModuleService();
         int controllerID = moduleService.GetModuleIdByName(controller);
