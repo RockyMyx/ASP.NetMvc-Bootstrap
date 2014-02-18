@@ -180,7 +180,7 @@ $(document).ready(function () {
 });
 
 function bindTable() {
-    /****************************表格排序处理*****************************/
+    //表格排序处理
     $("#js-table").each(function () {
         var $table = $(this);
         $table.alternateRowColors();
@@ -531,11 +531,6 @@ $('#js-btn-toolbar-delete').unbind('click').bind('click', function () {
 
 //工具栏刷新按钮点击事件
 $('#js-btn-toolbar-refresh').on('click', function () {
-    //    $.post(jPage.getUrl('Index'))
-    //     .done(function (result) {
-    //         $('#js-table').html(result);
-    //         paging.show();
-    //     });
     location.reload();
 });
 

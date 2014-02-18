@@ -6,7 +6,6 @@
 		<th>模块名称</th>
 		<th class="sort-alpha th-sort">模块代码</th>
 		<th>链接</th>
-		<th>Controller</th>
 		<th>是否启用</th>
         @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
          {
@@ -33,7 +32,6 @@
             @item.Name</td>
 		    <td>@item.Code</td>
 		    <td>@item.Url</td>
-		    <td>@item.Controller</td>
             <td>
             @if (item.IsEnable != null && (bool)item.IsEnable)
             {

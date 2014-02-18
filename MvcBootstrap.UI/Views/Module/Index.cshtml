@@ -35,11 +35,11 @@
             <input type="text" name="Code" class="form-input-readonly js-module-code" readonly />
         </div>
     </div>
-    <div class="control-group hide" id="Controller">
+    <div class="control-group hide" id="Url">
         <label class="control-label">
-            控制器名</label>
+            链接</label>
         <div class="controls">
-            <input type="text" name="Controller" class="empty hide form-input" />
+            <input type="text" name="Url" class="empty hide form-input" />
             <div class="form-tip">
             </div>
         </div>
@@ -110,11 +110,11 @@
                 </label>
             </div>
         </div>
-        <div class="control-group span6 hide" id="EController">
+        <div class="control-group span6 hide" id="EUrl">
             <label class="control-label">
-                控制器名</label>
+                链接</label>
             <div class="controls">
-                <input type="text" id="EditController" name="Controller" class="empty hide form-input" />
+                <input type="text" id="EditUrl" name="Url" class="empty hide form-input" />
                 <div class="form-tip">
                 </div>
             </div>
@@ -147,11 +147,11 @@
                             @Html.DropDownList("ParentId", modules, new { id = "SearchParentID", @class = "noCheck my-select" })
                         </div>
                     </div>
-                    <div class="control-group span6" id="SController">
+                    <div class="control-group span6" id="SUrl">
                         <label class="control-label">
-                            Controller</label>
+                            链接</label>
                         <div class="controls">
-                            <input type="text" id="SearchController" name="Controller" class="empty form-input" />
+                            <input type="text" id="SearchUrl" name="Url" class="empty form-input" />
                         </div>
                     </div>
                 </div>
@@ -203,15 +203,15 @@
             <form id="js-detail-form">
                 <div class="row-fluid">
                     <div class="control-group span6">
-                        <label class="control-label">Controller：<span id="detailController"></span></label>
+                        <label class="control-label">模块名称：<span id="detailName"></span></label>
                     </div>
                     <div class="control-group span6">
-                        <label class="control-label">模块名称：<span id="detailName"></span></label>
+                        <label class="control-label">模块代码：<span id="detailCode"></span></label>
                     </div>
                 </div>
                 <div class="row-fluid">
                     <div class="control-group span6">
-                        <label class="control-label">模块代码：<span id="detailCode"></span></label>
+                        <label class="control-label">链接：<span id="detailUrl"></span></label>
                     </div>
                     <div class="control-group span6">
                         <label class="control-label">是否启用：<span id="detailIsEnable"></span></label>

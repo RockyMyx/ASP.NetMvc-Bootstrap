@@ -4,12 +4,12 @@
 
 $('#EditParentID').on('change', function () {
     if ($(this).get(0).selectedIndex != 0) {
-        $('#EController').show();
-        $('#EController').find('.form-tip').toggleClass('form-init');
+        $('#EUrl').show();
+        $('#EUrl').find('.form-tip').toggleClass('form-init');
     }
     else {
-        $('#EController').hide();
-        $('#EController').find('.form-tip').toggleClass('form-init');
+        $('#EUrl').hide();
+        $('#EUrl').find('.form-tip').toggleClass('form-init');
     }
 });
 
@@ -19,11 +19,11 @@ function FillEditInfo(id) {
      .done(function (data) {
          $('#EditParentID').find('option[value=' + data.ParentId + ']').prop('selected', 'true');
          if (data.ParentId != null) {
-             $('#EController').show();
+             $('#EUrl').show();
          }
          $('#EditName').val(data.Name);
          $('#EditCode').val(data.Code);
-         $('#EditController').val(data.Controller);
+         $('#EditUrl').val(data.Url);
          if (data.IsEnable) {
              $('#EditVisible').prop('checked', 'true');
          }
@@ -55,7 +55,7 @@ $('#js-btn-modal-search').on('click', function () {
 
 //实现common.js中的方法
 function showDetail(data) {
-    $('#detailController').html(data.Controller);
+    $('#detailUrl').html(data.Url);
     $('#detailName').html(data.Name);
     $('#detailCode').html(data.Code);
     $('#detailIsEnable').html(data.IsEnable == 0 ? '是' : '否');

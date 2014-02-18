@@ -7,12 +7,12 @@ public class NetHelper
     public static string GetPrivateIPAddress()
     {
         string localIP = null;
-        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (IPAddress ip in host.AddressList)
+        IPAddress[] addresses = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+        foreach (IPAddress address in addresses)
         {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            if (address.AddressFamily == AddressFamily.InterNetwork)
             {
-                localIP = ip.ToString();
+                localIP = address.ToString();
                 break;
             }
         }
