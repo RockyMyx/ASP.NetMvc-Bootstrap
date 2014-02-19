@@ -378,6 +378,10 @@ function bindTable() {
                             for (var i = 0; i < count; i++) {
                                 currentTd = tds.eq(i);
                                 currentContent = result[currentTd.attr('key')];
+                                if (currentTd.attr('class') == 'js-check') {
+                                    currentTd.find('input').attr('class', 'js-check-cell')
+                                                           .prop('disabled', '');
+                                }
                                 if (currentTd.attr('class') == 'js-bool') {
                                     if (dataInfo[currentTd.attr('key')] == 'True') {
                                         currentTd.attr('content', '1');
