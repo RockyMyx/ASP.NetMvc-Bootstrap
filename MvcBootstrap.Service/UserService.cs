@@ -3,6 +3,7 @@ using MvcBootstrap.DAO;
 using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
 using MvcBootstrap.ViewModels;
+using System.Web.Mvc;
 
 namespace MvcBootstrap.Service
 {
@@ -26,6 +27,18 @@ namespace MvcBootstrap.Service
         public IEnumerable<string> GetUserOperation(int roleID, int controllerID)
         {
             return base.dao.GetUserOperation(roleID, controllerID);
+        }
+
+        public User GetUserInfo(FormCollection formInfo)
+        {
+            User role = new User
+            {
+                Name = formInfo["Name"].ObjToStr(),
+                RealName = formInfo["RealName"].ObjToStr(),
+                Remark = formInfo["Remark"].ObjToStr()
+            };
+
+            return role;
         }
     }
 }

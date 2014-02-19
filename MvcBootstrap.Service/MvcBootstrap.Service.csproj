@@ -41,6 +41,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AisCategoryService.cs" />
+    <Compile Include="AisResourceService.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="ModuleService.cs" />
     <Compile Include="OperationService.cs" />
