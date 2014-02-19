@@ -28,7 +28,7 @@ $('#js-btn-toolbar-permission').on('click', function () {
                  var ops = [];
                  var name;
                  $.each(result, function (k, v) {
-                     ops = v.split('');
+                     ops = v.split(',');
                      for (var i = 0; i < ops.length; i++) {
                          name = k + '-' + ops[i];
                          $('input[name="' + name + '"]').prop('checked', 'true');

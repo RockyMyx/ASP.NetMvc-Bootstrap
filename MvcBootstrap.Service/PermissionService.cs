@@ -41,7 +41,7 @@ namespace MvcBootstrap.Service
                     }
                     else
                     {
-                        permissionDict[controllerId] += permission.ActionID.ToString();
+                        permissionDict[controllerId] += "," + permission.ActionID.ToString();
                     }
                 }
 
