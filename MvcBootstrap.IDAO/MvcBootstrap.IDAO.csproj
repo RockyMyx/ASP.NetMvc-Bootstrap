@@ -36,6 +36,8 @@
     <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAisCategoryDao.cs" />
+    <Compile Include="IAisResourceDao.cs" />
     <Compile Include="IBaseDao.cs" />
     <Compile Include="IModuleDao.cs" />
     <Compile Include="IOperationDao.cs" />
