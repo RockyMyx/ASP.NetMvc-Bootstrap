@@ -57,6 +57,10 @@
                           {
                             <button class="btn" id="js-btn-toolbar-permission">权限分配</button>
                           }}
+                        @{if (ViewData["SetNode"] != null)
+                          {
+                            <button class="btn" id="js-btn-toolbar-node">节点分配</button>
+                          }}
                         @{if (ViewData["Search"] != null)
                           {
                             <button class="btn" id="js-btn-toolbar-refresh">刷新</button>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MvcBootstrap.EFModel.Operation>
+<thead>
+	<tr>
+        <th><input id="js-check-all" type="checkbox" class="th-check-all" />选择</th>
+		<th>权限名称</th>
+		<th>权限代码</th>
+        @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
+         {
+		<th>操作</th>
+         }}
+	</tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="hide">@item.ID</td>
+            <td class="js-check"><input class="js-check-cell" type="checkbox" /></td>
+		    <td key="Name" content="@item.Name" type="notEmpty">@item.Name</td>
+		    <td key="Action" content="@item.Action" type="notEmpty">@item.Action</td>
+            @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
+              {
+            <td>
+                @{if (Convert.ToBoolean(ViewData["Update"]))
+                  {
+                    <a href="javascript:;" title="编辑"><i class="icon-pencil" type="table"></i></a>
+                  }
+                }
+                @{if (Convert.ToBoolean(ViewData["Delete"]))
+                  {
+                    <a href="#ModalDel" role="button" data-toggle="modal" title="删除"><i class="icon-remove"></i></a>
+                  }
+                }
+            </td>
+              }}
+        </tr>
+    }
+</tbody>
