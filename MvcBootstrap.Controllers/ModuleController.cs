@@ -32,7 +32,6 @@ namespace MvcBootstrap.Controllers
             return View(result);
         }
 
-        [HttpPost]
         public override ActionResult Index(int? pageIndex)
         {
             ViewData["ParentId"] = moduleService.GetModuleSelect();
@@ -43,20 +42,17 @@ namespace MvcBootstrap.Controllers
             return PartialView("_ModuleGrid", result);
         }
 
-        [HttpPost]
         public override void Update(FormCollection formInfo)
         {
             Module module = moduleService.GetModuleInfo(formInfo);
             moduleService.Update(module);
         }
 
-        [HttpPost]
         public override void Delete(List<int> ids)
         {
             moduleService.Delete(ids);
         }
 
-        [HttpPost]
         public override void Create(FormCollection formInfo)
         {
             Module module = moduleService.GetModuleInfo(formInfo);
@@ -72,6 +68,7 @@ namespace MvcBootstrap.Controllers
             return PartialView("_ModuleGrid", filterEntities);
         }
 
+        //查看详情
         public ActionResult Get(int id)
         {
             Module module = moduleService.GetEntity(m => m.ID == id);

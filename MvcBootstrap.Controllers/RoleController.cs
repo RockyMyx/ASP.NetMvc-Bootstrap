@@ -24,15 +24,14 @@ namespace MvcBootstrap.Controllers
 
         public override ActionResult Index()
         {
+            Session.Remove(cacheAllKey);
+            Session.Remove(cacheSearchKey);
             var result = roleService.GetPagingInfo(base.PageSize);
             ModuleService moduleService = new ModuleService();
             ViewData["ParentModule"] = moduleService.GetParentModules();
-            Session.Remove(cacheAllKey);
-            Session.Remove(cacheSearchKey);
             return View(result);
         }
 
-        [HttpPost]
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
