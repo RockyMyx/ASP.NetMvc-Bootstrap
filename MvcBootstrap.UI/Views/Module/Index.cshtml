@@ -67,18 +67,16 @@
 @section EditForm{
     <input type="hidden" id="EditModuleID" name="ID" />
     <div class="row-fluid">
-        <div class="control-group span12">
+        <div class="control-group span6">
             <label class="control-label">
                 上级菜单</label>
             <div class="controls">
                 @{SelectList modules = ViewData["Modules"] as SelectList;}
                 @Html.DropDownList("ParentId", modules, new { id = "EditParentID", @class = "noCheck my-select" })
-                <div class="form-tip">
-                    如不选择，则默认为添加根节点菜单</div>
+                @*<div class="form-tip">
+                    如不选择，则默认为添加根节点菜单</div>*@
             </div>
         </div>
-    </div>
-    <div class="row-fluid">
         <div class="control-group span6">
             <label class="control-label">
                 模块名称</label>
@@ -88,6 +86,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    @*<div class="row-fluid">
         <div class="control-group span6">
             <label class="control-label">
                 模块代码</label>
@@ -96,8 +96,17 @@
                     readonly />
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="row-fluid">
+        <div class="control-group span6 hide" id="EUrl">
+            <label class="control-label">
+                链接</label>
+            <div class="controls">
+                <input type="text" id="EditUrl" name="Url" class="empty hide form-input" />
+                <div class="form-tip">
+                </div>
+            </div>
+        </div>
         <div class="control-group span6">
             <label class="control-label">
                 是否启用</label>
@@ -108,15 +117,6 @@
                 <label class="radio inline">
                     <input type="radio" id="EditHide" name="IsEnable" value="0">否
                 </label>
-            </div>
-        </div>
-        <div class="control-group span6 hide" id="EUrl">
-            <label class="control-label">
-                链接</label>
-            <div class="controls">
-                <input type="text" id="EditUrl" name="Url" class="empty hide form-input" />
-                <div class="form-tip">
-                </div>
             </div>
         </div>
     </div>

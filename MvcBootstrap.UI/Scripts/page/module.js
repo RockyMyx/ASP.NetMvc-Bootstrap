@@ -30,16 +30,15 @@ function FillEditInfo(id) {
          else {
              $('#EditHide').prop('checked', 'true');
          }
+
+         var opLength = $('#EditOp').find('input[id^="op"]');
+         for (var i = 0; i < opLength.length; i++) {
+             opLength[i].checked = false;
+         }
          if (data.Operations != null) {
              var operations = data.Operations.split(',');
-             for (var i = 1; i <= operations.length; i++) {
-                 $('#op' + i).prop('checked', 'true');
-             }
-         }
-         else {
-             var opLength = $('#EditOp').find('input[id^="op"]').length;
-             for (var i = 1; i <= opLength; i++) {
-                 $('#op' + i).prop('checked', '');
+             for (var i = 0; i <= operations.length; i++) {
+                 $('#op' + operations[i]).prop('checked', 'true');
              }
          }
          $(".js-loading").hide();
