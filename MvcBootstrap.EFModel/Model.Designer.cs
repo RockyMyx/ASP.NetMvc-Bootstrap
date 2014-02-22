@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -213,8 +214,57 @@ namespace MvcBootstrap.EFModel
             }
         }
         private ObjectSet<v_UserAllPermission> _v_UserAllPermission;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AisCategory> AisCategory
+        {
+            get
+            {
+                if ((_AisCategory == null))
+                {
+                    _AisCategory = base.CreateObjectSet<AisCategory>("AisCategory");
+                }
+                return _AisCategory;
+            }
+        }
+        private ObjectSet<AisCategory> _AisCategory;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AisResource> AisResource
+        {
+            get
+            {
+                if ((_AisResource == null))
+                {
+                    _AisResource = base.CreateObjectSet<AisResource>("AisResource");
+                }
+                return _AisResource;
+            }
+        }
+        private ObjectSet<AisResource> _AisResource;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserNode> UserNode
+        {
+            get
+            {
+                if ((_UserNode == null))
+                {
+                    _UserNode = base.CreateObjectSet<UserNode>("UserNode");
+                }
+                return _UserNode;
+            }
+        }
+        private ObjectSet<UserNode> _UserNode;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -288,8 +338,33 @@ namespace MvcBootstrap.EFModel
         {
             base.AddObject("v_UserAllPermission", v_UserAllPermission);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AisCategory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAisCategory(AisCategory aisCategory)
+        {
+            base.AddObject("AisCategory", aisCategory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AisResource EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAisResource(AisResource aisResource)
+        {
+            base.AddObject("AisResource", aisResource);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserNode EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserNode(UserNode userNode)
+        {
+            base.AddObject("UserNode", userNode);
+        }
 
         #endregion
+
         #region Function Imports
     
         /// <summary>
@@ -388,12 +463,318 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="AisCategory")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AisCategory : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AisCategory object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static AisCategory CreateAisCategory(global::System.Int32 id)
+        {
+            AisCategory aisCategory = new AisCategory();
+            aisCategory.ID = id;
+            return aisCategory;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ParentID
+        {
+            get
+            {
+                return _ParentID;
+            }
+            set
+            {
+                OnParentIDChanging(value);
+                ReportPropertyChanging("ParentID");
+                _ParentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentID");
+                OnParentIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ParentID;
+        partial void OnParentIDChanging(Nullable<global::System.Int32> value);
+        partial void OnParentIDChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="AisResource")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AisResource : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AisResource object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static AisResource CreateAisResource(global::System.Guid id)
+        {
+            AisResource aisResource = new AisResource();
+            aisResource.ID = id;
+            return aisResource;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Guid _ID;
+        partial void OnIDChanging(global::System.Guid value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ResourceName
+        {
+            get
+            {
+                return _ResourceName;
+            }
+            set
+            {
+                OnResourceNameChanging(value);
+                ReportPropertyChanging("ResourceName");
+                _ResourceName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ResourceName");
+                OnResourceNameChanged();
+            }
+        }
+        private global::System.String _ResourceName;
+        partial void OnResourceNameChanging(global::System.String value);
+        partial void OnResourceNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ResourceContent
+        {
+            get
+            {
+                return _ResourceContent;
+            }
+            set
+            {
+                OnResourceContentChanging(value);
+                ReportPropertyChanging("ResourceContent");
+                _ResourceContent = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ResourceContent");
+                OnResourceContentChanged();
+            }
+        }
+        private global::System.String _ResourceContent;
+        partial void OnResourceContentChanging(global::System.String value);
+        partial void OnResourceContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> ResourceVersion
+        {
+            get
+            {
+                return _ResourceVersion;
+            }
+            set
+            {
+                OnResourceVersionChanging(value);
+                ReportPropertyChanging("ResourceVersion");
+                _ResourceVersion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ResourceVersion");
+                OnResourceVersionChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _ResourceVersion;
+        partial void OnResourceVersionChanging(Nullable<global::System.Decimal> value);
+        partial void OnResourceVersionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ParentID
+        {
+            get
+            {
+                return _ParentID;
+            }
+            set
+            {
+                OnParentIDChanging(value);
+                ReportPropertyChanging("ParentID");
+                _ParentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentID");
+                OnParentIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ParentID;
+        partial void OnParentIDChanging(Nullable<global::System.Int32> value);
+        partial void OnParentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ResourcePath
+        {
+            get
+            {
+                return _ResourcePath;
+            }
+            set
+            {
+                OnResourcePathChanging(value);
+                ReportPropertyChanging("ResourcePath");
+                _ResourcePath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ResourcePath");
+                OnResourcePathChanged();
+            }
+        }
+        private global::System.String _ResourcePath;
+        partial void OnResourcePathChanging(global::System.String value);
+        partial void OnResourcePathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ResourceDetail
+        {
+            get
+            {
+                return _ResourceDetail;
+            }
+            set
+            {
+                OnResourceDetailChanging(value);
+                ReportPropertyChanging("ResourceDetail");
+                _ResourceDetail = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ResourceDetail");
+                OnResourceDetailChanged();
+            }
+        }
+        private global::System.String _ResourceDetail;
+        partial void OnResourceDetailChanging(global::System.String value);
+        partial void OnResourceDetailChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -417,6 +798,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -543,6 +925,7 @@ namespace MvcBootstrap.EFModel
         partial void OnUrlChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -585,6 +968,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -609,6 +993,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -807,6 +1192,7 @@ namespace MvcBootstrap.EFModel
         partial void OnCreateDateChanged();
 
         #endregion
+
     
     }
     
@@ -832,6 +1218,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1030,6 +1417,7 @@ namespace MvcBootstrap.EFModel
         partial void OnOperationsChanged();
 
         #endregion
+
     
     }
     
@@ -1055,6 +1443,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1181,6 +1570,7 @@ namespace MvcBootstrap.EFModel
         partial void OnCreateDateChanged();
 
         #endregion
+
     
     }
     
@@ -1206,6 +1596,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1404,6 +1795,7 @@ namespace MvcBootstrap.EFModel
         partial void OnModifyDateChanged();
 
         #endregion
+
     
     }
     
@@ -1429,6 +1821,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1651,6 +2044,7 @@ namespace MvcBootstrap.EFModel
         partial void OnModifyDateChanged();
 
         #endregion
+
     
     }
     
@@ -1676,6 +2070,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2090,6 +2485,7 @@ namespace MvcBootstrap.EFModel
         partial void OnRemarkChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2116,6 +2512,136 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="UserNode")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserNode : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserNode object.
+        /// </summary>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        public static UserNode CreateUserNode(global::System.Int32 userID)
+        {
+            UserNode userNode = new UserNode();
+            userNode.UserID = userID;
+            return userNode;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                if (_UserID != value)
+                {
+                    OnUserIDChanging(value);
+                    ReportPropertyChanging("UserID");
+                    _UserID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserID");
+                    OnUserIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AisCategoryID
+        {
+            get
+            {
+                return _AisCategoryID;
+            }
+            set
+            {
+                OnAisCategoryIDChanging(value);
+                ReportPropertyChanging("AisCategoryID");
+                _AisCategoryID = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AisCategoryID");
+                OnAisCategoryIDChanged();
+            }
+        }
+        private global::System.String _AisCategoryID;
+        partial void OnAisCategoryIDChanging(global::System.String value);
+        partial void OnAisCategoryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AisResourceID
+        {
+            get
+            {
+                return _AisResourceID;
+            }
+            set
+            {
+                OnAisResourceIDChanging(value);
+                ReportPropertyChanging("AisResourceID");
+                _AisResourceID = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AisResourceID");
+                OnAisResourceIDChanged();
+            }
+        }
+        private global::System.String _AisResourceID;
+        partial void OnAisResourceIDChanging(global::System.String value);
+        partial void OnAisResourceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AisResourceCache
+        {
+            get
+            {
+                return _AisResourceCache;
+            }
+            set
+            {
+                OnAisResourceCacheChanging(value);
+                ReportPropertyChanging("AisResourceCache");
+                _AisResourceCache = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AisResourceCache");
+                OnAisResourceCacheChanged();
+            }
+        }
+        private global::System.String _AisResourceCache;
+        partial void OnAisResourceCacheChanging(global::System.String value);
+        partial void OnAisResourceCacheChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>
@@ -2142,6 +2668,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2199,6 +2726,7 @@ namespace MvcBootstrap.EFModel
         partial void OnRoleIDChanged();
 
         #endregion
+
     
     }
     
@@ -2224,6 +2752,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2470,10 +2999,12 @@ namespace MvcBootstrap.EFModel
         partial void OnActionNameChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     #region ComplexTypes
     
     /// <summary>
@@ -2498,6 +3029,7 @@ namespace MvcBootstrap.EFModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2621,8 +3153,10 @@ namespace MvcBootstrap.EFModel
         partial void OnParentIdChanged();
 
         #endregion
+
     }
 
     #endregion
+
     
 }

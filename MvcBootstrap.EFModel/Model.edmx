@@ -6,6 +6,8 @@
     <edmx:StorageModels>
     <Schema Namespace="MvcBootstrap.EFModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="MvcBootstrapEFModelStoreContainer">
+          <EntitySet Name="AisCategory" EntityType="MvcBootstrap.EFModel.Store.AisCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AisResource" EntityType="MvcBootstrap.EFModel.Store.AisResource" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Favorite" EntityType="MvcBootstrap.EFModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Log" EntityType="MvcBootstrap.EFModel.Store.Log" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Module" EntityType="MvcBootstrap.EFModel.Store.Module" store:Type="Tables" Schema="dbo" />
@@ -13,6 +15,7 @@
           <EntitySet Name="Permission" EntityType="MvcBootstrap.EFModel.Store.Permission" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="MvcBootstrap.EFModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="MvcBootstrap.EFModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserNode" EntityType="MvcBootstrap.EFModel.Store.UserNode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="MvcBootstrap.EFModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="v_UserAllPermission" EntityType="MvcBootstrap.EFModel.Store.v_UserAllPermission" store:Type="Views" store:Schema="dbo" store:Name="v_UserAllPermission">
             <DefiningQuery>SELECT 
@@ -33,6 +36,26 @@
             <End Role="Favorite" EntitySet="Favorite" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AisCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="ParentID" Type="int" />
+        </EntityType>
+        <EntityType Name="AisResource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResourceName" Type="varchar" MaxLength="20" />
+          <Property Name="ResourceContent" Type="varchar(max)" />
+          <Property Name="ResourceVersion" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="ResourcePath" Type="varchar" MaxLength="200" />
+          <Property Name="ResourceDetail" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Favorite">
           <Key>
             <PropertyRef Name="ID" />
@@ -128,6 +151,15 @@
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="UserNode">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="AisCategoryID" Type="varchar" MaxLength="200" />
+          <Property Name="AisResourceID" Type="varchar(max)" />
+          <Property Name="AisResourceCache" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="UserID" />
@@ -208,6 +240,9 @@
             <Parameter Name="ids" Mode="In" Type="String" />
             <Parameter Name="table" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="AisCategory" EntityType="MvcBootstrap.EFModel.AisCategory" />
+          <EntitySet Name="AisResource" EntityType="MvcBootstrap.EFModel.AisResource" />
+          <EntitySet Name="UserNode" EntityType="MvcBootstrap.EFModel.UserNode" />
         </EntityContainer>
         <EntityType Name="Favorite">
           <Key>
@@ -348,6 +383,35 @@
           <Property Type="String" Name="Url" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="ParentId" Nullable="true" />
         </ComplexType>
+        <EntityType Name="AisCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ParentID" />
+        </EntityType>
+        <EntityType Name="AisResource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ResourceName" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ResourceContent" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ResourceVersion" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ParentID" />
+          <Property Type="String" Name="ResourcePath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ResourceDetail" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserNode">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="AisCategoryID" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AisResourceID" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AisResourceCache" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -458,6 +522,38 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="DeleteObjects" FunctionName="MvcBootstrap.EFModel.Store.DeleteObjects" />
+          <EntitySetMapping Name="AisCategory">
+            <EntityTypeMapping TypeName="MvcBootstrap.EFModel.AisCategory">
+              <MappingFragment StoreEntitySet="AisCategory">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AisResource">
+            <EntityTypeMapping TypeName="MvcBootstrap.EFModel.AisResource">
+              <MappingFragment StoreEntitySet="AisResource">
+                <ScalarProperty Name="ResourceDetail" ColumnName="ResourceDetail" />
+                <ScalarProperty Name="ResourcePath" ColumnName="ResourcePath" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ResourceVersion" ColumnName="ResourceVersion" />
+                <ScalarProperty Name="ResourceContent" ColumnName="ResourceContent" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNode">
+            <EntityTypeMapping TypeName="MvcBootstrap.EFModel.UserNode">
+              <MappingFragment StoreEntitySet="UserNode">
+                <ScalarProperty Name="AisResourceCache" ColumnName="AisResourceCache" />
+                <ScalarProperty Name="AisResourceID" ColumnName="AisResourceID" />
+                <ScalarProperty Name="AisCategoryID" ColumnName="AisCategoryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -492,6 +588,9 @@
           <ConnectorPoint PointX="2.25" PointY="3.3305261230468748" />
           <ConnectorPoint PointX="3" PointY="3.3305261230468748" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="MvcBootstrap.EFModel.AisCategory" Width="1.5" PointX="0.75" PointY="9.75" Height="1.5879931640624996" />
+        <EntityTypeShape EntityType="MvcBootstrap.EFModel.AisResource" Width="1.5" PointX="9.75" PointY="8.75" Height="2.3520719401041674" />
+        <EntityTypeShape EntityType="MvcBootstrap.EFModel.UserNode" Width="1.5" PointX="10.375" PointY="0.75" Height="1.7790128580729174" />
       </Diagram>
     </Diagrams>
   </Designer>
