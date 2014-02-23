@@ -23,18 +23,19 @@ function FillEditInfo(id) {
          }
          $('#EditName').val(data.Name);
          $('#EditCode').val(data.Code);
-         $('#EditUrl').val(data.Url);
+         $('#EditUrl').val(data.Url).attr('readonly', 'readonly');
          if (data.IsEnable) {
              $('#EditVisible').prop('checked', 'true');
          }
          else {
              $('#EditHide').prop('checked', 'true');
          }
-
+         //清空选择状态
          var opLength = $('#EditOp').find('input[id^="op"]');
          for (var i = 0; i < opLength.length; i++) {
              opLength[i].checked = false;
          }
+         //设置选择状态
          if (data.Operations != null) {
              var operations = data.Operations.split(',');
              for (var i = 0; i <= operations.length; i++) {
@@ -58,5 +59,4 @@ function showDetail(data) {
     $('#detailName').html(data.Name);
     $('#detailCode').html(data.Code);
     $('#detailIsEnable').html(data.IsEnable == 0 ? '是' : '否');
-    $('#detailCode').html(data.Code);
 }
