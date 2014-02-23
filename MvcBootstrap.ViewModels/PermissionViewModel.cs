@@ -1,5 +1,4 @@
-﻿
-namespace MvcBootstrap.ViewModels
+﻿namespace MvcBootstrap.ViewModels
 {
     public class PermissionViewModel
     {
