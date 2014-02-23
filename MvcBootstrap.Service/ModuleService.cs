@@ -71,19 +71,18 @@ namespace MvcBootstrap.Service
 
         public Module GetModuleInfo(FormCollection formInfo)
         {
+            int id = formInfo["ID"].ObjToInt();
+            Module oriModule = dao.GetEntity(m => m.ID == id);
             Module module = new Module
             {
-                ID = formInfo["ID"].ObjToInt(),
-                Name = formInfo["Name"].ObjToStr(),
-                Code = formInfo["Code"].ObjToStr(),
-                Url = formInfo["Url"].ObjToStr(),
-                IsEnable = formInfo["IsEnable"] == null || string.Compare(formInfo["IsEnable"], "1") == 0
+                ID = id,
+                Name = formInfo["Name"] == null ? oriModule.Name : formInfo["Name"],
+                Code = formInfo["Code"] == null ? oriModule.Code : formInfo["Code"],
+                Url = formInfo["Url"] == null ? oriModule.Url : formInfo["Url"],
+                Controller = formInfo["Controller"] == null ? oriModule.Controller : formInfo["Controller"],
+                ParentId = formInfo["ParentId"] == "NULL" ? oriModule.ParentId : Convert.ToInt32(formInfo["ParentId"]),
+                IsEnable = string.Compare(formInfo["IsEnable"], "1") == 0
             };
-
-            if (formInfo["ParentId"] != "NULL")
-            {
-                module.ParentId = formInfo["ParentId"].ObjToInt();
-            }
 
             List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
             if (operations.Count > 0)
