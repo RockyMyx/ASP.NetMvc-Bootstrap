@@ -29,13 +29,28 @@ namespace MvcBootstrap.Service
             return base.dao.GetUserOperation(roleID, controllerID);
         }
 
+        public IEnumerable<UserViewModel> GetAllUserView()
+        {
+            return base.dao.GetAllUserView();
+        }
+
+        public IEnumerable<UserViewModel> GetPagingUserView(int pageSize)
+        {
+            return base.dao.GetPagingUserView(pageSize);
+        }
+
+        public IEnumerable<UserViewModel> GetSearchPagingUserView(IEnumerable<UserViewModel> entities, int pageIndex, int pageSize)
+        {
+            return base.dao.GetSearchPagingUserView(entities, pageIndex, pageSize);
+        }
+
         public User GetUserInfo(FormCollection formInfo)
         {
             User role = new User
             {
-                Name = formInfo["Name"].ObjToStr(),
-                RealName = formInfo["RealName"].ObjToStr(),
-                Remark = formInfo["Remark"].ObjToStr()
+                Name = formInfo["Name"],
+                RealName = formInfo["RealName"],
+                Remark = formInfo["Remark"]
             };
 
             return role;
