@@ -44,6 +44,7 @@
     <Compile Include="IPermissionDao.cs" />
     <Compile Include="IRoleDao.cs" />
     <Compile Include="IUserDao.cs" />
+    <Compile Include="IUserRoleDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

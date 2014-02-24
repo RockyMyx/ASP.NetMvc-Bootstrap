@@ -23,18 +23,18 @@ namespace MvcBootstrap.DAO
                 //db.ExecuteStoreQuery<User>(sql, args);
 
                 //DB操作方法三：使用LINQ
-                UserLoginViewModel info = (from u in db.User
-                                           join r in db.UserRole
-                                           on u.ID equals r.UserID
-                                           where (u.Name == userName && u.Password == userPwd)
-                                           select new UserLoginViewModel
-                                           {
-                                               UserID = u.ID,
-                                               RoleID = r.RoleID,
-                                               RealName = u.RealName,
-                                               UserName = u.Name
-                                           }).FirstOrDefault();
-                return info;
+                UserLoginViewModel models = (from u in db.User
+                                             join r in db.UserRole
+                                             on u.ID equals r.UserID
+                                             where (u.Name == userName && u.Password == userPwd)
+                                             select new UserLoginViewModel
+                                             {
+                                                 UserID = u.ID,
+                                                 RoleID = r.RoleID,
+                                                 RealName = u.RealName,
+                                                 UserName = u.Name
+                                             }).FirstOrDefault();
+                return models;
             }
         }
 
@@ -52,6 +52,49 @@ namespace MvcBootstrap.DAO
             using (DBEntity db = new DBEntity())
             {
                 return db.GetUserOperation(roleID, controllerID).ToList();
+            }
+        }
+
+        public IEnumerable<UserViewModel> UserViewModels
+        {
+            get
+            {
+                using (DBEntity db = new DBEntity())
+                {
+                    IEnumerable<UserViewModel> models = from u in db.User
+                                                        join ur in db.UserRole
+                                                        on u.ID equals ur.UserID
+                                                        join r in db.Role
+                                                        on ur.RoleID equals r.ID
+                                                        select new UserViewModel
+                                                        {
+                                                            ID = u.ID,
+                                                            Name = u.Name,
+                                                            RealName = u.RealName,
+                                                            RoleName = r.Name
+                                                        };
+                    return models.ToList();
+                }
+            }
+        }
+
+        public IEnumerable<UserViewModel> GetAllUserView()
+        {
+            return UserViewModels.ToList();
+        }
+
+        public IEnumerable<UserViewModel> GetPagingUserView(int pageSize)
+        {
+            return UserViewModels.Take(pageSize).ToList();
+        }
+
+        public IEnumerable<UserViewModel> GetSearchPagingUserView(IEnumerable<UserViewModel> entities, int pageIndex, int pageSize)
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return entities.Skip((pageIndex - 1) * pageSize)
+                               .Take(pageSize)
+                               .ToList();
             }
         }
     }

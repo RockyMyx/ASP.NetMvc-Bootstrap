@@ -12,7 +12,7 @@ namespace MvcBootstrap.DAO
 {
     public abstract class BaseEFDao<T> : IBaseDao<T> where T : EntityObject
     {
-        protected virtual string tableName
+        protected virtual string TableName
         {
             get
             {
@@ -158,7 +158,7 @@ namespace MvcBootstrap.DAO
                 try
                 {
                     string ids = string.Join(",", idList.ToArray());
-                    db.DeleteObjects(ids, tableName);
+                    db.DeleteObjects(ids, TableName);
                     return true;
                 }
                 catch (OptimisticConcurrencyException)
