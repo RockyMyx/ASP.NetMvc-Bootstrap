@@ -4,6 +4,7 @@ using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
 using MvcBootstrap.ViewModels;
 using System.Web.Mvc;
+using System;
 
 namespace MvcBootstrap.Service
 {
@@ -44,16 +45,47 @@ namespace MvcBootstrap.Service
             return base.dao.GetSearchPagingUserView(entities, pageIndex, pageSize);
         }
 
+        public IList<SelectListItem> GetRoleSelect()
+        {
+            RoleService roleService = new RoleService();
+            IEnumerable<Role> roles = roleService.GetAll();
+
+            IList<SelectListItem> roleList = new List<SelectListItem>();
+            roleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
+            roles.Enumerate(m => roleList.Add(new SelectListItem
+                            {
+                                Text = m.Name,
+                                Value = m.ID.ToString()
+                            }));
+            return roleList;
+        }
+
         public User GetUserInfo(FormCollection formInfo)
         {
             User role = new User
             {
                 Name = formInfo["Name"],
-                RealName = formInfo["RealName"],
+                Password = formInfo["Password"],
                 Remark = formInfo["Remark"]
             };
 
             return role;
+        }
+
+        public UserRole GetUserRoleInfo(FormCollection formInfo)
+        {
+            UserRole ur = new UserRole
+            {
+                UserID = dao.GetInsertId(),
+                RoleID = Convert.ToInt32(formInfo["RoleID"])
+            };
+
+            return ur;
+        }
+
+        public UserViewModel GetUserViewModel(int id)
+        {
+            return base.dao.GetUserViewModel(id);
         }
     }
 }

@@ -8,6 +8,30 @@ namespace MvcBootstrap.DAO
 {
     public class UserDao : BaseEFDao<User>, IUserDao
     {
+        private IEnumerable<UserViewModel> UserViewModels;
+
+        public UserDao()
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                IEnumerable<UserViewModel> models = from u in db.User
+                                                    join ur in db.UserRole
+                                                    on u.ID equals ur.UserID
+                                                    join r in db.Role
+                                                    on ur.RoleID equals r.ID
+                                                    select new UserViewModel
+                                                    {
+                                                        UserID = u.ID,
+                                                        Name = u.Name,
+                                                        Password = u.Password,
+                                                        RoleId = r.ID,
+                                                        RoleName = r.Name,
+                                                        Remark = u.Remark,
+                                                    };
+                UserViewModels = models.ToList();
+            }
+        }
+
         public UserLoginViewModel GetUserLoginInfo(string userName, string userPwd)
         {
             using (DBEntity db = new DBEntity())
@@ -55,29 +79,6 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public IEnumerable<UserViewModel> UserViewModels
-        {
-            get
-            {
-                using (DBEntity db = new DBEntity())
-                {
-                    IEnumerable<UserViewModel> models = from u in db.User
-                                                        join ur in db.UserRole
-                                                        on u.ID equals ur.UserID
-                                                        join r in db.Role
-                                                        on ur.RoleID equals r.ID
-                                                        select new UserViewModel
-                                                        {
-                                                            ID = u.ID,
-                                                            Name = u.Name,
-                                                            RealName = u.RealName,
-                                                            RoleName = r.Name
-                                                        };
-                    return models.ToList();
-                }
-            }
-        }
-
         public IEnumerable<UserViewModel> GetAllUserView()
         {
             return UserViewModels.ToList();
@@ -96,6 +97,19 @@ namespace MvcBootstrap.DAO
                                .Take(pageSize)
                                .ToList();
             }
+        }
+
+        public int GetInsertId()
+        {
+            using (DBEntity db = new DBEntity())
+            {
+                return db.User.Max(u => u.ID);
+            }
+        }
+
+        public UserViewModel GetUserViewModel(int id)
+        {
+            return UserViewModels.Where(uv => uv.UserID == id).First();
         }
     }
 }

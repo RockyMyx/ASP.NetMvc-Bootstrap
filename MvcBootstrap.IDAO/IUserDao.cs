@@ -12,5 +12,7 @@ namespace MvcBootstrap.IDAO
         IEnumerable<UserViewModel> GetAllUserView();
         IEnumerable<UserViewModel> GetPagingUserView(int pageSize);
         IEnumerable<UserViewModel> GetSearchPagingUserView(IEnumerable<UserViewModel> entities, int pageIndex, int pageSize);
+        int GetInsertId();
+        UserViewModel GetUserViewModel(int id);
     }
 }
