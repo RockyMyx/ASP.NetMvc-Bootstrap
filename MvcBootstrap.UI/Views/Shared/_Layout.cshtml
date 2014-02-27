@@ -57,6 +57,10 @@
                           {
                             <button class="btn" id="js-btn-toolbar-permission">权限分配</button>
                           }}
+                        @{if (ViewData["SetRole"] != null)
+                          {
+                            <button class="btn" id="js-btn-toolbar-role">设置角色</button>
+                          }}
                         @{if (ViewData["SetNode"] != null)
                           {
                             <button class="btn" id="js-btn-toolbar-node">节点分配</button>

@@ -13,6 +13,7 @@ $('#EditParentID').on('change', function () {
     }
 });
 
+//实现common.js中的方法（编辑）
 function FillEditInfo(id) {
     $('#EditModuleID').val(id);
     $.getJSON('/Module/Get/' + id)
@@ -53,7 +54,7 @@ $('#js-btn-modal-search').on('click', function () {
      });
 });
 
-//实现common.js中的方法
+//实现common.js中的方法（查看详情）
 function showDetail(data) {
     $('#detailUrl').html(data.Url);
     $('#detailName').html(data.Name);

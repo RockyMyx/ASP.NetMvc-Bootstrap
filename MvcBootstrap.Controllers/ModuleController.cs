@@ -68,7 +68,6 @@ namespace MvcBootstrap.Controllers
             return PartialView("_ModuleGrid", filterEntities);
         }
 
-        //查看详情
         public ActionResult Get(int id)
         {
             Module module = moduleService.GetEntity(m => m.ID == id);

@@ -57,7 +57,7 @@ strongClass:      密码强度强图标样式
             return /^.{6,15}$/.test(value);
         },
         pwdLevel: function (value) {
-            var charMode = function(c) {
+            var charMode = function (c) {
                 if (c >= 48 && c <= 57) //数字
                     return 1;
                 else if (c >= 65 && c <= 90) //大写字母
@@ -344,7 +344,7 @@ strongClass:      密码强度强图标样式
         }
     };
 
-    $.fn.mValidate = function(options) {
+    $.fn.mValidate = function (options) {
         var settings = {
             init: validationInit,
             func: validationFunc,
@@ -398,7 +398,7 @@ strongClass:      密码强度强图标样式
             return true;
         };
 
-        $.fn.showTip = function(info) {
+        $.fn.showTip = function (info) {
             if (settings.tipStyle == 'text') {
                 this.html(info);
             } else if (settings.tipStyle == 'title') {
@@ -406,7 +406,7 @@ strongClass:      密码强度强图标样式
             }
         };
 
-        $.fn.showInit = function(info) {
+        $.fn.showInit = function (info) {
             this.next()
                 .removeClass(settings.successClass)
                 .removeClass(settings.errorClass)
@@ -414,7 +414,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showFocus = function(info) {
+        $.fn.showFocus = function (info) {
             this.next()
                 .removeClass(settings.initClass)
                 .removeClass(settings.successClass)
@@ -423,7 +423,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showError = function(info) {
+        $.fn.showError = function (info) {
             this.next()
                 .removeClass(settings.initClass)
                 .removeClass(settings.successClass)
@@ -431,7 +431,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showSuccess = function(info) {
+        $.fn.showSuccess = function (info) {
             this.next()
                 .removeClass(settings.initClass)
                 .removeClass(settings.errorClass)
@@ -439,14 +439,14 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.showHide = function(info, showClass, hideClass) {
+        $.fn.showHide = function (info, showClass, hideClass) {
             this.removeClass(settings.initClass)
                 .removeClass(hideClass)
                 .addClass(showClass)
                 .showTip(info);
         };
 
-        $.fn.showOnly = function(info, showClass) {
+        $.fn.showOnly = function (info, showClass) {
             this.removeClass(settings.successClass)
                 .removeClass(settings.errorClass)
                 .removeClass(settings.focusClass)
@@ -455,7 +455,7 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
-        $.fn.hideOnly = function(info, hideClas) {
+        $.fn.hideOnly = function (info, hideClas) {
             this.removeClass(hideClas)
                 .showTip(info);
         };
@@ -496,7 +496,7 @@ strongClass:      密码强度强图标样式
 
         var selects = $(this).find('select');
 
-        selects.on('change', function() {
+        selects.on('change blur', function () {
             var tipSelect = $(this).parent().find(settings.tipClass);
             if (!$(this).hasClass('noCheck')) {
                 if (this.selectedIndex == 0) {
@@ -510,7 +510,7 @@ strongClass:      密码强度强图标样式
         var inputs = $(this).find('input');
         var valType;
 
-        inputs.on('focus', function() {
+        inputs.on('focus', function () {
             if ($(this).attr('class') != undefined) {
                 valType = $(this).attr('class').split(' ')[0];
                 if (settings.config[valType] != undefined &&
@@ -521,7 +521,7 @@ strongClass:      密码强度强图标样式
         });
 
         if (settings.tipSweep) {
-            inputs.on('blur', function() {
+            inputs.on('blur', function () {
                 var value = $(this).val();
                 if (settings.config[valType] != undefined) {
                     if (settings.config[valType].empty && settings.func.empty(value)) {
@@ -578,7 +578,7 @@ strongClass:      密码强度强图标样式
             });
         }
 
-        $(this).find('input[type=submit]').on('click', function() {
+        $(this).find('input[type=submit]').on('click', function () {
             for (var i = 0; i < controls.length; i++) {
                 control = controls.eq(i);
                 if (control.is('select')) {

@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "用户管理";
+    ViewBag.ParentEnName = "System";
+    ViewBag.CurrentEnName = "UserManage";
+    ViewBag.SearchName = "用户名称";
+    ViewBag.AddTitle = "新增用户信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using MvcBootstrap.EFModel
+@section DataGrid{
+    @Html.Partial("_UserGrid")
+}
+@section AddForm{
+    <div class="control-group">
+        <label class="control-label">
+            用户名</label>
+        <div class="controls">
+            <input type="text" name="Name" class="empty form-input">
+            <div class="form-tip"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            密码</label>
+        <div class="controls">
+            <input type="password" name="Password" class="empty form-input" />
+            <div class="form-tip"></div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            角色名</label>
+        <div class="controls">
+            @{SelectList roles = ViewData["RoleId"] as SelectList;}
+            @Html.DropDownList("RoleId", roles, new { @class = "my-select" })
+            <div class="form-tip">如不选择，则默认为添加根节点菜单</div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            备注</label>
+        <div class="controls">
+            <input type="text" name="Remark" class="empty form-input" />
+            <div class="form-tip"></div>
+        </div>
+    </div>
+}
+@section EditForm{
+    <input type="hidden" id="EditRoleID" name="ID" />
+    <div class="row-fluid">
+        <div class="control-group span6">
+            <label class="control-label">
+                用户名</label>
+            <div class="controls">
+                <input type="text" id="EditName" name="Name" class="empty form-input">
+                <div class="form-tip"></div>
+            </div>
+        </div>
+        <div class="control-group span6">
+            <label class="control-label">
+                密码</label>
+            <div class="controls">
+                <input type="password" id="EditPassword" name="Password" class="empty form-input" />
+                <div class="form-tip"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="control-group span6">
+            <label class="control-label">
+                角色</label>
+            <div class="controls">
+                @{SelectList roles = ViewData["RoleId"] as SelectList;}
+                @Html.DropDownList("RoleId", roles, new { id = "EditRoleId", @class = "my-select" })
+            </div>
+        </div>
+        <div class="control-group span6">
+            <label class="control-label">
+                备注</label>
+            <div class="controls">
+                <input type="text" id="EditRemark" name="Remark" class="empty form-input" />
+                <div class="form-tip"></div>
+            </div>
+        </div>
+    </div>
+}
+@section script{
+    <script src="@Url.Content("~/Scripts/page/user.js")" type="text/javascript"></script>
+}
