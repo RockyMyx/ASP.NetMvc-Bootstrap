@@ -20,6 +20,8 @@ namespace MvcBootstrap.DAO
             }
         }
 
+        protected string PrimaryKey = string.Empty;
+
         #region IBaseDao<T> Members
 
         public virtual T GetEntity(Expression<Func<T, bool>> whereExp)
@@ -158,7 +160,7 @@ namespace MvcBootstrap.DAO
                 try
                 {
                     string ids = string.Join(",", idList.ToArray());
-                    db.DeleteObjects(ids, TableName);
+                    db.DeleteObjects(ids, TableName, PrimaryKey);
                     return true;
                 }
                 catch (OptimisticConcurrencyException)
