@@ -163,7 +163,6 @@
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="UserID" />
-            <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
@@ -201,6 +200,7 @@
         <Function Name="DeleteObjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ids" Type="varchar" Mode="In" />
           <Parameter Name="table" Type="varchar" Mode="In" />
+          <Parameter Name="primary" Type="varchar" Mode="In" />
         </Function>
         <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -239,6 +239,7 @@
           <FunctionImport Name="DeleteObjects">
             <Parameter Name="ids" Mode="In" Type="String" />
             <Parameter Name="table" Mode="In" Type="String" />
+            <Parameter Name="primary" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="AisCategory" EntityType="MvcBootstrap.EFModel.AisCategory" />
           <EntitySet Name="AisResource" EntityType="MvcBootstrap.EFModel.AisResource" />
@@ -344,10 +345,9 @@
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="UserID" />
-            <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
         </EntityType>
         <EntityType Name="v_UserAllPermission">
           <Key>
@@ -493,8 +493,8 @@
             <ScalarProperty Name="Remark" ColumnName="Remark" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="UserRole"><EntityTypeMapping TypeName="MvcBootstrap.EFModel.UserRole"><MappingFragment StoreEntitySet="UserRole">
-            <ScalarProperty Name="UserID" ColumnName="UserID" />
-            <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="v_UserAllPermission"><EntityTypeMapping TypeName="MvcBootstrap.EFModel.v_UserAllPermission"><MappingFragment StoreEntitySet="v_UserAllPermission">
             <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -582,7 +582,7 @@
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.Permission" Width="1.5" PointX="7.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="2.7341113281249996" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.User" Width="1.5" PointX="0.75" PointY="1" Height="4.4532885742187531" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrap.EFModel.UserRole" Width="1.5" PointX="4.75" PointY="7.75" Height="1.3969734700520817" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrap.EFModel.UserRole" Width="1.5" PointX="4.75" PointY="7.75" Height="1.3969734700520835" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.v_UserAllPermission" Width="1.5" PointX="6.75" PointY="8.75" Height="2.9251310221354174" IsExpanded="true" />
         <AssociationConnector Association="MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="3.3305261230468748" />

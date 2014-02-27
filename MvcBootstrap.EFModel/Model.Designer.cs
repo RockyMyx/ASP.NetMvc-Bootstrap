@@ -437,7 +437,8 @@ namespace MvcBootstrap.EFModel
         /// </summary>
         /// <param name="ids">No Metadata Documentation available.</param>
         /// <param name="table">No Metadata Documentation available.</param>
-        public int DeleteObjects(global::System.String ids, global::System.String table)
+        /// <param name="primary">No Metadata Documentation available.</param>
+        public int DeleteObjects(global::System.String ids, global::System.String table, global::System.String primary)
         {
             ObjectParameter idsParameter;
             if (ids != null)
@@ -459,7 +460,17 @@ namespace MvcBootstrap.EFModel
                 tableParameter = new ObjectParameter("table", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction("DeleteObjects", idsParameter, tableParameter);
+            ObjectParameter primaryParameter;
+            if (primary != null)
+            {
+                primaryParameter = new ObjectParameter("primary", primary);
+            }
+            else
+            {
+                primaryParameter = new ObjectParameter("primary", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("DeleteObjects", idsParameter, tableParameter, primaryParameter);
         }
 
         #endregion
@@ -2657,19 +2668,43 @@ namespace MvcBootstrap.EFModel
         /// <summary>
         /// Create a new UserRole object.
         /// </summary>
-        /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="roleID">Initial value of the RoleID property.</param>
-        public static UserRole CreateUserRole(global::System.Int32 userID, global::System.Int32 roleID)
+        /// <param name="userID">Initial value of the UserID property.</param>
+        public static UserRole CreateUserRole(global::System.Int32 roleID, global::System.Int32 userID)
         {
             UserRole userRole = new UserRole();
-            userRole.UserID = userID;
             userRole.RoleID = roleID;
+            userRole.UserID = userID;
             return userRole;
         }
 
         #endregion
 
         #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleID
+        {
+            get
+            {
+                return _RoleID;
+            }
+            set
+            {
+                OnRoleIDChanging(value);
+                ReportPropertyChanging("RoleID");
+                _RoleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RoleID");
+                OnRoleIDChanged();
+            }
+        }
+        private global::System.Int32 _RoleID;
+        partial void OnRoleIDChanging(global::System.Int32 value);
+        partial void OnRoleIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2697,33 +2732,6 @@ namespace MvcBootstrap.EFModel
         private global::System.Int32 _UserID;
         partial void OnUserIDChanging(global::System.Int32 value);
         partial void OnUserIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 RoleID
-        {
-            get
-            {
-                return _RoleID;
-            }
-            set
-            {
-                if (_RoleID != value)
-                {
-                    OnRoleIDChanging(value);
-                    ReportPropertyChanging("RoleID");
-                    _RoleID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("RoleID");
-                    OnRoleIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _RoleID;
-        partial void OnRoleIDChanging(global::System.Int32 value);
-        partial void OnRoleIDChanged();
 
         #endregion
 
