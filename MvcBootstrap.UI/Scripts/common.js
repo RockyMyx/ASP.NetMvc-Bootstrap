@@ -77,6 +77,15 @@ var jPage = (function ($) {
         return rowId;
     };
 
+    page.reload = function () {
+        $.post(page.getUrl('Index'), { "pageIndex": 1 })
+         .done(function (result) {
+             $('#js-table').html(result);
+             $('.pagination').hide();
+             bindTable();
+         });
+    }
+
     return page;
 })(jQuery);
 
@@ -105,12 +114,7 @@ var paging = {
         if (change < 0) {
             //当前数据不超过一页时，重新请求数据
             if (newIndex == 0) {
-                $.post(jPage.getUrl('Index'), { "pageIndex": 1 })
-                 .done(function (result) {
-                     $('#js-table').html(result);
-                     $('.pagination').hide();
-                     bindTable();
-                 });
+                jPage.reload();
             }
             else {
                 $('.pagination').showIfHide();
@@ -130,12 +134,7 @@ var paging = {
         else {
             //当前数据不超过一页时，重新请求数据
             if (newIndex == 0) {
-                $.post(jPage.getUrl('Index'), { "pageIndex": 1 })
-                 .done(function (result) {
-                     $('#js-table').html(result);
-                     $('.pagination').hide();
-                     bindTable();
-                 });
+                jPage.reload();
             }
             else {
                 this.show(newIndex);
@@ -321,7 +320,7 @@ function bindTable() {
                 var isCommit = true;
                 $('.edit-txt').on('blur', function () {
                     var newtxt;
-                    //依赖于myx.validate.js
+                    //依赖于myx.formValidate.js
                     var validateType = $(this).attr('validate');
                     if (mValidate[validateType]) {
                         if (!mValidate[validateType]($(this).val())) {
@@ -461,7 +460,13 @@ $('#js-btn-modal-edit').on('click', function () {
             url: jPage.getUrl('Update'),
             data: form.serialize()
         }).done(function () {
-            paging.show(paging.pageIndex);
+            var pageIndex = paging.pageIndex;
+            if (pageIndex == 0) {
+                jPage.reload();
+            }
+            else {
+                paging.show(pageIndex);
+            }
         });
     }
 });
