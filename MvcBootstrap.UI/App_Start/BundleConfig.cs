@@ -34,23 +34,32 @@ namespace MvcBootstrap.UI
             bundles.Add(new StyleBundle("~/Content/css-paging")
                         .Include("~/Content/common/myx.pagination.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css-ztree")
+                        .Include("~/Scripts/plugin/zTree/css/demo.css",
+                                 "~/Scripts/plugin/zTree/css/zTreeStyle/zTreeStyle.css"));
+
             #endregion
 
             #region JS
 
-            bundles.Add(new ScriptBundle("~/Content/js")
+            bundles.Add(new ScriptBundle("~/Script/js")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
                                  "~/Scripts/bs/bootstrap.min.js",
                                  "~/Scripts/tool/helper.js"));
 
-            bundles.Add(new ScriptBundle("~/Content/js-manage")
+            bundles.Add(new ScriptBundle("~/Script/js-manage")
                         .Include("~/Scripts/jquery-1.8.3.min.js",
+                                 "~/Scripts/bs/bootstrap.min.js",
                                  "~/Scripts/tool/helper.js",
                                  "~/Scripts/bs/bootstrap-modal.js",
                                  "~/Scripts/control/myx.editValidate.js",
                                  "~/Scripts/control/myx.formValidate.js",
                                  "~/Scripts/control/myx.pagination.js",
                                  "~/Scripts/common.js"));
+
+            bundles.Add(new ScriptBundle("~/Script/js-ztree")
+                        .Include("~/Scripts/plugin/zTree/js/jquery.ztree.core-3.5.js",
+                                 "~/Scripts/plugin/zTree/js/jquery.ztree.excheck-3.5.js"));
 
             #endregion
 

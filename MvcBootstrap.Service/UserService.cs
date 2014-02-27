@@ -62,17 +62,18 @@ namespace MvcBootstrap.Service
 
         public User GetUserInfo(FormCollection formInfo)
         {
-            User role = new User
+            User user = new User
             {
+                ID = Convert.ToInt32(formInfo["ID"]),
                 Name = formInfo["Name"],
                 Password = formInfo["Password"],
                 Remark = formInfo["Remark"]
             };
 
-            return role;
+            return user;
         }
 
-        public UserRole GetUserRoleInfo(FormCollection formInfo)
+        public UserRole GetNewUserRoleInfo(FormCollection formInfo)
         {
             UserRole ur = new UserRole
             {
@@ -83,9 +84,51 @@ namespace MvcBootstrap.Service
             return ur;
         }
 
+        public UserRole GetEditUserRoleInfo(FormCollection formInfo)
+        {
+            UserRole ur = new UserRole
+            {
+                UserID = Convert.ToInt32(formInfo["ID"]),
+                RoleID = Convert.ToInt32(formInfo["RoleID"])
+            };
+
+            return ur;
+        }
+
         public UserViewModel GetUserViewModel(int id)
         {
             return base.dao.GetUserViewModel(id);
+        }
+
+        public List<TreeViewModel> GetUserTreeViewModel()
+        {
+            List<TreeViewModel> treeNodes = new List<TreeViewModel>();
+            //构造分类
+            AisCategoryService categoryService = new AisCategoryService();
+            IEnumerable<AisCategory> categoryInfo = categoryService.GetAll();
+            foreach (AisCategory category in categoryInfo)
+            {
+                treeNodes.Add(new TreeViewModel
+                {
+                    Id = category.ID.ToString(),
+                    PId = category.ParentID.ToString(),
+                    Name = category.Name
+                });
+            }
+            //构造资源
+            AisResourceService resourceService = new AisResourceService();
+            IEnumerable<AisResource> resourceInfo = resourceService.GetAll();
+            foreach (AisResource resource in resourceInfo)
+            {
+                treeNodes.Add(new TreeViewModel
+                {
+                    Id = resource.ID.ToString(),
+                    PId = resource.ParentID.ToString(),
+                    Name = resource.ResourceName
+                });
+            }
+
+            return treeNodes;
         }
     }
 }

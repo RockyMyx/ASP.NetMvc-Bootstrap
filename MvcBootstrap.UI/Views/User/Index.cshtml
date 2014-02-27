@@ -6,6 +6,10 @@
     ViewBag.AddTitle = "新增用户信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section style{
+    @Styles.Render("~/Content/css-ztree")}
+
 @using MvcBootstrap.EFModel
 @section DataGrid{
     @Html.Partial("_UserGrid")
@@ -46,7 +50,7 @@
     </div>
 }
 @section EditForm{
-    <input type="hidden" id="EditRoleID" name="ID" />
+    <input type="hidden" id="EditUserID" name="ID" />
     <div class="row-fluid">
         <div class="control-group span6">
             <label class="control-label">
@@ -85,5 +89,6 @@
     </div>
 }
 @section script{
+    @Scripts.Render("~/Script/js-ztree")
     <script src="@Url.Content("~/Scripts/page/user.js")" type="text/javascript"></script>
 }
