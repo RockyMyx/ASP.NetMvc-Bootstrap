@@ -1,7 +1,7 @@
 ﻿/// <reference path="jquery-1.8.3.min.js" />
 /**
 Name    : form验证表单插件
-Version : 3.0
+Version : 5.0
 Author  : RockyMyx
 插件说明:
 validationInit：
@@ -35,7 +35,7 @@ strongClass:      密码强度强图标样式
     var validationInit = {
         pwdLevel: 3,
         dateMode: 'ymd',
-        success: '输入正确'
+        success: 'OK'
     };
 
     var validationFunc = {
@@ -259,7 +259,7 @@ strongClass:      密码强度强图标样式
             pwd: '密码长度在6到15位之间，请检查后重新输入',
             min: 6,
             max: 15,
-            pwdLevelTip: '.pwdLevelTip',
+            pwdLevelTip: 'pwdLevelTip',
             weak: '弱',
             middle: '中等',
             strong: '强',
@@ -318,12 +318,6 @@ strongClass:      密码强度强图标样式
             empty: '个人主页不得为空',
             url: '个人主页输入格式有误，请检查后重新输入'
         },
-        cv: {
-            init: '请选择您的学历',
-            focus: '请选择您的最高学历',
-            info: '请选择您的学历',
-            type: 'select'
-        },
         letter: {
             init: '请输入英文字母',
             focus: '请输入纯英文字母',
@@ -368,35 +362,6 @@ strongClass:      密码强度强图标样式
         $.extend(settings, options || {});
 
         /*************************Helpers*******************************/
-
-        function checkDate(year, month, day) {
-            if (year.length != 4 || month.length != 2 || day.length != 2)
-                return false;
-            if (parseInt(month, 10) <= 0 ||
-                parseInt(month, 10) > 12 ||
-                parseInt(day, 10) <= 0 ||
-                parseInt(day, 10) > 31) {
-                return false;
-            }
-            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-                //闰年2月不可大于29天
-                if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 29;
-            } else {
-                //平年2月不可大于28天
-                if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 28;
-            }
-            var monthArr = [1, 3, 5, 7, 8, 10, 12];
-            for (var i = 0; i < monthArr.length; i++) {
-                if (monthArr[i] == parseInt(month, 10)) {
-                    //大月天数不可大于31
-                    return parseInt(day, 10) <= 31;
-                } else {
-                    //小月天数不可大于30
-                    return parseInt(day, 10) <= 30;
-                }
-            }
-            return true;
-        };
 
         $.fn.showTip = function (info) {
             if (settings.tipStyle == 'text') {
@@ -460,6 +425,19 @@ strongClass:      密码强度强图标样式
                 .showTip(info);
         };
 
+        Array.prototype.contains = function () {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] == arguments[0]) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        String.prototype.equal = function (str2) {
+            return this.localeCompare(str2) == 0;
+        };
+
         /***************************************************************/
 
         if (settings.tipStyle == 'title') {
@@ -502,7 +480,7 @@ strongClass:      密码强度强图标样式
                 if (this.selectedIndex == 0) {
                     tipSelect.showHide('请选择内容', settings.errorClass, settings.successClass);
                 } else {
-                    tipSelect.showHide('OK', settings.successClass, settings.errorClass);
+                    tipSelect.showHide(settings.init.success, settings.successClass, settings.errorClass);
                 }
             }
         });
@@ -535,15 +513,16 @@ strongClass:      密码强度强图标样式
                         $(this).showError(settings.config[valType]['pwd']);
                     } else if (settings.config[valType].pwdLevelTip) {
                         var result = settings.func.pwdLevel(value);
+                        var pwdLevelClass = settings.config[valType].pwdLevelTip;
                         if (result == 1) {
-                            $(settings.config[pwdLevelTip]).attr('class', settings.config[pwdLevelTip] + ' ' + settings.weakClass);
-                            $(this).showOther(settings.config[valType]['pwd'], settings.warnClass);
+                            $('.' + pwdLevelClass).attr('class', pwdLevelClass + ' ' + settings.weakClass);
+                            $(this).showSuccess(settings.config[valType]['weakLevel'], settings.warnClass);
                         } else if (result == 2) {
-                            $('.' + validations.pwdLevelTip).attr('class', settings.config[pwdLevelTip] + ' ' + settings.midClass);
-                            $(this).showOther(settings.config[valType]['middleLevel'], settings.warnClass);
+                            $('.' + pwdLevelClass).attr('class', pwdLevelClass + ' ' + settings.midClass);
+                            $(this).showSuccess(settings.config[valType]['middleLevel'], settings.warnClass);
                         } else {
-                            $('.' + validations.pwdLevelTip).attr('class', settings.config[pwdLevelTip] + ' ' + settings.strongClass);
-                            $(this).showOther(settings.config[valType]['strongLevel'], settings.successClass);
+                            $('.' + pwdLevelClass).attr('class', pwdLevelClass + ' ' + settings.strongClass);
+                            $(this).showSuccess(settings.config[valType]['strongLevel'], settings.successClass);
                         }
                     } else if (settings.config[valType].compare &&
                         settings.config[valType].compareTo && !$(settings.config[valType].compareTo).val().equal(value)) {
@@ -579,6 +558,7 @@ strongClass:      密码强度强图标样式
         }
 
         $(this).find('input[type=submit]').on('click', function () {
+            var isValid = 1;
             for (var i = 0; i < controls.length; i++) {
                 control = controls.eq(i);
                 if (control.is('select')) {
@@ -591,6 +571,9 @@ strongClass:      密码强度强图标样式
                             if (!settings.showAllError) {
                                 return false;
                             }
+                            else {
+                                isValid = 0;
+                            }
                         }
                     }
                 } else {
@@ -602,11 +585,44 @@ strongClass:      密码强度强图标样式
                             if (!settings.showAllError) {
                                 return false;
                             }
+                            else {
+                                isValid = 0;
+                            }
                         }
                     }
                 }
-                return false;
             }
+
+            return isValid == 0 ? false : true;
         });
     };
 })(jQuery);
+
+function checkDate(year, month, day) {
+    if (year.length != 4 || month.length != 2 || day.length != 2)
+        return false;
+    if (parseInt(month, 10) <= 0 ||
+                parseInt(month, 10) > 12 ||
+                parseInt(day, 10) <= 0 ||
+                parseInt(day, 10) > 31) {
+        return false;
+    }
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        //闰年2月不可大于29天
+        if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 29;
+    } else {
+        //平年2月不可大于28天
+        if (parseInt(month, 10) == 2) return parseInt(day, 10) <= 28;
+    }
+    var monthArr = [1, 3, 5, 7, 8, 10, 12];
+    for (var i = 0; i < monthArr.length; i++) {
+        if (monthArr[i] == parseInt(month, 10)) {
+            //大月天数不可大于31
+            return parseInt(day, 10) <= 31;
+        } else {
+            //小月天数不可大于30
+            return parseInt(day, 10) <= 30;
+        }
+    }
+    return true;
+};
