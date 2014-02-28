@@ -102,33 +102,11 @@ namespace MvcBootstrap.Service
 
         public List<TreeViewModel> GetUserTreeViewModel(int userId)
         {
-            List<TreeViewModel> treeNodes = new List<TreeViewModel>();
-            //构造分类
-            AisCategoryService categoryService = new AisCategoryService();
-            IEnumerable<AisCategory> categoryInfo = categoryService.GetAll();
-            foreach (AisCategory category in categoryInfo)
-            {
-                treeNodes.Add(new TreeViewModel
-                {
-                    id = category.ID.ToString(),
-                    pId = category.ParentID.ToString(),
-                    name = category.Name
-                });
-            }
-            //构造资源
-            AisResourceService resourceService = new AisResourceService();
-            IEnumerable<AisResource> resourceInfo = resourceService.GetAll();
-            foreach (AisResource resource in resourceInfo)
-            {
-                treeNodes.Add(new TreeViewModel
-                {
-                    id = resource.ID.ToString(),
-                    pId = resource.ParentID.ToString(),
-                    name = resource.ResourceName
-                });
-            }
-
-            return treeNodes;
+            List<TreeViewModel> result = new List<TreeViewModel>();
+            UserNodeService unService = new UserNodeService();
+            result.AddRange(unService.GetCategoryNodes(userId));
+            result.AddRange(unService.GetResourceNodes(userId));
+            return result;
         }
     }
 }
