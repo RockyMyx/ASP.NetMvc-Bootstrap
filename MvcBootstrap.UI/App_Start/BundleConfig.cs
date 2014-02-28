@@ -35,8 +35,7 @@ namespace MvcBootstrap.UI
                         .Include("~/Content/common/myx.pagination.css"));
 
             bundles.Add(new StyleBundle("~/Content/css-ztree")
-                        .Include("~/Scripts/plugin/zTree/css/demo.css",
-                                 "~/Scripts/plugin/zTree/css/zTreeStyle/zTreeStyle.css"));
+                        .Include("~/Scripts/plugin/zTree/css/zTreeStyle/zTreeStyle.css"));
 
             #endregion
 
