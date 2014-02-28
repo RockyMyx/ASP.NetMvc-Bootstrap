@@ -2631,24 +2631,24 @@ namespace MvcBootstrap.EFModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String AisResourceCache
+        public global::System.String AisResourceCacheID
         {
             get
             {
-                return _AisResourceCache;
+                return _AisResourceCacheID;
             }
             set
             {
-                OnAisResourceCacheChanging(value);
-                ReportPropertyChanging("AisResourceCache");
-                _AisResourceCache = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AisResourceCache");
-                OnAisResourceCacheChanged();
+                OnAisResourceCacheIDChanging(value);
+                ReportPropertyChanging("AisResourceCacheID");
+                _AisResourceCacheID = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AisResourceCacheID");
+                OnAisResourceCacheIDChanged();
             }
         }
-        private global::System.String _AisResourceCache;
-        partial void OnAisResourceCacheChanging(global::System.String value);
-        partial void OnAisResourceCacheChanged();
+        private global::System.String _AisResourceCacheID;
+        partial void OnAisResourceCacheIDChanging(global::System.String value);
+        partial void OnAisResourceCacheIDChanged();
 
         #endregion
 
