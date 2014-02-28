@@ -48,8 +48,10 @@
     <Compile Include="HomeController.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="ModuleController.cs" />
+    <Compile Include="OperationController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleController.cs" />
+    <Compile Include="UserController.cs" />
     <Compile Include="ViewResult\CustomJsonResult.cs" />
   </ItemGroup>
   <ItemGroup>

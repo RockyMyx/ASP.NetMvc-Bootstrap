@@ -84,7 +84,7 @@ var jPage = (function ($) {
              $('.pagination').hide();
              bindTable();
          });
-    }
+    };
 
     return page;
 })(jQuery);

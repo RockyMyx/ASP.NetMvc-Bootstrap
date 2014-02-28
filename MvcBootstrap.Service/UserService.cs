@@ -100,7 +100,7 @@ namespace MvcBootstrap.Service
             return base.dao.GetUserViewModel(id);
         }
 
-        public List<TreeViewModel> GetUserTreeViewModel()
+        public List<TreeViewModel> GetUserTreeViewModel(int userId)
         {
             List<TreeViewModel> treeNodes = new List<TreeViewModel>();
             //构造分类
@@ -110,9 +110,9 @@ namespace MvcBootstrap.Service
             {
                 treeNodes.Add(new TreeViewModel
                 {
-                    Id = category.ID.ToString(),
-                    PId = category.ParentID.ToString(),
-                    Name = category.Name
+                    id = category.ID.ToString(),
+                    pId = category.ParentID.ToString(),
+                    name = category.Name
                 });
             }
             //构造资源
@@ -122,9 +122,9 @@ namespace MvcBootstrap.Service
             {
                 treeNodes.Add(new TreeViewModel
                 {
-                    Id = resource.ID.ToString(),
-                    PId = resource.ParentID.ToString(),
-                    Name = resource.ResourceName
+                    id = resource.ID.ToString(),
+                    pId = resource.ParentID.ToString(),
+                    name = resource.ResourceName
                 });
             }
 
