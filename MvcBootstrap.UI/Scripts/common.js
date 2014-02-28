@@ -484,13 +484,16 @@ $('#js-btn-toolbar-detail').on('click', function () {
         return false;
     }
     else {
+        $('#ModalDetail').modal('show');
+        $('.js-loading').show();
         $.getJSON('/Module/Get/' + jPage.getCheckId())
          .done(function (data) {
              if (window.showDetail) {
                  showDetail(data);
              }
+             $('.js-loading').hide();
          });
-    }
+     }
 });
 
 //工具栏添加按钮点击事件
