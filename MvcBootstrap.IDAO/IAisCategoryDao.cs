@@ -1,4 +1,6 @@
-﻿using MvcBootstrap.EFModel;
+﻿using System.Collections.Generic;
+using MvcBootstrap.EFModel;
+using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.IDAO
 {

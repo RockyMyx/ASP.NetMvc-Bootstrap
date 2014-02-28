@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public static class ConvertHelper
 {
@@ -123,5 +124,17 @@ public static class ConvertHelper
             return null;
         }
         return ObjToDecimal(obj);
+    }
+
+    public static List<string> StrToList(this string str)
+    {
+        string[] strs = str.Split(',');
+        List<string> strList = new List<string>();
+        foreach (string s in strs)
+        {
+            strList.Add(s);
+        }
+
+        return strList;
     }
 }

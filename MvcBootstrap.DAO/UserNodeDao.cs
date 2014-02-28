@@ -3,8 +3,7 @@ using MvcBootstrap.IDAO;
 
 namespace MvcBootstrap.DAO
 {
-    public class AisCategoryDao : BaseEFDao<AisCategory>, IAisCategoryDao
+    public class UserNodeDao : BaseEFDao<UserNode>, IUserNodeDao
     {
-        
     }
 }
