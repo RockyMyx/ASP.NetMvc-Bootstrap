@@ -48,7 +48,7 @@ $('#js-btn-toolbar-node').on('click', function () {
     else {
         $.getJSON('/User/GetResourceTreeNodes')
          .done(function (data) {
-             $.fn.zTree.init($("#treeDemo"), setting, data);
+             $.fn.zTree.init($("#aisTree"), setting, data);
          });
     }
 });
