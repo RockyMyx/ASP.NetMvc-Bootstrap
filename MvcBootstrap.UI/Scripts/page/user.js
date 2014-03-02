@@ -25,7 +25,7 @@ var setting = {
 };
 
 function onCheck(e, treeId, treeNode) {
-    var treeObj = $.fn.zTree.getZTreeObj("treeDemo"),
+    var treeObj = $.fn.zTree.getZTreeObj("aisTree"),
                     nodes = treeObj.getCheckedNodes(true),
                     v = "";
     for (var i = 0; i < nodes.length; i++) {
@@ -46,9 +46,12 @@ $('#js-btn-toolbar-node').on('click', function () {
         return false;
     }
     else {
+        $('#ModalNode').modal('show');
+        $('.js-loading').show();
         $.getJSON('/User/GetResourceTreeNodes')
          .done(function (data) {
              $.fn.zTree.init($("#aisTree"), setting, data);
+             $('.js-loading').hide();
          });
     }
 });

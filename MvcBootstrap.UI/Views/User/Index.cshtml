@@ -89,7 +89,24 @@
     </div>
 }
 @section NodeForm{
-    <ul id="aisTree" class="ztree"></ul>
+<div id="ModalNode" class="modal hide fade wp60" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×</button>
+            <span class="label label-warning">分配资源节点</span>
+            <img src="@Url.Content("~/Images/loading.gif")" class="js-loading hide" alt="loading" />
+        </div>
+        <div class="modal-body h300">
+            <ul id="aisTree" class="ztree"></ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                取消</button>
+            <button class="btn btn-primary" id="js-btn-modal-permission" data-dismiss="modal">
+                提交</button>
+        </div>
+    </div>
 }
 @section script{
     @Scripts.Render("~/Script/js-ztree")
