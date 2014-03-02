@@ -51,7 +51,7 @@
 		},
 		data: {
 			key: {
-				checked: "checked"
+			    checked: "isChecked"
 			}
 		},
 		callback: {
