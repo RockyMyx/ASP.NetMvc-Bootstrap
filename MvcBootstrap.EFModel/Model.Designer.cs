@@ -2607,30 +2607,6 @@ namespace MvcBootstrap.EFModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String AisResourceID
-        {
-            get
-            {
-                return _AisResourceID;
-            }
-            set
-            {
-                OnAisResourceIDChanging(value);
-                ReportPropertyChanging("AisResourceID");
-                _AisResourceID = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AisResourceID");
-                OnAisResourceIDChanged();
-            }
-        }
-        private global::System.String _AisResourceID;
-        partial void OnAisResourceIDChanging(global::System.String value);
-        partial void OnAisResourceIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String AisResourceCacheID
         {
             get
