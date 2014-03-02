@@ -57,8 +57,8 @@ namespace MvcBootstrap.UI
                                  "~/Scripts/common.js"));
 
             bundles.Add(new ScriptBundle("~/Script/js-ztree")
-                        .Include("~/Scripts/plugin/zTree/js/jquery.ztree.core-3.5.js",
-                                 "~/Scripts/plugin/zTree/js/jquery.ztree.excheck-3.5.js"));
+                        .Include("~/Scripts/plugin/zTree/js/jquery.ztree.core-3.5.min.js",
+                                 "~/Scripts/plugin/zTree/js/jquery.ztree.excheck-3.5.min.js"));
 
             #endregion
 
