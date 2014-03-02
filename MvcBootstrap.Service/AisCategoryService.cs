@@ -13,22 +13,31 @@ namespace MvcBootstrap.Service
             base.dao = new AisCategoryDao();
         }
 
-        public List<TreeViewModel> GetCategoryNodes()
+        public List<TreeViewModel> GetCategoryNodes(int userId)
         {
+            UserNodeService unService = new UserNodeService();
+            string distributedIds = unService.GetEntity(un => un.UserID == userId).AisCategoryID;
+
             List<TreeViewModel> categoryNodes = new List<TreeViewModel>();
+            TreeViewModel model = null;
             using (DBEntity db = new DBEntity())
             {
                 IEnumerable<AisCategory> categoryInfo = this.GetAll();
                 foreach (AisCategory category in categoryInfo)
                 {
-                    categoryNodes.Add(new TreeViewModel
+                    model = new TreeViewModel
                     {
                         id = category.ID.ToString(),
                         pId = category.ParentID.ToString(),
                         name = category.Name,
-                        open = true,
-                        isParent = true
-                    });
+                        open = true
+                    };
+                    if (!string.IsNullOrWhiteSpace(distributedIds) &&
+                        distributedIds.Contains(category.ID.ToString()))
+                    {
+                        model.isChecked = true;
+                    }
+                    categoryNodes.Add(model);
                 }
             }
 

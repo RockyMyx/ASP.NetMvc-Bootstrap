@@ -87,15 +87,17 @@ namespace MvcBootstrap.Controllers
 
         public ActionResult GetResourceTreeNodes()
         {
+            //ToTest
+            //int userId = Convert.ToInt32(Session["UserId"]);
+            int userId = 1;
+
             AisCategoryService categoryService = new AisCategoryService();
-            List<TreeViewModel> treeNodes = categoryService.GetCategoryNodes();
+            List<TreeViewModel> treeNodes = categoryService.GetCategoryNodes(userId);
             return Json(treeNodes, JsonRequestBehavior.AllowGet);
         }
 
         public bool DistributeUserNodes(string idString)
         {
-            //ToTest
-            //int userId = Convert.ToInt32(Session["UserId"]);
             UserNode userNode = new UserNode
             {
                 UserID = 1,
