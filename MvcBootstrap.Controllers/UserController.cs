@@ -87,7 +87,8 @@ namespace MvcBootstrap.Controllers
             //int userId = Convert.ToInt32(Session["UserId"]);
             int userId = 1;
 
-            List<TreeViewModel> treeNodes = userService.GetUserTreeViewModel(userId);
+            UserNodeService unService = new UserNodeService();
+            List<TreeViewModel> treeNodes = unService.GetCategoryNodes(userId);
             return Json(treeNodes, JsonRequestBehavior.AllowGet);
         }
     }
