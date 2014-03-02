@@ -20,12 +20,5 @@ namespace MvcBootstrap.Service
             AisCategoryService categoryService = new AisCategoryService();
             return categoryService.GetCategoryNodes(idString.StrToList());
         }
-
-        public List<TreeViewModel> GetResourceNodes(int userId)
-        {
-            string idString = base.dao.GetEntity(n => n.UserID == userId).AisResourceID;
-            AisResourceService resourceService = new AisResourceService();
-            return resourceService.GetResourceNodes(idString.StrToList());
-        }
     }
 }

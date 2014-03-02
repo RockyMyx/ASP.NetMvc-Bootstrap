@@ -99,14 +99,5 @@ namespace MvcBootstrap.Service
         {
             return base.dao.GetUserViewModel(id);
         }
-
-        public List<TreeViewModel> GetUserTreeViewModel(int userId)
-        {
-            List<TreeViewModel> result = new List<TreeViewModel>();
-            UserNodeService unService = new UserNodeService();
-            result.AddRange(unService.GetCategoryNodes(userId));
-            result.AddRange(unService.GetResourceNodes(userId));
-            return result;
-        }
     }
 }

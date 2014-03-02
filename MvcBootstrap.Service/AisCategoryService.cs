@@ -27,7 +27,9 @@ namespace MvcBootstrap.Service
                         {
                             id = category.ID.ToString(),
                             pId = category.ParentID.ToString(),
-                            name = category.Name
+                            name = category.Name,
+                            open = true,
+                            isParent = true
                         });
                     }
                 }
