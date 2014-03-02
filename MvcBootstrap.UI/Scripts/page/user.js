@@ -34,7 +34,7 @@ $('#js-btn-toolbar-node').on('click', function () {
     else {
         $('#ModalNode').modal('show');
         $('.js-loading').show();
-        $.getJSON('/User/GetResourceTreeNodes')
+        $.getJSON('/User/GetResourceTreeNodes/' + jPage.getCheckId())
          .done(function (data) {
              $.fn.zTree.init($("#aisTree"), setting, data);
              $('.js-loading').hide();

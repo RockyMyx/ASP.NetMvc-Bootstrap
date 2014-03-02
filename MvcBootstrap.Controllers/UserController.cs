@@ -85,14 +85,10 @@ namespace MvcBootstrap.Controllers
             return PartialView("_UserGrid", filterEntities);
         }
 
-        public ActionResult GetResourceTreeNodes()
+        public ActionResult GetResourceTreeNodes(int id)
         {
-            //ToTest
-            //int userId = Convert.ToInt32(Session["UserId"]);
-            int userId = 1;
-
             AisCategoryService categoryService = new AisCategoryService();
-            List<TreeViewModel> treeNodes = categoryService.GetCategoryNodes(userId);
+            List<TreeViewModel> treeNodes = categoryService.GetCategoryNodes(id);
             return Json(treeNodes, JsonRequestBehavior.AllowGet);
         }
 
