@@ -13,6 +13,7 @@ namespace MvcBootstrap.Controllers
     {
         UserService userService = new UserService();
         UserRoleService urService = new UserRoleService();
+        UserNodeService unService = new UserNodeService();
 
         public UserController()
         {
@@ -47,14 +48,17 @@ namespace MvcBootstrap.Controllers
         {
             User user = userService.GetUserInfo(formInfo);
             userService.Create(user);
-            UserRole ur = userService.GetNewUserRoleInfo(formInfo);
-            urService.Create(ur);
+            UserRole userRole = userService.GetNewUserRoleInfo(formInfo);
+            urService.Create(userRole);
+            UserNode userNode = userService.GetNewUserNodeInfo(formInfo);
+            unService.Create(userNode);
         }
 
         public override void Delete(List<int> ids)
         {
             userService.Delete(ids);
             urService.Delete(ids);
+            unService.Delete(ids);
         }
 
         public override void Update(FormCollection formInfo)
@@ -83,13 +87,23 @@ namespace MvcBootstrap.Controllers
 
         public ActionResult GetResourceTreeNodes()
         {
+            AisCategoryService categoryService = new AisCategoryService();
+            List<TreeViewModel> treeNodes = categoryService.GetCategoryNodes();
+            return Json(treeNodes, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool DistributeUserNodes(string idString)
+        {
             //ToTest
             //int userId = Convert.ToInt32(Session["UserId"]);
-            int userId = 1;
+            UserNode userNode = new UserNode
+            {
+                UserID = 1,
+                AisCategoryID = idString
+            };
 
-            UserNodeService unService = new UserNodeService();
-            List<TreeViewModel> treeNodes = unService.GetCategoryNodes(userId);
-            return Json(treeNodes, JsonRequestBehavior.AllowGet);
+            unService.Update(userNode);
+            return true;
         }
     }
 }

@@ -18,22 +18,8 @@ var setting = {
         simpleData: {
             enable: true
         }
-    },
-    callback: {
-        onCheck: onCheck
     }
 };
-
-function onCheck(e, treeId, treeNode) {
-    var treeObj = $.fn.zTree.getZTreeObj("aisTree"),
-                    nodes = treeObj.getCheckedNodes(true),
-                    v = "";
-    for (var i = 0; i < nodes.length; i++) {
-        v += nodes[i].name + ",";
-        alert(nodes[i].id); //获取选中节点的值
-        alert(nodes[i].pId); //获取选中节点的值
-    }
-}
 
 $('#js-btn-toolbar-node').on('click', function () {
     var rowCheck = $('input:checked.js-check-cell');
@@ -54,4 +40,19 @@ $('#js-btn-toolbar-node').on('click', function () {
              $('.js-loading').hide();
          });
     }
-});
+ });
+
+ $('#js-btn-modal-node').on('click', function (e) {
+     var checkedNodes = '';
+     var treeObj = $.fn.zTree.getZTreeObj("aisTree"),
+                    nodes = treeObj.getCheckedNodes(true);
+     for (var i = 0; i < nodes.length; i++) {
+         checkedNodes += nodes[i].id + ',';
+     }
+     checkedNodes = checkedNodes.substring(0, checkedNodes.length - 1);
+     $.post(jPage.getUrl('DistributeUserNodes'), { 'idString': checkedNodes }, function (result) {
+         if (result) {
+             alert('资源分配成功！');
+         }
+     })
+ });
