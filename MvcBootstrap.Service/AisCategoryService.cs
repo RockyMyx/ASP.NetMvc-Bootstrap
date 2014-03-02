@@ -13,7 +13,7 @@ namespace MvcBootstrap.Service
             base.dao = new AisCategoryDao();
         }
 
-        public List<TreeViewModel> GetCategoryNodes(List<string> idList)
+        public List<TreeViewModel> GetCategoryNodes()
         {
             List<TreeViewModel> categoryNodes = new List<TreeViewModel>();
             using (DBEntity db = new DBEntity())
@@ -21,17 +21,14 @@ namespace MvcBootstrap.Service
                 IEnumerable<AisCategory> categoryInfo = this.GetAll();
                 foreach (AisCategory category in categoryInfo)
                 {
-                    if (idList.Contains(category.ID.ToString()))
+                    categoryNodes.Add(new TreeViewModel
                     {
-                        categoryNodes.Add(new TreeViewModel
-                        {
-                            id = category.ID.ToString(),
-                            pId = category.ParentID.ToString(),
-                            name = category.Name,
-                            open = true,
-                            isParent = true
-                        });
-                    }
+                        id = category.ID.ToString(),
+                        pId = category.ParentID.ToString(),
+                        name = category.Name,
+                        open = true,
+                        isParent = true
+                    });
                 }
             }
 

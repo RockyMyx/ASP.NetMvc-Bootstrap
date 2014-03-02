@@ -126,7 +126,7 @@ public static class ConvertHelper
         return ObjToDecimal(obj);
     }
 
-    public static List<string> StrToList(this string str)
+    public static List<string> ToList(this string str)
     {
         string[] strs = str.Split(',');
         List<string> strList = new List<string>();

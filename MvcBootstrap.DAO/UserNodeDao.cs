@@ -5,5 +5,9 @@ namespace MvcBootstrap.DAO
 {
     public class UserNodeDao : BaseEFDao<UserNode>, IUserNodeDao
     {
+        public UserNodeDao()
+        {
+            base.PrimaryKey = "UserID";
+        }
     }
 }

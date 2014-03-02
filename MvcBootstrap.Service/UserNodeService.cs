@@ -4,6 +4,7 @@ using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
 using MvcBootstrap.ViewModels;
 using System;
+using System.Text;
 
 namespace MvcBootstrap.Service
 {
@@ -12,13 +13,6 @@ namespace MvcBootstrap.Service
         protected override void SetCurrentDao()
         {
             base.dao = new UserNodeDao();
-        }
-
-        public List<TreeViewModel> GetCategoryNodes(int userId)
-        {
-            string idString = base.dao.GetEntity(n => n.UserID == userId).AisCategoryID;
-            AisCategoryService categoryService = new AisCategoryService();
-            return categoryService.GetCategoryNodes(idString.StrToList());
         }
     }
 }

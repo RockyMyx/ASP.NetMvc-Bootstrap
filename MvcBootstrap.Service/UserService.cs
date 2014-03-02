@@ -84,6 +84,16 @@ namespace MvcBootstrap.Service
             return ur;
         }
 
+        public UserNode GetNewUserNodeInfo(FormCollection formInfo)
+        {
+            UserNode un = new UserNode
+            {
+                UserID = dao.GetInsertId()
+            };
+
+            return un;
+        }
+
         public UserRole GetEditUserRoleInfo(FormCollection formInfo)
         {
             UserRole ur = new UserRole
