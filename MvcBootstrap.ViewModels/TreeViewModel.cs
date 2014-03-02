@@ -12,6 +12,7 @@ namespace MvcBootstrap.ViewModels
         public string pId { get; set; }
         public string name { get; set; }
         public bool open { get; set; }
-        public bool isParent { get; set; }
+        public bool isParent { get { return true; } }
+        public bool isChecked { get; set; }
     }
 }
