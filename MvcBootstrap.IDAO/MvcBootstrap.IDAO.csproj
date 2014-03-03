@@ -49,9 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj">
-      <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
-      <Name>MvcBootstrap.EFModel</Name>
+    <ProjectReference Include="..\MvcBootstrap.MysqlEFModel\MvcBootstrap.MysqlEFModel.csproj">
+      <Project>{A07D60FE-A75B-426E-8D45-9CED18F3947D}</Project>
+      <Name>MvcBootstrap.MysqlEFModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.ViewModels\MvcBootstrap.ViewModels.csproj">
       <Project>{F04F960E-4490-489D-97CD-7F53B7F639FD}</Project>

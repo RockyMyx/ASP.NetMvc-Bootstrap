@@ -55,10 +55,6 @@
     <Compile Include="ViewResult\CustomJsonResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj">
-      <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
-      <Name>MvcBootstrap.EFModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Filters\MvcBootstrap.Filters.csproj">
       <Project>{0B6D24B6-03CC-46AA-B17F-D3716FB45839}</Project>
       <Name>MvcBootstrap.Filters</Name>
@@ -66,6 +62,10 @@
     <ProjectReference Include="..\MvcBootstrap.IDAO\MvcBootstrap.IDAO.csproj">
       <Project>{7D3A8BF1-941D-4144-811E-806A94FB1BF8}</Project>
       <Name>MvcBootstrap.IDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.MysqlEFModel\MvcBootstrap.MysqlEFModel.csproj">
+      <Project>{A07D60FE-A75B-426E-8D45-9CED18F3947D}</Project>
+      <Name>MvcBootstrap.MysqlEFModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
       <Project>{F9FA6F2A-DC9A-4A36-BCDA-32DFC0F8AF60}</Project>
