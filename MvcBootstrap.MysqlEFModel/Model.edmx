@@ -274,13 +274,6 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
         </EntityType>
-        <ComplexType Name="UserBrowseViewModel" >
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="ParentId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="false" />
-          <Property Type="String" Name="Url" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MvcBootstrap.MysqlModel")]
+[assembly: AssemblyTitle("MvcBootstrap.MysqlEFModel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("MvcBootstrap.MysqlModel")]
+[assembly: AssemblyProduct("MvcBootstrap.MysqlEFModel")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b652c925-2e08-471d-abd1-43c18dccec36")]
+[assembly: Guid("972849f8-d4e8-4e63-af03-0b9686c972ab")]
 
 // Version information for an assembly consists of the following four values:
 //

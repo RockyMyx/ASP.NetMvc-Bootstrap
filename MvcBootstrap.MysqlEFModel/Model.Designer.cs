@@ -8,16 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
 using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-namespace MvcBootstrap.MysqlModel
+namespace MvcBootstrap.MysqlEFModel
 {
     #region Contexts
     
@@ -2327,167 +2324,6 @@ namespace MvcBootstrap.MysqlModel
         #endregion
 
     
-    }
-
-    #endregion
-
-    #region ComplexTypes
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="EFModel", Name="UserBrowseViewModel")]
-    [DataContractAttribute(IsReference=true)]
-    [Serializable()]
-    public partial class UserBrowseViewModel : ComplexObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new UserBrowseViewModel object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="parentId">Initial value of the ParentId property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="code">Initial value of the Code property.</param>
-        /// <param name="url">Initial value of the Url property.</param>
-        public static UserBrowseViewModel CreateUserBrowseViewModel(global::System.Int32 id, global::System.Int32 parentId, global::System.String name, global::System.String code, global::System.String url)
-        {
-            UserBrowseViewModel userBrowseViewModel = new UserBrowseViewModel();
-            userBrowseViewModel.ID = id;
-            userBrowseViewModel.ParentId = parentId;
-            userBrowseViewModel.Name = name;
-            userBrowseViewModel.Code = code;
-            userBrowseViewModel.Url = url;
-            return userBrowseViewModel;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                OnIDChanging(value);
-                ReportPropertyChanging("ID");
-                _ID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ID");
-                OnIDChanged();
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ParentId
-        {
-            get
-            {
-                return _ParentId;
-            }
-            set
-            {
-                OnParentIdChanging(value);
-                ReportPropertyChanging("ParentId");
-                _ParentId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ParentId");
-                OnParentIdChanged();
-            }
-        }
-        private global::System.Int32 _ParentId;
-        partial void OnParentIdChanging(global::System.Int32 value);
-        partial void OnParentIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Code
-        {
-            get
-            {
-                return _Code;
-            }
-            set
-            {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
-            }
-        }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Url
-        {
-            get
-            {
-                return _Url;
-            }
-            set
-            {
-                OnUrlChanging(value);
-                ReportPropertyChanging("Url");
-                _Url = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Url");
-                OnUrlChanged();
-            }
-        }
-        private global::System.String _Url;
-        partial void OnUrlChanging(global::System.String value);
-        partial void OnUrlChanged();
-
-        #endregion
-
     }
 
     #endregion

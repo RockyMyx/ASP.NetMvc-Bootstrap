@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Objects;
 using System.Configuration;
-using System.Data;
 using System.Data.Common;
+using System.Data.Objects;
+using System.Linq;
 
-namespace MvcBootstrap.MysqlModel
+namespace MvcBootstrap.MysqlEFModel
 {
     public partial class DBEntity : ObjectContext
     {
         DBHelper db = new DBHelper(ConfigurationManager.AppSettings["DBType"]);
 
-        public ObjectResult<module> GetModuleTree()
+        public IEnumerable<module> GetModuleTree()
         {
-            using (DBEntity dbEntity = new DBEntity())
+            using (DBEntity db = new DBEntity())
             {
-                return dbEntity.ExecuteStoreQuery<module>("CALL GetModuleTree()");
+                return db.ExecuteStoreQuery<module>("CALL GetModuleTree()").ToList();
             }
         }
 
@@ -31,7 +29,9 @@ namespace MvcBootstrap.MysqlModel
                 {
                     ID = Convert.ToInt32(reader["ID"]),
                     Name = reader["Name"].ToString(),
-                    Code = reader["Code"].ToString()
+                    Code = reader["Code"].ToString(),
+                    Url = reader["Url"].ToString(),
+                    ParentId = Convert.ToInt32(reader["ParentId"])
                 };
             }
         }

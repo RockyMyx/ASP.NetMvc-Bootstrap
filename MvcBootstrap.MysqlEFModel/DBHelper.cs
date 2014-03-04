@@ -132,7 +132,7 @@ public class DBHelper
         }
         catch (Exception e)
         {
-            Log.Append(e.ToString());
+            LogHelper.Append(e.ToString());
         }
     }
     #endregion
@@ -167,7 +167,7 @@ public class DBHelper
         }
         catch (Exception e)
         {
-            Log.Append(e.ToString());
+            LogHelper.Append(e.ToString());
         }
         finally
         {
@@ -201,7 +201,7 @@ public class DBHelper
         }
         catch (Exception e)
         {
-            Log.Append(e.ToString());
+            LogHelper.Append(e.ToString());
         }
         finally
         {
@@ -235,7 +235,7 @@ public class DBHelper
         }
         catch (Exception e)
         {
-            Log.Append(e.ToString());
+            LogHelper.Append(e.ToString());
             return null;
         }
         finally
@@ -259,7 +259,7 @@ public class DBHelper
         }
         catch (Exception e)
         {
-            Log.Append(e.ToString());
+            LogHelper.Append(e.ToString());
         }
 
         return _reader;

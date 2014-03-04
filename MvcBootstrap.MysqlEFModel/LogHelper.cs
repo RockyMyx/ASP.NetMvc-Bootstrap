@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-public class Log
+public class LogHelper
 {
     public static void Append(string info)
     {
