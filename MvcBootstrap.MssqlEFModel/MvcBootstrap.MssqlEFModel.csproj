@@ -8,8 +8,8 @@
     <ProjectGuid>{C298EABF-74D0-4103-9582-88C05EDA64F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcBootstrap.EFModel</RootNamespace>
-    <AssemblyName>MvcBootstrap.EFModel</AssemblyName>
+    <RootNamespace>MvcBootstrap.MssqlEFModel</RootNamespace>
+    <AssemblyName>MvcBootstrap.MssqlEFModel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

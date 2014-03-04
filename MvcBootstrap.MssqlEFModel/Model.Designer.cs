@@ -12,18 +12,17 @@ using System.ComponentModel;
 using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MvcBootstrap.EFModel.User), "Favorite", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcBootstrap.EFModel.Favorite), true)]
+[assembly: EdmRelationshipAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MvcBootstrap.MssqlEFModel.User), "Favorite", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcBootstrap.MssqlEFModel.Favorite), true)]
 
 #endregion
 
-namespace MvcBootstrap.EFModel
+namespace MvcBootstrap.MssqlEFModel
 {
     #region Contexts
     
