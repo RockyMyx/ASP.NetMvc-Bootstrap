@@ -6,32 +6,18 @@
     <edmx:StorageModels>
       <Schema Namespace="EFModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EFModelStoreContainer">
-          <EntitySet Name="aiscategory" EntityType="EFModel.Store.aiscategory" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="aisresource" EntityType="EFModel.Store.aisresource" store:Type="Tables" Schema="ais" />
+          <EntitySet Name="ais_category" EntityType="EFModel.Store.ais_category" store:Type="Tables" Schema="ais" />
+          <EntitySet Name="ais_resource" EntityType="EFModel.Store.ais_resource" store:Type="Tables" Schema="ais" />
           <EntitySet Name="log" EntityType="EFModel.Store.log" store:Type="Tables" Schema="ais" />
           <EntitySet Name="module" EntityType="EFModel.Store.module" store:Type="Tables" Schema="ais" />
           <EntitySet Name="operation" EntityType="EFModel.Store.operation" store:Type="Tables" Schema="ais" />
           <EntitySet Name="permission" EntityType="EFModel.Store.permission" store:Type="Tables" Schema="ais" />
           <EntitySet Name="role" EntityType="EFModel.Store.role" store:Type="Tables" Schema="ais" />
           <EntitySet Name="user" EntityType="EFModel.Store.user" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="usernode" EntityType="EFModel.Store.usernode" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="userrole" EntityType="EFModel.Store.userrole" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="v_userallpermission" EntityType="EFModel.Store.v_userallpermission" store:Type="Views" store:Schema="ais" store:Name="v_userallpermission">
-            <DefiningQuery>SELECT
-      `v_userallpermission`.`UserID`, 
-      `v_userallpermission`.`RoleID`, 
-      `v_userallpermission`.`RoleEnable`, 
-      `v_userallpermission`.`ControllerID`, 
-      `v_userallpermission`.`Code`, 
-      `v_userallpermission`.`Name`, 
-      `v_userallpermission`.`ParentId`, 
-      `v_userallpermission`.`ModuleEnable`, 
-      `v_userallpermission`.`ActionID`, 
-      `v_userallpermission`.`ActionName`
-      FROM `v_userallpermission` AS `v_userallpermission`</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="user_node" EntityType="EFModel.Store.user_node" store:Type="Tables" Schema="ais" />
+          <EntitySet Name="user_role" EntityType="EFModel.Store.user_role" store:Type="Tables" Schema="ais" />
         </EntityContainer>
-        <EntityType Name="aiscategory">
+        <EntityType Name="ais_category">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -39,7 +25,7 @@
           <Property Name="Name" Type="varchar" MaxLength="30" />
           <Property Name="ParentID" Type="int" />
         </EntityType>
-        <EntityType Name="aisresource">
+        <EntityType Name="ais_resource">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -136,7 +122,7 @@
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="usernode">
+        <EntityType Name="user_node">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
@@ -144,30 +130,12 @@
           <Property Name="AisCategoryID" Type="varchar" MaxLength="200" />
           <Property Name="AisResourceCacheID" Type="longtext" />
         </EntityType>
-        <EntityType Name="userrole">
+        <EntityType Name="user_role">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'def.ais.v_userallpermission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-        <EntityType Name="v_userallpermission">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="RoleID" Type="int" />
-          <Property Name="RoleEnable" Type="bool" />
-          <Property Name="ControllerID" Type="int" />
-          <Property Name="Code" Type="varchar" MaxLength="20" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="ParentId" Type="int" />
-          <Property Name="ModuleEnable" Type="bool" />
-          <Property Name="ActionID" Type="int" />
-          <Property Name="ActionName" Type="varchar" MaxLength="20" />
         </EntityType>
       </Schema>
     </edmx:StorageModels>
@@ -175,19 +143,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DBEntity" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="aiscategory" EntityType="EFModel.AisCategory" />
-          <EntitySet Name="aisresource" EntityType="EFModel.AisResource" />
-          <EntitySet Name="log" EntityType="EFModel.Log" />
-          <EntitySet Name="module" EntityType="EFModel.Module" />
-          <EntitySet Name="operation" EntityType="EFModel.Operation" />
-          <EntitySet Name="permission" EntityType="EFModel.Permission" />
-          <EntitySet Name="role" EntityType="EFModel.Role" />
-          <EntitySet Name="user" EntityType="EFModel.User" />
-          <EntitySet Name="usernode" EntityType="EFModel.UserNode" />
-          <EntitySet Name="userrole" EntityType="EFModel.UserRole" />
-          <EntitySet Name="v_userallpermission" EntityType="EFModel.v_userallpermission" />
+          <EntitySet Name="ais_category" EntityType="EFModel.ais_category" />
+          <EntitySet Name="ais_resource" EntityType="EFModel.ais_resource" />
+          <EntitySet Name="log" EntityType="EFModel.log" />
+          <EntitySet Name="module" EntityType="EFModel.module" />
+          <EntitySet Name="operation" EntityType="EFModel.operation" />
+          <EntitySet Name="permission" EntityType="EFModel.permission" />
+          <EntitySet Name="role" EntityType="EFModel.role" />
+          <EntitySet Name="user" EntityType="EFModel.user" />
+          <EntitySet Name="user_node" EntityType="EFModel.user_node" />
+          <EntitySet Name="user_role" EntityType="EFModel.user_role" />
         </EntityContainer>
-        <EntityType Name="AisCategory">
+        <EntityType Name="ais_category">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -195,7 +162,7 @@
           <Property Name="Name" Type="String" />
           <Property Name="ParentID" Type="Int32" />
         </EntityType>
-        <EntityType Name="AisResource">
+        <EntityType Name="ais_resource">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -207,7 +174,7 @@
           <Property Name="ResourcePath" Type="String" />
           <Property Name="ResourceDetail" Type="String" />
         </EntityType>
-        <EntityType Name="Log">
+        <EntityType Name="log">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -220,7 +187,7 @@
           <Property Name="Remark" Type="String" />
           <Property Name="CreateDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="Module">
+        <EntityType Name="module">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -233,7 +200,7 @@
           <Property Name="IsEnable" Type="Boolean" />
           <Property Name="Operations" Type="String" />
         </EntityType>
-        <EntityType Name="Operation">
+        <EntityType Name="operation">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -243,7 +210,7 @@
           <Property Name="CreateUserId" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="Permission">
+        <EntityType Name="permission">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -256,7 +223,7 @@
           <Property Name="ModifyUserID" Type="Int32" />
           <Property Name="ModifyDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="Role">
+        <EntityType Name="role">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -270,7 +237,7 @@
           <Property Name="ModifyUserID" Type="Int32" />
           <Property Name="ModifyDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="user">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -292,7 +259,7 @@
           <Property Name="ModifyDate" Type="DateTime" />
           <Property Name="Remark" Type="String" />
         </EntityType>
-        <EntityType Name="UserNode">
+        <EntityType Name="user_node">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
@@ -300,34 +267,19 @@
           <Property Name="AisCategoryID" Type="String" />
           <Property Name="AisResourceCacheID" Type="String" />
         </EntityType>
-        <EntityType Name="UserRole">
+        <EntityType Name="user_role">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="v_userallpermission">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" />
-          <Property Name="RoleEnable" Type="Boolean" />
-          <Property Name="ControllerID" Type="Int32" />
-          <Property Name="Code" Type="String" />
-          <Property Name="Name" Type="String" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="ModuleEnable" Type="Boolean" />
-          <Property Name="ActionID" Type="Int32" />
-          <Property Name="ActionName" Type="String" />
-        </EntityType>
         <ComplexType Name="UserBrowseViewModel" >
-          <Property Type="Int32" Name="ParentId" Nullable="false" />
-          <Property Type="String" Name="Url" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" />
           <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="ParentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Url" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -335,18 +287,18 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EFModelStoreContainer" CdmEntityContainer="DBEntity">
-          <EntitySetMapping Name="aiscategory">
-            <EntityTypeMapping TypeName="EFModel.AisCategory">
-              <MappingFragment StoreEntitySet="aiscategory">
+          <EntitySetMapping Name="ais_category">
+            <EntityTypeMapping TypeName="EFModel.ais_category">
+              <MappingFragment StoreEntitySet="ais_category">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aisresource">
-            <EntityTypeMapping TypeName="EFModel.AisResource">
-              <MappingFragment StoreEntitySet="aisresource">
+          <EntitySetMapping Name="ais_resource">
+            <EntityTypeMapping TypeName="EFModel.ais_resource">
+              <MappingFragment StoreEntitySet="ais_resource">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
                 <ScalarProperty Name="ResourceContent" ColumnName="ResourceContent" />
@@ -358,7 +310,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="log">
-            <EntityTypeMapping TypeName="EFModel.Log">
+            <EntityTypeMapping TypeName="EFModel.log">
               <MappingFragment StoreEntitySet="log">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -372,7 +324,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="module">
-            <EntityTypeMapping TypeName="EFModel.Module">
+            <EntityTypeMapping TypeName="EFModel.module">
               <MappingFragment StoreEntitySet="module">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -386,7 +338,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="operation">
-            <EntityTypeMapping TypeName="EFModel.Operation">
+            <EntityTypeMapping TypeName="EFModel.operation">
               <MappingFragment StoreEntitySet="operation">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -397,7 +349,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="permission">
-            <EntityTypeMapping TypeName="EFModel.Permission">
+            <EntityTypeMapping TypeName="EFModel.permission">
               <MappingFragment StoreEntitySet="permission">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -411,7 +363,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="role">
-            <EntityTypeMapping TypeName="EFModel.Role">
+            <EntityTypeMapping TypeName="EFModel.role">
               <MappingFragment StoreEntitySet="role">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -426,7 +378,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="user">
-            <EntityTypeMapping TypeName="EFModel.User">
+            <EntityTypeMapping TypeName="EFModel.user">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -448,36 +400,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usernode">
-            <EntityTypeMapping TypeName="EFModel.UserNode">
-              <MappingFragment StoreEntitySet="usernode">
+          <EntitySetMapping Name="user_node">
+            <EntityTypeMapping TypeName="EFModel.user_node">
+              <MappingFragment StoreEntitySet="user_node">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="AisCategoryID" ColumnName="AisCategoryID" />
                 <ScalarProperty Name="AisResourceCacheID" ColumnName="AisResourceCacheID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="userrole">
-            <EntityTypeMapping TypeName="EFModel.UserRole">
-              <MappingFragment StoreEntitySet="userrole">
+          <EntitySetMapping Name="user_role">
+            <EntityTypeMapping TypeName="EFModel.user_role">
+              <MappingFragment StoreEntitySet="user_role">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="v_userallpermission">
-            <EntityTypeMapping TypeName="EFModel.v_userallpermission">
-              <MappingFragment StoreEntitySet="v_userallpermission">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="RoleEnable" ColumnName="RoleEnable" />
-                <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="ModuleEnable" ColumnName="ModuleEnable" />
-                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
-                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -502,17 +438,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="EFModel.AisCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.AisResource" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.Log" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.Module" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.Operation" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9700325520833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.Permission" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5430916341145817" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.Role" Width="1.5" PointX="6.75" PointY="0.75" Height="2.7341113281249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.User" Width="1.5" PointX="6.75" PointY="4.75" Height="4.2622688802083317" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.UserNode" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5879931640624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.UserRole" Width="1.5" PointX="0.75" PointY="8.75" Height="1.3969734700520817" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.v_userallpermission" Width="1.5" PointX="2.75" PointY="8.75" Height="2.9251310221354174" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.ais_category" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.ais_resource" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.log" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.module" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.operation" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.permission" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.role" Width="1.5" PointX="6.75" PointY="0.75" Height="2.7341113281249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.user" Width="1.5" PointX="6.75" PointY="4.75" Height="4.2622688802083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.user_node" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.user_role" Width="1.5" PointX="0.75" PointY="8.75" Height="1.3969734700520817" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
