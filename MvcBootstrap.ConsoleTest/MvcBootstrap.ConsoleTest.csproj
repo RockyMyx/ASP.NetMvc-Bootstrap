@@ -43,9 +43,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcBootstrap.EFModel\MvcBootstrap.EFModel.csproj">
+    <ProjectReference Include="..\MvcBootstrap.MssqlEFModel\MvcBootstrap.MssqlEFModel.csproj">
       <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
-      <Name>MvcBootstrap.EFModel</Name>
+      <Name>MvcBootstrap.MssqlEFModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Web.SessionState;
 
 public static class SessionExtension
