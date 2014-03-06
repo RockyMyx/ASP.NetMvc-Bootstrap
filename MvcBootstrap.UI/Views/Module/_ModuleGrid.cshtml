@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MvcBootstrap.EFModel.Module>
+﻿@*@model IEnumerable<MvcBootstrap.EFModel.Module>*@
+@model IEnumerable<MvcBootstrap.MysqlEFModel.module>
 
 <thead>
 	<tr>
@@ -21,7 +22,7 @@
             <td class="hide">@item.ID</td>
             <td><input class="js-check-cell" type="checkbox" /></td>
 		    <td>
-            @if (item.ParentId == null || item.ParentId == item.ID)
+            @if (item.ParentId == 0 || item.ParentId == item.ID)
             {
                 <img src="../../Images/folder.png" style="padding-right:10px;" />
             }

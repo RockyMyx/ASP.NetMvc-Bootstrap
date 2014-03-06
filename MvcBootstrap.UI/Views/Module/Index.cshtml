@@ -14,7 +14,7 @@
         <label class="control-label">
             上级菜单</label>
         <div class="controls">
-            @{SelectList modules = ViewData["Modules"] as SelectList;}
+            @{SelectList modules = ViewData["ParentId"] as SelectList;}
             @Html.DropDownList("ParentId", modules, new { @class = "noCheck my-select" })
             <div class="form-tip">如不选择，则默认为添加根节点菜单</div>
         </div>
@@ -71,7 +71,7 @@
             <label class="control-label">
                 上级菜单</label>
             <div class="controls">
-                @{SelectList modules = ViewData["Modules"] as SelectList;}
+                @{SelectList modules = ViewData["ParentId"] as SelectList;}
                 @Html.DropDownList("ParentId", modules, new { id = "EditParentID", @class = "noCheck my-select" })
                 @*<div class="form-tip">
                     如不选择，则默认为添加根节点菜单</div>*@

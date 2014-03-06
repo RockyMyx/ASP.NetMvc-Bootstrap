@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MvcBootstrap.EFModel.Role>
+﻿@*@model IEnumerable<MvcBootstrap.EFModel.Role>*@
+@model IEnumerable<MvcBootstrap.MysqlEFModel.role>
 <thead>
 	<tr>
         <th><input id="js-check-all" type="checkbox" class="th-check-all" />选择</th>
@@ -7,9 +8,9 @@
 		<th>是否启用</th>
 		<th>创建日期</th>
         @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
-         {
+          {
 		<th>操作</th>
-         }}
+          }}
 	</tr>
 </thead>
 <tbody>
