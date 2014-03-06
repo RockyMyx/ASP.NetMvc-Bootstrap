@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
-using MvcBootstrap.EFModel;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.Service;
-using System.Web.SessionState;
 
 public static class UIService
 {
@@ -26,9 +25,9 @@ public static class UIService
         IEnumerable<UserBrowseViewModel> modules = userService.GetUserBrowse(roleID);
         //获取父菜单
         IList<UserBrowseViewModel> parentModules = new List<UserBrowseViewModel>();
-        modules.Enumerate(m => m.ParentId == null, m => parentModules.Add(m));
+        modules.Enumerate(m => m.ParentId == 0, m => parentModules.Add(m));
         //获取子菜单
-        IEnumerable<Module> childModules = null;
+        IEnumerable<module> childModules = null;
         StringBuilder menuBuilder = new StringBuilder();
         StringBuilder childBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
@@ -76,13 +75,13 @@ public static class UIService
 
         StringBuilder opBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
-        IEnumerable<Module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
+        IEnumerable<module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
 
         string[] operations = null;
         int actionId = 0;
-        Operation operation = null;
+        operation operation = null;
         OperationService operationService = new OperationService();
-        foreach (Module module in modules)
+        foreach (module module in modules)
         {
             if (!string.IsNullOrWhiteSpace(module.Operations))
             {

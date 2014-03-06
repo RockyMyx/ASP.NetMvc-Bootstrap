@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
 {
-    public class PermissionService : BaseService<Permission, IPermissionDao>
+    public class PermissionService : BaseService<permission, IPermissionDao>
     {
         protected override void SetCurrentDao()
         {
@@ -60,7 +60,7 @@ namespace MvcBootstrap.Service
             {
                 controllerId = Convert.ToInt32(item.Split('-')[0]);
                 actionId = Convert.ToInt32(item.Split('-')[1]);
-                base.dao.Create(new Permission
+                base.dao.Create(new permission
                 {
                     RoleID = roleId,
                     ControllerID = controllerId,
@@ -81,7 +81,7 @@ namespace MvcBootstrap.Service
             //创建对父节点的浏览权限
             foreach (int parentId in parentIds)
             {
-                base.dao.Create(new Permission
+                base.dao.Create(new permission
                 {
                     RoleID = roleId,
                     ControllerID = parentId,

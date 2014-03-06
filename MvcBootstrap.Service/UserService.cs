@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
-using MvcBootstrap.IDAO;
-using MvcBootstrap.ViewModels;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using System;
+using MvcBootstrap.DAO;
+using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
+using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
 {
-    public class UserService : BaseService<User, IUserDao>
+    public class UserService : BaseService<user, IUserDao>
     {
         protected override void SetCurrentDao()
         {
@@ -48,7 +48,7 @@ namespace MvcBootstrap.Service
         public IList<SelectListItem> GetRoleSelect()
         {
             RoleService roleService = new RoleService();
-            IEnumerable<Role> roles = roleService.GetAll();
+            IEnumerable<role> roles = roleService.GetAll();
 
             IList<SelectListItem> roleList = new List<SelectListItem>();
             roleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
@@ -60,9 +60,9 @@ namespace MvcBootstrap.Service
             return roleList;
         }
 
-        public User GetUserInfo(FormCollection formInfo)
+        public user GetUserInfo(FormCollection formInfo)
         {
-            User user = new User
+            user user = new user
             {
                 ID = Convert.ToInt32(formInfo["ID"]),
                 Name = formInfo["Name"],
@@ -73,9 +73,9 @@ namespace MvcBootstrap.Service
             return user;
         }
 
-        public UserRole GetNewUserRoleInfo(FormCollection formInfo)
+        public user_role GetNewUserRoleInfo(FormCollection formInfo)
         {
-            UserRole ur = new UserRole
+            user_role ur = new user_role
             {
                 UserID = dao.GetInsertId(),
                 RoleID = Convert.ToInt32(formInfo["RoleID"])
@@ -84,9 +84,9 @@ namespace MvcBootstrap.Service
             return ur;
         }
 
-        public UserNode GetNewUserNodeInfo(FormCollection formInfo)
+        public user_node GetNewUserNodeInfo(FormCollection formInfo)
         {
-            UserNode un = new UserNode
+            user_node un = new user_node
             {
                 UserID = dao.GetInsertId()
             };
@@ -94,9 +94,9 @@ namespace MvcBootstrap.Service
             return un;
         }
 
-        public UserRole GetEditUserRoleInfo(FormCollection formInfo)
+        public user_role GetEditUserRoleInfo(FormCollection formInfo)
         {
-            UserRole ur = new UserRole
+            user_role ur = new user_role
             {
                 UserID = Convert.ToInt32(formInfo["ID"]),
                 RoleID = Convert.ToInt32(formInfo["RoleID"])

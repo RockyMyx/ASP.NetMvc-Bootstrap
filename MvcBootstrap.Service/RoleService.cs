@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Caching;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class RoleService : BaseService<Role, IRoleDao>
+    public class RoleService : BaseService<role, IRoleDao>
     {
         protected override void SetCurrentDao()
         {
             base.dao = new RoleDao();
         }
 
-        public Role GetRoleInfo(FormCollection formInfo)
+        public role GetRoleInfo(FormCollection formInfo)
         {
-            Role role = new Role
+            role role = new role
             {
                 Name = formInfo["Name"].ObjToStr(),
                 Remark = formInfo["Remark"].ObjToStr(),

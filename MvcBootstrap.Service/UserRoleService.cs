@@ -1,10 +1,10 @@
 ﻿using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class UserRoleService : BaseService<UserRole, IUserRoleDao>
+    public class UserRoleService : BaseService<user_role, IUserRoleDao>
     {
         protected override void SetCurrentDao()
         {

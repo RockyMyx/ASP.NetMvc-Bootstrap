@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
 {
-    public class AisResourceService : BaseService<AisResource, IAisResourceDao>
+    public class AisResourceService : BaseService<ais_resource, IAisResourceDao>
     {
         protected override void SetCurrentDao()
         {
@@ -18,8 +18,8 @@ namespace MvcBootstrap.Service
             List<TreeViewModel> resourceNodes = new List<TreeViewModel>();
             using (DBEntity db = new DBEntity())
             {
-                IEnumerable<AisResource> resourceInfo = this.GetAll();
-                foreach (AisResource resource in resourceInfo)
+                IEnumerable<ais_resource> resourceInfo = this.GetAll();
+                foreach (ais_resource resource in resourceInfo)
                 {
                     if (idList.Contains(resource.ID.ToString()))
                     {

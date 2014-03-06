@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
+﻿using MvcBootstrap.DAO;
 using MvcBootstrap.IDAO;
-using MvcBootstrap.ViewModels;
-using System;
-using System.Text;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class UserNodeService : BaseService<UserNode, IUserNodeDao>
+    public class UserNodeService : BaseService<user_node, IUserNodeDao>
     {
         protected override void SetCurrentDao()
         {

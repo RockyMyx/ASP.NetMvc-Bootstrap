@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using MvcBootstrap.DAO;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
 {
-    public class AisCategoryService : BaseService<AisCategory, IAisCategoryDao>
+    public class AisCategoryService : BaseService<ais_category, IAisCategoryDao>
     {
         protected override void SetCurrentDao()
         {
@@ -22,8 +22,8 @@ namespace MvcBootstrap.Service
             TreeViewModel model = null;
             using (DBEntity db = new DBEntity())
             {
-                IEnumerable<AisCategory> categoryInfo = this.GetAll();
-                foreach (AisCategory category in categoryInfo)
+                IEnumerable<ais_category> categoryInfo = this.GetAll();
+                foreach (ais_category category in categoryInfo)
                 {
                     model = new TreeViewModel
                     {
