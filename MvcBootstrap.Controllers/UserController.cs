@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MvcBootstrap.Service;
 using System.Web.Mvc;
-using MvcBootstrap.EFModel;
+using MvcBootstrap.MysqlEFModel;
+using MvcBootstrap.Service;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Controllers
@@ -46,11 +44,11 @@ namespace MvcBootstrap.Controllers
 
         public override void Create(FormCollection formInfo)
         {
-            User user = userService.GetUserInfo(formInfo);
+            user user = userService.GetUserInfo(formInfo);
             userService.Create(user);
-            UserRole userRole = userService.GetNewUserRoleInfo(formInfo);
+            user_role userRole = userService.GetNewUserRoleInfo(formInfo);
             urService.Create(userRole);
-            UserNode userNode = userService.GetNewUserNodeInfo(formInfo);
+            user_node userNode = userService.GetNewUserNodeInfo(formInfo);
             unService.Create(userNode);
         }
 
@@ -63,9 +61,9 @@ namespace MvcBootstrap.Controllers
 
         public override void Update(FormCollection formInfo)
         {
-            User user = userService.GetUserInfo(formInfo);
+            user user = userService.GetUserInfo(formInfo);
             userService.Update(user);
-            UserRole ur = userService.GetEditUserRoleInfo(formInfo);
+            user_role ur = userService.GetEditUserRoleInfo(formInfo);
             urService.Update(ur);
         }
 
@@ -94,7 +92,7 @@ namespace MvcBootstrap.Controllers
 
         public bool DistributeUserNodes(string idString)
         {
-            UserNode userNode = new UserNode
+            user_node userNode = new user_node
             {
                 UserID = 1,
                 AisCategoryID = idString

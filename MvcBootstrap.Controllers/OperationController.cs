@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MvcBootstrap.Service;
 using System.Web.Mvc;
-using MvcBootstrap.EFModel;
+using MvcBootstrap.MysqlEFModel;
+using MvcBootstrap.Service;
 
 namespace MvcBootstrap.Controllers
 {
@@ -35,19 +33,19 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IEnumerable<Operation> entities = (IEnumerable<Operation>)Session[cacheSearchKey] ??
+            IEnumerable<operation> entities = (IEnumerable<operation>)Session[cacheSearchKey] ??
                                               opService.GetAll();
-            IEnumerable<Operation> result = opService.GetSearchPagingInfo(entities, index, base.PageSize);
+            IEnumerable<operation> result = opService.GetSearchPagingInfo(entities, index, base.PageSize);
             return PartialView("_OperationGrid", result);
         }
 
         public override void Create(FormCollection formInfo)
         {
-            Operation module = opService.GetOperationInfo(formInfo);
+            operation module = opService.GetOperationInfo(formInfo);
             opService.Create(module);
         }
 
-        public ActionResult Modify(Operation operation)
+        public ActionResult Modify(operation operation)
         {
             opService.Update(operation);
             return MyJson(operation);
@@ -61,7 +59,7 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Operation> filterEntities = opService.GetAll().Where(m => m.Name.Contains(name));
+            IEnumerable<operation> filterEntities = opService.GetAll().Where(m => m.Name.Contains(name));
             Session[cacheSearchKey] = filterEntities;
             if (filterEntities.Count() == 0) return new EmptyResult();
             return PartialView("_OperationGrid", filterEntities);
