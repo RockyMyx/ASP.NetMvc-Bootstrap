@@ -1,10 +1,8 @@
-﻿using MvcBootstrap.EFModel;
-using MvcBootstrap.ViewModels;
-using System.Collections.Generic;
+﻿using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IAisResourceDao : IBaseDao<AisResource>
+    public interface IAisResourceDao : IBaseDao<ais_resource>
     {
     }
 }

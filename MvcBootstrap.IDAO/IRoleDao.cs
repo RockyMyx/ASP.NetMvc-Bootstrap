@@ -1,8 +1,8 @@
-﻿using MvcBootstrap.EFModel;
+﻿using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IRoleDao : IBaseDao<Role>
+    public interface IRoleDao : IBaseDao<role>
     {
     }
 }

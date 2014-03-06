@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using MvcBootstrap.EFModel;
-using MvcBootstrap.ViewModels;
+﻿using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IAisCategoryDao : IBaseDao<AisCategory>
+    public interface IAisCategoryDao : IBaseDao<ais_category>
     {
     }
 }

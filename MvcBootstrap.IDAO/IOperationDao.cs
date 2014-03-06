@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using MvcBootstrap.EFModel;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IOperationDao : IBaseDao<Operation>
+    public interface IOperationDao : IBaseDao<operation>
     {
         IDictionary<int, string> GetOperations();
     }

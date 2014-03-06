@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MvcBootstrap.EFModel;
+﻿using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IUserRoleDao : IBaseDao<UserRole>
+    public interface IUserRoleDao : IBaseDao<user_role>
     {
     }
 }

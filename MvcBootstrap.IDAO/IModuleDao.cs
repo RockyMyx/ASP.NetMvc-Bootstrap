@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using MvcBootstrap.EFModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IModuleDao : IBaseDao<Module>
+    public interface IModuleDao : IBaseDao<module>
     {
-        IEnumerable<Module> GetSortedModules();
+        IEnumerable<module> GetSortedModules();
     }
 }
