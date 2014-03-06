@@ -1,9 +1,9 @@
-﻿using MvcBootstrap.EFModel;
-using MvcBootstrap.IDAO;
+﻿using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
-    public class RoleDao : BaseEFDao<Role>, IRoleDao
+    public class RoleDao : BaseEFDao<role>, IRoleDao
     {
     }
 }

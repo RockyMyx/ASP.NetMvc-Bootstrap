@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.DAO
 {
-    public class PermissionDao : BaseEFDao<Permission>, IPermissionDao
+    public class PermissionDao : BaseEFDao<permission>, IPermissionDao
     {
         public IEnumerable<PermissionViewModel> GetPermission(int roleId)
         {
             using (DBEntity db = new DBEntity())
             {
-                return (from p in db.Permission
+                return (from p in db.permission
                         where p.RoleID == roleId
                         select new PermissionViewModel
                         {
@@ -26,11 +26,11 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                foreach(Permission permission in db.Permission)
+                foreach(permission permission in db.permission)
                 {
                     if (permission.RoleID == roleId)
                     {
-                        db.Permission.DeleteObject(permission);
+                        db.permission.DeleteObject(permission);
                     }
                 }
 

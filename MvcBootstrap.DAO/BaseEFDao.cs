@@ -5,8 +5,8 @@ using System.Data.Objects;
 using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Linq.Expressions;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
@@ -155,6 +155,16 @@ namespace MvcBootstrap.DAO
 
         public virtual bool Delete(List<int> idList)
         {
+            //try
+            //{
+            //    string ids = string.Join(",", idList.ToArray());
+            //    dbExtend.DeleteObjects(ids, TableName, PrimaryKey);
+            //    return true;
+            //}
+            //catch (OptimisticConcurrencyException)
+            //{
+            //    return false;
+            //}
             using (DBEntity db = new DBEntity())
             {
                 try

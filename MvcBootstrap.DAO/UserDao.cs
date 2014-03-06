@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MvcBootstrap.EFModel;
 using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.DAO
 {
-    public class UserDao : BaseEFDao<User>, IUserDao
+    public class UserDao : BaseEFDao<user>, IUserDao
     {
         private IEnumerable<UserViewModel> UserViewModels;
 
@@ -14,10 +14,10 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                IEnumerable<UserViewModel> models = from u in db.User
-                                                    join ur in db.UserRole
+                IEnumerable<UserViewModel> models = from u in db.user
+                                                    join ur in db.user_role
                                                     on u.ID equals ur.UserID
-                                                    join r in db.Role
+                                                    join r in db.role
                                                     on ur.RoleID equals r.ID
                                                     select new UserViewModel
                                                     {
@@ -47,8 +47,8 @@ namespace MvcBootstrap.DAO
                 //db.ExecuteStoreQuery<User>(sql, args);
 
                 //DB操作方法三：使用LINQ
-                UserLoginViewModel models = (from u in db.User
-                                             join r in db.UserRole
+                UserLoginViewModel models = (from u in db.user
+                                             join r in db.user_role
                                              on u.ID equals r.UserID
                                              where (u.Name == userName && u.Password == userPwd)
                                              select new UserLoginViewModel
@@ -64,6 +64,7 @@ namespace MvcBootstrap.DAO
 
         public IEnumerable<UserBrowseViewModel> GetUserBrowse(int roleId)
         {
+            //return dbExtend.GetUserBrowse(roleId).ToList();
             using (DBEntity db = new DBEntity())
             {
                 //ToList立即执行，否则会出错：The ObjectContext instance has been disposed and can no longer be used for operations that require a connection
@@ -73,6 +74,7 @@ namespace MvcBootstrap.DAO
 
         public IEnumerable<string> GetUserOperation(int roleID, int controllerID)
         {
+            //return dbExtend.GetUserOperation(roleID, controllerID).ToList();
             using (DBEntity db = new DBEntity())
             {
                 return db.GetUserOperation(roleID, controllerID).ToList();
@@ -103,7 +105,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.User.Max(u => u.ID);
+                return db.user.Max(u => u.ID);
             }
         }
 

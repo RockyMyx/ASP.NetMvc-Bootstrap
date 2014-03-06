@@ -1,9 +1,9 @@
-﻿using MvcBootstrap.EFModel;
-using MvcBootstrap.IDAO;
+﻿using MvcBootstrap.IDAO;
+using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
-    public class UserNodeDao : BaseEFDao<UserNode>, IUserNodeDao
+    public class UserNodeDao : BaseEFDao<user_node>, IUserNodeDao
     {
         public UserNodeDao()
         {
