@@ -37,6 +37,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,7 +66,7 @@
       <Name>MvcBootstrap.IDAO</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.MysqlEFModel\MvcBootstrap.MysqlEFModel.csproj">
-      <Project>{A07D60FE-A75B-426E-8D45-9CED18F3947D}</Project>
+      <Project>{188549FD-D29B-4438-80F7-54F35F780766}</Project>
       <Name>MvcBootstrap.MysqlEFModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcBootstrap.Service\MvcBootstrap.Service.csproj">
@@ -75,10 +77,6 @@
       <Project>{F941FDA0-4E85-4D39-8973-DCBD9A392742}</Project>
       <Name>MvcBootstrap.ViewHelper</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

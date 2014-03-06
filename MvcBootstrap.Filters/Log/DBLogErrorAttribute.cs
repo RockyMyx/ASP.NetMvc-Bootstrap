@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
-using MvcBootstrap.EFModel;
+using MvcBootstrap.MysqlEFModel;
 
 public class DBLogErrorAttribute : HandleErrorAttribute
 {
@@ -17,7 +17,7 @@ public class DBLogErrorAttribute : HandleErrorAttribute
 
     public override void OnException(ExceptionContext filterContext)
     {
-        Log log = new Log();
+        log log = new log();
 
         //ToTest
         log.UserId = 1;

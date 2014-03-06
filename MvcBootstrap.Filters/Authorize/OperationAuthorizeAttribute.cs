@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MvcBootstrap.EFModel;
+using MvcBootstrap.MysqlEFModel;
 using MvcBootstrap.Service;
 
 public class OperationAuthorizeAttribute : AuthorizeAttribute
