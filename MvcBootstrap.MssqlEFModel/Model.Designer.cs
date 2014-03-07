@@ -19,7 +19,7 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MvcBootstrap.MssqlEFModel.User), "Favorite", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcBootstrap.MssqlEFModel.Favorite), true)]
+[assembly: EdmRelationshipAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "T_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MvcBootstrap.MssqlEFModel.T_User), "T_Favorite", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MvcBootstrap.MssqlEFModel.T_Favorite), true)]
 
 #endregion
 
@@ -74,130 +74,178 @@ namespace MvcBootstrap.MssqlEFModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Favorite> Favorite
+        public ObjectSet<T_AisCategory> T_AisCategory
         {
             get
             {
-                if ((_Favorite == null))
+                if ((_T_AisCategory == null))
                 {
-                    _Favorite = base.CreateObjectSet<Favorite>("Favorite");
+                    _T_AisCategory = base.CreateObjectSet<T_AisCategory>("T_AisCategory");
                 }
-                return _Favorite;
+                return _T_AisCategory;
             }
         }
-        private ObjectSet<Favorite> _Favorite;
+        private ObjectSet<T_AisCategory> _T_AisCategory;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Log> Log
+        public ObjectSet<T_AisResource> T_AisResource
         {
             get
             {
-                if ((_Log == null))
+                if ((_T_AisResource == null))
                 {
-                    _Log = base.CreateObjectSet<Log>("Log");
+                    _T_AisResource = base.CreateObjectSet<T_AisResource>("T_AisResource");
                 }
-                return _Log;
+                return _T_AisResource;
             }
         }
-        private ObjectSet<Log> _Log;
+        private ObjectSet<T_AisResource> _T_AisResource;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Module> Module
+        public ObjectSet<T_Favorite> T_Favorite
         {
             get
             {
-                if ((_Module == null))
+                if ((_T_Favorite == null))
                 {
-                    _Module = base.CreateObjectSet<Module>("Module");
+                    _T_Favorite = base.CreateObjectSet<T_Favorite>("T_Favorite");
                 }
-                return _Module;
+                return _T_Favorite;
             }
         }
-        private ObjectSet<Module> _Module;
+        private ObjectSet<T_Favorite> _T_Favorite;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Operation> Operation
+        public ObjectSet<T_Log> T_Log
         {
             get
             {
-                if ((_Operation == null))
+                if ((_T_Log == null))
                 {
-                    _Operation = base.CreateObjectSet<Operation>("Operation");
+                    _T_Log = base.CreateObjectSet<T_Log>("T_Log");
                 }
-                return _Operation;
+                return _T_Log;
             }
         }
-        private ObjectSet<Operation> _Operation;
+        private ObjectSet<T_Log> _T_Log;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Permission> Permission
+        public ObjectSet<T_Module> T_Module
         {
             get
             {
-                if ((_Permission == null))
+                if ((_T_Module == null))
                 {
-                    _Permission = base.CreateObjectSet<Permission>("Permission");
+                    _T_Module = base.CreateObjectSet<T_Module>("T_Module");
                 }
-                return _Permission;
+                return _T_Module;
             }
         }
-        private ObjectSet<Permission> _Permission;
+        private ObjectSet<T_Module> _T_Module;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Role> Role
+        public ObjectSet<T_Operation> T_Operation
         {
             get
             {
-                if ((_Role == null))
+                if ((_T_Operation == null))
                 {
-                    _Role = base.CreateObjectSet<Role>("Role");
+                    _T_Operation = base.CreateObjectSet<T_Operation>("T_Operation");
                 }
-                return _Role;
+                return _T_Operation;
             }
         }
-        private ObjectSet<Role> _Role;
+        private ObjectSet<T_Operation> _T_Operation;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<User> User
+        public ObjectSet<T_Permission> T_Permission
         {
             get
             {
-                if ((_User == null))
+                if ((_T_Permission == null))
                 {
-                    _User = base.CreateObjectSet<User>("User");
+                    _T_Permission = base.CreateObjectSet<T_Permission>("T_Permission");
                 }
-                return _User;
+                return _T_Permission;
             }
         }
-        private ObjectSet<User> _User;
+        private ObjectSet<T_Permission> _T_Permission;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<UserRole> UserRole
+        public ObjectSet<T_Role> T_Role
         {
             get
             {
-                if ((_UserRole == null))
+                if ((_T_Role == null))
                 {
-                    _UserRole = base.CreateObjectSet<UserRole>("UserRole");
+                    _T_Role = base.CreateObjectSet<T_Role>("T_Role");
                 }
-                return _UserRole;
+                return _T_Role;
             }
         }
-        private ObjectSet<UserRole> _UserRole;
+        private ObjectSet<T_Role> _T_Role;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<T_User> T_User
+        {
+            get
+            {
+                if ((_T_User == null))
+                {
+                    _T_User = base.CreateObjectSet<T_User>("T_User");
+                }
+                return _T_User;
+            }
+        }
+        private ObjectSet<T_User> _T_User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<T_UserNode> T_UserNode
+        {
+            get
+            {
+                if ((_T_UserNode == null))
+                {
+                    _T_UserNode = base.CreateObjectSet<T_UserNode>("T_UserNode");
+                }
+                return _T_UserNode;
+            }
+        }
+        private ObjectSet<T_UserNode> _T_UserNode;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<T_UserRole> T_UserRole
+        {
+            get
+            {
+                if ((_T_UserRole == null))
+                {
+                    _T_UserRole = base.CreateObjectSet<T_UserRole>("T_UserRole");
+                }
+                return _T_UserRole;
+            }
+        }
+        private ObjectSet<T_UserRole> _T_UserRole;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -214,121 +262,97 @@ namespace MvcBootstrap.MssqlEFModel
             }
         }
         private ObjectSet<v_UserAllPermission> _v_UserAllPermission;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<AisCategory> AisCategory
-        {
-            get
-            {
-                if ((_AisCategory == null))
-                {
-                    _AisCategory = base.CreateObjectSet<AisCategory>("AisCategory");
-                }
-                return _AisCategory;
-            }
-        }
-        private ObjectSet<AisCategory> _AisCategory;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<AisResource> AisResource
-        {
-            get
-            {
-                if ((_AisResource == null))
-                {
-                    _AisResource = base.CreateObjectSet<AisResource>("AisResource");
-                }
-                return _AisResource;
-            }
-        }
-        private ObjectSet<AisResource> _AisResource;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UserNode> UserNode
-        {
-            get
-            {
-                if ((_UserNode == null))
-                {
-                    _UserNode = base.CreateObjectSet<UserNode>("UserNode");
-                }
-                return _UserNode;
-            }
-        }
-        private ObjectSet<UserNode> _UserNode;
 
         #endregion
 
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Favorite EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_AisCategory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToFavorite(Favorite favorite)
+        public void AddToT_AisCategory(T_AisCategory t_AisCategory)
         {
-            base.AddObject("Favorite", favorite);
+            base.AddObject("T_AisCategory", t_AisCategory);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Log EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_AisResource EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToLog(Log log)
+        public void AddToT_AisResource(T_AisResource t_AisResource)
         {
-            base.AddObject("Log", log);
+            base.AddObject("T_AisResource", t_AisResource);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Module EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_Favorite EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToModule(Module module)
+        public void AddToT_Favorite(T_Favorite t_Favorite)
         {
-            base.AddObject("Module", module);
+            base.AddObject("T_Favorite", t_Favorite);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Operation EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_Log EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToOperation(Operation operation)
+        public void AddToT_Log(T_Log t_Log)
         {
-            base.AddObject("Operation", operation);
+            base.AddObject("T_Log", t_Log);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Permission EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_Module EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToPermission(Permission permission)
+        public void AddToT_Module(T_Module t_Module)
         {
-            base.AddObject("Permission", permission);
+            base.AddObject("T_Module", t_Module);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Role EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_Operation EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToRole(Role role)
+        public void AddToT_Operation(T_Operation t_Operation)
         {
-            base.AddObject("Role", role);
+            base.AddObject("T_Operation", t_Operation);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_Permission EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUser(User user)
+        public void AddToT_Permission(T_Permission t_Permission)
         {
-            base.AddObject("User", user);
+            base.AddObject("T_Permission", t_Permission);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the UserRole EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the T_Role EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToUserRole(UserRole userRole)
+        public void AddToT_Role(T_Role t_Role)
         {
-            base.AddObject("UserRole", userRole);
+            base.AddObject("T_Role", t_Role);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_User(T_User t_User)
+        {
+            base.AddObject("T_User", t_User);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_UserNode EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_UserNode(T_UserNode t_UserNode)
+        {
+            base.AddObject("T_UserNode", t_UserNode);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_UserRole EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_UserRole(T_UserRole t_UserRole)
+        {
+            base.AddObject("T_UserRole", t_UserRole);
         }
     
         /// <summary>
@@ -338,30 +362,6 @@ namespace MvcBootstrap.MssqlEFModel
         {
             base.AddObject("v_UserAllPermission", v_UserAllPermission);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the AisCategory EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAisCategory(AisCategory aisCategory)
-        {
-            base.AddObject("AisCategory", aisCategory);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the AisResource EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAisResource(AisResource aisResource)
-        {
-            base.AddObject("AisResource", aisResource);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UserNode EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserNode(UserNode userNode)
-        {
-            base.AddObject("UserNode", userNode);
-        }
 
         #endregion
 
@@ -370,17 +370,9 @@ namespace MvcBootstrap.MssqlEFModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectResult<Module> GetModuleTree()
+        public int GetModuleTree()
         {
-            return base.ExecuteFunction<Module>("GetModuleTree");
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="mergeOption"></param>
-        public ObjectResult<Module> GetModuleTree(MergeOption mergeOption)
-        {
-            return base.ExecuteFunction<Module>("GetModuleTree", mergeOption);
+            return base.ExecuteFunction("GetModuleTree");
         }
     
         /// <summary>
@@ -484,22 +476,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="AisCategory")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_AisCategory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class AisCategory : EntityObject
+    public partial class T_AisCategory : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new AisCategory object.
+        /// Create a new T_AisCategory object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static AisCategory CreateAisCategory(global::System.Int32 id)
+        public static T_AisCategory CreateT_AisCategory(global::System.Int32 id)
         {
-            AisCategory aisCategory = new AisCategory();
-            aisCategory.ID = id;
-            return aisCategory;
+            T_AisCategory t_AisCategory = new T_AisCategory();
+            t_AisCategory.ID = id;
+            return t_AisCategory;
         }
 
         #endregion
@@ -589,22 +581,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="AisResource")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_AisResource")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class AisResource : EntityObject
+    public partial class T_AisResource : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new AisResource object.
+        /// Create a new T_AisResource object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static AisResource CreateAisResource(global::System.Guid id)
+        public static T_AisResource CreateT_AisResource(global::System.Guid id)
         {
-            AisResource aisResource = new AisResource();
-            aisResource.ID = id;
-            return aisResource;
+            T_AisResource t_AisResource = new T_AisResource();
+            t_AisResource.ID = id;
+            return t_AisResource;
         }
 
         #endregion
@@ -790,22 +782,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="Favorite")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_Favorite")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Favorite : EntityObject
+    public partial class T_Favorite : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Favorite object.
+        /// Create a new T_Favorite object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Favorite CreateFavorite(global::System.Int32 id)
+        public static T_Favorite CreateT_Favorite(global::System.Int32 id)
         {
-            Favorite favorite = new Favorite();
-            favorite.ID = id;
-            return favorite;
+            T_Favorite t_Favorite = new T_Favorite();
+            t_Favorite.ID = id;
+            return t_Favorite;
         }
 
         #endregion
@@ -946,16 +938,16 @@ namespace MvcBootstrap.MssqlEFModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "User")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "T_User")]
+        public T_User T_User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<T_User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "T_User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<T_User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "T_User").Value = value;
             }
         }
         /// <summary>
@@ -963,17 +955,17 @@ namespace MvcBootstrap.MssqlEFModel
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<T_User> T_UserReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<T_User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "T_User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<T_User>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "T_User", value);
                 }
             }
         }
@@ -985,22 +977,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="Log")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_Log")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Log : EntityObject
+    public partial class T_Log : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Log object.
+        /// Create a new T_Log object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Log CreateLog(global::System.Int32 id)
+        public static T_Log CreateT_Log(global::System.Int32 id)
         {
-            Log log = new Log();
-            log.ID = id;
-            return log;
+            T_Log t_Log = new T_Log();
+            t_Log.ID = id;
+            return t_Log;
         }
 
         #endregion
@@ -1210,22 +1202,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="Module")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_Module")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Module : EntityObject
+    public partial class T_Module : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Module object.
+        /// Create a new T_Module object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Module CreateModule(global::System.Int32 id)
+        public static T_Module CreateT_Module(global::System.Int32 id)
         {
-            Module module = new Module();
-            module.ID = id;
-            return module;
+            T_Module t_Module = new T_Module();
+            t_Module.ID = id;
+            return t_Module;
         }
 
         #endregion
@@ -1435,22 +1427,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="Operation")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_Operation")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Operation : EntityObject
+    public partial class T_Operation : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Operation object.
+        /// Create a new T_Operation object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Operation CreateOperation(global::System.Int32 id)
+        public static T_Operation CreateT_Operation(global::System.Int32 id)
         {
-            Operation operation = new Operation();
-            operation.ID = id;
-            return operation;
+            T_Operation t_Operation = new T_Operation();
+            t_Operation.ID = id;
+            return t_Operation;
         }
 
         #endregion
@@ -1588,22 +1580,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="Permission")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_Permission")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Permission : EntityObject
+    public partial class T_Permission : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Permission object.
+        /// Create a new T_Permission object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Permission CreatePermission(global::System.Int32 id)
+        public static T_Permission CreateT_Permission(global::System.Int32 id)
         {
-            Permission permission = new Permission();
-            permission.ID = id;
-            return permission;
+            T_Permission t_Permission = new T_Permission();
+            t_Permission.ID = id;
+            return t_Permission;
         }
 
         #endregion
@@ -1813,22 +1805,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="Role")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_Role")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Role : EntityObject
+    public partial class T_Role : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Role object.
+        /// Create a new T_Role object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Role CreateRole(global::System.Int32 id)
+        public static T_Role CreateT_Role(global::System.Int32 id)
         {
-            Role role = new Role();
-            role.ID = id;
-            return role;
+            T_Role t_Role = new T_Role();
+            t_Role.ID = id;
+            return t_Role;
         }
 
         #endregion
@@ -2038,22 +2030,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="User")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class User : EntityObject
+    public partial class T_User : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new User object.
+        /// Create a new T_User object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static User CreateUser(global::System.Int32 id)
+        public static T_User CreateT_User(global::System.Int32 id)
         {
-            User user = new User();
-            user.ID = id;
-            return user;
+            T_User t_User = new T_User();
+            t_User.ID = id;
+            return t_User;
         }
 
         #endregion
@@ -2338,18 +2330,18 @@ namespace MvcBootstrap.MssqlEFModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "Favorite")]
-        public EntityCollection<Favorite> Favorite
+        [EdmRelationshipNavigationPropertyAttribute("MvcBootstrap.EFModel", "FK_TBFAVORI_REFERENCE_USER", "T_Favorite")]
+        public EntityCollection<T_Favorite> T_Favorite
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Favorite>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "Favorite");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<T_Favorite>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "T_Favorite");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Favorite>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "Favorite", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<T_Favorite>("MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER", "T_Favorite", value);
                 }
             }
         }
@@ -2361,22 +2353,22 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="UserNode")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_UserNode")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class UserNode : EntityObject
+    public partial class T_UserNode : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new UserNode object.
+        /// Create a new T_UserNode object.
         /// </summary>
         /// <param name="userID">Initial value of the UserID property.</param>
-        public static UserNode CreateUserNode(global::System.Int32 userID)
+        public static T_UserNode CreateT_UserNode(global::System.Int32 userID)
         {
-            UserNode userNode = new UserNode();
-            userNode.UserID = userID;
-            return userNode;
+            T_UserNode t_UserNode = new T_UserNode();
+            t_UserNode.UserID = userID;
+            return t_UserNode;
         }
 
         #endregion
@@ -2466,53 +2458,29 @@ namespace MvcBootstrap.MssqlEFModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="UserRole")]
+    [EdmEntityTypeAttribute(NamespaceName="MvcBootstrap.EFModel", Name="T_UserRole")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class UserRole : EntityObject
+    public partial class T_UserRole : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new UserRole object.
+        /// Create a new T_UserRole object.
         /// </summary>
-        /// <param name="roleID">Initial value of the RoleID property.</param>
         /// <param name="userID">Initial value of the UserID property.</param>
-        public static UserRole CreateUserRole(global::System.Int32 roleID, global::System.Int32 userID)
+        /// <param name="roleID">Initial value of the RoleID property.</param>
+        public static T_UserRole CreateT_UserRole(global::System.Int32 userID, global::System.Int32 roleID)
         {
-            UserRole userRole = new UserRole();
-            userRole.RoleID = roleID;
-            userRole.UserID = userID;
-            return userRole;
+            T_UserRole t_UserRole = new T_UserRole();
+            t_UserRole.UserID = userID;
+            t_UserRole.RoleID = roleID;
+            return t_UserRole;
         }
 
         #endregion
 
         #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 RoleID
-        {
-            get
-            {
-                return _RoleID;
-            }
-            set
-            {
-                OnRoleIDChanging(value);
-                ReportPropertyChanging("RoleID");
-                _RoleID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("RoleID");
-                OnRoleIDChanged();
-            }
-        }
-        private global::System.Int32 _RoleID;
-        partial void OnRoleIDChanging(global::System.Int32 value);
-        partial void OnRoleIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2540,6 +2508,30 @@ namespace MvcBootstrap.MssqlEFModel
         private global::System.Int32 _UserID;
         partial void OnUserIDChanging(global::System.Int32 value);
         partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleID
+        {
+            get
+            {
+                return _RoleID;
+            }
+            set
+            {
+                OnRoleIDChanging(value);
+                ReportPropertyChanging("RoleID");
+                _RoleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RoleID");
+                OnRoleIDChanged();
+            }
+        }
+        private global::System.Int32 _RoleID;
+        partial void OnRoleIDChanging(global::System.Int32 value);
+        partial void OnRoleIDChanged();
 
         #endregion
 
