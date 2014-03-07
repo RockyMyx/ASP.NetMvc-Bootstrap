@@ -11,11 +11,11 @@ namespace MvcBootstrap.MysqlEFModel
     {
         DBHelper db = new DBHelper(ConfigurationManager.AppSettings["DBType"]);
 
-        public IEnumerable<module> GetModuleTree()
+        public IEnumerable<Module> GetModuleTree()
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.ExecuteStoreQuery<module>("CALL GetModuleTree()").ToList();
+                return db.ExecuteStoreQuery<Module>("CALL GetModuleTree()").ToList();
             }
         }
 
