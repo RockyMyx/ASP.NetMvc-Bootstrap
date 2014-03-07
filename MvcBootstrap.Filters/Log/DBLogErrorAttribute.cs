@@ -17,7 +17,7 @@ public class DBLogErrorAttribute : HandleErrorAttribute
 
     public override void OnException(ExceptionContext filterContext)
     {
-        log log = new log();
+        Log log = new Log();
 
         //ToTest
         log.UserId = 1;
