@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFModel.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="10.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFModelStoreContainer">
+          <EntitySet Name="G_AISCATEGORY" EntityType="EFModel.Store.G_AISCATEGORY" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_AISRESOURCE" EntityType="EFModel.Store.G_AISRESOURCE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_LOG" EntityType="EFModel.Store.G_LOG" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_MODULE" EntityType="EFModel.Store.G_MODULE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_OPERATION" EntityType="EFModel.Store.G_OPERATION" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_PERMISSION" EntityType="EFModel.Store.G_PERMISSION" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_ROLE" EntityType="EFModel.Store.G_ROLE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_USER" EntityType="EFModel.Store.G_USER" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_USERNODE" EntityType="EFModel.Store.G_USERNODE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="G_USERROLE" EntityType="EFModel.Store.G_USERROLE" store:Type="Tables" Schema="AISADMIN" />
+        </EntityContainer>
+        <EntityType Name="G_AISCATEGORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="NAME" Type="varchar2" MaxLength="20" />
+          <Property Name="PARENTID" Type="number" Precision="10" />
+        </EntityType>
+        <EntityType Name="G_AISRESOURCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" Nullable="false" MaxLength="40" />
+          <Property Name="RESOURCENAME" Type="varchar2" MaxLength="20" />
+          <Property Name="RESOURCECONTENT" Type="blob" />
+          <Property Name="RESOURCEVERSION" Type="float" Precision="126" />
+          <Property Name="PARENTID" Type="number" Precision="6" />
+          <Property Name="RESOURCEPATH" Type="varchar2" MaxLength="200" />
+          <Property Name="RESOURCEDETAIL" Type="varchar2" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="G_LOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="USERID" Type="number" Precision="10" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="20" />
+          <Property Name="IPADDRESS" Type="varchar2" MaxLength="20" />
+          <Property Name="CONTROLLER" Type="varchar2" MaxLength="50" />
+          <Property Name="ACTION" Type="varchar2" MaxLength="20" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="100" />
+          <Property Name="CREATEDATE" Type="date" />
+        </EntityType>
+        <EntityType Name="G_MODULE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="CODE" Type="varchar2" MaxLength="20" />
+          <Property Name="URL" Type="varchar2" MaxLength="100" />
+          <Property Name="CONTROLLER" Type="varchar2" MaxLength="50" />
+          <Property Name="PARENTID" Type="number" Precision="10" />
+          <Property Name="ISENABLE" Type="number" Precision="1" />
+          <Property Name="OPERATIONS" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="G_OPERATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="NAME" Type="varchar2" MaxLength="20" />
+          <Property Name="ACTION" Type="varchar2" MaxLength="20" />
+          <Property Name="CREATEUSERID" Type="number" Precision="10" />
+          <Property Name="CREATEDATE" Type="date" />
+        </EntityType>
+        <EntityType Name="G_PERMISSION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="ROLEID" Type="number" Precision="10" />
+          <Property Name="CONTROLLERID" Type="number" Precision="10" />
+          <Property Name="ACTIONID" Type="number" Precision="10" />
+          <Property Name="CREATEUSERID" Type="number" Precision="10" />
+          <Property Name="CREATEDATE" Type="date" />
+          <Property Name="MODIFYUSERID" Type="number" Precision="10" />
+          <Property Name="MODIFYDATE" Type="date" />
+        </EntityType>
+        <EntityType Name="G_ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="100" />
+          <Property Name="ISENABLE" Type="number" Precision="1" />
+          <Property Name="CREATEUSERID" Type="number" Precision="10" />
+          <Property Name="CREATEDATE" Type="date" />
+          <Property Name="MODIFYUSERID" Type="number" Precision="10" />
+          <Property Name="MODIFYDATE" Type="date" />
+        </EntityType>
+        <EntityType Name="G_USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="NAME" Type="varchar2" MaxLength="20" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="20" />
+          <Property Name="REALNAME" Type="varchar2" MaxLength="20" />
+          <Property Name="ISLOCKED" Type="number" Precision="1" />
+          <Property Name="LASTLOGINTIME" Type="date" />
+          <Property Name="CREATEUSERID" Type="number" Precision="10" />
+          <Property Name="CREATEDATE" Type="date" />
+          <Property Name="MODIFYUSERID" Type="number" Precision="10" />
+          <Property Name="MODIFYDATE" Type="date" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="G_USERNODE">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="AISCATEGORYID" Type="varchar2" MaxLength="200" />
+          <Property Name="AISRESOURCECACHEID" Type="varchar2" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="G_USERROLE">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="number" Nullable="false" Precision="10" />
+          <Property Name="ROLEID" Type="number" Nullable="false" Precision="10" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DBEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ais_category" EntityType="EFModel.ais_category" />
+          <EntitySet Name="ais_resource" EntityType="EFModel.ais_resource" />
+          <EntitySet Name="logs" EntityType="EFModel.log" />
+          <EntitySet Name="modules" EntityType="EFModel.module" />
+          <EntitySet Name="operations" EntityType="EFModel.operation" />
+          <EntitySet Name="permissions" EntityType="EFModel.permission" />
+          <EntitySet Name="roles" EntityType="EFModel.role" />
+          <EntitySet Name="users" EntityType="EFModel.user" />
+          <EntitySet Name="user_node" EntityType="EFModel.user_node" />
+          <EntitySet Name="user_role" EntityType="EFModel.user_role" />
+        </EntityContainer>
+        <EntityType Name="ais_category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ParentID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ais_resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="ResourceName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ResourceContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ResourceVersion" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="ResourcePath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ResourceDetail" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="IpAddress" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IsEnable" Type="Int16" />
+          <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="operation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Action" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CreateUserId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="ControllerID" Type="Int32" />
+          <Property Name="ActionID" Type="Int32" />
+          <Property Name="CreateUserID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="ModifyUserID" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="IsEnable" Type="Int16" />
+          <Property Name="CreateUserID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="ModifyUserID" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="RealName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="IsLocked" Type="Int16" />
+          <Property Name="LastLoginTime" Type="DateTime" />
+          <Property Name="CreateUserID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="ModifyUserID" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" />
+          <Property Name="Remark" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user_node">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="AisCategoryID" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="AisResourceCacheID" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user_role">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFModelStoreContainer" CdmEntityContainer="DBEntity">
+          <EntitySetMapping Name="ais_category">
+            <EntityTypeMapping TypeName="EFModel.ais_category">
+              <MappingFragment StoreEntitySet="G_AISCATEGORY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="ParentID" ColumnName="PARENTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ais_resource">
+            <EntityTypeMapping TypeName="EFModel.ais_resource">
+              <MappingFragment StoreEntitySet="G_AISRESOURCE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResourceName" ColumnName="RESOURCENAME" />
+                <ScalarProperty Name="ResourceContent" ColumnName="RESOURCECONTENT" />
+                <ScalarProperty Name="ResourceVersion" ColumnName="RESOURCEVERSION" />
+                <ScalarProperty Name="ParentID" ColumnName="PARENTID" />
+                <ScalarProperty Name="ResourcePath" ColumnName="RESOURCEPATH" />
+                <ScalarProperty Name="ResourceDetail" ColumnName="RESOURCEDETAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logs">
+            <EntityTypeMapping TypeName="EFModel.log">
+              <MappingFragment StoreEntitySet="G_LOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserId" ColumnName="USERID" />
+                <ScalarProperty Name="UserName" ColumnName="USERNAME" />
+                <ScalarProperty Name="IpAddress" ColumnName="IPADDRESS" />
+                <ScalarProperty Name="Controller" ColumnName="CONTROLLER" />
+                <ScalarProperty Name="Action" ColumnName="ACTION" />
+                <ScalarProperty Name="Remark" ColumnName="REMARK" />
+                <ScalarProperty Name="CreateDate" ColumnName="CREATEDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modules">
+            <EntityTypeMapping TypeName="EFModel.module">
+              <MappingFragment StoreEntitySet="G_MODULE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Url" ColumnName="URL" />
+                <ScalarProperty Name="Controller" ColumnName="CONTROLLER" />
+                <ScalarProperty Name="ParentId" ColumnName="PARENTID" />
+                <ScalarProperty Name="IsEnable" ColumnName="ISENABLE" />
+                <ScalarProperty Name="Operations" ColumnName="OPERATIONS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operations">
+            <EntityTypeMapping TypeName="EFModel.operation">
+              <MappingFragment StoreEntitySet="G_OPERATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Action" ColumnName="ACTION" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CREATEUSERID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CREATEDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="permissions">
+            <EntityTypeMapping TypeName="EFModel.permission">
+              <MappingFragment StoreEntitySet="G_PERMISSION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleID" ColumnName="ROLEID" />
+                <ScalarProperty Name="ControllerID" ColumnName="CONTROLLERID" />
+                <ScalarProperty Name="ActionID" ColumnName="ACTIONID" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CREATEUSERID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="MODIFYUSERID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="MODIFYDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="EFModel.role">
+              <MappingFragment StoreEntitySet="G_ROLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Remark" ColumnName="REMARK" />
+                <ScalarProperty Name="IsEnable" ColumnName="ISENABLE" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CREATEUSERID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="MODIFYUSERID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="MODIFYDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="EFModel.user">
+              <MappingFragment StoreEntitySet="G_USER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Password" ColumnName="PASSWORD" />
+                <ScalarProperty Name="RealName" ColumnName="REALNAME" />
+                <ScalarProperty Name="IsLocked" ColumnName="ISLOCKED" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LASTLOGINTIME" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CREATEUSERID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="MODIFYUSERID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="MODIFYDATE" />
+                <ScalarProperty Name="Remark" ColumnName="REMARK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_node">
+            <EntityTypeMapping TypeName="EFModel.user_node">
+              <MappingFragment StoreEntitySet="G_USERNODE">
+                <ScalarProperty Name="UserID" ColumnName="USERID" />
+                <ScalarProperty Name="AisCategoryID" ColumnName="AISCATEGORYID" />
+                <ScalarProperty Name="AisResourceCacheID" ColumnName="AISRESOURCECACHEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_role">
+            <EntityTypeMapping TypeName="EFModel.user_role">
+              <MappingFragment StoreEntitySet="G_USERROLE">
+                <ScalarProperty Name="UserID" ColumnName="USERID" />
+                <ScalarProperty Name="RoleID" ColumnName="ROLEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="EFModel.ais_category" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.ais_resource" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.log" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.module" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.operation" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.permission" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.role" Width="1.5" PointX="6.75" PointY="0.75" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.user" Width="1.5" PointX="6.75" PointY="4.75" Height="3.1161507161458317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.user_node" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.user_role" Width="1.5" PointX="0.75" PointY="8.75" Height="1.3969734700520817" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
