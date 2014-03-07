@@ -4,7 +4,7 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class UserRoleService : BaseService<user_role, IUserRoleDao>
+    public class UserRoleService : BaseService<UserRole, IUserRoleDao>
     {
         protected override void SetCurrentDao()
         {
