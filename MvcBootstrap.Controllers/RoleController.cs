@@ -35,13 +35,13 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Index(int? pageIndex)
         {
             int index = pageIndex ?? 1;
-            IEnumerable<Role> entities = (IEnumerable<Role>)Session[cacheSearchKey] ??
-                                         roleService.GetAll();
-            IEnumerable<Role> result = roleService.GetSearchPagingInfo(entities, index, base.PageSize);
+            IEnumerable<T_Role> entities = (IEnumerable<T_Role>)Session[cacheSearchKey] ??
+                                           roleService.GetAll();
+            IEnumerable<T_Role> result = roleService.GetSearchPagingInfo(entities, index, base.PageSize);
             return PartialView("_RoleGrid", result);
         }
 
-        public ActionResult Modify(Role role)
+        public ActionResult Modify(T_Role role)
         {
             roleService.Update(role);
             return MyJson(role);
@@ -54,7 +54,7 @@ namespace MvcBootstrap.Controllers
 
         public override void Create(FormCollection formInfo)
         {
-            Role role = roleService.GetRoleInfo(formInfo);
+            T_Role role = roleService.GetRoleInfo(formInfo);
             role.CreateDate = DateTime.Now;
             //ToTest
             //role.CreateUserID = Convert.ToInt32(Session["UserID"]);
@@ -64,7 +64,7 @@ namespace MvcBootstrap.Controllers
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<Role> filterEntities = roleService.GetAll().Where(m => m.Name.Contains(name));
+            IEnumerable<T_Role> filterEntities = roleService.GetAll().Where(m => m.Name.Contains(name));
             Session[cacheSearchKey] = filterEntities;
             if (filterEntities.Count() == 0) return new EmptyResult();
             return PartialView("_RoleGrid", filterEntities);

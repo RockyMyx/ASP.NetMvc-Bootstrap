@@ -44,11 +44,11 @@ namespace MvcBootstrap.Controllers
 
         public override void Create(FormCollection formInfo)
         {
-            User user = userService.GetUserInfo(formInfo);
+            T_User user = userService.GetUserInfo(formInfo);
             userService.Create(user);
-            UserRole userRole = userService.GetNewUserRoleInfo(formInfo);
+            T_UserRole userRole = userService.GetNewUserRoleInfo(formInfo);
             urService.Create(userRole);
-            UserNode userNode = userService.GetNewUserNodeInfo(formInfo);
+            T_UserNode userNode = userService.GetNewUserNodeInfo(formInfo);
             unService.Create(userNode);
         }
 
@@ -61,9 +61,9 @@ namespace MvcBootstrap.Controllers
 
         public override void Update(FormCollection formInfo)
         {
-            User user = userService.GetUserInfo(formInfo);
+            T_User user = userService.GetUserInfo(formInfo);
             userService.Update(user);
-            UserRole ur = userService.GetEditUserRoleInfo(formInfo);
+            T_UserRole ur = userService.GetEditUserRoleInfo(formInfo);
             urService.Update(ur);
         }
 
@@ -92,7 +92,7 @@ namespace MvcBootstrap.Controllers
 
         public bool DistributeUserNodes(string idString)
         {
-            UserNode userNode = new UserNode
+            T_UserNode userNode = new T_UserNode
             {
                 UserID = 1,
                 AisCategoryID = idString
