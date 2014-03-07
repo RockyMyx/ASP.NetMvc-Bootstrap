@@ -2,7 +2,7 @@
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IUserNodeDao : IBaseDao<user_node>
+    public interface IUserNodeDao : IBaseDao<UserNode>
     {
     }
 }

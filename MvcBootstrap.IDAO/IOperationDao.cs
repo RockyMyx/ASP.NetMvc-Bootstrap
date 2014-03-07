@@ -3,7 +3,7 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IOperationDao : IBaseDao<operation>
+    public interface IOperationDao : IBaseDao<Operation>
     {
         IDictionary<int, string> GetOperations();
     }

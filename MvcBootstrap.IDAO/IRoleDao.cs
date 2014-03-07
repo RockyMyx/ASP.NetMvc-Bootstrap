@@ -2,7 +2,7 @@
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IRoleDao : IBaseDao<role>
+    public interface IRoleDao : IBaseDao<Role>
     {
     }
 }
