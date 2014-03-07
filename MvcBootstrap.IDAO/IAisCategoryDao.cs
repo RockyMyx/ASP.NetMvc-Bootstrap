@@ -2,7 +2,7 @@
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IAisCategoryDao : IBaseDao<AisCategory>
+    public interface IAisCategoryDao : IBaseDao<T_AisCategory>
     {
     }
 }

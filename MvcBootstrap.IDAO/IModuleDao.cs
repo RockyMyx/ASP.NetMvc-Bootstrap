@@ -3,8 +3,8 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IModuleDao : IBaseDao<Module>
+    public interface IModuleDao : IBaseDao<T_Module>
     {
-        IEnumerable<Module> GetSortedModules();
+        IEnumerable<T_Module> GetSortedModules();
     }
 }

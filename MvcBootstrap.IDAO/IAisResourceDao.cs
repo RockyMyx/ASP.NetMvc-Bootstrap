@@ -2,7 +2,7 @@
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IAisResourceDao : IBaseDao<AisResource>
+    public interface IAisResourceDao : IBaseDao<T_AisResource>
     {
     }
 }

@@ -4,7 +4,7 @@ using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IUserDao : IBaseDao<User>
+    public interface IUserDao : IBaseDao<T_User>
     {
         UserLoginViewModel GetUserLoginInfo(string userName, string userPwd);
         IEnumerable<UserBrowseViewModel> GetUserBrowse(int roleId);
