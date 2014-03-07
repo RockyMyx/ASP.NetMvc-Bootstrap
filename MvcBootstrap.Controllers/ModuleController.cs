@@ -35,15 +35,15 @@ namespace MvcBootstrap.Controllers
         {
             ViewData["ParentId"] = moduleService.GetModuleSelect();
             int index = pageIndex ?? 1;
-            IEnumerable<module> entities = (IEnumerable<module>)Session[cacheSearchKey] ??
+            IEnumerable<Module> entities = (IEnumerable<Module>)Session[cacheSearchKey] ??
                                            moduleService.GetAll();
-            IEnumerable<module> result = moduleService.GetSearchPagingInfo(entities, index, base.PageSize);
+            IEnumerable<Module> result = moduleService.GetSearchPagingInfo(entities, index, base.PageSize);
             return PartialView("_ModuleGrid", result);
         }
 
         public override void Update(FormCollection formInfo)
         {
-            module module = moduleService.GetModuleInfo(formInfo);
+            Module module = moduleService.GetModuleInfo(formInfo);
             moduleService.Update(module);
         }
 
@@ -54,14 +54,14 @@ namespace MvcBootstrap.Controllers
 
         public override void Create(FormCollection formInfo)
         {
-            module module = moduleService.GetModuleInfo(formInfo);
+            Module module = moduleService.GetModuleInfo(formInfo);
             moduleService.Create(module);
         }
 
         public override ActionResult Search(string name)
         {
             name = name.Trim();
-            IEnumerable<module> filterEntities = moduleService.GetAll().Where(m => m.Name.Contains(name));
+            IEnumerable<Module> filterEntities = moduleService.GetAll().Where(m => m.Name.Contains(name));
             Session[cacheSearchKey] = filterEntities;
             if (filterEntities.Count() == 0) return new EmptyResult();
             return PartialView("_ModuleGrid", filterEntities);
@@ -69,14 +69,14 @@ namespace MvcBootstrap.Controllers
 
         public ActionResult Get(int id)
         {
-            module module = moduleService.GetEntity(m => m.ID == id);
+            Module module = moduleService.GetEntity(m => m.ID == id);
             return Json(module, JsonRequestBehavior.AllowGet);
         }
 
         public override ActionResult AdvanceSearch(FormCollection searchFormInfo)
         {
-            module module = moduleService.GetModuleInfo(searchFormInfo);
-            IEnumerable<module> search = moduleService.GetAll().ToList();
+            Module module = moduleService.GetModuleInfo(searchFormInfo);
+            IEnumerable<Module> search = moduleService.GetAll().ToList();
             if (!string.IsNullOrEmpty(module.Name))
             {
                 search = search.Where(m => m.Name.Contains(module.Name));
@@ -94,7 +94,7 @@ namespace MvcBootstrap.Controllers
                 search = search.Where(m => m.ParentId == module.ParentId);
             }
 
-            IList<module> filterEntities = search.Where(m => m.IsEnable == module.IsEnable).ToList();
+            IList<Module> filterEntities = search.Where(m => m.IsEnable == module.IsEnable).ToList();
             Session[cacheSearchKey] = filterEntities;
             if (filterEntities.Count == 0)
             {
