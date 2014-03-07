@@ -6,13 +6,13 @@ using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.DAO
 {
-    public class PermissionDao : BaseEFDao<Permission>, IPermissionDao
+    public class PermissionDao : BaseEFDao<T_Permission>, IPermissionDao
     {
         public IEnumerable<PermissionViewModel> GetPermission(int roleId)
         {
             using (DBEntity db = new DBEntity())
             {
-                return (from p in db.Permission
+                return (from p in db.T_Permission
                         where p.RoleID == roleId
                         select new PermissionViewModel
                         {
@@ -26,11 +26,11 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                foreach (Permission permission in db.Permission)
+                foreach (T_Permission permission in db.T_Permission)
                 {
                     if (permission.RoleID == roleId)
                     {
-                        db.Permission.DeleteObject(permission);
+                        db.T_Permission.DeleteObject(permission);
                     }
                 }
 

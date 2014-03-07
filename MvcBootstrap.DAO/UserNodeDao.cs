@@ -3,7 +3,7 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
-    public class UserNodeDao : BaseEFDao<UserNode>, IUserNodeDao
+    public class UserNodeDao : BaseEFDao<T_UserNode>, IUserNodeDao
     {
         public UserNodeDao()
         {

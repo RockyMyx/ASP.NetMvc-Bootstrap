@@ -3,7 +3,7 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
-    public class RoleDao : BaseEFDao<Role>, IRoleDao
+    public class RoleDao : BaseEFDao<T_Role>, IRoleDao
     {
     }
 }

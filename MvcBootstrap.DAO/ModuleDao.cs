@@ -7,9 +7,9 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
-    public class ModuleDao : BaseEFDao<Module>, IModuleDao
+    public class ModuleDao : BaseEFDao<T_Module>, IModuleDao
     {
-        public override IEnumerable<Module> GetPagingInfo(int pageSize)
+        public override IEnumerable<T_Module> GetPagingInfo(int pageSize)
         {
             //return dbExtend.GetModuleTree().Take(pageSize).ToList();
             using (DBEntity db = new DBEntity())
@@ -18,7 +18,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public override IEnumerable<Module> GetPagingInfo(int pageIndex, int pageSize)
+        public override IEnumerable<T_Module> GetPagingInfo(int pageIndex, int pageSize)
         {
             //return dbExtend.GetModuleTree().Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             using (DBEntity db = new DBEntity())
@@ -27,7 +27,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public override IEnumerable<Module> GetEntities(Expression<Func<Module, bool>> whereExp)
+        public override IEnumerable<T_Module> GetEntities(Expression<Func<T_Module, bool>> whereExp)
         {
             //return dbExtend.GetModuleTree().AsQueryable().Where(whereExp).ToList();
             using (DBEntity db = new DBEntity())
@@ -36,7 +36,7 @@ namespace MvcBootstrap.DAO
             }
         }
 
-        public IEnumerable<Module> GetSortedModules()
+        public IEnumerable<T_Module> GetSortedModules()
         {
             //return dbExtend.GetModuleTree().AsQueryable().ToList();
             using (DBEntity db = new DBEntity())

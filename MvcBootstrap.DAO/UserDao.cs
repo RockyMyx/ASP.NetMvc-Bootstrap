@@ -6,7 +6,7 @@ using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.DAO
 {
-    public class UserDao : BaseEFDao<User>, IUserDao
+    public class UserDao : BaseEFDao<T_User>, IUserDao
     {
         private IEnumerable<UserViewModel> UserViewModels;
 
@@ -14,10 +14,10 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                IEnumerable<UserViewModel> models = from u in db.User
-                                                    join ur in db.UserRole
+                IEnumerable<UserViewModel> models = from u in db.T_User
+                                                    join ur in db.T_UserRole
                                                     on u.ID equals ur.UserID
-                                                    join r in db.Role
+                                                    join r in db.T_Role
                                                     on ur.RoleID equals r.ID
                                                     select new UserViewModel
                                                     {
@@ -47,8 +47,8 @@ namespace MvcBootstrap.DAO
                 //db.ExecuteStoreQuery<User>(sql, args);
 
                 //DB操作方法三：使用LINQ
-                UserLoginViewModel models = (from u in db.User
-                                             join r in db.UserRole
+                UserLoginViewModel models = (from u in db.T_User
+                                             join r in db.T_UserRole
                                              on u.ID equals r.UserID
                                              where (u.Name == userName && u.Password == userPwd)
                                              select new UserLoginViewModel
@@ -105,7 +105,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.User.Max(u => u.ID);
+                return db.T_User.Max(u => u.ID);
             }
         }
 
