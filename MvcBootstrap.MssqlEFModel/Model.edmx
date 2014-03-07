@@ -123,7 +123,6 @@
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Remark" Type="varchar" MaxLength="100" />
           <Property Name="IsEnable" Type="bit" />
-          <Property Name="ParentID" Type="int" />
           <Property Name="CreateUserID" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="int" />
@@ -137,12 +136,6 @@
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Password" Type="varchar" MaxLength="20" />
           <Property Name="RealName" Type="varchar" MaxLength="20" />
-          <Property Name="DeptID" Type="int" />
-          <Property Name="WorkNo" Type="varchar" MaxLength="50" />
-          <Property Name="Age" Type="int" />
-          <Property Name="Gender" Type="varchar" MaxLength="10" />
-          <Property Name="Phone" Type="varchar" MaxLength="20" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="IsLocked" Type="bit" />
           <Property Name="LastLoginTime" Type="datetime" />
           <Property Name="CreateUserID" Type="int" />
@@ -312,7 +305,6 @@
           <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="IsEnable" Type="Boolean" />
-          <Property Name="ParentID" Type="Int32" />
           <Property Name="CreateUserID" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" />
           <Property Name="ModifyUserID" Type="Int32" />
@@ -326,12 +318,6 @@
           <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="RealName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="DeptID" Type="Int32" />
-          <Property Name="WorkNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="Gender" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Phone" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="IsLocked" Type="Boolean" />
           <Property Name="LastLoginTime" Type="DateTime" />
           <Property Name="CreateUserID" Type="Int32" />
@@ -465,7 +451,6 @@
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Remark" ColumnName="Remark" />
             <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
-            <ScalarProperty Name="ParentID" ColumnName="ParentID" />
             <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
             <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
             <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
@@ -476,12 +461,6 @@
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Password" ColumnName="Password" />
             <ScalarProperty Name="RealName" ColumnName="RealName" />
-            <ScalarProperty Name="DeptID" ColumnName="DeptID" />
-            <ScalarProperty Name="WorkNo" ColumnName="WorkNo" />
-            <ScalarProperty Name="Age" ColumnName="Age" />
-            <ScalarProperty Name="Gender" ColumnName="Gender" />
-            <ScalarProperty Name="Phone" ColumnName="Phone" />
-            <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
             <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
             <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
@@ -577,13 +556,13 @@
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.Module" Width="1.5" PointX="2.75" PointY="5.75" Height="2.5430916341145835" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.Operation" Width="1.5" PointX="5.75" PointY="4.75" Height="1.9700325520833335" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.Permission" Width="1.5" PointX="7.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrap.EFModel.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="2.7341113281249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="MvcBootstrap.EFModel.User" Width="1.5" PointX="0.75" PointY="1" Height="4.4532885742187531" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrap.EFModel.Role" Width="1.5" PointX="7.75" PointY="4.75" Height="2.5430916341145826" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcBootstrap.EFModel.User" Width="1.5" PointX="0.75" PointY="1" Height="3.3071704101562496" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.UserRole" Width="1.5" PointX="4.75" PointY="7.75" Height="1.3969734700520835" IsExpanded="true" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.v_UserAllPermission" Width="1.5" PointX="6.75" PointY="8.75" Height="2.9251310221354174" IsExpanded="true" />
         <AssociationConnector Association="MvcBootstrap.EFModel.FK_TBFAVORI_REFERENCE_USER" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.3305261230468748" />
-          <ConnectorPoint PointX="3" PointY="3.3305261230468748" />
+          <ConnectorPoint PointX="2.25" PointY="3.2785852050781248" />
+          <ConnectorPoint PointX="3" PointY="3.2785852050781248" />
         </AssociationConnector>
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.AisCategory" Width="1.5" PointX="0.75" PointY="9.75" Height="1.5879931640624996" />
         <EntityTypeShape EntityType="MvcBootstrap.EFModel.AisResource" Width="1.5" PointX="9.75" PointY="8.75" Height="2.3520719401041674" />

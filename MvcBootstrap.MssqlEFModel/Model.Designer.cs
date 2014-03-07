@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
@@ -1938,30 +1939,6 @@ namespace MvcBootstrap.MssqlEFModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ParentID
-        {
-            get
-            {
-                return _ParentID;
-            }
-            set
-            {
-                OnParentIDChanging(value);
-                ReportPropertyChanging("ParentID");
-                _ParentID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ParentID");
-                OnParentIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ParentID;
-        partial void OnParentIDChanging(Nullable<global::System.Int32> value);
-        partial void OnParentIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Int32> CreateUserID
         {
             get
@@ -2181,150 +2158,6 @@ namespace MvcBootstrap.MssqlEFModel
         private global::System.String _RealName;
         partial void OnRealNameChanging(global::System.String value);
         partial void OnRealNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> DeptID
-        {
-            get
-            {
-                return _DeptID;
-            }
-            set
-            {
-                OnDeptIDChanging(value);
-                ReportPropertyChanging("DeptID");
-                _DeptID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DeptID");
-                OnDeptIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _DeptID;
-        partial void OnDeptIDChanging(Nullable<global::System.Int32> value);
-        partial void OnDeptIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String WorkNo
-        {
-            get
-            {
-                return _WorkNo;
-            }
-            set
-            {
-                OnWorkNoChanging(value);
-                ReportPropertyChanging("WorkNo");
-                _WorkNo = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("WorkNo");
-                OnWorkNoChanged();
-            }
-        }
-        private global::System.String _WorkNo;
-        partial void OnWorkNoChanging(global::System.String value);
-        partial void OnWorkNoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Age
-        {
-            get
-            {
-                return _Age;
-            }
-            set
-            {
-                OnAgeChanging(value);
-                ReportPropertyChanging("Age");
-                _Age = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Age");
-                OnAgeChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Age;
-        partial void OnAgeChanging(Nullable<global::System.Int32> value);
-        partial void OnAgeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Gender
-        {
-            get
-            {
-                return _Gender;
-            }
-            set
-            {
-                OnGenderChanging(value);
-                ReportPropertyChanging("Gender");
-                _Gender = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Gender");
-                OnGenderChanged();
-            }
-        }
-        private global::System.String _Gender;
-        partial void OnGenderChanging(global::System.String value);
-        partial void OnGenderChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Phone
-        {
-            get
-            {
-                return _Phone;
-            }
-            set
-            {
-                OnPhoneChanging(value);
-                ReportPropertyChanging("Phone");
-                _Phone = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Phone");
-                OnPhoneChanged();
-            }
-        }
-        private global::System.String _Phone;
-        partial void OnPhoneChanging(global::System.String value);
-        partial void OnPhoneChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
