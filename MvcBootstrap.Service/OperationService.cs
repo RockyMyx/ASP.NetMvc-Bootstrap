@@ -6,7 +6,7 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class OperationService : BaseService<Operation, IOperationDao>
+    public class OperationService : BaseService<T_Operation, IOperationDao>
     {
         protected override void SetCurrentDao()
         {
@@ -18,9 +18,9 @@ namespace MvcBootstrap.Service
             return base.dao.GetOperations();
         }
 
-        public Operation GetOperationInfo(FormCollection formInfo)
+        public T_Operation GetOperationInfo(FormCollection formInfo)
         {
-            Operation operation = new Operation
+            T_Operation operation = new T_Operation
             {
                 Name = formInfo["Name"].ObjToStr(),
                 Action = formInfo["Action"].ObjToStr(),

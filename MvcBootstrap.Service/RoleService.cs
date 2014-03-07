@@ -5,16 +5,16 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class RoleService : BaseService<Role, IRoleDao>
+    public class RoleService : BaseService<T_Role, IRoleDao>
     {
         protected override void SetCurrentDao()
         {
             base.dao = new RoleDao();
         }
 
-        public Role GetRoleInfo(FormCollection formInfo)
+        public T_Role GetRoleInfo(FormCollection formInfo)
         {
-            Role role = new Role
+            T_Role role = new T_Role
             {
                 Name = formInfo["Name"].ObjToStr(),
                 Remark = formInfo["Remark"].ObjToStr(),

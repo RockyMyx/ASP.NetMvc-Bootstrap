@@ -8,7 +8,7 @@ using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
 {
-    public class UserService : BaseService<User, IUserDao>
+    public class UserService : BaseService<T_User, IUserDao>
     {
         protected override void SetCurrentDao()
         {
@@ -48,7 +48,7 @@ namespace MvcBootstrap.Service
         public IList<SelectListItem> GetRoleSelect()
         {
             RoleService roleService = new RoleService();
-            IEnumerable<Role> roles = roleService.GetAll();
+            IEnumerable<T_Role> roles = roleService.GetAll();
 
             IList<SelectListItem> roleList = new List<SelectListItem>();
             roleList.Add(new SelectListItem { Text = "请选择", Value = "NULL" });
@@ -60,9 +60,9 @@ namespace MvcBootstrap.Service
             return roleList;
         }
 
-        public User GetUserInfo(FormCollection formInfo)
+        public T_User GetUserInfo(FormCollection formInfo)
         {
-            User user = new User
+            T_User user = new T_User
             {
                 ID = Convert.ToInt32(formInfo["ID"]),
                 Name = formInfo["Name"],
@@ -73,9 +73,9 @@ namespace MvcBootstrap.Service
             return user;
         }
 
-        public UserRole GetNewUserRoleInfo(FormCollection formInfo)
+        public T_UserRole GetNewUserRoleInfo(FormCollection formInfo)
         {
-            UserRole ur = new UserRole
+            T_UserRole ur = new T_UserRole
             {
                 UserID = dao.GetInsertId(),
                 RoleID = Convert.ToInt32(formInfo["RoleID"])
@@ -84,9 +84,9 @@ namespace MvcBootstrap.Service
             return ur;
         }
 
-        public UserNode GetNewUserNodeInfo(FormCollection formInfo)
+        public T_UserNode GetNewUserNodeInfo(FormCollection formInfo)
         {
-            UserNode un = new UserNode
+            T_UserNode un = new T_UserNode
             {
                 UserID = dao.GetInsertId()
             };
@@ -94,9 +94,9 @@ namespace MvcBootstrap.Service
             return un;
         }
 
-        public UserRole GetEditUserRoleInfo(FormCollection formInfo)
+        public T_UserRole GetEditUserRoleInfo(FormCollection formInfo)
         {
-            UserRole ur = new UserRole
+            T_UserRole ur = new T_UserRole
             {
                 UserID = Convert.ToInt32(formInfo["ID"]),
                 RoleID = Convert.ToInt32(formInfo["RoleID"])

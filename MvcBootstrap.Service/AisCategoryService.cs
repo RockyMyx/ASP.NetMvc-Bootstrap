@@ -6,7 +6,7 @@ using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.Service
 {
-    public class AisCategoryService : BaseService<AisCategory, IAisCategoryDao>
+    public class AisCategoryService : BaseService<T_AisCategory, IAisCategoryDao>
     {
         protected override void SetCurrentDao()
         {
@@ -22,8 +22,8 @@ namespace MvcBootstrap.Service
             TreeViewModel model = null;
             using (DBEntity db = new DBEntity())
             {
-                IEnumerable<AisCategory> categoryInfo = this.GetAll();
-                foreach (AisCategory category in categoryInfo)
+                IEnumerable<T_AisCategory> categoryInfo = this.GetAll();
+                foreach (T_AisCategory category in categoryInfo)
                 {
                     model = new TreeViewModel
                     {

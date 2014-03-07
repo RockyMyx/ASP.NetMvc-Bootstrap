@@ -27,7 +27,7 @@ public static class UIService
         IList<UserBrowseViewModel> parentModules = new List<UserBrowseViewModel>();
         modules.Enumerate(m => m.ParentId == 0, m => parentModules.Add(m));
         //获取子菜单
-        IEnumerable<Module> childModules = null;
+        IEnumerable<T_Module> childModules = null;
         StringBuilder menuBuilder = new StringBuilder();
         StringBuilder childBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
@@ -75,13 +75,13 @@ public static class UIService
 
         StringBuilder opBuilder = new StringBuilder();
         ModuleService moduleService = new ModuleService();
-        IEnumerable<Module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
+        IEnumerable<T_Module> modules = moduleService.GetEntities(m => m.ParentId == moduleId);
 
         string[] operations = null;
         int actionId = 0;
-        Operation operation = null;
+        T_Operation operation = null;
         OperationService operationService = new OperationService();
-        foreach (Module module in modules)
+        foreach (T_Module module in modules)
         {
             if (!string.IsNullOrWhiteSpace(module.Operations))
             {

@@ -9,19 +9,19 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.Service
 {
-    public class ModuleService : BaseService<Module, IModuleDao>
+    public class ModuleService : BaseService<T_Module, IModuleDao>
     {
         protected override void SetCurrentDao()
         {
             base.dao = new ModuleDao();
         }
 
-        private IEnumerable<Module> CacheModules
+        private IEnumerable<T_Module> CacheModules
         {
             get { return this.GetAll(); }
         }
 
-        public IEnumerable<Module> GetSortedModules()
+        public IEnumerable<T_Module> GetSortedModules()
         {
             return base.dao.GetSortedModules();
         }
@@ -38,17 +38,17 @@ namespace MvcBootstrap.Service
             return CacheModules.Where(m => m.Controller == controllerName).Single().ID;
         }
 
-        public IList<Module> GetChildModules(int parentId)
+        public IList<T_Module> GetChildModules(int parentId)
         {
-            IList<Module> childModules = new List<Module>();
+            IList<T_Module> childModules = new List<T_Module>();
             CacheModules.Enumerate(m => m.ParentId != null && m.ParentId == parentId,
                                    m => childModules.Add(m));
             return childModules;
         }
 
-        public IList<Module> GetParentModules()
+        public IList<T_Module> GetParentModules()
         {
-            IList<Module> parentModules = new List<Module>();
+            IList<T_Module> parentModules = new List<T_Module>();
             CacheModules.Enumerate(m => m.ParentId == 0,
                                    m => parentModules.Add(m));
             return parentModules;
@@ -67,11 +67,11 @@ namespace MvcBootstrap.Service
             return moduleList;
         }
 
-        public Module GetModuleInfo(FormCollection formInfo)
+        public T_Module GetModuleInfo(FormCollection formInfo)
         {
             int id = formInfo["ID"].ObjToInt();
-            Module oriModule = dao.GetEntity(m => m.ID == id);
-            Module module = new Module
+            T_Module oriModule = dao.GetEntity(m => m.ID == id);
+            T_Module module = new T_Module
             {
                 ID = id,
                 Name = formInfo["Name"] == null ? oriModule.Name : formInfo["Name"],
