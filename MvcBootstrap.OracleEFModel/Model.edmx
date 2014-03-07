@@ -6,18 +6,18 @@
     <edmx:StorageModels>
       <Schema Namespace="EFModel.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="10.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EFModelStoreContainer">
-          <EntitySet Name="G_AISCATEGORY" EntityType="EFModel.Store.G_AISCATEGORY" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_AISRESOURCE" EntityType="EFModel.Store.G_AISRESOURCE" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_LOG" EntityType="EFModel.Store.G_LOG" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_MODULE" EntityType="EFModel.Store.G_MODULE" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_OPERATION" EntityType="EFModel.Store.G_OPERATION" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_PERMISSION" EntityType="EFModel.Store.G_PERMISSION" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_ROLE" EntityType="EFModel.Store.G_ROLE" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_USER" EntityType="EFModel.Store.G_USER" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_USERNODE" EntityType="EFModel.Store.G_USERNODE" store:Type="Tables" Schema="AISADMIN" />
-          <EntitySet Name="G_USERROLE" EntityType="EFModel.Store.G_USERROLE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_AISCATEGORY" EntityType="EFModel.Store.T_AISCATEGORY" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_AISRESOURCE" EntityType="EFModel.Store.T_AISRESOURCE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_LOG" EntityType="EFModel.Store.T_LOG" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_MODULE" EntityType="EFModel.Store.T_MODULE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_OPERATION" EntityType="EFModel.Store.T_OPERATION" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_PERMISSION" EntityType="EFModel.Store.T_PERMISSION" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_ROLE" EntityType="EFModel.Store.T_ROLE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_USER" EntityType="EFModel.Store.T_USER" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_USERNODE" EntityType="EFModel.Store.T_USERNODE" store:Type="Tables" Schema="AISADMIN" />
+          <EntitySet Name="T_USERROLE" EntityType="EFModel.Store.T_USERROLE" store:Type="Tables" Schema="AISADMIN" />
         </EntityContainer>
-        <EntityType Name="G_AISCATEGORY">
+        <EntityType Name="T_AISCATEGORY">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -25,7 +25,7 @@
           <Property Name="NAME" Type="varchar2" MaxLength="20" />
           <Property Name="PARENTID" Type="number" Precision="10" />
         </EntityType>
-        <EntityType Name="G_AISRESOURCE">
+        <EntityType Name="T_AISRESOURCE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -37,7 +37,7 @@
           <Property Name="RESOURCEPATH" Type="varchar2" MaxLength="200" />
           <Property Name="RESOURCEDETAIL" Type="varchar2" MaxLength="500" />
         </EntityType>
-        <EntityType Name="G_LOG">
+        <EntityType Name="T_LOG">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -50,7 +50,7 @@
           <Property Name="REMARK" Type="varchar2" MaxLength="100" />
           <Property Name="CREATEDATE" Type="date" />
         </EntityType>
-        <EntityType Name="G_MODULE">
+        <EntityType Name="T_MODULE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -63,7 +63,7 @@
           <Property Name="ISENABLE" Type="number" Precision="1" />
           <Property Name="OPERATIONS" Type="varchar2" MaxLength="100" />
         </EntityType>
-        <EntityType Name="G_OPERATION">
+        <EntityType Name="T_OPERATION">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -73,7 +73,7 @@
           <Property Name="CREATEUSERID" Type="number" Precision="10" />
           <Property Name="CREATEDATE" Type="date" />
         </EntityType>
-        <EntityType Name="G_PERMISSION">
+        <EntityType Name="T_PERMISSION">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -86,7 +86,7 @@
           <Property Name="MODIFYUSERID" Type="number" Precision="10" />
           <Property Name="MODIFYDATE" Type="date" />
         </EntityType>
-        <EntityType Name="G_ROLE">
+        <EntityType Name="T_ROLE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -99,7 +99,7 @@
           <Property Name="MODIFYUSERID" Type="number" Precision="10" />
           <Property Name="MODIFYDATE" Type="date" />
         </EntityType>
-        <EntityType Name="G_USER">
+        <EntityType Name="T_USER">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -115,7 +115,7 @@
           <Property Name="MODIFYDATE" Type="date" />
           <Property Name="REMARK" Type="varchar2" MaxLength="200" />
         </EntityType>
-        <EntityType Name="G_USERNODE">
+        <EntityType Name="T_USERNODE">
           <Key>
             <PropertyRef Name="USERID" />
           </Key>
@@ -123,7 +123,7 @@
           <Property Name="AISCATEGORYID" Type="varchar2" MaxLength="200" />
           <Property Name="AISRESOURCECACHEID" Type="varchar2" MaxLength="2000" />
         </EntityType>
-        <EntityType Name="G_USERROLE">
+        <EntityType Name="T_USERROLE">
           <Key>
             <PropertyRef Name="USERID" />
           </Key>
@@ -136,18 +136,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DBEntity" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ais_category" EntityType="EFModel.ais_category" />
-          <EntitySet Name="ais_resource" EntityType="EFModel.ais_resource" />
-          <EntitySet Name="logs" EntityType="EFModel.log" />
-          <EntitySet Name="modules" EntityType="EFModel.module" />
-          <EntitySet Name="operations" EntityType="EFModel.operation" />
-          <EntitySet Name="permissions" EntityType="EFModel.permission" />
-          <EntitySet Name="roles" EntityType="EFModel.role" />
-          <EntitySet Name="users" EntityType="EFModel.user" />
-          <EntitySet Name="user_node" EntityType="EFModel.user_node" />
-          <EntitySet Name="user_role" EntityType="EFModel.user_role" />
+          <EntitySet Name="T_AisCategory" EntityType="EFModel.T_AisCategory" />
+          <EntitySet Name="T_AisResource" EntityType="EFModel.T_AisResource" />
+          <EntitySet Name="T_Log" EntityType="EFModel.T_Log" />
+          <EntitySet Name="T_Module" EntityType="EFModel.T_Module" />
+          <EntitySet Name="T_Operation" EntityType="EFModel.T_Operation" />
+          <EntitySet Name="T_Permission" EntityType="EFModel.T_Permission" />
+          <EntitySet Name="T_Role" EntityType="EFModel.T_Role" />
+          <EntitySet Name="T_User" EntityType="EFModel.T_User" />
+          <EntitySet Name="T_UserNode" EntityType="EFModel.T_UserNode" />
+          <EntitySet Name="T_UserRole" EntityType="EFModel.T_UserRole" />
         </EntityContainer>
-        <EntityType Name="ais_category">
+        <EntityType Name="T_AisCategory">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -155,7 +155,7 @@
           <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="ParentID" Type="Int32" />
         </EntityType>
-        <EntityType Name="ais_resource">
+        <EntityType Name="T_AisResource">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -167,12 +167,12 @@
           <Property Name="ResourcePath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="ResourceDetail" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
         </EntityType>
-        <EntityType Name="log">
+        <EntityType Name="T_Log">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IpAddress" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
@@ -180,7 +180,7 @@
           <Property Name="Remark" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="module">
+        <EntityType Name="T_Module">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -189,11 +189,11 @@
           <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Url" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="ParentId" Type="Int32" />
+          <Property Name="ParentID" Type="Int32" />
           <Property Name="IsEnable" Type="Int16" />
           <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
-        <EntityType Name="operation">
+        <EntityType Name="T_Operation">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -203,7 +203,7 @@
           <Property Name="CreateUserId" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="permission">
+        <EntityType Name="T_Permission">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -216,7 +216,7 @@
           <Property Name="ModifyUserID" Type="Int32" />
           <Property Name="ModifyDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="role">
+        <EntityType Name="T_Role">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -227,9 +227,9 @@
           <Property Name="CreateUserID" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" />
           <Property Name="ModifyUserID" Type="Int32" />
-          <Property Name="ModifyDate" Type="DateTime" />
+          <Property Name="ModifyUserDate" Type="DateTime" />
         </EntityType>
-        <EntityType Name="user">
+        <EntityType Name="T_User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -245,7 +245,7 @@
           <Property Name="ModifyDate" Type="DateTime" />
           <Property Name="Remark" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
         </EntityType>
-        <EntityType Name="user_node">
+        <EntityType Name="T_UserNode">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
@@ -253,7 +253,7 @@
           <Property Name="AisCategoryID" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="AisResourceCacheID" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
         </EntityType>
-        <EntityType Name="user_role">
+        <EntityType Name="T_UserRole">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
@@ -266,18 +266,18 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EFModelStoreContainer" CdmEntityContainer="DBEntity">
-          <EntitySetMapping Name="ais_category">
-            <EntityTypeMapping TypeName="EFModel.ais_category">
-              <MappingFragment StoreEntitySet="G_AISCATEGORY">
+          <EntitySetMapping Name="T_AisCategory">
+            <EntityTypeMapping TypeName="EFModel.T_AisCategory">
+              <MappingFragment StoreEntitySet="T_AISCATEGORY">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="NAME" />
                 <ScalarProperty Name="ParentID" ColumnName="PARENTID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ais_resource">
-            <EntityTypeMapping TypeName="EFModel.ais_resource">
-              <MappingFragment StoreEntitySet="G_AISRESOURCE">
+          <EntitySetMapping Name="T_AisResource">
+            <EntityTypeMapping TypeName="EFModel.T_AisResource">
+              <MappingFragment StoreEntitySet="T_AISRESOURCE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ResourceName" ColumnName="RESOURCENAME" />
                 <ScalarProperty Name="ResourceContent" ColumnName="RESOURCECONTENT" />
@@ -288,11 +288,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="logs">
-            <EntityTypeMapping TypeName="EFModel.log">
-              <MappingFragment StoreEntitySet="G_LOG">
+          <EntitySetMapping Name="T_Log">
+            <EntityTypeMapping TypeName="EFModel.T_Log">
+              <MappingFragment StoreEntitySet="T_LOG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserId" ColumnName="USERID" />
+                <ScalarProperty Name="UserID" ColumnName="USERID" />
                 <ScalarProperty Name="UserName" ColumnName="USERNAME" />
                 <ScalarProperty Name="IpAddress" ColumnName="IPADDRESS" />
                 <ScalarProperty Name="Controller" ColumnName="CONTROLLER" />
@@ -302,23 +302,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="modules">
-            <EntityTypeMapping TypeName="EFModel.module">
-              <MappingFragment StoreEntitySet="G_MODULE">
+          <EntitySetMapping Name="T_Module">
+            <EntityTypeMapping TypeName="EFModel.T_Module">
+              <MappingFragment StoreEntitySet="T_MODULE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="NAME" />
                 <ScalarProperty Name="Code" ColumnName="CODE" />
                 <ScalarProperty Name="Url" ColumnName="URL" />
                 <ScalarProperty Name="Controller" ColumnName="CONTROLLER" />
-                <ScalarProperty Name="ParentId" ColumnName="PARENTID" />
+                <ScalarProperty Name="ParentID" ColumnName="PARENTID" />
                 <ScalarProperty Name="IsEnable" ColumnName="ISENABLE" />
                 <ScalarProperty Name="Operations" ColumnName="OPERATIONS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="operations">
-            <EntityTypeMapping TypeName="EFModel.operation">
-              <MappingFragment StoreEntitySet="G_OPERATION">
+          <EntitySetMapping Name="T_Operation">
+            <EntityTypeMapping TypeName="EFModel.T_Operation">
+              <MappingFragment StoreEntitySet="T_OPERATION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="NAME" />
                 <ScalarProperty Name="Action" ColumnName="ACTION" />
@@ -327,9 +327,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="permissions">
-            <EntityTypeMapping TypeName="EFModel.permission">
-              <MappingFragment StoreEntitySet="G_PERMISSION">
+          <EntitySetMapping Name="T_Permission">
+            <EntityTypeMapping TypeName="EFModel.T_Permission">
+              <MappingFragment StoreEntitySet="T_PERMISSION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RoleID" ColumnName="ROLEID" />
                 <ScalarProperty Name="ControllerID" ColumnName="CONTROLLERID" />
@@ -341,9 +341,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="roles">
-            <EntityTypeMapping TypeName="EFModel.role">
-              <MappingFragment StoreEntitySet="G_ROLE">
+          <EntitySetMapping Name="T_Role">
+            <EntityTypeMapping TypeName="EFModel.T_Role">
+              <MappingFragment StoreEntitySet="T_ROLE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="NAME" />
                 <ScalarProperty Name="Remark" ColumnName="REMARK" />
@@ -351,13 +351,13 @@
                 <ScalarProperty Name="CreateUserID" ColumnName="CREATEUSERID" />
                 <ScalarProperty Name="CreateDate" ColumnName="CREATEDATE" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="MODIFYUSERID" />
-                <ScalarProperty Name="ModifyDate" ColumnName="MODIFYDATE" />
+                <ScalarProperty Name="ModifyUserDate" ColumnName="MODIFYDATE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="EFModel.user">
-              <MappingFragment StoreEntitySet="G_USER">
+          <EntitySetMapping Name="T_User">
+            <EntityTypeMapping TypeName="EFModel.T_User">
+              <MappingFragment StoreEntitySet="T_USER">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="NAME" />
                 <ScalarProperty Name="Password" ColumnName="PASSWORD" />
@@ -372,18 +372,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="user_node">
-            <EntityTypeMapping TypeName="EFModel.user_node">
-              <MappingFragment StoreEntitySet="G_USERNODE">
+          <EntitySetMapping Name="T_UserNode">
+            <EntityTypeMapping TypeName="EFModel.T_UserNode">
+              <MappingFragment StoreEntitySet="T_USERNODE">
                 <ScalarProperty Name="UserID" ColumnName="USERID" />
                 <ScalarProperty Name="AisCategoryID" ColumnName="AISCATEGORYID" />
                 <ScalarProperty Name="AisResourceCacheID" ColumnName="AISRESOURCECACHEID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="user_role">
-            <EntityTypeMapping TypeName="EFModel.user_role">
-              <MappingFragment StoreEntitySet="G_USERROLE">
+          <EntitySetMapping Name="T_UserRole">
+            <EntityTypeMapping TypeName="EFModel.T_UserRole">
+              <MappingFragment StoreEntitySet="T_USERROLE">
                 <ScalarProperty Name="UserID" ColumnName="USERID" />
                 <ScalarProperty Name="RoleID" ColumnName="ROLEID" />
               </MappingFragment>
@@ -410,16 +410,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="EFModel.ais_category" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.ais_resource" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.log" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.module" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.operation" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9700325520833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.permission" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5430916341145817" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.role" Width="1.5" PointX="6.75" PointY="0.75" Height="2.5430916341145817" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.user" Width="1.5" PointX="6.75" PointY="4.75" Height="3.1161507161458317" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.user_node" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5879931640624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="EFModel.user_role" Width="1.5" PointX="0.75" PointY="8.75" Height="1.3969734700520817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_AisCategory" Width="1.5" PointX="0.5" PointY="0.5" Height="1.5879931640625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_AisResource" Width="1.75" PointX="2.5" PointY="0.5" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Log" Width="1.5" PointX="4.5" PointY="0.5" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Module" Width="1.5" PointX="0.5" PointY="4.5" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Operation" Width="1.5" PointX="2.5" PointY="4.5" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Permission" Width="1.5" PointX="4.5" PointY="4.5" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Role" Width="1.5" PointX="6.5" PointY="0.5" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_User" Width="1.5" PointX="6.5" PointY="4.5" Height="3.1161507161458317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_UserNode" Width="1.875" PointX="8.5" PointY="0.5" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_UserRole" Width="1.5" PointX="0.5" PointY="8.5" Height="1.3969734700520817" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
