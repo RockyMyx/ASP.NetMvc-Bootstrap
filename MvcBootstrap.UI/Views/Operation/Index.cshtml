@@ -6,6 +6,11 @@
     ViewBag.AddTitle = "新增权限信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@*@using MvcBootstrap.MssqlEFModel*@
+@using MvcBootstrap.MysqlEFModel
+@*@using MvcBootstrap.OracleEFModel*@
+
 @section DataGrid{
     @Html.Partial("_OperationGrid")
 }

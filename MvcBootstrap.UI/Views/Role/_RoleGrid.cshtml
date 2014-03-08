@@ -1,5 +1,7 @@
-﻿@*@model IEnumerable<MvcBootstrap.EFModel.Role>*@
+﻿@*@model IEnumerable<MvcBootstrap.MssqlEFModel.T_Role>*@
 @model IEnumerable<MvcBootstrap.MysqlEFModel.T_Role>
+@*@model IEnumerable<MvcBootstrap.OracleEFModel.T_Role>*@
+
 <thead>
 	<tr>
         <th><input id="js-check-all" type="checkbox" class="th-check-all" />选择</th>
@@ -28,6 +30,8 @@
 		    <td key="Remark" content="@item.Remark" type="notEmpty">@item.Remark</td>
             <td class="js-bool" key="IsEnable" content="@(item.IsEnable != null && (bool)item.IsEnable ? "1" : "0")">
             @if (item.IsEnable != null && (bool)item.IsEnable)
+            @*<td class="js-bool" key="IsEnable" content="@(item.IsEnable != null && item.IsEnable == 1)">
+            @if (item.IsEnable != null && item.IsEnable == 1)*@
             {
                 <img src="../../Images/enable.png" alt="可用" title="可用" />
             }

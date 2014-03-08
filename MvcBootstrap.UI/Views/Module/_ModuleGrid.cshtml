@@ -1,5 +1,6 @@
-﻿@*@model IEnumerable<MvcBootstrap.EFModel.Module>*@
+﻿@*@model IEnumerable<MvcBootstrap.MssqlEFModel.T_Module>*@
 @model IEnumerable<MvcBootstrap.MysqlEFModel.T_Module>
+@*@model IEnumerable<MvcBootstrap.OracleEFModel.T_Module>*@
 
 <thead>
 	<tr>
@@ -9,9 +10,9 @@
 		<th>链接</th>
 		<th>是否启用</th>
         @{if (Convert.ToBoolean(ViewData["Update"]) || Convert.ToBoolean(ViewData["Delete"]))
-         {
+          {
 		<th>操作</th>
-         }}
+          }}
 	</tr>
 </thead>
 <tbody>
@@ -35,6 +36,7 @@
 		    <td>@item.Url</td>
             <td>
             @if (item.IsEnable != null && (bool)item.IsEnable)
+            @*@if (item.IsEnable != null && item.IsEnable == 1)*@
             {
                 <img src="../../Images/enable.png" alt="可用" title="可用" />
             }
