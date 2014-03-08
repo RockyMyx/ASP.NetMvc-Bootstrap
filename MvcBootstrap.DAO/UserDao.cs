@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MvcBootstrap.IDAO;
+//using MvcBootstrap.MssqlEFModel;
 using MvcBootstrap.MysqlEFModel;
+//using MvcBootstrap.OracleEFModel;
 using MvcBootstrap.ViewModels;
 
 namespace MvcBootstrap.DAO
@@ -64,7 +66,6 @@ namespace MvcBootstrap.DAO
 
         public IEnumerable<UserBrowseViewModel> GetUserBrowse(int roleId)
         {
-            //return dbExtend.GetUserBrowse(roleId).ToList();
             using (DBEntity db = new DBEntity())
             {
                 //ToList立即执行，否则会出错：The ObjectContext instance has been disposed and can no longer be used for operations that require a connection
@@ -74,7 +75,6 @@ namespace MvcBootstrap.DAO
 
         public IEnumerable<string> GetUserOperation(int roleID, int controllerID)
         {
-            //return dbExtend.GetUserOperation(roleID, controllerID).ToList();
             using (DBEntity db = new DBEntity())
             {
                 return db.GetUserOperation(roleID, controllerID).ToList();
