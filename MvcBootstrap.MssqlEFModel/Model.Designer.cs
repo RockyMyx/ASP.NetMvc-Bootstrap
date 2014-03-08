@@ -370,9 +370,17 @@ namespace MvcBootstrap.MssqlEFModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public int GetModuleTree()
+        public ObjectResult<T_Module> GetModuleTree()
         {
-            return base.ExecuteFunction("GetModuleTree");
+            return base.ExecuteFunction<T_Module>("GetModuleTree");
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="mergeOption"></param>
+        public ObjectResult<T_Module> GetModuleTree(MergeOption mergeOption)
+        {
+            return base.ExecuteFunction<T_Module>("GetModuleTree", mergeOption);
         }
     
         /// <summary>

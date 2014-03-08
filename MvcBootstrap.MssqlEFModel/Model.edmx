@@ -207,7 +207,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MvcBootstrap.EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DBEntity" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="GetModuleTree" />
+          <FunctionImport Name="GetModuleTree" EntitySet="T_Module" ReturnType="Collection(MvcBootstrap.EFModel.T_Module)" />
           <FunctionImport Name="GetUserOperation" ReturnType="Collection(String)">
             <Parameter Name="RoleID" Mode="In" Type="Int32" />
             <Parameter Name="ControllerID" Mode="In" Type="Int32" />
