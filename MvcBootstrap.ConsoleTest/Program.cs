@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MvcBootstrap.EFModel;
 using System.Data.Objects;
+using MvcBootstrap.MssqlEFModel;
+//using MvcBootstrap.MysqlEFModel;
+//using MvcBootstrap.OracleEFModel;
 
 namespace MvcBootstrap.ConsoleTest
 {
@@ -13,8 +15,8 @@ namespace MvcBootstrap.ConsoleTest
         {
             using (DBEntity db = new DBEntity())
             {
-                IEnumerable<Module> modules = db.GetModuleTree();
-                foreach (Module module in modules)
+                IEnumerable<T_Module> modules = db.GetModuleTree();
+                foreach (T_Module module in modules)
                 {
                     Console.WriteLine(module.Name);
                 }

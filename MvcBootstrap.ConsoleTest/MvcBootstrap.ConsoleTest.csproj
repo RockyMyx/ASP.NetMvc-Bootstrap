@@ -47,6 +47,14 @@
       <Project>{C298EABF-74D0-4103-9582-88C05EDA64F4}</Project>
       <Name>MvcBootstrap.MssqlEFModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.MysqlEFModel\MvcBootstrap.MysqlEFModel.csproj">
+      <Project>{188549FD-D29B-4438-80F7-54F35F780766}</Project>
+      <Name>MvcBootstrap.MysqlEFModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBootstrap.OracleEFModel\MvcBootstrap.OracleEFModel.csproj">
+      <Project>{CDF8A833-D24F-463E-8E50-31F6B3AF5926}</Project>
+      <Name>MvcBootstrap.OracleEFModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
