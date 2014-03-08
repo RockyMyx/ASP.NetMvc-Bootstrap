@@ -5,7 +5,9 @@ using System.Text;
 using System.Web.Mvc;
 using MvcBootstrap.DAO;
 using MvcBootstrap.IDAO;
+//using MvcBootstrap.MssqlEFModel;
 using MvcBootstrap.MysqlEFModel;
+//using MvcBootstrap.OracleEFModel;
 
 namespace MvcBootstrap.Service
 {
@@ -80,6 +82,7 @@ namespace MvcBootstrap.Service
                 Controller = formInfo["Controller"] == null ? oriModule.Controller : formInfo["Controller"],
                 ParentId = Convert.ToInt32(formInfo["ParentId"]),
                 IsEnable = string.Compare(formInfo["IsEnable"], "1") == 0
+                //IsEnable = short.Parse(formInfo["IsEnable"])
             };
 
             List<string> operations = formInfo.AllKeys.Where(k => k.Contains("op")).ToList();
