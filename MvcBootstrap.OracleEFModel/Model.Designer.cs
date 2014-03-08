@@ -680,24 +680,24 @@ namespace MvcBootstrap.OracleEFModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> UserID
+        public Nullable<global::System.Int32> UserId
         {
             get
             {
-                return _UserID;
+                return _UserId;
             }
             set
             {
-                OnUserIDChanging(value);
-                ReportPropertyChanging("UserID");
-                _UserID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserID");
-                OnUserIDChanged();
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _UserID;
-        partial void OnUserIDChanging(Nullable<global::System.Int32> value);
-        partial void OnUserIDChanged();
+        private Nullable<global::System.Int32> _UserId;
+        partial void OnUserIdChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1001,24 +1001,24 @@ namespace MvcBootstrap.OracleEFModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ParentID
+        public Nullable<global::System.Int32> ParentId
         {
             get
             {
-                return _ParentID;
+                return _ParentId;
             }
             set
             {
-                OnParentIDChanging(value);
-                ReportPropertyChanging("ParentID");
-                _ParentID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ParentID");
-                OnParentIDChanged();
+                OnParentIdChanging(value);
+                ReportPropertyChanging("ParentId");
+                _ParentId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentId");
+                OnParentIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _ParentID;
-        partial void OnParentIDChanging(Nullable<global::System.Int32> value);
-        partial void OnParentIDChanged();
+        private Nullable<global::System.Int32> _ParentId;
+        partial void OnParentIdChanging(Nullable<global::System.Int32> value);
+        partial void OnParentIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

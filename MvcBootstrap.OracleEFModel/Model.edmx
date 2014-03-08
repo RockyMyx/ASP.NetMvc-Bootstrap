@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EFModel.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="10.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="EFModel.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="10.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EFModelStoreContainer">
           <EntitySet Name="T_AISCATEGORY" EntityType="EFModel.Store.T_AISCATEGORY" store:Type="Tables" Schema="AISADMIN" />
           <EntitySet Name="T_AISRESOURCE" EntityType="EFModel.Store.T_AISRESOURCE" store:Type="Tables" Schema="AISADMIN" />
@@ -130,8 +130,7 @@
           <Property Name="USERID" Type="number" Nullable="false" Precision="10" />
           <Property Name="ROLEID" Type="number" Nullable="false" Precision="10" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -172,7 +171,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IpAddress" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
@@ -189,7 +188,7 @@
           <Property Name="Code" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Url" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Controller" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="ParentID" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" />
           <Property Name="IsEnable" Type="Int16" />
           <Property Name="Operations" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
         </EntityType>
@@ -292,7 +291,7 @@
             <EntityTypeMapping TypeName="EFModel.T_Log">
               <MappingFragment StoreEntitySet="T_LOG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserID" ColumnName="USERID" />
+                <ScalarProperty Name="UserId" ColumnName="USERID" />
                 <ScalarProperty Name="UserName" ColumnName="USERNAME" />
                 <ScalarProperty Name="IpAddress" ColumnName="IPADDRESS" />
                 <ScalarProperty Name="Controller" ColumnName="CONTROLLER" />
@@ -310,7 +309,7 @@
                 <ScalarProperty Name="Code" ColumnName="CODE" />
                 <ScalarProperty Name="Url" ColumnName="URL" />
                 <ScalarProperty Name="Controller" ColumnName="CONTROLLER" />
-                <ScalarProperty Name="ParentID" ColumnName="PARENTID" />
+                <ScalarProperty Name="ParentId" ColumnName="PARENTID" />
                 <ScalarProperty Name="IsEnable" ColumnName="ISENABLE" />
                 <ScalarProperty Name="Operations" ColumnName="OPERATIONS" />
               </MappingFragment>
@@ -403,8 +402,8 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
