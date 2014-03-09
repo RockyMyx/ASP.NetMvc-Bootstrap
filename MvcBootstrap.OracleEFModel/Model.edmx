@@ -130,6 +130,11 @@
           <Property Name="USERID" Type="number" Nullable="false" Precision="10" />
           <Property Name="ROLEID" Type="number" Nullable="false" Precision="10" />
         </EntityType>
+        <Function Name="DELETEOBJECTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AISADMIN">
+          <Parameter Name="IDS" Type="varchar2" Mode="In" />
+          <Parameter Name="TABLENAME" Type="varchar2" Mode="In" />
+          <Parameter Name="PRIMARYKEY" Type="varchar2" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -145,6 +150,11 @@
           <EntitySet Name="T_User" EntityType="EFModel.T_User" />
           <EntitySet Name="T_UserNode" EntityType="EFModel.T_UserNode" />
           <EntitySet Name="T_UserRole" EntityType="EFModel.T_UserRole" />
+          <FunctionImport Name="DeleteObjects">
+            <Parameter Name="IDS" Mode="In" Type="String" />
+            <Parameter Name="TABLENAME" Mode="In" Type="String" />
+            <Parameter Name="PRIMARYKEY" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="T_AisCategory">
           <Key>
@@ -388,6 +398,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteObjects" FunctionName="EFModel.Store.DELETEOBJECTS" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

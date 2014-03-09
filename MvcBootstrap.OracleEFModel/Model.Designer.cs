@@ -311,6 +311,51 @@ namespace MvcBootstrap.OracleEFModel
 
         #endregion
 
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="iDS">No Metadata Documentation available.</param>
+        /// <param name="tABLENAME">No Metadata Documentation available.</param>
+        /// <param name="pRIMARYKEY">No Metadata Documentation available.</param>
+        public int DeleteObjects(global::System.String iDS, global::System.String tABLENAME, global::System.String pRIMARYKEY)
+        {
+            ObjectParameter iDSParameter;
+            if (iDS != null)
+            {
+                iDSParameter = new ObjectParameter("IDS", iDS);
+            }
+            else
+            {
+                iDSParameter = new ObjectParameter("IDS", typeof(global::System.String));
+            }
+    
+            ObjectParameter tABLENAMEParameter;
+            if (tABLENAME != null)
+            {
+                tABLENAMEParameter = new ObjectParameter("TABLENAME", tABLENAME);
+            }
+            else
+            {
+                tABLENAMEParameter = new ObjectParameter("TABLENAME", typeof(global::System.String));
+            }
+    
+            ObjectParameter pRIMARYKEYParameter;
+            if (pRIMARYKEY != null)
+            {
+                pRIMARYKEYParameter = new ObjectParameter("PRIMARYKEY", pRIMARYKEY);
+            }
+            else
+            {
+                pRIMARYKEYParameter = new ObjectParameter("PRIMARYKEY", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("DeleteObjects", iDSParameter, tABLENAMEParameter, pRIMARYKEYParameter);
+        }
+
+        #endregion
+
     }
 
     #endregion
