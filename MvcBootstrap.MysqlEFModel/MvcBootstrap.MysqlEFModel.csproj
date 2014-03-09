@@ -41,7 +41,6 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +63,7 @@
     </EntityDeploy>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
