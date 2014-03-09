@@ -196,22 +196,6 @@ namespace MvcBootstrap.MysqlEFModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<T_UserNode> T_UserNode
-        {
-            get
-            {
-                if ((_T_UserNode == null))
-                {
-                    _T_UserNode = base.CreateObjectSet<T_UserNode>("T_UserNode");
-                }
-                return _T_UserNode;
-            }
-        }
-        private ObjectSet<T_UserNode> _T_UserNode;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<T_UserRole> T_UserRole
         {
             get
@@ -224,6 +208,22 @@ namespace MvcBootstrap.MysqlEFModel
             }
         }
         private ObjectSet<T_UserRole> _T_UserRole;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<T_UserNode> T_UserNode
+        {
+            get
+            {
+                if ((_T_UserNode == null))
+                {
+                    _T_UserNode = base.CreateObjectSet<T_UserNode>("T_UserNode");
+                }
+                return _T_UserNode;
+            }
+        }
+        private ObjectSet<T_UserNode> _T_UserNode;
 
         #endregion
 
@@ -294,19 +294,19 @@ namespace MvcBootstrap.MysqlEFModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the T_UserNode EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToT_UserNode(T_UserNode t_UserNode)
-        {
-            base.AddObject("T_UserNode", t_UserNode);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the T_UserRole EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToT_UserRole(T_UserRole t_UserRole)
         {
             base.AddObject("T_UserRole", t_UserRole);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_UserNode EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_UserNode(T_UserNode t_UserNode)
+        {
+            base.AddObject("T_UserNode", t_UserNode);
         }
 
         #endregion
@@ -2072,6 +2072,174 @@ namespace MvcBootstrap.MysqlEFModel
         private global::System.String _AisResourceCacheID;
         partial void OnAisResourceCacheIDChanging(global::System.String value);
         partial void OnAisResourceCacheIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanAddRootNode
+        {
+            get
+            {
+                return _CanAddRootNode;
+            }
+            set
+            {
+                OnCanAddRootNodeChanging(value);
+                ReportPropertyChanging("CanAddRootNode");
+                _CanAddRootNode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanAddRootNode");
+                OnCanAddRootNodeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanAddRootNode;
+        partial void OnCanAddRootNodeChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanAddRootNodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanAddChildNode
+        {
+            get
+            {
+                return _CanAddChildNode;
+            }
+            set
+            {
+                OnCanAddChildNodeChanging(value);
+                ReportPropertyChanging("CanAddChildNode");
+                _CanAddChildNode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanAddChildNode");
+                OnCanAddChildNodeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanAddChildNode;
+        partial void OnCanAddChildNodeChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanAddChildNodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanRenameNode
+        {
+            get
+            {
+                return _CanRenameNode;
+            }
+            set
+            {
+                OnCanRenameNodeChanging(value);
+                ReportPropertyChanging("CanRenameNode");
+                _CanRenameNode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanRenameNode");
+                OnCanRenameNodeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanRenameNode;
+        partial void OnCanRenameNodeChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanRenameNodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanDeleteNode
+        {
+            get
+            {
+                return _CanDeleteNode;
+            }
+            set
+            {
+                OnCanDeleteNodeChanging(value);
+                ReportPropertyChanging("CanDeleteNode");
+                _CanDeleteNode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanDeleteNode");
+                OnCanDeleteNodeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanDeleteNode;
+        partial void OnCanDeleteNodeChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanDeleteNodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanAddResource
+        {
+            get
+            {
+                return _CanAddResource;
+            }
+            set
+            {
+                OnCanAddResourceChanging(value);
+                ReportPropertyChanging("CanAddResource");
+                _CanAddResource = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanAddResource");
+                OnCanAddResourceChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanAddResource;
+        partial void OnCanAddResourceChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanAddResourceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanUpdateResource
+        {
+            get
+            {
+                return _CanUpdateResource;
+            }
+            set
+            {
+                OnCanUpdateResourceChanging(value);
+                ReportPropertyChanging("CanUpdateResource");
+                _CanUpdateResource = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanUpdateResource");
+                OnCanUpdateResourceChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanUpdateResource;
+        partial void OnCanUpdateResourceChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanUpdateResourceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> CanDeleteResource
+        {
+            get
+            {
+                return _CanDeleteResource;
+            }
+            set
+            {
+                OnCanDeleteResourceChanging(value);
+                ReportPropertyChanging("CanDeleteResource");
+                _CanDeleteResource = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CanDeleteResource");
+                OnCanDeleteResourceChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _CanDeleteResource;
+        partial void OnCanDeleteResourceChanging(Nullable<global::System.Boolean> value);
+        partial void OnCanDeleteResourceChanged();
 
         #endregion
 

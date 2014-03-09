@@ -122,6 +122,13 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="AisCategoryID" Type="varchar" MaxLength="200" />
           <Property Name="AisResourceCacheID" Type="longtext" />
+          <Property Name="CanAddRootNode" Type="bool" />
+          <Property Name="CanAddChildNode" Type="bool" />
+          <Property Name="CanRenameNode" Type="bool" />
+          <Property Name="CanDeleteNode" Type="bool" />
+          <Property Name="CanAddResource" Type="bool" />
+          <Property Name="CanUpdateResource" Type="bool" />
+          <Property Name="CanDeleteResource" Type="bool" />
         </EntityType>
         <EntityType Name="T_UserRole">
           <Key>
@@ -143,8 +150,8 @@
           <EntitySet Name="T_Permission" EntityType="aisModel.T_Permission" />
           <EntitySet Name="T_Role" EntityType="aisModel.T_Role" />
           <EntitySet Name="T_User" EntityType="aisModel.T_User" />
-          <EntitySet Name="T_UserNode" EntityType="aisModel.T_UserNode" />
           <EntitySet Name="T_UserRole" EntityType="aisModel.T_UserRole" />
+          <EntitySet Name="T_UserNode" EntityType="aisModel.T_UserNode" />
         </EntityContainer>
         <EntityType Name="T_AisCategory">
           <Key>
@@ -244,6 +251,13 @@
           <Property Type="DateTime" Name="ModifyDate" />
           <Property Type="String" Name="Remark" />
         </EntityType>
+        <EntityType Name="T_UserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+        </EntityType>
         <EntityType Name="T_UserNode">
           <Key>
             <PropertyRef Name="UserID" />
@@ -251,13 +265,13 @@
           <Property Type="Int32" Name="UserID" Nullable="false" />
           <Property Type="String" Name="AisCategoryID" />
           <Property Type="String" Name="AisResourceCacheID" />
-        </EntityType>
-        <EntityType Name="T_UserRole">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="Boolean" Name="CanAddRootNode" />
+          <Property Type="Boolean" Name="CanAddChildNode" />
+          <Property Type="Boolean" Name="CanRenameNode" />
+          <Property Type="Boolean" Name="CanDeleteNode" />
+          <Property Type="Boolean" Name="CanAddResource" />
+          <Property Type="Boolean" Name="CanUpdateResource" />
+          <Property Type="Boolean" Name="CanDeleteResource" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -371,19 +385,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="T_UserNode">
-            <EntityTypeMapping TypeName="aisModel.T_UserNode">
-              <MappingFragment StoreEntitySet="T_UserNode">
-                <ScalarProperty Name="AisResourceCacheID" ColumnName="AisResourceCacheID" />
-                <ScalarProperty Name="AisCategoryID" ColumnName="AisCategoryID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="T_UserRole">
             <EntityTypeMapping TypeName="aisModel.T_UserRole">
               <MappingFragment StoreEntitySet="T_UserRole">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_UserNode">
+            <EntityTypeMapping TypeName="aisModel.T_UserNode">
+              <MappingFragment StoreEntitySet="T_UserNode">
+                <ScalarProperty Name="CanDeleteResource" ColumnName="CanDeleteResource" />
+                <ScalarProperty Name="CanUpdateResource" ColumnName="CanUpdateResource" />
+                <ScalarProperty Name="CanAddResource" ColumnName="CanAddResource" />
+                <ScalarProperty Name="CanDeleteNode" ColumnName="CanDeleteNode" />
+                <ScalarProperty Name="CanRenameNode" ColumnName="CanRenameNode" />
+                <ScalarProperty Name="CanAddChildNode" ColumnName="CanAddChildNode" />
+                <ScalarProperty Name="CanAddRootNode" ColumnName="CanAddRootNode" />
+                <ScalarProperty Name="AisResourceCacheID" ColumnName="AisResourceCacheID" />
+                <ScalarProperty Name="AisCategoryID" ColumnName="AisCategoryID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -417,8 +438,8 @@
         <EntityTypeShape EntityType="aisModel.T_Permission" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5430916341145888" />
         <EntityTypeShape EntityType="aisModel.T_Role" Width="1.5" PointX="6.75" PointY="0.75" Height="2.5430916341145888" />
         <EntityTypeShape EntityType="aisModel.T_User" Width="1.5" PointX="6.75" PointY="4.75" Height="3.1161507161458388" />
-        <EntityTypeShape EntityType="aisModel.T_UserNode" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5879931640625031" />
         <EntityTypeShape EntityType="aisModel.T_UserRole" Width="1.5" PointX="0.75" PointY="8.75" Height="1.3969734700520888" />
+        <EntityTypeShape EntityType="aisModel.T_UserNode" Width="1.5" PointX="8.75" PointY="0.75" Height="2.9251310221354174" />
       </Diagram>
     </Diagrams>
   </Designer>
