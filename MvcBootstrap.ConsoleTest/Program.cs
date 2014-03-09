@@ -21,14 +21,14 @@ namespace MvcBootstrap.ConsoleTest
                 //    Console.WriteLine(module.Name);
                 //}
 
-                //IEnumerable<UserBrowseViewModel> models = db.GetUserBrowse(1);
+                //List<UserBrowseViewModel> models = db.GetUserBrowse(1).ToList();
                 //foreach (UserBrowseViewModel m in models)
                 //{
                 //    Console.WriteLine(m.Name);
                 //}
                 //Console.WriteLine(models.Count);
 
-                //IEnumerable<string> operations = db.GetUserOperation(1, 1);
+                //List<string> operations = db.GetUserOperation(1, 2).ToList();
                 //foreach (string o in operations)
                 //{
                 //    Console.WriteLine(o);
