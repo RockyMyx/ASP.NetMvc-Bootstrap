@@ -493,7 +493,7 @@ $('#js-btn-toolbar-detail').on('click', function () {
              }
              $('.js-loading').hide();
          });
-     }
+    }
 });
 
 //工具栏添加按钮点击事件
@@ -549,15 +549,11 @@ $('#js-btn-toolbar-refresh').on('click', function () {
 
 //工具栏搜索按钮点击事件
 $('#js-btn-search').on('click', function () {
-    if ($('#js-input-search').val() == '') {
-        alert('请输入搜索的内容');
-    }
-    else {
-        $.post(jPage.getUrl('Search'), { 'name': $('#js-input-search').val() })
+    if ($('#js-input-search').val() == '') return;
+    $.post(jPage.getUrl('Search'), { 'name': $('#js-input-search').val() })
          .done(function (result) {
              jPage.showSearch(result);
          });
-    }
 });
 
 /****************************添加表单*****************************/
