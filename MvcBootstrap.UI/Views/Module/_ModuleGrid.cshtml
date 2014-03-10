@@ -35,8 +35,8 @@
 		    <td>@item.Code</td>
 		    <td>@item.Url</td>
             <td>
-            @if (item.IsEnable != null && (bool)item.IsEnable)
             @*@if (item.IsEnable != null && item.IsEnable == 1)*@
+            @if (item.IsEnable != null && (bool)item.IsEnable)
             {
                 <img src="../../Images/enable.png" alt="可用" title="可用" />
             }
