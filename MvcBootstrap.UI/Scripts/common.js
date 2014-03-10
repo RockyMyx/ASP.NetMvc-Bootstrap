@@ -460,12 +460,11 @@ $('#js-btn-modal-edit').on('click', function () {
             url: jPage.getUrl('Update'),
             data: form.serialize()
         }).done(function () {
-            var pageIndex = paging.pageIndex;
-            if (pageIndex == 0) {
+            if (dataCount < pageSize) {
                 jPage.reload();
             }
             else {
-                paging.show(pageIndex);
+                paging.show(paging.pageIndex);
             }
         });
     }
