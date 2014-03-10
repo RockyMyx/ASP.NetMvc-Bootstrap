@@ -52,7 +52,7 @@ public static class UIService
     /// <summary>
     /// 生成权限操作选项
     /// </summary>
-    public static MvcHtmlString Operations(this HtmlHelper helper)
+    public static MvcHtmlString CreateOperations(this HtmlHelper helper)
     {
         string opLabel = "<label class=\"checkbox inline ml10\"><input type=\"checkbox\" id=\"op{0}\" name=\"op{0}\" />{1}</label>";
         OperationService service = new OperationService();

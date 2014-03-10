@@ -236,7 +236,6 @@
     position: relative;
     overflow:hidden;
 }
-
 .tab-arrow
 {
     position: absolute;
@@ -248,19 +247,16 @@
     cursor:pointer;
     z-index:13;
 }
-
 .tab-left-arrow
 {
     background-position: 0px 0px;
     left: 0;
 }
-
 .tab-right-arrow
 {
     background-position: -51px 0px;
     right: 0;
 }
-
 .tab-ul
 {
     margin: 0;
@@ -271,7 +267,6 @@
     overflow:hidden;
     white-space:nowrap;
 }
-
 .tab-ul li
 {
     width:100px;
@@ -287,12 +282,10 @@
     margin-top:5px;
     margin-left:5px;
 }
-
 .tab-ul li.tab-main
 {
     background-image:url('/Images/ui-bg-hover.png');
 }
-
 .tab-ul li.tab-active
 {
     background-image:url('/Images/ui-bg.png');

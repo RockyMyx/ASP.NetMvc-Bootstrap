@@ -32,9 +32,9 @@ function FillEditInfo(id) {
              $('#EditHide').prop('checked', 'true');
          }
          //清空选择状态
-         var opLength = $('#EditOp').find('input[id^="op"]');
-         for (var i = 0; i < opLength.length; i++) {
-             opLength[i].checked = false;
+         var ops = $('#EditOp').find('input[id^="op"]');
+         for (var i = 0; i < ops.length; i++) {
+             ops[i].checked = false;
          }
          //设置选择状态
          if (data.Operations != null) {
