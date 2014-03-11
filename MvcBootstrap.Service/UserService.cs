@@ -90,7 +90,14 @@ namespace MvcBootstrap.Service
         {
             T_UserNode un = new T_UserNode
             {
-                UserID = dao.GetInsertId()
+                UserID = dao.GetInsertId(),
+                CanAddRootNode = formInfo["CanAddRootNode"] == null ? false : true,
+                CanAddChildNode = formInfo["CanAddChildNode"] == null ? false : true,
+                CanRenameNode = formInfo["CanRenameNode"] == null ? false : true,
+                CanDeleteNode = formInfo["CanDeleteNode"] == null ? false : true,
+                CanAddResource = formInfo["CanAddResource"] == null ? false : true,
+                CanUpdateResource = formInfo["CanUpdateResource"] == null ? false : true,
+                CanDeleteResource = formInfo["CanDeleteResource"] == null ? false : true,
             };
 
             return un;

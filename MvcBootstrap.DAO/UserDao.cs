@@ -21,6 +21,8 @@ namespace MvcBootstrap.DAO
                                                     on u.ID equals ur.UserID
                                                     join r in db.T_Role
                                                     on ur.RoleID equals r.ID
+                                                    join un in db.T_UserNode
+                                                    on u.ID equals un.UserID
                                                     select new UserViewModel
                                                     {
                                                         UserID = u.ID,
@@ -29,6 +31,13 @@ namespace MvcBootstrap.DAO
                                                         RoleId = r.ID,
                                                         RoleName = r.Name,
                                                         Remark = u.Remark,
+                                                        CanAddRootNode = un.CanAddRootNode,
+                                                        CanAddChildNode = un.CanAddChildNode,
+                                                        CanRenameNode = un.CanRenameNode,
+                                                        CanDeleteNode = un.CanDeleteNode,
+                                                        CanAddResource = un.CanAddResource,
+                                                        CanUpdateResource = un.CanUpdateResource,
+                                                        CanDeleteResource = un.CanDeleteResource,
                                                     };
                 UserViewModels = models.ToList();
             }
