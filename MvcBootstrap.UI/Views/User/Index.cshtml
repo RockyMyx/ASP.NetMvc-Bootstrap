@@ -51,13 +51,37 @@
             <div class="form-tip"></div>
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">
+            操作权限</label>
+        <div class="controls">
+            <p>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanAddRootNode" />新建根目录</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanAddChildNode" />新建子目录</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanRenameNode" />重命名目录</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanDeleteNode" />删除目录</label>
+            </p>
+            <p>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanAddResource" />新建资源文件</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanUpdateResource" />更新资源文件</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanDeleteResource" />删除资源文件</label>
+            </p>
+        </div>
+    </div>
 }
 @section EditForm{
     <input type="hidden" id="EditUserID" name="ID" />
     <div class="row-fluid">
         <div class="control-group span6">
             <label class="control-label">
-                用户名</label>
+                用户名：</label>
             <div class="controls">
                 <input type="text" id="EditName" name="Name" class="empty form-input">
                 <div class="form-tip"></div>
@@ -65,7 +89,7 @@
         </div>
         <div class="control-group span6">
             <label class="control-label">
-                密码</label>
+                密码：</label>
             <div class="controls">
                 <input type="password" id="EditPassword" name="Password" class="empty form-input" />
                 <div class="form-tip"></div>
@@ -75,7 +99,7 @@
     <div class="row-fluid">
         <div class="control-group span6">
             <label class="control-label">
-                角色</label>
+                角色：</label>
             <div class="controls">
                 @{SelectList roles = ViewData["RoleId"] as SelectList;}
                 @Html.DropDownList("RoleId", roles, new { id = "EditRoleId", @class = "my-select" })
@@ -83,11 +107,35 @@
         </div>
         <div class="control-group span6">
             <label class="control-label">
-                备注</label>
+                备注：</label>
             <div class="controls">
                 <input type="text" id="EditRemark" name="Remark" class="empty form-input" />
                 <div class="form-tip"></div>
             </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            操作权限：</label>
+        <div class="controls">
+            <p>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanAddRootNode" />新建根目录</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanAddChildNode" />新建子目录</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanRenameNode" />重命名目录</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanDeleteNode" />删除目录</label>
+            </p>
+            <p>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanAddResource" />新建资源文件</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanUpdateResource" />更新资源文件</label>
+                <label class="checkbox inline ml10">
+                <input type="checkbox" name="CanDeleteResource" />删除资源文件</label>
+            </p>
         </div>
     </div>
 }

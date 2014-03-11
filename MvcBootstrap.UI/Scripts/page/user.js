@@ -6,6 +6,10 @@
          $('#EditPassword').val(data.Password);
          $('#EditRemark').val(data.Remark);
          $('#EditRoleId').find('option[value=' + data.RoleId + ']').prop('selected', 'true');
+         var ops = $('#js-edit-form').find('input[name^="Can"]');
+         for (var i = 0; i < ops.length; i++) {
+             ops[i].checked = data[ops[i].name];
+         }
          $(".js-loading").hide();
      });
 };
