@@ -1,5 +1,5 @@
 /*
- * JQuery zTree exedit v3.5.15
+ * JQuery zTree exedit v3.5.16
  * http://zTree.me/
  *
  * Copyright (c) 2010 Hunter.z
@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  *
  * email: hunter.z@263.net
- * Date: 2013-10-15
+ * Date: 2014-03-09
  */
 (function($){
 	//default consts of exedit
@@ -16,8 +16,8 @@
 		event: {
 			DRAG: "ztree_drag",
 			DROP: "ztree_drop",
-			REMOVE: "ztree_remove",
-			RENAME: "ztree_rename"
+			RENAME: "ztree_rename",
+			DRAGMOVE:"ztree_dragmove"
 		},
 		id: {
 			EDIT: "_edit",
@@ -69,6 +69,7 @@
 			beforeEditName:null,
 			beforeRename:null,
 			onDrag:null,
+			onDragMove:null,
 			onDrop:null,
 			onRename:null
 		}
@@ -94,12 +95,12 @@
 			tools.apply(setting.callback.onRename, [event, treeId, treeNode, isCancel]);
 		});
 
-		o.bind(c.REMOVE, function (event, treeId, treeNode) {
-			tools.apply(setting.callback.onRemove, [event, treeId, treeNode]);
-		});
-
 		o.bind(c.DRAG, function (event, srcEvent, treeId, treeNodes) {
 			tools.apply(setting.callback.onDrag, [srcEvent, treeId, treeNodes]);
+		});
+
+		o.bind(c.DRAGMOVE,function(event, srcEvent, treeId, treeNodes){
+			tools.apply(setting.callback.onDragMove,[srcEvent, treeId, treeNodes]);
 		});
 
 		o.bind(c.DROP, function (event, srcEvent, treeId, treeNodes, targetNode, moveType, isCopy) {
@@ -110,8 +111,8 @@
 		var o = setting.treeObj;
 		var c = consts.event;
 		o.unbind(c.RENAME);
-		o.unbind(c.REMOVE);
 		o.unbind(c.DRAG);
+		o.unbind(c.DRAGMOVE);
 		o.unbind(c.DROP);
 	},
 	//default event proxy of exedit
@@ -176,60 +177,62 @@
 	//update zTreeObj, add method of edit
 	_zTreeTools = function(setting, zTreeTools) {
 		zTreeTools.cancelEditName = function(newName) {
-			var root = data.getRoot(setting);
+			var root = data.getRoot(this.setting);
 			if (!root.curEditNode) return;
-			view.cancelCurEditNode(setting, newName?newName:null, true);
+			view.cancelCurEditNode(this.setting, newName?newName:null, true);
 		}
 		zTreeTools.copyNode = function(targetNode, node, moveType, isSilent) {
 			if (!node) return null;
-			if (targetNode && !targetNode.isParent && setting.data.keep.leaf && moveType === consts.move.TYPE_INNER) return null;
-			var newNode = tools.clone(node);
+			if (targetNode && !targetNode.isParent && this.setting.data.keep.leaf && moveType === consts.move.TYPE_INNER) return null;
+			var _this = this,
+				newNode = tools.clone(node);
 			if (!targetNode) {
 				targetNode = null;
 				moveType = consts.move.TYPE_INNER;
 			}
 			if (moveType == consts.move.TYPE_INNER) {
 				function copyCallback() {
-					view.addNodes(setting, targetNode, [newNode], isSilent);
+					view.addNodes(_this.setting, targetNode, [newNode], isSilent);
 				}
 
-				if (tools.canAsync(setting, targetNode)) {
-					view.asyncNode(setting, targetNode, isSilent, copyCallback);
+				if (tools.canAsync(this.setting, targetNode)) {
+					view.asyncNode(this.setting, targetNode, isSilent, copyCallback);
 				} else {
 					copyCallback();
 				}
 			} else {
-				view.addNodes(setting, targetNode.parentNode, [newNode], isSilent);
-				view.moveNode(setting, targetNode, newNode, moveType, false, isSilent);
+				view.addNodes(this.setting, targetNode.parentNode, [newNode], isSilent);
+				view.moveNode(this.setting, targetNode, newNode, moveType, false, isSilent);
 			}
 			return newNode;
 		}
 		zTreeTools.editName = function(node) {
-			if (!node || !node.tId || node !== data.getNodeCache(setting, node.tId)) return;
-			if (node.parentTId) view.expandCollapseParentNode(setting, node.getParentNode(), true);
-			view.editNode(setting, node)
+			if (!node || !node.tId || node !== data.getNodeCache(this.setting, node.tId)) return;
+			if (node.parentTId) view.expandCollapseParentNode(this.setting, node.getParentNode(), true);
+			view.editNode(this.setting, node)
 		}
 		zTreeTools.moveNode = function(targetNode, node, moveType, isSilent) {
 			if (!node) return node;
-			if (targetNode && !targetNode.isParent && setting.data.keep.leaf && moveType === consts.move.TYPE_INNER) {
+			if (targetNode && !targetNode.isParent && this.setting.data.keep.leaf && moveType === consts.move.TYPE_INNER) {
 				return null;
-			} else if (targetNode && ((node.parentTId == targetNode.tId && moveType == consts.move.TYPE_INNER) || $$(node, setting).find("#" + targetNode.tId).length > 0)) {
+			} else if (targetNode && ((node.parentTId == targetNode.tId && moveType == consts.move.TYPE_INNER) || $$(node, this.setting).find("#" + targetNode.tId).length > 0)) {
 				return null;
 			} else if (!targetNode) {
 				targetNode = null;
 			}
+			var _this = this;
 			function moveCallback() {
-				view.moveNode(setting, targetNode, node, moveType, false, isSilent);
+				view.moveNode(_this.setting, targetNode, node, moveType, false, isSilent);
 			}
-			if (tools.canAsync(setting, targetNode) && moveType === consts.move.TYPE_INNER) {
-				view.asyncNode(setting, targetNode, isSilent, moveCallback);
+			if (tools.canAsync(this.setting, targetNode) && moveType === consts.move.TYPE_INNER) {
+				view.asyncNode(this.setting, targetNode, isSilent, moveCallback);
 			} else {
 				moveCallback();
 			}
 			return node;
 		}
 		zTreeTools.setEditable = function(editable) {
-			setting.edit.enable = editable;
+			this.setting.edit.enable = editable;
 			return this.refresh();
 		}
 	},
@@ -379,6 +382,10 @@
 						view.selectNode(setting, tmpNode, i>0);
 						view.removeTreeDom(setting, tmpNode);
 
+						if (i > setting.edit.drag.maxShowNodeNum-1) {
+							continue;
+						}
+
 						tmpDom = $$("<li id='"+ tmpNode.tId +"_tmp'></li>", setting);
 						tmpDom.append($$(tmpNode, consts.id.A, setting).clone());
 						tmpDom.css("padding", "0");
@@ -387,7 +394,6 @@
 						if (i == setting.edit.drag.maxShowNodeNum-1) {
 							tmpDom = $$("<li id='"+ tmpNode.tId +"_moretmp'><a>  ...  </a></li>", setting);
 							curNode.append(tmpDom);
-							break;
 						}
 					}
 					curNode.attr("id", nodes[0].tId + consts.id.UL + "_tmp");
@@ -502,7 +508,7 @@
 					var dY = 0;
 					if (tmpTarget && tmpTarget.attr("id")!=targetSetting.treeId) {
 						var tmpTargetNode = tmpTargetNodeId == null ? null: data.getNodeCache(targetSetting, tmpTargetNodeId),
-						isCopy = (event.ctrlKey && setting.edit.drag.isMove && setting.edit.drag.isCopy) || (!setting.edit.drag.isMove && setting.edit.drag.isCopy),
+						isCopy = ((event.ctrlKey || event.metaKey) && setting.edit.drag.isMove && setting.edit.drag.isCopy) || (!setting.edit.drag.isMove && setting.edit.drag.isCopy),
 						isPrev = !!(preNode && tmpTargetNodeId === preNode.tId),
 						isNext = !!(nextNode && tmpTargetNodeId === nextNode.tId),
 						isInner = (tmpNode.parentTId && tmpNode.parentTId == tmpTargetNodeId),
@@ -591,6 +597,8 @@
 					}
 					preTmpTargetNodeId = tmpTargetNodeId;
 					preTmpMoveType = moveType;
+
+					setting.treeObj.trigger(consts.event.DRAGMOVE, [event, setting.treeId, nodes]);
 				}
 				return false;
 			}
@@ -630,7 +638,7 @@
 				if (curNode) curNode.remove();
 				if (tmpArrow) tmpArrow.remove();
 
-				var isCopy = (event.ctrlKey && setting.edit.drag.isMove && setting.edit.drag.isCopy) || (!setting.edit.drag.isMove && setting.edit.drag.isCopy);
+				var isCopy = ((event.ctrlKey || event.metaKey) && setting.edit.drag.isMove && setting.edit.drag.isCopy) || (!setting.edit.drag.isMove && setting.edit.drag.isCopy);
 				if (!isCopy && tmpTarget && tmpTargetNodeId && nodes[0].parentTId && tmpTargetNodeId==nodes[0].parentTId && moveType == consts.move.TYPE_INNER) {
 					tmpTarget = null;
 				}
