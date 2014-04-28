@@ -356,7 +356,8 @@ function bindTable() {
 
                 //重置按钮
                 function resetEditButton() {
-                    tds.eq(tds.length - 1).html('<a href="javascript:;"><i class="icon-pencil"></i></a><a href="#ModalDel" role="button" data-toggle="modal"><i class="icon-remove"></i></a>');
+                    //tds.eq(tds.length - 1).html('<a href="javascript:;"><i class="icon-pencil"></i></a><a href="javascript:;" title="删除"><i class="icon-remove"></i></a>');
+                    tds.eq(tds.length - 1).html('<a href="javascript:;"><i class="icon-pencil"></i></a>');
                 }
 
                 //确定编辑按钮点击事件
@@ -396,6 +397,7 @@ function bindTable() {
                                     currentTd.html(currentContent);
                                 }
                             }
+
                             resetEditButton();
                         });
                     }
@@ -415,7 +417,8 @@ function bindTable() {
         }
         //表格行删除按钮点击事件
         else if (e.target.className == 'icon-remove') {
-            jPage.setRowId($(this).find('td').eq(0).html());
+            //jPage.setRowId($(this).find('td').eq(0).html());
+            $('#ModalDel').modal('show');
         }
     });
 

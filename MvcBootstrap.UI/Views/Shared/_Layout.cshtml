@@ -86,13 +86,13 @@
                     </div>
                     @Html.Partial("_ModalDel")
                 </div>
-                <div id="ModalEdit" class="modal hide fade my-modal" style="display:none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div id="ModalEdit" class="modal hide fade edit-modal" style="display:none" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <span class="label label-warning">修改信息</span>
                         <img src="@Url.Content("~/Images/loading.gif")" class="js-loading hide" alt="loading" />
                     </div>
-                    <div class="modal-body my-modal">
+                    <div class="modal-body edit-modal">
                         <form id="js-edit-form">
                             @RenderSection("EditForm", required: false)
                         </form>
