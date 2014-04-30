@@ -41,10 +41,13 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBEntity.cs" />
+    <Compile Include="DBEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DBHelper.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Model.Designer.cs">
@@ -56,11 +59,13 @@
     <Compile Include="UserBrowseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

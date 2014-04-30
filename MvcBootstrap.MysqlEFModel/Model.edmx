@@ -4,44 +4,66 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="aisModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="aisModelStoreContainer">
-          <EntitySet Name="T_AisCategory" EntityType="aisModel.Store.T_AisCategory" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_AisResource" EntityType="aisModel.Store.T_AisResource" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_Log" EntityType="aisModel.Store.T_Log" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_Module" EntityType="aisModel.Store.T_Module" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_Operation" EntityType="aisModel.Store.T_Operation" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_Permission" EntityType="aisModel.Store.T_Permission" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_Role" EntityType="aisModel.Store.T_Role" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_User" EntityType="aisModel.Store.T_User" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_UserNode" EntityType="aisModel.Store.T_UserNode" store:Type="Tables" Schema="ais" />
-          <EntitySet Name="T_UserRole" EntityType="aisModel.Store.T_UserRole" store:Type="Tables" Schema="ais" />
+      <Schema Namespace="EFModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFModelStoreContainer">
+          <EntitySet Name="T_AisCategory" EntityType="EFModel.Store.T_AisCategory" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_AisLog" EntityType="EFModel.Store.T_AisLog" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_AisResource" EntityType="EFModel.Store.T_AisResource" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_Log" EntityType="EFModel.Store.T_Log" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_Module" EntityType="EFModel.Store.T_Module" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_Operation" EntityType="EFModel.Store.T_Operation" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_Permission" EntityType="EFModel.Store.T_Permission" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_Role" EntityType="EFModel.Store.T_Role" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_User" EntityType="EFModel.Store.T_User" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_UserCache" EntityType="EFModel.Store.T_UserCache" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_UserCategory" EntityType="EFModel.Store.T_UserCategory" store:Type="Tables" Schema="aiswoo" />
+          <EntitySet Name="T_UserRole" EntityType="EFModel.Store.T_UserRole" store:Type="Tables" Schema="aiswoo" />
         </EntityContainer>
         <EntityType Name="T_AisCategory">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" MaxLength="20" />
-          <Property Name="ParentID" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Creator" Type="int" />
+          <Property Name="CreateTime" Type="timestamp" Precision="0" />
+          <Property Name="Modifier" Type="int" />
+          <Property Name="LastModifyTime" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="T_AisLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TableName" Type="varchar" MaxLength="50" />
+          <Property Name="Operation" Type="varchar" MaxLength="255" />
+          <Property Name="Obj" Type="varchar" MaxLength="500" />
+          <Property Name="ObjInfo" Type="varchar" MaxLength="255" />
+          <Property Name="LogTime" Type="timestamp" Precision="0" />
         </EntityType>
         <EntityType Name="T_AisResource">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="char" Nullable="false" MaxLength="38" />
-          <Property Name="ResourceName" Type="varchar" MaxLength="20" />
-          <Property Name="ResourceContent" Type="longtext" />
-          <Property Name="ResourceVersion" Type="decimal" Precision="6" Scale="2" />
-          <Property Name="ParentID" Type="int" />
-          <Property Name="ResourcePath" Type="varchar" MaxLength="200" />
-          <Property Name="ResourceDetail" Type="text" />
+          <Property Name="Id" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Content" Type="mediumblob" />
+          <Property Name="Version" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Path" Type="varchar" MaxLength="255" />
+          <Property Name="Detail" Type="varchar" />
+          <Property Name="Creator" Type="int" />
+          <Property Name="CreateTime" Type="timestamp" Precision="0" />
+          <Property Name="Modifier" Type="int" />
+          <Property Name="LastModifyTime" Type="timestamp" Precision="0" />
         </EntityType>
         <EntityType Name="T_Log">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" />
           <Property Name="UserName" Type="varchar" MaxLength="20" />
           <Property Name="IpAddress" Type="varchar" MaxLength="20" />
@@ -52,9 +74,9 @@
         </EntityType>
         <EntityType Name="T_Module">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="20" />
           <Property Name="Url" Type="varchar" MaxLength="100" />
@@ -65,9 +87,9 @@
         </EntityType>
         <EntityType Name="T_Operation">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Action" Type="varchar" MaxLength="20" />
           <Property Name="CreateUserId" Type="int" />
@@ -75,337 +97,395 @@
         </EntityType>
         <EntityType Name="T_Permission">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RoleID" Type="int" />
-          <Property Name="ControllerID" Type="int" />
-          <Property Name="ActionID" Type="int" />
-          <Property Name="CreateUserID" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="ControllerId" Type="int" />
+          <Property Name="ActionId" Type="int" />
+          <Property Name="CreateUserId" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ModifyUserID" Type="int" />
+          <Property Name="ModifyUserId" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
         </EntityType>
         <EntityType Name="T_Role">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Remark" Type="varchar" MaxLength="100" />
           <Property Name="IsEnable" Type="bool" />
-          <Property Name="CreateUserID" Type="int" />
+          <Property Name="CreateUserId" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ModifyUserID" Type="int" />
+          <Property Name="ModifyUserId" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
         </EntityType>
         <EntityType Name="T_User">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
           <Property Name="Password" Type="varchar" MaxLength="20" />
           <Property Name="RealName" Type="varchar" MaxLength="20" />
           <Property Name="IsLocked" Type="bool" />
           <Property Name="LastLoginTime" Type="datetime" />
-          <Property Name="CreateUserID" Type="int" />
+          <Property Name="CreateUserId" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ModifyUserID" Type="int" />
+          <Property Name="ModifyUserId" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="Remark" Type="varchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="T_UserNode">
+        <EntityType Name="T_UserCache">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="AisCategoryID" Type="varchar" MaxLength="200" />
-          <Property Name="AisResourceCacheID" Type="longtext" />
-          <Property Name="CanAddRootNode" Type="bool" />
-          <Property Name="CanAddChildNode" Type="bool" />
-          <Property Name="CanRenameNode" Type="bool" />
-          <Property Name="CanDeleteNode" Type="bool" />
-          <Property Name="CanAddResource" Type="bool" />
-          <Property Name="CanUpdateResource" Type="bool" />
-          <Property Name="CanDeleteResource" Type="bool" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="AisResourceCache" Type="longtext" />
+          <Property Name="AisCacheSelectedIndex" Type="int" />
+        </EntityType>
+        <EntityType Name="T_UserCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Permission" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="T_UserRole">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
-      </Schema></edmx:StorageModels>
+        <Function Name="ClearCategoryPermission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+        <Function Name="DeleteObjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+        <Function Name="GetLoadCIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+        <Function Name="GetModuleTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+        <Function Name="GetUserBrowse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+        <Function Name="GetUserOperation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+        <Function Name="SetPrivateCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aiswoo" />
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="aisModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="EFModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DBEntity" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="T_AisCategory" EntityType="aisModel.T_AisCategory" />
-          <EntitySet Name="T_AisResource" EntityType="aisModel.T_AisResource" />
-          <EntitySet Name="T_Log" EntityType="aisModel.T_Log" />
-          <EntitySet Name="T_Module" EntityType="aisModel.T_Module" />
-          <EntitySet Name="T_Operation" EntityType="aisModel.T_Operation" />
-          <EntitySet Name="T_Permission" EntityType="aisModel.T_Permission" />
-          <EntitySet Name="T_Role" EntityType="aisModel.T_Role" />
-          <EntitySet Name="T_User" EntityType="aisModel.T_User" />
-          <EntitySet Name="T_UserRole" EntityType="aisModel.T_UserRole" />
-          <EntitySet Name="T_UserNode" EntityType="aisModel.T_UserNode" />
+          <EntitySet Name="T_AisCategory" EntityType="EFModel.T_AisCategory" />
+          <EntitySet Name="T_AisLog" EntityType="EFModel.T_AisLog" />
+          <EntitySet Name="T_AisResource" EntityType="EFModel.T_AisResource" />
+          <EntitySet Name="T_Log" EntityType="EFModel.T_Log" />
+          <EntitySet Name="T_Module" EntityType="EFModel.T_Module" />
+          <EntitySet Name="T_Operation" EntityType="EFModel.T_Operation" />
+          <EntitySet Name="T_Permission" EntityType="EFModel.T_Permission" />
+          <EntitySet Name="T_Role" EntityType="EFModel.T_Role" />
+          <EntitySet Name="T_User" EntityType="EFModel.T_User" />
+          <EntitySet Name="T_UserCache" EntityType="EFModel.T_UserCache" />
+          <EntitySet Name="T_UserCategory" EntityType="EFModel.T_UserCategory" />
+          <EntitySet Name="T_UserRole" EntityType="EFModel.T_UserRole" />
         </EntityContainer>
         <EntityType Name="T_AisCategory">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" />
-          <Property Type="Int32" Name="ParentID" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Creator" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTimeOffset" />
+          <Property Name="Modifier" Type="Int32" />
+          <Property Name="LastModifyTime" Type="DateTimeOffset" />
+        </EntityType>
+        <EntityType Name="T_AisLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TableName" Type="String" />
+          <Property Name="Operation" Type="String" />
+          <Property Name="Obj" Type="String" />
+          <Property Name="ObjInfo" Type="String" />
+          <Property Name="LogTime" Type="DateTimeOffset" />
         </EntityType>
         <EntityType Name="T_AisResource">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="String" Name="ID" Nullable="false" />
-          <Property Type="String" Name="ResourceName" />
-          <Property Type="String" Name="ResourceContent" />
-          <Property Type="Decimal" Name="ResourceVersion" />
-          <Property Type="Int32" Name="ParentID" />
-          <Property Type="String" Name="ResourcePath" />
-          <Property Type="String" Name="ResourceDetail" />
+          <Property Name="Id" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" />
+          <Property Name="Content" Type="Binary" />
+          <Property Name="Version" Type="Decimal" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Path" Type="String" />
+          <Property Name="Detail" Type="String" />
+          <Property Name="Creator" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTimeOffset" />
+          <Property Name="Modifier" Type="Int32" />
+          <Property Name="LastModifyTime" Type="DateTimeOffset" />
         </EntityType>
         <EntityType Name="T_Log">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserId" />
-          <Property Type="String" Name="UserName" />
-          <Property Type="String" Name="IpAddress" />
-          <Property Type="String" Name="Controller" />
-          <Property Type="String" Name="Action" />
-          <Property Type="String" Name="Remark" />
-          <Property Type="DateTime" Name="CreateDate" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserName" Type="String" />
+          <Property Name="IpAddress" Type="String" />
+          <Property Name="Controller" Type="String" />
+          <Property Name="Action" Type="String" />
+          <Property Name="Remark" Type="String" />
+          <Property Name="CreateDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="T_Module">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" />
-          <Property Type="String" Name="Code" />
-          <Property Type="String" Name="Url" />
-          <Property Type="String" Name="Controller" />
-          <Property Type="Int32" Name="ParentId" />
-          <Property Type="Boolean" Name="IsEnable" />
-          <Property Type="String" Name="Operations" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" />
+          <Property Name="Code" Type="String" />
+          <Property Name="Url" Type="String" />
+          <Property Name="Controller" Type="String" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IsEnable" Type="Boolean" />
+          <Property Name="Operations" Type="String" />
         </EntityType>
         <EntityType Name="T_Operation">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" />
-          <Property Type="String" Name="Action" />
-          <Property Type="Int32" Name="CreateUserId" />
-          <Property Type="DateTime" Name="CreateDate" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" />
+          <Property Name="Action" Type="String" />
+          <Property Name="CreateUserId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="T_Permission">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="RoleID" />
-          <Property Type="Int32" Name="ControllerID" />
-          <Property Type="Int32" Name="ActionID" />
-          <Property Type="Int32" Name="CreateUserID" />
-          <Property Type="DateTime" Name="CreateDate" />
-          <Property Type="Int32" Name="ModifyUserID" />
-          <Property Type="DateTime" Name="ModifyDate" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="ControllerId" Type="Int32" />
+          <Property Name="ActionId" Type="Int32" />
+          <Property Name="CreateUserId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="ModifyUserId" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="T_Role">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" />
-          <Property Type="String" Name="Remark" />
-          <Property Type="Boolean" Name="IsEnable" />
-          <Property Type="Int32" Name="CreateUserID" />
-          <Property Type="DateTime" Name="CreateDate" />
-          <Property Type="Int32" Name="ModifyUserID" />
-          <Property Type="DateTime" Name="ModifyDate" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" />
+          <Property Name="Remark" Type="String" />
+          <Property Name="IsEnable" Type="Boolean" />
+          <Property Name="CreateUserId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="ModifyUserId" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="T_User">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" />
-          <Property Type="String" Name="Password" />
-          <Property Type="String" Name="RealName" />
-          <Property Type="Boolean" Name="IsLocked" />
-          <Property Type="DateTime" Name="LastLoginTime" />
-          <Property Type="Int32" Name="CreateUserID" />
-          <Property Type="DateTime" Name="CreateDate" />
-          <Property Type="Int32" Name="ModifyUserID" />
-          <Property Type="DateTime" Name="ModifyDate" />
-          <Property Type="String" Name="Remark" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" />
+          <Property Name="Password" Type="String" />
+          <Property Name="RealName" Type="String" />
+          <Property Name="IsLocked" Type="Boolean" />
+          <Property Name="LastLoginTime" Type="DateTime" />
+          <Property Name="CreateUserId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" />
+          <Property Name="ModifyUserId" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" />
+          <Property Name="Remark" Type="String" />
+        </EntityType>
+        <EntityType Name="T_UserCache">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="AisResourceCache" Type="String" />
+          <Property Name="AisCacheSelectedIndex" Type="Int32" />
+        </EntityType>
+        <EntityType Name="T_UserCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Permission" Type="String" />
         </EntityType>
         <EntityType Name="T_UserRole">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="Int32" Name="RoleID" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_UserNode">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="AisCategoryID" />
-          <Property Type="String" Name="AisResourceCacheID" />
-          <Property Type="Boolean" Name="CanAddRootNode" />
-          <Property Type="Boolean" Name="CanAddChildNode" />
-          <Property Type="Boolean" Name="CanRenameNode" />
-          <Property Type="Boolean" Name="CanDeleteNode" />
-          <Property Type="Boolean" Name="CanAddResource" />
-          <Property Type="Boolean" Name="CanUpdateResource" />
-          <Property Type="Boolean" Name="CanDeleteResource" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="aisModelStoreContainer" CdmEntityContainer="DBEntity">
+        <EntityContainerMapping StorageEntityContainer="EFModelStoreContainer" CdmEntityContainer="DBEntity">
           <EntitySetMapping Name="T_AisCategory">
-            <EntityTypeMapping TypeName="aisModel.T_AisCategory">
+            <EntityTypeMapping TypeName="EFModel.T_AisCategory">
               <MappingFragment StoreEntitySet="T_AisCategory">
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_AisLog">
+            <EntityTypeMapping TypeName="EFModel.T_AisLog">
+              <MappingFragment StoreEntitySet="T_AisLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="Obj" ColumnName="Obj" />
+                <ScalarProperty Name="ObjInfo" ColumnName="ObjInfo" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_AisResource">
-            <EntityTypeMapping TypeName="aisModel.T_AisResource">
+            <EntityTypeMapping TypeName="EFModel.T_AisResource">
               <MappingFragment StoreEntitySet="T_AisResource">
-                <ScalarProperty Name="ResourceDetail" ColumnName="ResourceDetail" />
-                <ScalarProperty Name="ResourcePath" ColumnName="ResourcePath" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="ResourceVersion" ColumnName="ResourceVersion" />
-                <ScalarProperty Name="ResourceContent" ColumnName="ResourceContent" />
-                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="LastModifyTime" ColumnName="LastModifyTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_Log">
-            <EntityTypeMapping TypeName="aisModel.T_Log">
+            <EntityTypeMapping TypeName="EFModel.T_Log">
               <MappingFragment StoreEntitySet="T_Log">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
-                <ScalarProperty Name="Controller" ColumnName="Controller" />
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_Module">
-            <EntityTypeMapping TypeName="aisModel.T_Module">
+            <EntityTypeMapping TypeName="EFModel.T_Module">
               <MappingFragment StoreEntitySet="T_Module">
-                <ScalarProperty Name="Operations" ColumnName="Operations" />
-                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="Controller" ColumnName="Controller" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="Operations" ColumnName="Operations" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_Operation">
-            <EntityTypeMapping TypeName="aisModel.T_Operation">
+            <EntityTypeMapping TypeName="EFModel.T_Operation">
               <MappingFragment StoreEntitySet="T_Operation">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_Permission">
-            <EntityTypeMapping TypeName="aisModel.T_Permission">
+            <EntityTypeMapping TypeName="EFModel.T_Permission">
               <MappingFragment StoreEntitySet="T_Permission">
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ControllerId" ColumnName="ControllerId" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
-                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
-                <ScalarProperty Name="ControllerID" ColumnName="ControllerID" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_Role">
-            <EntityTypeMapping TypeName="aisModel.T_Role">
+            <EntityTypeMapping TypeName="EFModel.T_Role">
               <MappingFragment StoreEntitySet="T_Role">
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
-                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_User">
-            <EntityTypeMapping TypeName="aisModel.T_User">
+            <EntityTypeMapping TypeName="EFModel.T_User">
               <MappingFragment StoreEntitySet="T_User">
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
-                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
-                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
-                <ScalarProperty Name="RealName" ColumnName="RealName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_UserCache">
+            <EntityTypeMapping TypeName="EFModel.T_UserCache">
+              <MappingFragment StoreEntitySet="T_UserCache">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AisResourceCache" ColumnName="AisResourceCache" />
+                <ScalarProperty Name="AisCacheSelectedIndex" ColumnName="AisCacheSelectedIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_UserCategory">
+            <EntityTypeMapping TypeName="EFModel.T_UserCategory">
+              <MappingFragment StoreEntitySet="T_UserCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="T_UserRole">
-            <EntityTypeMapping TypeName="aisModel.T_UserRole">
+            <EntityTypeMapping TypeName="EFModel.T_UserRole">
               <MappingFragment StoreEntitySet="T_UserRole">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_UserNode">
-            <EntityTypeMapping TypeName="aisModel.T_UserNode">
-              <MappingFragment StoreEntitySet="T_UserNode">
-                <ScalarProperty Name="CanDeleteResource" ColumnName="CanDeleteResource" />
-                <ScalarProperty Name="CanUpdateResource" ColumnName="CanUpdateResource" />
-                <ScalarProperty Name="CanAddResource" ColumnName="CanAddResource" />
-                <ScalarProperty Name="CanDeleteNode" ColumnName="CanDeleteNode" />
-                <ScalarProperty Name="CanRenameNode" ColumnName="CanRenameNode" />
-                <ScalarProperty Name="CanAddChildNode" ColumnName="CanAddChildNode" />
-                <ScalarProperty Name="CanAddRootNode" ColumnName="CanAddRootNode" />
-                <ScalarProperty Name="AisResourceCacheID" ColumnName="AisResourceCacheID" />
-                <ScalarProperty Name="AisCategoryID" ColumnName="AisCategoryID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -423,23 +503,25 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="aisModel.T_AisCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="aisModel.T_AisResource" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041674" />
-        <EntityTypeShape EntityType="aisModel.T_Log" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145888" />
-        <EntityTypeShape EntityType="aisModel.T_Module" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5430916341145888" />
-        <EntityTypeShape EntityType="aisModel.T_Operation" Width="1.5" PointX="2.75" PointY="4.75" Height="1.9700325520833388" />
-        <EntityTypeShape EntityType="aisModel.T_Permission" Width="1.5" PointX="4.75" PointY="4.75" Height="2.5430916341145888" />
-        <EntityTypeShape EntityType="aisModel.T_Role" Width="1.5" PointX="6.75" PointY="0.75" Height="2.5430916341145888" />
-        <EntityTypeShape EntityType="aisModel.T_User" Width="1.5" PointX="6.75" PointY="4.75" Height="3.1161507161458388" />
-        <EntityTypeShape EntityType="aisModel.T_UserRole" Width="1.5" PointX="0.75" PointY="8.75" Height="1.3969734700520888" />
-        <EntityTypeShape EntityType="aisModel.T_UserNode" Width="1.5" PointX="8.75" PointY="0.75" Height="2.9251310221354174" />
+        <EntityTypeShape EntityType="EFModel.T_AisCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_AisLog" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_AisResource" Width="1.5" PointX="4.75" PointY="0.75" Height="3.1161507161458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Log" Width="1.5" PointX="0.75" PointY="4.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Module" Width="1.5" PointX="2.75" PointY="4.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Operation" Width="1.5" PointX="4.75" PointY="4.75" Height="1.9700325520833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Permission" Width="1.5" PointX="6.75" PointY="0.75" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_Role" Width="1.5" PointX="6.75" PointY="4.75" Height="2.5430916341145817" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_User" Width="1.5" PointX="8.75" PointY="0.75" Height="3.1161507161458317" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_UserCache" Width="1.5" PointX="0.75" PointY="8.75" Height="1.5879931640624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_UserCategory" Width="1.5" PointX="2.75" PointY="8.75" Height="1.7790128580729174" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFModel.T_UserRole" Width="1.5" PointX="8.75" PointY="4.75" Height="1.3969734700520888" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
