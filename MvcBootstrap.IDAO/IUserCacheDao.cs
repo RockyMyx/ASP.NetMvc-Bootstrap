@@ -4,7 +4,7 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.IDAO
 {
-    public interface IUserNodeDao : IBaseDao<T_UserNode>
+    public interface IUserCacheDao : IBaseDao<T_UserCache>
     {
     }
 }
