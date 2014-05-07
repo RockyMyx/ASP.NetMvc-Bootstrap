@@ -14,9 +14,9 @@ namespace MvcBootstrap.DAO
             using (DBEntity db = new DBEntity())
             {
                 return db.T_Operation
-                         .Select(s => new { s.ID, s.Name })
+                         .Select(s => new { s.Id, s.Name })
                          .AsEnumerable()
-                         .ToDictionary(k => k.ID, k => k.Name);
+                         .ToDictionary(k => k.Id, k => k.Name);
             }
         }
     }

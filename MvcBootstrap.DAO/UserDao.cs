@@ -18,26 +18,19 @@ namespace MvcBootstrap.DAO
             {
                 IEnumerable<UserViewModel> models = from u in db.T_User
                                                     join ur in db.T_UserRole
-                                                    on u.ID equals ur.UserID
+                                                    on u.Id equals ur.UserId
                                                     join r in db.T_Role
-                                                    on ur.RoleID equals r.ID
-                                                    join un in db.T_UserNode
-                                                    on u.ID equals un.UserID
+                                                    on ur.RoleId equals r.Id
+                                                    join un in db.T_UserCache
+                                                    on u.Id equals un.UserId
                                                     select new UserViewModel
                                                     {
-                                                        UserID = u.ID,
+                                                        UserID = u.Id,
                                                         Name = u.Name,
                                                         Password = u.Password,
-                                                        RoleId = r.ID,
+                                                        RoleId = r.Id,
                                                         RoleName = r.Name,
-                                                        Remark = u.Remark,
-                                                        CanAddRootNode = un.CanAddRootNode,
-                                                        CanAddChildNode = un.CanAddChildNode,
-                                                        CanRenameNode = un.CanRenameNode,
-                                                        CanDeleteNode = un.CanDeleteNode,
-                                                        CanAddResource = un.CanAddResource,
-                                                        CanUpdateResource = un.CanUpdateResource,
-                                                        CanDeleteResource = un.CanDeleteResource,
+                                                        Remark = u.Remark
                                                     };
                 UserViewModels = models.ToList();
             }
@@ -60,12 +53,12 @@ namespace MvcBootstrap.DAO
                 //DB操作方法三：使用LINQ
                 UserLoginViewModel models = (from u in db.T_User
                                              join r in db.T_UserRole
-                                             on u.ID equals r.UserID
+                                             on u.Id equals r.UserId
                                              where (u.Name == userName && u.Password == userPwd)
                                              select new UserLoginViewModel
                                              {
-                                                 UserID = u.ID,
-                                                 RoleID = r.RoleID,
+                                                 UserID = u.Id,
+                                                 RoleID = r.RoleId,
                                                  RealName = u.RealName,
                                                  UserName = u.Name
                                              }).FirstOrDefault();
@@ -114,7 +107,7 @@ namespace MvcBootstrap.DAO
         {
             using (DBEntity db = new DBEntity())
             {
-                return db.T_User.Max(u => u.ID);
+                return db.T_User.Max(u => u.Id);
             }
         }
 

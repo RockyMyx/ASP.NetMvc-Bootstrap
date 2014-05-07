@@ -5,11 +5,11 @@ using MvcBootstrap.MysqlEFModel;
 
 namespace MvcBootstrap.DAO
 {
-    public class UserNodeDao : BaseEFDao<T_UserNode>, IUserNodeDao
+    public class UserCacheDao : BaseEFDao<T_UserCache>, IUserCacheDao
     {
-        public UserNodeDao()
+        public UserCacheDao()
         {
-            base.PrimaryKey = "UserID";
+            base.PrimaryKey = "UserId";
         }
     }
 }

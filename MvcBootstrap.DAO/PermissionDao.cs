@@ -15,11 +15,11 @@ namespace MvcBootstrap.DAO
             using (DBEntity db = new DBEntity())
             {
                 return (from p in db.T_Permission
-                        where p.RoleID == roleId
+                        where p.RoleId == roleId
                         select new PermissionViewModel
                         {
-                            ControllerID = p.ControllerID,
-                            ActionID = p.ActionID
+                            ControllerID = p.ControllerId,
+                            ActionID = p.ActionId
                         }).ToList();
             }
         }
@@ -30,7 +30,7 @@ namespace MvcBootstrap.DAO
             {
                 foreach (T_Permission permission in db.T_Permission)
                 {
-                    if (permission.RoleID == roleId)
+                    if (permission.RoleId == roleId)
                     {
                         db.T_Permission.DeleteObject(permission);
                     }

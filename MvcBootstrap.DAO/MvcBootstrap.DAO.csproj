@@ -46,7 +46,7 @@
     <Compile Include="ModuleDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleDao.cs" />
-    <Compile Include="UserNodeDao.cs" />
+    <Compile Include="UserCacheDao.cs" />
     <Compile Include="UserRoleDao.cs" />
   </ItemGroup>
   <ItemGroup>
