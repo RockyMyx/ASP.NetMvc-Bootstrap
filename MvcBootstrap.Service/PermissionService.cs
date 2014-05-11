@@ -64,10 +64,10 @@ namespace MvcBootstrap.Service
                 actionId = Convert.ToInt32(item.Split('-')[1]);
                 base.dao.Create(new T_Permission
                 {
-                    RoleID = roleId,
-                    ControllerID = controllerId,
-                    ActionID = actionId,
-                    ModifyUserID = modifyUserId,
+                    RoleId = roleId,
+                    ControllerId = controllerId,
+                    ActionId = actionId,
+                    ModifyUserId = modifyUserId,
                     ModifyDate = DateTime.Now
                 });
 
@@ -85,10 +85,10 @@ namespace MvcBootstrap.Service
             {
                 base.dao.Create(new T_Permission
                 {
-                    RoleID = roleId,
-                    ControllerID = parentId,
-                    ActionID = 1,
-                    ModifyUserID = modifyUserId,
+                    RoleId = roleId,
+                    ControllerId = parentId,
+                    ActionId = 1,
+                    ModifyUserId = modifyUserId,
                     ModifyDate = DateTime.Now
                 });
             }

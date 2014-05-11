@@ -17,8 +17,8 @@ namespace MvcBootstrap.Service
 
         public List<TreeViewModel> GetCategoryNodes(int userId)
         {
-            UserNodeService unService = new UserNodeService();
-            string distributedIds = unService.GetEntity(un => un.UserID == userId).AisCategoryID;
+            /*UserCacheService unService = new UserCacheService();
+            string distributedIds = unService.GetEntity(un => un.UserId == userId).AisCategoryId;
 
             List<TreeViewModel> categoryNodes = new List<TreeViewModel>();
             TreeViewModel model = null;
@@ -29,13 +29,13 @@ namespace MvcBootstrap.Service
                 {
                     model = new TreeViewModel
                     {
-                        id = category.ID.ToString(),
-                        pId = category.ParentID.ToString(),
+                        id = category.Id.ToString(),
+                        pId = category.ParentId.ToString(),
                         name = category.Name,
                         open = true
                     };
                     if (!string.IsNullOrWhiteSpace(distributedIds) &&
-                        distributedIds.Contains(category.ID.ToString()))
+                        distributedIds.Contains(category.Id.ToString()))
                     {
                         model.isChecked = true;
                     }
@@ -43,7 +43,9 @@ namespace MvcBootstrap.Service
                 }
             }
 
-            return categoryNodes;
+            return categoryNodes;*/
+
+            return null;
         }
     }
 }

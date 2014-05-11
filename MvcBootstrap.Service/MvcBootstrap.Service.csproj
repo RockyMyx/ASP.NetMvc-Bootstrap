@@ -49,7 +49,7 @@
     <Compile Include="PermissionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />
-    <Compile Include="UserNodeService.cs" />
+    <Compile Include="UserCacheService.cs" />
     <Compile Include="UserRoleService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="UIService.cs" />

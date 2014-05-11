@@ -23,13 +23,13 @@ namespace MvcBootstrap.Service
                 IEnumerable<T_AisResource> resourceInfo = this.GetAll();
                 foreach (T_AisResource resource in resourceInfo)
                 {
-                    if (idList.Contains(resource.ID.ToString()))
+                    if (idList.Contains(resource.Id.ToString()))
                     {
                         resourceNodes.Add(new TreeViewModel
                         {
-                            id = resource.ID.ToString(),
-                            pId = resource.ParentID.ToString(),
-                            name = resource.ResourceName
+                            id = resource.Id.ToString(),
+                            pId = resource.ParentId.ToString(),
+                            name = resource.Name
                         });
                     }
                 }

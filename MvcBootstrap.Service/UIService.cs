@@ -92,8 +92,8 @@ public static class UIService
                 foreach (string op in operations)
                 {
                     actionId = Convert.ToInt32(op);
-                    operation = operationService.GetEntity(o => o.ID == actionId);
-                    opBuilder.AppendFormat(checkbox, module.ID, operation.ID, operation.Name);
+                    operation = operationService.GetEntity(o => o.Id == actionId);
+                    opBuilder.AppendFormat(checkbox, module.Id, operation.Id, operation.Name);
                 }
 
                 opBuilder.Append("</form><p></p>");

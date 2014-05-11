@@ -22,6 +22,11 @@ namespace MvcBootstrap.Service
             return base.dao.GetUserLoginInfo(userName, userPwd);
         }
 
+        public bool IsUserExist(string userName)
+        {
+            return Convert.ToBoolean(base.dao.GetEntitiesCount(u => u.Name == userName));
+        }
+
         public IEnumerable<UserBrowseViewModel> GetUserBrowse(int roleId)
         {
             return base.dao.GetUserBrowse(roleId);
@@ -57,7 +62,7 @@ namespace MvcBootstrap.Service
             roles.Enumerate(m => roleList.Add(new SelectListItem
                             {
                                 Text = m.Name,
-                                Value = m.ID.ToString()
+                                Value = m.Id.ToString()
                             }));
             return roleList;
         }
@@ -66,7 +71,7 @@ namespace MvcBootstrap.Service
         {
             T_User user = new T_User
             {
-                ID = Convert.ToInt32(formInfo["ID"]),
+                Id = Convert.ToInt32(formInfo["ID"]),
                 Name = formInfo["Name"],
                 Password = formInfo["Password"],
                 Remark = formInfo["Remark"]
@@ -79,25 +84,18 @@ namespace MvcBootstrap.Service
         {
             T_UserRole ur = new T_UserRole
             {
-                UserID = dao.GetInsertId(),
-                RoleID = Convert.ToInt32(formInfo["RoleID"])
+                UserId = dao.GetInsertId(),
+                RoleId = Convert.ToInt32(formInfo["RoleID"])
             };
 
             return ur;
         }
 
-        public T_UserNode GetNewUserNodeInfo(FormCollection formInfo)
+        public T_UserCache GetNewUserNodeInfo(FormCollection formInfo)
         {
-            T_UserNode un = new T_UserNode
+            T_UserCache un = new T_UserCache
             {
-                UserID = dao.GetInsertId(),
-                CanAddRootNode = formInfo["CanAddRootNode"] == null ? false : true,
-                CanAddChildNode = formInfo["CanAddChildNode"] == null ? false : true,
-                CanRenameNode = formInfo["CanRenameNode"] == null ? false : true,
-                CanDeleteNode = formInfo["CanDeleteNode"] == null ? false : true,
-                CanAddResource = formInfo["CanAddResource"] == null ? false : true,
-                CanUpdateResource = formInfo["CanUpdateResource"] == null ? false : true,
-                CanDeleteResource = formInfo["CanDeleteResource"] == null ? false : true,
+                UserId = dao.GetInsertId()
             };
 
             return un;
@@ -107,8 +105,8 @@ namespace MvcBootstrap.Service
         {
             T_UserRole ur = new T_UserRole
             {
-                UserID = Convert.ToInt32(formInfo["ID"]),
-                RoleID = Convert.ToInt32(formInfo["RoleID"])
+                UserId = Convert.ToInt32(formInfo["ID"]),
+                RoleId = Convert.ToInt32(formInfo["RoleID"])
             };
 
             return ur;

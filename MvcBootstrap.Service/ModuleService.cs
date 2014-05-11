@@ -30,14 +30,14 @@ namespace MvcBootstrap.Service
 
         public int GetModuleParentId(int moduleId)
         {
-            return Convert.ToInt32(CacheModules.Where(m => m.ID == moduleId)
+            return Convert.ToInt32(CacheModules.Where(m => m.Id == moduleId)
                                                .Select(m => m.ParentId)
                                                .Single());
         }
 
         public int GetModuleIdByName(string controllerName)
         {
-            return CacheModules.Where(m => m.Controller == controllerName).Single().ID;
+            return CacheModules.Where(m => m.Controller == controllerName).Single().Id;
         }
 
         public IList<T_Module> GetChildModules(int parentId)
@@ -64,7 +64,7 @@ namespace MvcBootstrap.Service
                                    m => moduleList.Add(new SelectListItem
                                    {
                                        Text = m.Name,
-                                       Value = m.ID.ToString()
+                                       Value = m.Id.ToString()
                                    }));
             return moduleList;
         }
@@ -72,10 +72,10 @@ namespace MvcBootstrap.Service
         public T_Module GetModuleInfo(FormCollection formInfo)
         {
             int id = formInfo["ID"].ObjToInt();
-            T_Module oriModule = dao.GetEntity(m => m.ID == id);
+            T_Module oriModule = dao.GetEntity(m => m.Id == id);
             T_Module module = new T_Module
             {
-                ID = id,
+                Id = id,
                 Name = formInfo["Name"] == null ? oriModule.Name : formInfo["Name"],
                 Code = formInfo["Code"] == null ? oriModule.Code : formInfo["Code"],
                 Url = formInfo["Url"] == null ? oriModule.Url : formInfo["Url"],
