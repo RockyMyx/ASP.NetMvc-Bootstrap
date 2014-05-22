@@ -71,7 +71,7 @@ namespace MvcBootstrap.Controllers
 
         public ActionResult Get(int id)
         {
-            T_Module module = moduleService.GetEntity(m => m.ID == id);
+            T_Module module = moduleService.GetEntity(m => m.Id == id);
             return Json(module, JsonRequestBehavior.AllowGet);
         }
 

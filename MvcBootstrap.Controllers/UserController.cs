@@ -13,7 +13,7 @@ namespace MvcBootstrap.Controllers
     {
         UserService userService = new UserService();
         UserRoleService urService = new UserRoleService();
-        UserNodeService unService = new UserNodeService();
+        UserCacheService unService = new UserCacheService();
 
         public UserController()
         {
@@ -46,12 +46,13 @@ namespace MvcBootstrap.Controllers
 
         public override void Create(FormCollection formInfo)
         {
+            //TODO： 提交前判断用户名是否重复
             T_User user = userService.GetUserInfo(formInfo);
             userService.Create(user);
             T_UserRole userRole = userService.GetNewUserRoleInfo(formInfo);
             urService.Create(userRole);
-            T_UserNode userNode = userService.GetNewUserNodeInfo(formInfo);
-            unService.Create(userNode);
+            T_UserCache userCache = userService.GetNewUserNodeInfo(formInfo);
+            unService.Create(userCache);
         }
 
         public override void Delete(List<int> ids)
@@ -85,6 +86,7 @@ namespace MvcBootstrap.Controllers
             return PartialView("_UserGrid", filterEntities);
         }
 
+        /*
         public ActionResult GetResourceTreeNodes(int id)
         {
             AisCategoryService categoryService = new AisCategoryService();
@@ -94,7 +96,7 @@ namespace MvcBootstrap.Controllers
 
         public bool DistributeUserNodes(string idString)
         {
-            T_UserNode userNode = new T_UserNode
+            T_UserCache userNode = new T_UserCache
             {
                 UserID = 1,
                 AisCategoryID = idString
@@ -103,5 +105,6 @@ namespace MvcBootstrap.Controllers
             unService.Update(userNode);
             return true;
         }
+        */
     }
 }
