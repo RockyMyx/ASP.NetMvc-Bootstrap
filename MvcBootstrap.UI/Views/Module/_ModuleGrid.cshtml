@@ -20,10 +20,10 @@
     {
         <tr>
             @*默认隐藏列*@
-            <td class="hide">@item.ID</td>
+            <td class="hide">@item.Id</td>
             <td><input class="js-check-cell" type="checkbox" /></td>
 		    <td>
-            @if (item.ParentId == 0 || item.ParentId == item.ID)
+            @if (item.ParentId == 0 || item.ParentId == item.Id)
             {
                 <img src="../../Images/folder.png" style="padding-right:10px;" />
             }
